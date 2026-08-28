@@ -29,15 +29,6 @@ import {
 import { createChartPreview } from "./preview-icons.js";
 import "/src/shared/ui/icon-button/icon-button.js";
 
-const RADIUS_LABELS = { none: "无", small: "小", medium: "中", large: "大" };
-const MENU_LABELS = { subtle: "淡雅", bold: "加粗", inverted: "反色" };
-const VARIANT_LABELS = { sidebar: "常规", floating: "悬浮", inset: "内嵌" };
-const COLLAPSIBLE_LABELS = {
-  offcanvas: "覆盖",
-  icon: "图标",
-  none: "不可折叠",
-};
-
 class DsThemeSettings extends HTMLElement {
   /** @type {HTMLElement} */
   #trigger;
@@ -124,7 +115,7 @@ class DsThemeSettings extends HTMLElement {
         t("theme.radius", "圆角"),
         Object.keys(RADIUS_STEPS).map((key) => ({
           value: key,
-          label: RADIUS_LABELS[key],
+          label: t(`theme.radius.${key}`, key),
           selected: prefs.radius === RADIUS_STEPS[key],
           apply: () => setAppearance({ radius: RADIUS_STEPS[key] }),
         })),
@@ -151,7 +142,7 @@ class DsThemeSettings extends HTMLElement {
         t("theme.menu", "菜单外观"),
         MENU_APPEARANCES.map((name) => ({
           value: name,
-          label: MENU_LABELS[name],
+          label: t(`theme.menu.${name}`, name),
           selected: prefs.menu === name,
           apply: () => setAppearance({ menu: name }),
         })),
@@ -160,7 +151,7 @@ class DsThemeSettings extends HTMLElement {
         t("theme.sidebarVariant", "侧栏变体"),
         ["sidebar", "floating", "inset"].map((name) => ({
           value: name,
-          label: VARIANT_LABELS[name],
+          label: t(`theme.variant.${name}`, name),
           selected: getSidebarVariant() === name,
           apply: () => setSidebarVariant(name),
         })),
@@ -169,7 +160,7 @@ class DsThemeSettings extends HTMLElement {
         t("theme.sidebarCollapsible", "折叠模式"),
         ["offcanvas", "icon", "none"].map((name) => ({
           value: name,
-          label: COLLAPSIBLE_LABELS[name],
+          label: t(`theme.collapsible.${name}`, name),
           selected: getSidebarCollapsible() === name,
           apply: () => setSidebarCollapsible(name),
         })),

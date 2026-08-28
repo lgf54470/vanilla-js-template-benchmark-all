@@ -16,10 +16,11 @@ fmt:
 fmt-check:
     deno fmt --check
 
-# deno lint + 治理脚本（check-hardcoded-tokens 自 M1 起接入）
+# deno lint + 治理脚本（check-hardcoded-tokens M1 起接入；check-i18n-keys M5 起接入）
 lint:
     deno lint
     deno run -A scripts/check-hardcoded-tokens.js
+    deno run -A scripts/check-i18n-keys.js
     deno check apps/server/src/platform-adapters/
 
 # 全量测试

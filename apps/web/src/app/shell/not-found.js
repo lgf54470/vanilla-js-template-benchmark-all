@@ -15,7 +15,7 @@ export function renderNotFound(mainEl, path) {
   el.setAttribute("title", t("shell.notFound.title", "页面不存在"));
   el.setAttribute(
     "description",
-    t("shell.notFound.description", `没有找到与 ${path} 对应的页面`),
+    t("shell.notFound.description", { path }),
   );
   mainEl.replaceChildren(el);
 }

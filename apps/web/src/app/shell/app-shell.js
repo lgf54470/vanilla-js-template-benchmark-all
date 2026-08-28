@@ -42,6 +42,7 @@ import { createIcon } from "/src/shared/ui/base.js";
 import { toast } from "/src/shared/ui/toast/toast-host.js";
 import { MODULE_REGISTRY } from "/src/modules/registry.generated.js";
 import { setupRouter } from "../router/router.js";
+import { setLocale } from "../i18n/bootstrap.js";
 import "./theme-settings.js";
 
 /* 组件注册（side-effect import） */
@@ -136,6 +137,14 @@ export class AppShell {
     this.#bindSwitcher();
     this.#bindNavUser();
     this.#buildMenu();
+
+    /* 语言切换（lang-change 由 Header 的 ds-lang-switch 派发，冒泡到 host）：
+     * 先加载目标语言字典就绪，再广播 locale:changed → main.js 重挂壳层 */
+    const langHandler = (e) => setLocale(e.detail.locale);
+    this.#host.addEventListener("lang-change", langHandler);
+    this.#teardown.push(() =>
+      this.#host.removeEventListener("lang-change", langHandler)
+    );
 
     this.#routerHandle = setupRouter(this.#els.main);
     this.#teardown.push(

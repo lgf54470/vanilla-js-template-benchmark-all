@@ -7,13 +7,15 @@
  * - auth:unauthorized：任一 API 401（会话过期/吊销）→ 清令牌（级联拆壳）。
  */
 import { initAppearance } from "/src/shared/lib/appearance.js";
+import { initI18n } from "/src/app/i18n/bootstrap.js";
 import { clearAuthToken, getToken } from "/src/shared/core/auth-client.js";
 import { on } from "/src/shared/core/event-bus.js";
 import { navigate } from "/src/shared/core/router.js";
 import { AppShell } from "/src/app/shell/app-shell.js";
 import { renderLogin } from "/src/app/shell/login.js";
 
-initAppearance();
+await initAppearance();
+await initI18n(); // 字典就绪后才渲染（i18n.md §1，防整屏裸 key）
 
 const host = document.querySelector("#app");
 
@@ -50,4 +52,17 @@ on("auth:changed", ({ token }) => {
 /* API 401（令牌过期/吊销）：清令牌 → 级联触发 auth:changed 拆壳 */
 on("auth:unauthorized", () => {
   if (getToken()) clearAuthToken();
+});
+
+/* 语言切换（setLocale 已确保新字典就绪）：重建当前视图（i18n.md §1） */
+on("locale:changed", () => {
+  if (getToken()) {
+    if (shell) {
+      unmountShell();
+      mountShell();
+    }
+  } else {
+    host.replaceChildren();
+    renderLogin(host);
+  }
 });

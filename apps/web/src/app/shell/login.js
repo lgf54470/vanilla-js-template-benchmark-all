@@ -17,10 +17,8 @@ import { SESSION_DURATIONS } from "/packages/contracts/constants.js";
 import "/src/shared/ui/input/input.js";
 import "/src/shared/ui/button/button.js";
 import "/src/shared/ui/segmented-control/segmented-control.js";
-
 /** 默认选中的时长选项（Auth.md §2 表格首列常见档位） */
 const DEFAULT_DURATION = "24h";
-
 /** 时长选项文案表（i18n key → 兜底中文；M5 起由字典覆盖） */
 const DURATION_LABELS = {
   "4h": "4 小时",
@@ -32,14 +30,7 @@ const DURATION_LABELS = {
   "30d": "30 天",
   "90d": "90 天",
 };
-
-/** 登录失败错误码 → 用户可读文案（Auth.md §1/§6） */
-const ERROR_TEXTS = {
-  AUTH_INVALID_PASSWORD: "密码错误",
-  AUTH_LOCKED: "失败次数过多，已临时锁定，请稍后再试",
-  NETWORK_ERROR: "网络异常，请稍后再试",
-};
-
+/** 登录失败错误码 → 字典 key（auth.error.<code>，Auth.md §1/§6） */
 /**
  * 渲染登录页（幂等：已渲染时直接返回）。
  * @param {HTMLElement} host 挂载容器（#app）
@@ -50,7 +41,6 @@ export function renderLogin(host) {
   if (globalThis.location?.pathname !== "/login") {
     navigate("/login", { replace: true });
   }
-
   host.innerHTML = `
     <div class="login-standalone">
       <div class="login-card">
@@ -89,12 +79,10 @@ export function renderLogin(host) {
         </ds-button>
       </div>
     </div>`;
-
   const input = host.querySelector(".login-password");
   const durations = host.querySelector(".login-durations");
   const submitBtn = host.querySelector(".login-submit");
   const sessionBtn = host.querySelector(".login-session");
-
   // 2×4 网格只装 8 个固定档位；session 档走底部通栏大按钮
   for (const option of SESSION_DURATIONS) {
     if (option.sessionOnly) continue;
@@ -106,12 +94,10 @@ export function renderLogin(host) {
     );
     durations.append(item);
   }
-
   let duration = DEFAULT_DURATION;
   durations.addEventListener("segmented-change", (e) => {
     duration = e.detail.value;
   });
-
   /** @param {string} durationOption */
   const submit = async (durationOption) => {
     const password = input.value?.trim() ?? "";
@@ -136,14 +122,10 @@ export function renderLogin(host) {
     input.setAttribute("invalid", "");
     input.setAttribute(
       "error",
-      t(
-        `auth.error.${result.code ?? ""}`,
-        ERROR_TEXTS[result.code ?? ""] ?? t("auth.loginFailed", "登录失败"),
-      ),
+      t(`auth.error.${result.code ?? ""}`, t("auth.loginFailed", "登录失败")),
     );
     input.focus();
   };
-
   submitBtn.addEventListener("click", () => submit(duration));
   sessionBtn.addEventListener("click", () => submit("session"));
   input.addEventListener("keydown", (e) => {
