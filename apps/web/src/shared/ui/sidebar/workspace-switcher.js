@@ -11,6 +11,7 @@
 
 import { attachStyles, define } from "../base.js";
 import { iconSvg } from "../../lib/icons.js";
+import { t } from "../../lib/i18n.js";
 
 const CSS = `
 :host{display:block}
@@ -59,12 +60,12 @@ class DsWorkspaceSwitcher extends HTMLElement {
           <span class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/icons.svg#i-chevron-down"></use></svg></span>
         </button>
         <div slot="content" class="content-slot">
-          <div class="menu-head">工作空间</div>
+          <div class="menu-head">${t("shell.nav.workspace")}</div>
           <div class="ws-list"></div>
           <div class="separator"></div>
           <button type="button" class="new-ws">
             <span class="item-tile"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/icons.svg#i-plus"></use></svg></span>
-            <span>新建工作空间</span>
+            <span>${t("shell.nav.newWorkspace")}</span>
           </button>
         </div>
       </ds-dropdown-menu>`;

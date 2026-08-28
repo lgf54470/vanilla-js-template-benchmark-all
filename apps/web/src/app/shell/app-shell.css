@@ -1,0 +1,115 @@
+/* apps/web/src/app/shell/app-shell.css — 顶层布局（Layout.md §1）
+ *
+ * 两列网格「侧栏列 + inset 列」；<main> 是唯一滚动区域。变体三形态由
+ * <html data-sidebar-variant> 驱动（appearance 引擎维护）。移动端（<768px）
+ * 网格退化为 1fr，侧栏走 <ds-sheet> 覆盖层（ds-sidebar 内部处理）。
+ * 拖拽/展开收起时壳层在 provider 上写 --sidebar-current-width（网格列）与
+ * --sidebar-width（面板宽度令牌，ds-sidebar 继承覆盖 :root 默认）。
+ */
+
+ds-sidebar-provider.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-current-width, var(--sidebar-width)) 1fr;
+  grid-template-rows: 100%;
+  grid-template-areas: "sidebar inset";
+  block-size: 100dvh;
+  overflow: hidden; /* 唯一允许滚动的是 <main> */
+  transition: grid-template-columns var(--motion-fast, 150ms)
+    var(--ease-standard, ease); /* 当前被全站 no-motion 压制，保留供未来恢复 */
+}
+
+ds-sidebar-provider.app-shell > ds-sidebar {
+  grid-area: sidebar;
+  min-inline-size: 0;
+  /* 拖拽中禁用过渡：否则每次宽度更新都重启动画（Layout.md §1.1） */
+  transition: inline-size var(--sidebar-resize-duration, var(--motion-base,
+    200ms))
+    var(--ease-standard, ease);
+}
+
+body.sidebar-resizing ds-sidebar-provider.app-shell,
+body.sidebar-resizing ds-sidebar-provider.app-shell > ds-sidebar {
+  transition: none !important;
+}
+
+.app-shell__inset {
+  grid-area: inset;
+  display: flex;
+  flex-direction: column; /* header 固定 + main 弹性滚动 */
+  min-inline-size: 0;
+  overflow: hidden;
+}
+
+.app-shell__header {
+  overflow: hidden; /* 高度 3.5rem（模板 h-14） */
+}
+
+.app-shell__main {
+  flex: 1;
+  min-block-size: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-4); /* 移动端 --space-3 */
+}
+
+/* ---- 变体：floating（侧栏悬浮卡片）/ inset（内容区内嵌卡片） ---- */
+
+html[data-sidebar-variant="floating"] ds-sidebar-provider.app-shell {
+  --sidebar-gap: 1rem;
+  grid-template-columns: calc(
+    var(--sidebar-current-width, var(--sidebar-width)) + var(--sidebar-gap)
+  ) 1fr;
+}
+
+html[data-sidebar-variant="inset"] ds-sidebar-provider.app-shell {
+  gap: var(--space-4);
+  padding: var(--space-4);
+  grid-template-columns: var(--sidebar-current-width, var(--sidebar-width)) 1fr;
+  grid-template-rows: 100%;
+}
+
+html[data-sidebar-variant="inset"] ds-sidebar-provider.app-shell > ds-sidebar::part(aside) {
+  border-radius: var(--ds-card-radius);
+  border: 1px solid var(--color-sidebar-border);
+}
+
+/* ---- 拖拽宽度数值气泡（Layout.md §1.1） ---- */
+
+.resize-bubble {
+  position: fixed;
+  top: 1rem;
+  left: calc(var(--bubble-x, 0px) + 8px);
+  z-index: var(--z-dropdown, 50);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--ds-tooltip-radius, 6px);
+  background: var(--ds-tooltip-bg);
+  color: var(--ds-tooltip-fg);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-fast, 150ms) var(--ease-standard, ease);
+}
+
+body.sidebar-resizing .resize-bubble {
+  opacity: 1;
+}
+
+/* ---- 移动端：网格退化为单列，侧栏不占列宽（Layout.md §2 md=768px） ---- */
+
+@media (max-width: 767px) {
+  ds-sidebar-provider.app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas: "inset";
+  }
+  html[data-sidebar-variant="floating"] ds-sidebar-provider.app-shell,
+  html[data-sidebar-variant="inset"] ds-sidebar-provider.app-shell {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 0;
+  }
+  .app-shell__main {
+    padding: var(--space-3);
+  }
+}

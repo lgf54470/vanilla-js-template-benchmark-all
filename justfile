@@ -25,6 +25,10 @@ lint:
 test:
 	@deno test -A
 
+# 从各模块 module.json 生成注册表（新增/改模块后运行）
+generate:registry:
+	@deno run -A scripts/generate-registry.js
+
 # 执行数据库迁移
 db-migrate:
 	@deno run {{ENV}} -A scripts/db-migrate.js

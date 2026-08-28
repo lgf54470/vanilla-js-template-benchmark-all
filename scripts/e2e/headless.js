@@ -27,7 +27,7 @@ export function hasChrome() {
 }
 
 /**
- * @param {{ port?: number, url?: string, headless?: boolean }} [opts]
+ * @param {{ port?: number, url?: string, headless?: boolean, profileDir?: string }} [opts]
  */
 export async function launchHeadless(opts = {}) {
   if (!CHROME_BIN) {
@@ -35,6 +35,10 @@ export async function launchHeadless(opts = {}) {
       "未找到 Chrome（CHROME_BIN 或 PATH 中的 google-chrome/chromium）",
     );
   }
+
+  // 每次启动用全新 profile：避免 localStorage/会话状态跨运行残留
+  const profileDir = opts.profileDir ??
+    `/tmp/fb-cdp-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
   const proc = new Deno.Command(CHROME_BIN, {
     args: [
@@ -44,7 +48,7 @@ export async function launchHeadless(opts = {}) {
       "--no-default-browser-check",
       "--disable-extensions",
       "--remote-debugging-port=0",
-      "--user-data-dir=/tmp/fb-cdp-profile",
+      `--user-data-dir=${profileDir}`,
       "--window-size=1280,900",
       opts.url ?? "about:blank",
     ].filter(Boolean),
@@ -180,6 +184,18 @@ async function connectPage(wsUrl) {
       },
       consoleErrors() {
         return [...consoleErrors];
+      },
+      /** 截图到本地 PNG 文件（Page.captureScreenshot） */
+      async screenshot(filePath) {
+        const res = await send("Page.captureScreenshot", {
+          format: "png",
+          captureBeyondViewport: false,
+        });
+        const base64 = res.data;
+        await Deno.writeFile(
+          filePath,
+          Uint8Array.from(atob(base64), (c) => c.charCodeAt(0)),
+        );
       },
     },
     close() {

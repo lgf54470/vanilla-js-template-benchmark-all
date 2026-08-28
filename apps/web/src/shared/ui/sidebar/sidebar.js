@@ -9,13 +9,14 @@
 
 import { attachStyles, define } from "../base.js";
 import { iconSvg } from "../../lib/icons.js";
+import { t } from "../../lib/i18n.js";
 import { STORAGE_KEYS } from "@contracts/constants.js";
 
 const SIDEBAR_CSS = `
 :host{display:block;height:100%}
-aside{display:flex;flex-direction:column;height:100%;width:var(--sidebar-width);
-  background:var(--color-sidebar);color:var(--color-sidebar-fg);
-  border-right:1px solid var(--color-sidebar-border)}
+aside{position:relative;display:flex;flex-direction:column;height:100%;
+  width:var(--sidebar-width);background:var(--color-sidebar);
+  color:var(--color-sidebar-fg);border-right:1px solid var(--color-sidebar-border)}
 :host([data-variant="floating"]) aside{height:auto;min-height:calc(100% - 1rem);
   margin:.5rem;border-radius:var(--ds-card-radius);
   border:1px solid var(--color-sidebar-border);box-shadow:var(--ds-card-ring)}
@@ -161,7 +162,9 @@ class DsSidebarRail extends HTMLElement {
   }
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-      <button type="button" aria-label="切换侧栏" aria-haspopup="true"></button>`;
+      <button type="button" aria-label="${
+      t("shell.nav.toggleSidebar")
+    }" aria-haspopup="true"></button>`;
     this._btn = this.shadowRoot.querySelector("button");
     this._btn.innerHTML = iconSvg("panel-left", 14);
     this._btn.addEventListener("click", () => {
@@ -192,7 +195,9 @@ button:focus-visible{outline:2px solid var(--color-ring);outline-offset:2px}
   }
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-      <button type="button" aria-label="切换侧栏"></button>`;
+      <button type="button" aria-label="${
+      t("shell.nav.toggleSidebar")
+    }"></button>`;
     const btn = this.shadowRoot.querySelector("button");
     btn.innerHTML = iconSvg("panel-left", 18);
     btn.addEventListener("click", () => {

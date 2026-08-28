@@ -9,6 +9,7 @@
 // 事件（detail: { action: 'settings'|'profile'|'account'|'logout' }）。
 
 import { attachStyles, define } from "../base.js";
+import { t } from "../../lib/i18n.js";
 
 const CSS = `
 :host{display:block}
@@ -46,11 +47,19 @@ class DsNavUser extends HTMLElement {
             <span class="email"></span>
           </div>
           <div class="separator"></div>
-          <ds-menu-item label="设置" icon="settings" value="settings"></ds-menu-item>
-          <ds-menu-item label="配置文件" icon="user" value="profile"></ds-menu-item>
-          <ds-menu-item label="用户资料" icon="notebook-pen" value="account"></ds-menu-item>
+          <ds-menu-item label="${
+      t("shell.nav.settings")
+    }" icon="settings" value="settings"></ds-menu-item>
+          <ds-menu-item label="${
+      t("shell.nav.profile")
+    }" icon="user" value="profile"></ds-menu-item>
+          <ds-menu-item label="${
+      t("shell.nav.account")
+    }" icon="notebook-pen" value="account"></ds-menu-item>
           <div class="separator"></div>
-          <ds-menu-item label="退出登录" icon="log-out" value="logout" danger></ds-menu-item>
+          <ds-menu-item label="${
+      t("shell.nav.logout")
+    }" icon="log-out" value="logout" danger></ds-menu-item>
         </div>
       </ds-dropdown-menu>`;
     this._menu = this.shadowRoot.querySelector("ds-dropdown-menu");
@@ -81,9 +90,9 @@ class DsNavUser extends HTMLElement {
     const avatar = this.getAttribute("avatar") ?? "";
     this._avatar.setAttribute("name", name || "U");
     if (avatar) this._avatar.setAttribute("src", avatar);
-    this._name.textContent = name || "用户";
-    this._userEl.textContent = name || "用户";
-    this._emailEl.textContent = email || "未绑定邮箱";
+    this._name.textContent = name || t("shell.nav.userFallback");
+    this._userEl.textContent = name || t("shell.nav.userFallback");
+    this._emailEl.textContent = email || t("shell.nav.noEmail");
   }
 }
 define("ds-nav-user", DsNavUser);

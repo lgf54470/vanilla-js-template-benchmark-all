@@ -18,7 +18,7 @@ export async function listWorkspacesCached(db) {
   const cached = appCache.get(WORKSPACES_CACHE_KEY);
   if (cached) return cached;
   const rows = await db.query(
-    "SELECT id, is_system FROM core_workspaces ORDER BY sort_order ASC, id ASC",
+    "SELECT id, name, icon, color_token, is_system FROM core_workspaces ORDER BY sort_order ASC, id ASC",
     [],
   );
   appCache.set(WORKSPACES_CACHE_KEY, rows, WORKSPACES_CACHE_TTL_MS);

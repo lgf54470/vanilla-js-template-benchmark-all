@@ -1,0 +1,7 @@
+{
+  "id": "logs",
+  "order": 30,
+  "icon": "scroll-text",
+  "labelKey": "logs.menu.title",
+  "route": "/logs"
+}

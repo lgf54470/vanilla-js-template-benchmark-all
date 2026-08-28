@@ -1,0 +1,7 @@
+{
+  "id": "dashboard",
+  "order": 0,
+  "icon": "layout-dashboard",
+  "labelKey": "dashboard.menu.title",
+  "route": "/dashboard"
+}

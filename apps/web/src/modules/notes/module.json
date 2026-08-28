@@ -1,0 +1,11 @@
+{
+  "id": "notes",
+  "order": 70,
+  "icon": "notebook-pen",
+  "labelKey": "notes.menu.title",
+  "route": "/notes",
+  "submodules": [
+    { "id": "all", "labelKey": "notes.menu.all", "route": "/notes/all" },
+    { "id": "tags", "labelKey": "notes.menu.tags", "route": "/notes/tags" }
+  ]
+}

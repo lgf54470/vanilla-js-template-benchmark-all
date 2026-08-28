@@ -1,0 +1,19 @@
+{
+  "id": "settings",
+  "order": 80,
+  "icon": "settings",
+  "labelKey": "settings.menu.title",
+  "route": "/settings",
+  "submodules": [
+    {
+      "id": "profile",
+      "labelKey": "settings.menu.profile",
+      "route": "/settings/profile"
+    },
+    {
+      "id": "account",
+      "labelKey": "settings.menu.account",
+      "route": "/settings/account"
+    }
+  ]
+}

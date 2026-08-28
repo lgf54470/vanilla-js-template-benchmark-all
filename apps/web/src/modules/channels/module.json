@@ -1,0 +1,7 @@
+{
+  "id": "channels",
+  "order": 10,
+  "icon": "list-tree",
+  "labelKey": "channels.menu.title",
+  "route": "/channels"
+}

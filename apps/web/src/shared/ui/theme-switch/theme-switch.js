@@ -6,6 +6,7 @@
 // 值通过 ds-segmented-control-change 事件上抛，由壳层接 appearance 引擎。
 
 import { attachStyles, define } from "../base.js";
+import { LOCALE_LABELS, SUPPORTED_LOCALES } from "../../lib/locales.js";
 
 const THEME_CSS = `
 :host{display:inline-flex}
@@ -85,11 +86,12 @@ define("ds-theme-switch", DsThemeSwitch);
 
 const LANG_CSS = `
 :host{display:inline-flex}
-button{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;
+button.trigger{display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;
   border-radius:var(--ds-btn-radius);font-size:var(--ds-btn-font-size);
   color:var(--color-fg-muted);cursor:pointer;background:transparent}
-button:hover{background:var(--color-muted);color:var(--color-fg)}
-button:focus-visible{outline:2px solid var(--color-ring);outline-offset:2px}
+button.trigger:hover{background:var(--color-muted);color:var(--color-fg)}
+button.trigger:focus-visible{outline:2px solid var(--color-ring);outline-offset:2px}
+.lang-name{font-size:.78rem}
 `;
 
 class DsLangSwitch extends HTMLElement {
@@ -100,36 +102,55 @@ class DsLangSwitch extends HTMLElement {
     attachStyles(this, LANG_CSS);
   }
   connectedCallback() {
-    this._render();
-  }
-  attributeChangedCallback() {
-    if (this._btn) this._render();
-  }
-  _render() {
-    const value = this.getAttribute("value") ?? "zh-CN";
-    const label = value === "zh-CN"
-      ? "简体中文"
-      : value === "zh-TW"
-      ? "繁體中文"
-      : "English";
-    this.shadowRoot.innerHTML = "";
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.setAttribute("aria-label", "切换语言");
-    btn.innerHTML =
-      `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/icons.svg#i-languages"></use></svg><span></span>`;
-    btn.querySelector("span").textContent = label;
-    btn.addEventListener("click", () => {
+    this.shadowRoot.innerHTML = `
+      <ds-dropdown-menu>
+        <button slot="trigger" type="button" class="trigger" aria-label="切换语言">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/icons.svg#i-languages"></use></svg>
+          <span class="lang-name"></span>
+        </button>
+        <div slot="content"></div>
+      </ds-dropdown-menu>`;
+    this._menu = this.shadowRoot.querySelector("ds-dropdown-menu");
+    this._name = this.shadowRoot.querySelector(".lang-name");
+    this._content = this.shadowRoot.querySelector("[slot='content']");
+    this._content.addEventListener("ds-menu-item-select", (e) => {
+      const value = e.detail?.value;
+      if (!value || value === this.value) {
+        this._menu.close();
+        return;
+      }
+      this.setAttribute("value", value);
+      this._menu.close();
       this.dispatchEvent(
-        new CustomEvent("ds-lang-switch-click", {
+        new CustomEvent("ds-lang-switch-change", {
           bubbles: true,
           composed: true,
-          detail: { current: value },
+          detail: { value },
         }),
       );
     });
-    this.shadowRoot.append(btn);
-    this._btn = btn;
+    this._renderItems();
+    this._sync();
+  }
+  attributeChangedCallback() {
+    if (this._name) this._sync();
+  }
+  _sync() {
+    const value = this.getAttribute("value") ?? "zh-CN";
+    this._name.textContent = LOCALE_LABELS[value] ?? value;
+    this._renderItems();
+  }
+  _renderItems() {
+    if (!this._content) return;
+    const value = this.getAttribute("value") ?? "zh-CN";
+    this._content.innerHTML = "";
+    for (const locale of SUPPORTED_LOCALES) {
+      const item = document.createElement("ds-menu-item");
+      item.setAttribute("label", LOCALE_LABELS[locale] ?? locale);
+      item.setAttribute("value", locale);
+      if (locale === value) item.setAttribute("checked", "true");
+      this._content.append(item);
+    }
   }
   get value() {
     return this.getAttribute("value") ?? "zh-CN";

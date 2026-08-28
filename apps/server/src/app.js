@@ -15,7 +15,11 @@ import { withRequestId } from "./shared/logger/request-context.js";
 import { createLogger } from "./shared/logger/logger.js";
 import { createAppSettingsStore } from "./shared/settings/app-settings.js";
 import { createAuthMiddleware } from "./shared/auth/auth-middleware.js";
-import { createWorkspaceMiddleware } from "./shared/workspace/workspace-middleware.js";
+import {
+  createWorkspaceMiddleware,
+  listWorkspacesCached,
+} from "./shared/workspace/workspace-middleware.js";
+import { createWorkspaceRoutes } from "./shared/workspace/workspace-routes.js";
 import { createI18nMiddleware } from "./shared/i18n/i18n-middleware.js";
 import { createSessionsRepository } from "./modules/auth/repository.js";
 import { createAuthService } from "./modules/auth/service.js";
@@ -86,6 +90,13 @@ export function createApp({ db, env = {} }) {
     const target = env.DEPLOY_TARGET ?? "local";
     return c.json({ ok: true, data: { target } });
   });
+
+  app.route(
+    "/api/workspaces",
+    createWorkspaceRoutes({
+      listWorkspaces: listWorkspacesCached,
+    }),
+  );
 
   app.route("/api/auth", createAuthRoutes({ settingsStore, authService }));
   app.route(

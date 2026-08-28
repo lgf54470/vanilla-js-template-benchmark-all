@@ -1,0 +1,7 @@
+{
+  "id": "docs",
+  "order": 50,
+  "icon": "book-open",
+  "labelKey": "docs.menu.title",
+  "route": "/docs"
+}

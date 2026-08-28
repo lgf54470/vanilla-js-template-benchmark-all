@@ -1,0 +1,7 @@
+{
+  "id": "tokens",
+  "order": 20,
+  "icon": "key",
+  "labelKey": "tokens.menu.title",
+  "route": "/tokens"
+}

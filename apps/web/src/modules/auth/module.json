@@ -1,0 +1,7 @@
+{
+  "id": "auth",
+  "order": 60,
+  "icon": "shield",
+  "labelKey": "auth.menu.title",
+  "route": "/auth"
+}

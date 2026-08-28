@@ -1,0 +1,12 @@
+{
+  "auth.menu.title": "认证",
+  "auth.session.4h": "4 小时",
+  "auth.session.8h": "8 小时",
+  "auth.session.12h": "12 小时",
+  "auth.session.24h": "24 小时",
+  "auth.session.7d": "7 天",
+  "auth.session.14d": "14 天",
+  "auth.session.30d": "30 天",
+  "auth.session.90d": "90 天",
+  "auth.session.sessionOnly": "保持登录直到下次浏览器打开"
+}

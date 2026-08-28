@@ -1,0 +1,7 @@
+{
+  "id": "system",
+  "order": 40,
+  "icon": "monitor",
+  "labelKey": "system.menu.title",
+  "route": "/system"
+}
