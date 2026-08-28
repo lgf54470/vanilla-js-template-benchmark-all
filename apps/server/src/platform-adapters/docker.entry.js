@@ -1,25 +1,17 @@
 import { createApp } from "../app.js";
-import { resolveDbAdapter } from "../shared/db/resolve.js";
-import { runMigrations } from "../shared/db/migrate.js";
 import { createStaticHandler } from "../shared/static/static-handler.js";
 import { serveWithPortHint } from "../shared/net/serve-with-port-hint.js";
 
 const port = Number(Deno.env.get("PORT")) || 8787;
+const staticRoot = Deno.env.get("STATIC_ROOT") || "./public";
+
 const app = createApp();
 const staticHandler = createStaticHandler({
-  root: "apps/web",
+  root: staticRoot,
   extraRoots: {
-    "/packages/contracts": "packages/contracts",
+    "/packages/contracts": `${staticRoot}/packages/contracts`,
   },
 });
-
-// Auto-run migrations in local dev
-try {
-  const db = await resolveDbAdapter({ target: "local" });
-  await runMigrations(db);
-} catch (err) {
-  console.warn("[local] Auto-migration warning:", err.message);
-}
 
 const fetchHandler = async (req) => {
   const staticRes = await staticHandler({ req });
@@ -27,5 +19,5 @@ const fetchHandler = async (req) => {
   return app.fetch(req);
 };
 
-console.log(`[local] Server started: http://127.0.0.1:${port}`);
+console.log(`[docker] Server running on port ${port}`);
 serveWithPortHint({ port }, fetchHandler);
