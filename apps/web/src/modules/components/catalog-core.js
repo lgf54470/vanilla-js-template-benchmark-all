@@ -346,4 +346,13 @@ export const CORE_COMPONENTS = [
     desc: "问卷与题目列表容器。",
     docs: "https://ui.shadcn.com/docs/components/base/questionnaire",
   },
+  {
+    id: "message-scroller",
+    name: "Message Scroller",
+    zh: "消息滚动容器",
+    category: "data",
+    icon: "move",
+    desc: "支持平滑滚动与自动吸底的对话消息滚动容器。",
+    docs: "https://ui.shadcn.com/docs/components/base/message-scroller",
+  },
 ];
