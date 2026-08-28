@@ -1,0 +1,70 @@
+#!/usr/bin/env -S deno run --allow-read
+// .githooks/commit-msg — 提交信息校验（启用：git config core.hooksPath .githooks）
+// 规范见 docs/Commit.md §5 / ARCHITECTURE.md §17。
+
+const file = Deno.args[0];
+if (!file) {
+  console.error("commit-msg: 缺少提交信息文件参数");
+  Deno.exit(1);
+}
+
+const raw = await Deno.readTextFile(file);
+const lines = raw.split("\n");
+const subject = lines[0] ?? "";
+const body = lines.slice(1);
+
+const TYPES = [
+  "feat",
+  "fix",
+  "docs",
+  "style",
+  "refactor",
+  "perf",
+  "test",
+  "build",
+  "ci",
+  "chore",
+  "revert",
+];
+const subjectRe = new RegExp(
+  `^(${TYPES.join("|")})\\(([a-z0-9-]+)\\): (.+)$`,
+);
+const bodyLineRe = /^- [\w./-]+: .+/;
+
+const problems = [];
+
+const match = subject.match(subjectRe);
+if (!match) {
+  const typeOk = TYPES.some((t) => subject.startsWith(`${t}(`));
+  const scopeOk = /^\w+\([a-z0-9-]+\):/.test(subject);
+  if (!typeOk) {
+    problems.push(
+      `首行 type 不合法：必须是 ${TYPES.join("/")} 之一，形如 "feat(notes): ..."`,
+    );
+  } else if (!scopeOk) {
+    problems.push('首行 scope 缺失或不合法：小写字母/数字/连字符，形如 "(notes):"');
+  } else {
+    problems.push(
+      `首行 subject 不合法（祈使句、不加句号、≤50 字符）："${subject}"`,
+    );
+  }
+} else if (match[3].length > 50) {
+  problems.push(`首行 subject 超过 50 字符（当前 ${match[3].length}）`);
+}
+
+const hasFileLine = body.some((l) => bodyLineRe.test(l));
+if (!hasFileLine) {
+  problems.push(
+    '正文缺少逐文件改动行：至少一行形如 "- apps/web/src/xxx.js: 改动内容（到方法/组件级）"',
+  );
+}
+
+if (problems.length > 0) {
+  console.error("提交信息不符合 docs/Commit.md 规范：");
+  for (const p of problems) console.error(`  - ${p}`);
+  console.error("\n示例：");
+  console.error("  feat(notes): 支持按工作空间过滤笔记列表");
+  console.error("  ");
+  console.error("  - apps/server/src/modules/notes/repository.js: xxx");
+  Deno.exit(1);
+}

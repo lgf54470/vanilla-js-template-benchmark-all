@@ -1,0 +1,40 @@
+{
+  "workspace": {
+    "members": ["apps/web", "apps/server"]
+  },
+  "imports": {
+    "hono": "./packages/lib/hono/mod.js",
+    "hono/": "./packages/lib/hono/",
+    "@libsql/client/web": "./packages/lib/libsql-client/web.js",
+    "@contracts/": "./packages/contracts/"
+  },
+  "tasks": {
+    "dev": "deno run -A apps/server/src/platform-adapters/local.entry.js",
+    "generate:registry": "deno run -A scripts/generate-registry.js",
+    "build:web": "deno run -A scripts/build-web.js",
+    "db:migrate": "deno run -A scripts/db-migrate.js",
+    "db:seed": "deno run -A scripts/db-seed.js",
+    "checks": "deno run -A scripts/run-checks.js",
+    "vendor:fetch": "deno run -A scripts/vendor-fetch.js"
+  },
+  "fmt": {
+    "exclude": [
+      "packages/lib",
+      "dist",
+      ".data",
+      "coverage",
+      "docs",
+      "README.md",
+      "ARCHITECTURE.md",
+      "AGENTS.md",
+      "apps/web/public",
+      "apps/web/src/modules/registry.generated.js"
+    ]
+  },
+  "lint": {
+    "exclude": ["packages/lib", "dist", ".data", "coverage"]
+  },
+  "test": {
+    "exclude": ["packages/lib", "dist", ".data", "coverage"]
+  }
+}
