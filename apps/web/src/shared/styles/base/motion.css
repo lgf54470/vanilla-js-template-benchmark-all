@@ -1,0 +1,13 @@
+/*
+ * base/motion.css — 备份降级路径（docs/Design.md §4）。
+ * 仅当 base/no-motion.css 被移除后才实际起作用：prefers-reduced-motion 命中时
+ * 把动效时长令牌降为近 0。当前全站无动效，本文件处于休眠状态。
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0.01ms;
+    --motion-base: 0.01ms;
+    --motion-slow: 0.01ms;
+  }
+}

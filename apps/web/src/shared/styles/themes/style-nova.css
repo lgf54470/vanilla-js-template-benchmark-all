@@ -1,0 +1,38 @@
+/*
+ * themes/style-nova.css — 风格令牌集基准（第 3 层）。
+ * --ds-<component>-<property> 全集在此定义；其余 7 个风格（vega/maia/lyra/mira/
+ * luma/sera/rhea）只写 delta。组件 CSS 以 var(--ds-*, <nova 默认>) 消费，
+ * 即组件内也带同值兜底——本文件缺失时页面仍可用 zinc 直角形态渲染。
+ * 本目录是令牌定义处，允许字面量（docs/CSS.md §6 白名单）。
+ */
+
+.style-nova {
+  /* 按钮/常规控件 */
+  --ds-btn-radius: calc(var(--radius) * 2.6);
+
+  /* 输入类 */
+  --ds-input-radius: calc(var(--radius) * 2.6);
+  --ds-input-bg: transparent;
+  --ds-input-border: var(--color-border);
+
+  /* 卡片：1px 描边 + 极淡内环（非阴影，见 Design.md §1/§3） */
+  --ds-card-radius: var(--radius-lg);
+  --ds-card-ring: color-mix(in oklch, var(--color-fg) 5%, transparent);
+
+  /* 侧栏菜单项 */
+  --ds-menu-item-radius: calc(var(--radius) * 1.8);
+
+  /* 浮层家族 */
+  --ds-popover-radius: var(--radius-md);
+  --ds-dialog-radius: var(--radius-xl);
+  --ds-sheet-radius: var(--radius-xl);
+  --ds-toast-radius: var(--radius-lg);
+  --ds-tooltip-radius: var(--radius-md);
+
+  /* 徽标/头像 */
+  --ds-badge-radius: var(--radius-sm);
+  --ds-avatar-radius: var(--radius-full);
+
+  /* 侧栏容器（floating/inset 变体的圆角） */
+  --ds-sidebar-radius: var(--radius-lg);
+}

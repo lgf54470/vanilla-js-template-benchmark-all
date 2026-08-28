@@ -1,0 +1,96 @@
+/*
+ * base/reset.css — light-DOM 全局重置（令牌定义处白名单成员，docs/CSS.md §6）。
+ * shadow DOM 内的重置由各组件样式自行处理（见 attachStyles 约定）。
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  border: 0 solid var(--color-border, oklch(0.92 0.004 286.32));
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  margin: 0;
+  font-size: var(--text-sm, 0.875rem);
+  line-height: var(--leading-normal, 1.5);
+  color: var(--color-fg, oklch(0.141 0.005 285.823));
+  background-color: var(--color-bg, oklch(1 0 0));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring, oklch(0.705 0.015 286.067));
+  outline-offset: 2px;
+}
+
+/* 全站无动效下滚动行为也保持瞬时（锚点跳转不平滑） */
+html {
+  scroll-behavior: auto;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--color-primary, oklch(0.21 0.006
+    285.885)) 20%, transparent);
+}

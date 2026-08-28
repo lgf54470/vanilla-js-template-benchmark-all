@@ -1,0 +1,11 @@
+/*
+ * themes/style-sera.css — 风格 delta：柔和（浮层家族整体更圆）。
+ */
+
+.style-sera {
+  --ds-menu-item-radius: calc(var(--radius) * 2.2);
+  --ds-card-ring: color-mix(in oklch, var(--color-fg) 8%, transparent);
+  --ds-toast-radius: calc(var(--radius) * 2.2);
+  --ds-tooltip-radius: var(--radius-lg);
+  --ds-badge-radius: var(--radius-full);
+}

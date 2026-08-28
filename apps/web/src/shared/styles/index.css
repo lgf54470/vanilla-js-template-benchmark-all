@@ -1,0 +1,40 @@
+/*
+ * shared/styles/index.css — 样式唯一入口（docs/CSS.md §1）。
+ * 加载顺序：tokens（结构令牌 + 语义映射）→ themes（原始变量层 + 风格集）→
+ * base（reset / 动效降级 / no-motion）。src/style.css 只引本文件。
+ * 自定义属性在计算值阶段解析，@import 顺序只影响同优先级级联；
+ * palettes 类选择器优先级高于 tokens 的 :root，主题覆盖关系不受顺序影响。
+ *
+ * 注意：块注释内不得出现星斜杠序列（会提前终止注释吞掉后续规则，
+ * docs/CSS.md §8 明令禁止，本次已实际踩坑）。
+ */
+
+/* 第 1 层：结构令牌 + 语义映射层 */
+@import "./tokens/colors.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radius.css";
+@import "./tokens/shadow.css";
+@import "./tokens/typography.css";
+@import "./tokens/zindex.css";
+@import "./tokens/motion.css";
+@import "./tokens/sidebar.css";
+
+/* 第 2 层：原始变量层（base-* 与 chart-* 类） */
+@import "./themes/palettes-base.css";
+@import "./themes/palettes-chart.css";
+@import "./themes/palettes-swatches.css";
+
+/* 第 3 层：风格令牌集（style-* 类；nova 基准，其余 delta） */
+@import "./themes/style-nova.css";
+@import "./themes/style-vega.css";
+@import "./themes/style-maia.css";
+@import "./themes/style-lyra.css";
+@import "./themes/style-mira.css";
+@import "./themes/style-luma.css";
+@import "./themes/style-sera.css";
+@import "./themes/style-rhea.css";
+
+/* 第 4 层：全局基础（reset → 动效降级备份 → no-motion 清零） */
+@import "./base/reset.css";
+@import "./base/motion.css";
+@import "./base/no-motion.css";

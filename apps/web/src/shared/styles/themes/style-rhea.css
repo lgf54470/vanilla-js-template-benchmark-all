@@ -1,0 +1,18 @@
+/*
+ * themes/style-rhea.css — 风格 delta：极简直角（无内环、小圆角）。
+ */
+
+.style-rhea {
+  --ds-btn-radius: var(--radius-sm);
+  --ds-input-radius: var(--radius-sm);
+  --ds-card-radius: var(--radius-sm);
+  --ds-card-ring: transparent;
+  --ds-menu-item-radius: var(--radius-sm);
+  --ds-popover-radius: var(--radius-sm);
+  --ds-dialog-radius: var(--radius-md);
+  --ds-sheet-radius: var(--radius-md);
+  --ds-toast-radius: var(--radius-sm);
+  --ds-tooltip-radius: var(--radius-sm);
+  --ds-badge-radius: var(--radius-sm);
+  --ds-sidebar-radius: var(--radius-sm);
+}

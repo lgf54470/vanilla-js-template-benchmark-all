@@ -1,0 +1,65 @@
+/*
+ * tokens/typography.css — 字号/行高/字体族（结构令牌层）+ 三可变字体 @font-face。
+ * 字体自托管于 public/fonts/（来源与校验和见 public/fonts/FONTS.md），不引 CDN。
+ * 正文默认 --font-sans-base（Inter Variable）；页面级标题 h1–h4 跟随
+ * --font-heading-base（Manrope Variable），主题设置切字体时全站生效。
+ */
+
+:root {
+  --text-2xs: 0.625rem; /* 10px：色板示意标签等微字号 */
+  --text-xs: 0.75rem; /* 12px：辅助说明、时间戳、Badge */
+  --text-sm: 0.875rem; /* 14px：正文默认（信息密度优先） */
+  --text-base: 1rem; /* 16px：表单输入、按钮文字 */
+  --text-lg: 1.125rem; /* 18px：卡片/Section 标题 */
+  --text-xl: 1.25rem; /* 20px：页面标题 */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px：首页级大数字 */
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+
+  --font-sans-base: "Inter Variable", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-heading-base: "Manrope Variable", "Inter Variable", ui-sans-serif,
+    system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --icon-sm: 1rem; /* 16px */
+  --icon-md: 1.25rem; /* 20px */
+  --icon-lg: 1.5rem; /* 24px */
+}
+
+/* 三可变字体（wght 轴全范围；文件为 latin 子集） */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-var-latin.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Manrope Variable";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-var-latin.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geist-var-latin.woff2") format("woff2-variations");
+}
+
+/* light-DOM 全局字体规则（shadow 组件内由组件样式自行消费令牌） */
+html {
+  font-family: var(--font-sans-base, ui-sans-serif, system-ui, sans-serif);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading-base, inherit);
+}

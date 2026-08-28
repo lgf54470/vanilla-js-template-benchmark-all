@@ -1,0 +1,10 @@
+/*
+ * themes/style-mira.css — 风格 delta：微填充输入 + 方正菜单。
+ */
+
+.style-mira {
+  --ds-input-bg: color-mix(in oklch, var(--color-fg) 3%, transparent);
+  --ds-menu-item-radius: var(--radius-md);
+  --ds-card-ring: color-mix(in oklch, var(--color-fg) 8%, transparent);
+  --ds-toast-radius: calc(var(--radius) * 1.4);
+}

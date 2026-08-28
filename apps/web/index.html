@@ -1,11 +1,95 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>vanilla-js-template</title>
+    <!--
+      PREPAINT：首帧前把持久化外观写到 <html>（防刷新闪白/闪暗，docs/CSS.md §1 通道 2）。
+      与 shared/lib/appearance.js 运行时引擎同一契约：键名镜像
+      packages/contracts/constants.js 的 STORAGE_KEYS，字体栈组合镜像
+      composeSansStack/composeHeadingStack。改动任意一侧必须同步另一侧。
+    -->
+    <script>
+    (function () {
+      var s = function (k, d) {
+        try {
+          return localStorage.getItem(k) ?? d;
+        } catch {
+          return d;
+        }
+      };
+      var n = function (k) {
+        var v = Number(s(k, ""));
+        return Number.isFinite(v) && v > 0 ? v : null;
+      };
+      var theme = s("pref:theme", "system");
+      var dark = theme === "dark" ||
+        (theme === "system" &&
+          matchMedia("(prefers-color-scheme: dark)").matches);
+      var html = document.documentElement;
+      var style = s("pref:style", "style-nova");
+      var palette = s("pref:palette", "base-zinc");
+      var chart = s("pref:chart", "");
+      var menu = s("pref:menu", "menu-cozy");
+      html.className = [style, palette, chart, menu, dark ? "dark" : ""]
+        .filter(Boolean)
+        .join(" ");
+      html.dataset.theme = dark ? "dark" : "light";
+      html.style.colorScheme = dark ? "dark" : "light";
+      html.dataset.sidebarVariant = s("pref:sidebar-variant", "sidebar");
+      html.dataset.sidebarCollapsible = s("pref:sidebar-collapsible", "icon");
+      var radius = n("pref:radius");
+      if (radius != null) html.style.setProperty("--radius", radius + "px");
+      var sans = s("pref:font-sans", "");
+      if (sans) {
+        html.style.setProperty(
+          "--font-sans-base",
+          '"' + sans + '", ui-sans-serif, system-ui, sans-serif',
+        );
+      }
+      var heading = s("pref:font-heading", "");
+      if (heading) {
+        html.style.setProperty(
+          "--font-heading-base",
+          '"' + heading +
+            '", "Inter Variable", ui-sans-serif, system-ui, sans-serif',
+        );
+      }
+    })();
+    </script>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link
+      rel="preload"
+      href="/fonts/inter-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/manrope-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-var-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script type="importmap">
+    {
+      "imports": {
+        "@contracts/": "/packages/contracts/"
+      }
+    }
+    </script>
   </head>
   <body>
-    <p>M0 脚手架占位页（M1 起替换为完整前端）。</p>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

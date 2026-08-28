@@ -1,0 +1,21 @@
+/*
+ * themes/style-luma.css — 风格 delta：大圆角 + 填充输入（示例见 docs/CSS.md §2.3）。
+ */
+
+.style-luma {
+  --ds-btn-radius: calc(var(--radius) * 2.6);
+  --ds-input-radius: calc(var(--radius) * 2.6);
+  --ds-input-bg: color-mix(in oklch, var(--input) 50%, transparent);
+  --ds-input-border: transparent;
+  --ds-card-radius: calc(var(--radius) * 2.2);
+  --ds-menu-item-radius: calc(var(--radius) * 2.2);
+  --ds-popover-radius: calc(var(--radius) * 1.8);
+  --ds-dialog-radius: calc(var(--radius) * 2.6);
+  --ds-sheet-radius: calc(var(--radius) * 2.6);
+  --ds-toast-radius: calc(var(--radius) * 2.2);
+  --ds-sidebar-radius: calc(var(--radius) * 2.2);
+}
+
+.dark.style-luma {
+  --ds-card-ring: color-mix(in oklch, var(--color-fg) 10%, transparent);
+}

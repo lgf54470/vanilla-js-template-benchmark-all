@@ -1,0 +1,13 @@
+/*
+ * base/no-motion.css — 全站无动效（docs/CSS.md §9 / Design.md §4）。
+ * 无条件清零一切 animation/transition；本文件是 !important 的唯一豁免处之一。
+ * light-DOM 全局规则穿不透 shadow：shadow root 内的清零由 attachStyles()
+ * 注入同一份规则（shared/ui/base.js）。
+ */
+
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}

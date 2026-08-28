@@ -1,0 +1,19 @@
+/*
+ * themes/style-vega.css — 风格 delta：利落方角，强描边。
+ * 只写与 style-nova 的差异，其余继承基准（docs/CSS.md §2.3）。
+ */
+
+.style-vega {
+  --ds-btn-radius: var(--radius-sm);
+  --ds-input-radius: var(--radius-sm);
+  --ds-card-radius: var(--radius-md);
+  --ds-card-ring: color-mix(in oklch, var(--color-fg) 8%, transparent);
+  --ds-menu-item-radius: calc(var(--radius) * 1.2);
+  --ds-popover-radius: var(--radius-md);
+  --ds-dialog-radius: var(--radius-lg);
+  --ds-sheet-radius: var(--radius-lg);
+  --ds-toast-radius: var(--radius-md);
+  --ds-tooltip-radius: var(--radius-sm);
+  --ds-badge-radius: var(--radius-sm);
+  --ds-sidebar-radius: var(--radius-md);
+}

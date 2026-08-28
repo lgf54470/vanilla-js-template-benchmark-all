@@ -1,0 +1,6 @@
+/*
+ * src/style.css — 应用样式入口（index.html 唯一引用的静态样式）。
+ * 只允许引 shared/styles/index.css，页面/模块样式走 ensurePageStyles 注入。
+ */
+
+@import "./shared/styles/index.css";

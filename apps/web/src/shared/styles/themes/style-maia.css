@@ -1,0 +1,14 @@
+/*
+ * themes/style-maia.css — 风格 delta：紧凑密度（小一号圆角，控件更收紧）。
+ */
+
+.style-maia {
+  --ds-btn-radius: calc(var(--radius) * 1.8);
+  --ds-input-radius: calc(var(--radius) * 1.8);
+  --ds-card-radius: calc(var(--radius) * 1.4);
+  --ds-menu-item-radius: calc(var(--radius) * 1.2);
+  --ds-dialog-radius: var(--radius-lg);
+  --ds-sheet-radius: var(--radius-lg);
+  --ds-toast-radius: calc(var(--radius) * 1.4);
+  --ds-sidebar-radius: calc(var(--radius) * 1.4);
+}

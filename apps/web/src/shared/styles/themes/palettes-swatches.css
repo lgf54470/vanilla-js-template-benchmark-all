@@ -1,0 +1,27 @@
+/* themes/palettes-swatches.css — 主题设置选色器示意色块
+ * 原始变量层（令牌定义处，允许颜色字面量，docs/CSS.md §6 白名单）。
+ * 数值来源：shadcn-ui 官方仓库 apps/v4/registry/themes.ts（本地 /home/kubuntu/projects/shadcn-ui，
+ * commit 683a5a9b3）。勿手改数值——重生成请重跑提取脚本并核对 diff。
+ * 消费规则见 docs/CSS.md §2：组件禁止直引本层，一律走 tokens/colors.css 语义层。
+ */
+* base/chart 色块取对应方案 light 模式 primary/chart-1；style 色块手写中性示意值。 */ :root {
+  --swatch-base-zinc: oklch(0.21 0.006 285.885);
+  --swatch-base-red: oklch(0.505 0.213 27.518);
+  --swatch-base-orange: oklch(0.553 0.195 38.402);
+  --swatch-base-green: oklch(0.527 0.154 150.069);
+  --swatch-base-blue: oklch(0.488 0.243 264.376);
+  --swatch-base-violet: oklch(0.491 0.27 292.581);
+  --swatch-base-rose: oklch(0.514 0.222 16.935);
+  --swatch-chart-1: oklch(0.808 0.114 19.571);
+  --swatch-chart-2: oklch(0.837 0.128 66.29);
+  --swatch-chart-3: oklch(0.879 0.169 91.605);
+  --swatch-chart-4: oklch(0.905 0.182 98.111);
+  --swatch-chart-5: oklch(0.897 0.196 126.665);
+  --swatch-chart-6: oklch(0.871 0.15 154.449);
+  --swatch-chart-7: oklch(0.845 0.143 164.978);
+  --swatch-chart-8: oklch(0.855 0.138 181.071);
+  --swatch-chart-9: oklch(0.865 0.127 207.078);
+  --swatch-chart-10: oklch(0.809 0.105 251.813);
+  --swatch-chart-11: oklch(0.811 0.111 293.571);
+  --swatch-chart-12: oklch(0.823 0.12 346.018);
+}

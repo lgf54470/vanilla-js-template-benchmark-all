@@ -1,0 +1,12 @@
+/*
+ * tokens/sidebar.css — 侧栏尺寸常量（结构令牌层）。
+ * 颜色不在这里（走语义层 --color-sidebar-*）；变体与收起形态见 docs/Layout.md §3。
+ * 拖拽调宽时 app-shell 同帧双写 --sidebar-current-width 与 --sidebar-width
+ * （内联令牌优先于继承，见 ARCHITECTURE §5.1）。
+ */
+
+:root {
+  --sidebar-width: 16rem; /* 展开态 */
+  --sidebar-width-icon: 3rem; /* 图标条（收起态） */
+  --sidebar-width-mobile: 18rem; /* 移动端抽屉 */
+}

@@ -1,0 +1,13 @@
+/*
+ * themes/style-lyra.css — 风格 delta：中庸大圆角（介于 nova 与 luma 之间）。
+ */
+
+.style-lyra {
+  --ds-btn-radius: calc(var(--radius) * 2.2);
+  --ds-input-radius: calc(var(--radius) * 2.2);
+  --ds-card-radius: calc(var(--radius) * 1.8);
+  --ds-menu-item-radius: calc(var(--radius) * 2.2);
+  --ds-dialog-radius: calc(var(--radius) * 2.2);
+  --ds-sheet-radius: calc(var(--radius) * 2.2);
+  --ds-sidebar-radius: calc(var(--radius) * 1.8);
+}

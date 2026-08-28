@@ -1,0 +1,18 @@
+/*
+ * tokens/spacing.css — 间距刻度（结构令牌层）。
+ * 刻度刻意跳号：没有 --space-7/9/11（8=2rem、10=2.5rem、12=3rem）。
+ * 不要"补齐"它们，也不要引用不存在的刻度（会静默失效为 0，
+ * 见 docs/bug/2026-08-28-css-var-typo-silent-zero.md 模式的教训）。
+ */
+
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+}

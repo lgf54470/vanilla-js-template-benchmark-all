@@ -1,0 +1,114 @@
+/*
+ * tokens/colors.css — 语义映射层（第 2 层）。
+ * 组件/页面消费颜色的唯一直引出口：--color-* = var(--原始变量, oklch 兜底)。
+ * 原始变量由 themes/palettes-*.css 经 <html> 的 base-* 与 chart-* 类提供；
+ * 兜底值 = shadcn zinc 主题（与官方默认一致），供未挂 base-* 类的极端场景。
+ * 本文件是令牌定义处，允许颜色字面量（docs/CSS.md §6 白名单）。
+ * 注意：块注释内不得出现星斜杠序列（会提前终止注释，docs/CSS.md §8）。
+ */
+
+:root {
+  /* zinc 灰阶兜底/工具场景（Tailwind/shadcn 官方 zinc oklch） */
+  --zinc-50: oklch(0.985 0 0);
+  --zinc-100: oklch(0.967 0.001 286.375);
+  --zinc-200: oklch(0.927 0.006 286.033);
+  --zinc-300: oklch(0.871 0.006 286.286);
+  --zinc-400: oklch(0.705 0.015 286.067);
+  --zinc-500: oklch(0.552 0.016 285.938);
+  --zinc-600: oklch(0.442 0.017 285.786);
+  --zinc-700: oklch(0.37 0.013 285.805);
+  --zinc-800: oklch(0.274 0.006 286.033);
+  --zinc-900: oklch(0.21 0.006 285.885);
+  --zinc-950: oklch(0.141 0.005 285.823);
+
+  /* 基础面/前景 */
+  --color-bg: var(--background, oklch(1 0 0));
+  --color-fg: var(--foreground, oklch(0.141 0.005 285.823));
+  --color-card: var(--card, oklch(1 0 0));
+  --color-card-fg: var(--card-foreground, oklch(0.141 0.005 285.823));
+  --color-popover: var(--popover, oklch(1 0 0));
+  --color-popover-fg: var(--popover-foreground, oklch(0.141 0.005 285.823));
+
+  /* 中性层次 */
+  --color-muted: var(--muted, oklch(0.967 0.001 286.375));
+  --color-fg-muted: var(--muted-foreground, oklch(0.552 0.016 285.938));
+  --color-accent: var(--accent, oklch(0.967 0.001 286.375));
+  --color-fg-accent: var(--accent-foreground, oklch(0.21 0.006 285.885));
+  --color-border: var(--border, oklch(0.92 0.004 286.32));
+
+  /* 强调/语义动作 */
+  --color-primary: var(--primary, oklch(0.21 0.006 285.885));
+  --color-primary-fg: var(--primary-foreground, oklch(0.985 0 0));
+  --color-secondary: var(--secondary, oklch(0.967 0.001 286.375));
+  --color-secondary-fg: var(--secondary-foreground, oklch(0.21 0.006 285.885));
+  --color-danger: var(--destructive, oklch(0.577 0.245 27.325));
+  --color-fg-danger: var(--primary-foreground, oklch(0.985 0 0));
+
+  /* 状态色（shadcn 无对应原始变量，固定值；暗色在下方覆盖） */
+  --color-warning: oklch(0.769 0.188 70.08);
+  --color-fg-warning: oklch(0.279 0.077 45.635);
+  --color-success: oklch(0.627 0.194 149.214);
+  --color-fg-success: oklch(0.982 0.018 155.826);
+
+  /* 遮罩（浮层；暗色更淡，见 Design.md §3） */
+  --color-overlay: rgb(0 0 0 / 40%);
+
+  /* 焦点环。
+   * 说明：同名自引用 var(--ring, 兜底) 是刻意设计——挂 base-* 类时 palettes 的
+   * :root.base-* 声明以更高优先级胜出，本条落选不参与求值；未挂任何 base-* 类时
+   * 本条胜出但形成自环失效，消费方 var(--ring, …) 落到兜底值，语义不变。 */
+  --ring: var(--ring, oklch(0.705 0.015 286.067));
+
+  /* 图表色兜底（zinc 灰阶）；chart-* 类（palettes-chart.css）以更高优先级覆盖 */
+  --chart-1: oklch(0.871 0.006 286.286);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+
+  /* Sidebar 语义（原始 --sidebar-* 由 palettes 提供，组件禁止直引） */
+  --color-sidebar: var(--sidebar, oklch(0.985 0 0));
+  --color-sidebar-fg: var(--sidebar-foreground, oklch(0.141 0.005 285.823));
+  --color-sidebar-primary: var(--sidebar-primary, oklch(0.21 0.006 285.885));
+  --color-sidebar-primary-fg: var(--sidebar-primary-foreground, oklch(0.985 0 0));
+  --color-sidebar-accent: var(--sidebar-accent, oklch(0.967 0.001 286.375));
+  --color-sidebar-accent-fg: var(--sidebar-accent-foreground, oklch(0.21 0.006 285.885));
+  --color-sidebar-border: var(--sidebar-border, oklch(0.92 0.004 286.32));
+}
+
+/* 暗色：状态色/遮罩覆盖（调色板部分由 :root.dark.base-* 处理） */
+:root.dark {
+  --color-warning: oklch(0.795 0.184 86.047);
+  --color-fg-warning: oklch(0.279 0.077 45.635);
+  --color-success: oklch(0.723 0.219 149.579);
+  --color-fg-success: oklch(0.262 0.051 172.552);
+  --color-overlay: rgb(0 0 0 / 60%);
+}
+
+/* 未挂任何 base-* 类时的暗色兜底（与 base-zinc dark 相同的关键变量） */
+.dark:not([class*="base-"]) {
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.21 0.006 285.885);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.92 0.004 286.32);
+  --primary-foreground: oklch(0.21 0.006 285.885);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --accent: oklch(0.274 0.006 286.033);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --sidebar: oklch(0.21 0.006 285.885);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+}

@@ -1,0 +1,140 @@
+/*
+ * app/dev/playground.css — M1 令牌层验收样张样式（临时，M4 应用壳替换）。
+ * 只消费令牌（--color-*/
+--ds-*/--space-*/--text-*/--radius-*），无字面量。 */ .pg-main {
+  max-width: 60rem;
+  margin-inline: auto;
+  padding-block: var(--space-8);
+  padding-inline: var(--space-6);
+  display: grid;
+  gap: var(--space-6);
+}
+
+.pg-title {
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+
+.pg-sub {
+  color: var(--color-fg-muted);
+  font-size: var(--text-xs);
+}
+
+.pg-group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pg-group h2 {
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+  font-weight: 500;
+}
+
+.pg-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.pg-chip {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding-block: var(--space-1);
+  padding-inline: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+  background: var(--color-bg);
+}
+
+.pg-chip:hover {
+  background: var(--color-muted);
+  color: var(--color-fg);
+}
+
+.pg-chip.is-active {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pg-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--ds-card-radius, var(--radius-lg));
+  box-shadow: inset 0 0 0 1px var(--ds-card-ring, transparent);
+  background: var(--color-card);
+  color: var(--color-card-fg);
+  padding-block: var(--space-3);
+  padding-inline: var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.pg-btn {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  border-radius: var(--ds-btn-radius, calc(var(--radius) * 2.6));
+  padding-block: var(--space-2);
+  padding-inline: var(--space-4);
+  font-size: var(--text-base);
+}
+
+.pg-badge {
+  border: 1px solid var(--color-border);
+  border-radius: var(--ds-badge-radius, var(--radius-sm));
+  padding-block: var(--space-1);
+  padding-inline: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+}
+
+.pg-status {
+  border-radius: var(--radius-full);
+  padding-block: var(--space-1);
+  padding-inline: var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.pg-status-danger {
+  background: color-mix(in oklch, var(--color-danger) 15%, transparent);
+  color: var(--color-danger);
+}
+
+.pg-status-success {
+  background: color-mix(in oklch, var(--color-success) 15%, transparent);
+  color: var(--color-success);
+}
+
+.pg-status-warning {
+  background: color-mix(in oklch, var(--color-warning) 15%, transparent);
+  color: var(--color-fg-warning);
+}
+
+.pg-chart-row {
+  align-items: stretch;
+}
+
+.pg-chart {
+  width: 5rem;
+  padding-block: var(--space-4);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  font-size: var(--text-2xs);
+  color: var(--color-primary-fg);
+}
+
+.pg-chart-1 {
+  background: var(--chart-1);
+}
+.pg-chart-2 {
+  background: var(--chart-2);
+}
+.pg-chart-3 {
+  background: var(--chart-3);
+}
+.pg-chart-4 {
+  background: var(--chart-4);
+}
+.pg-chart-5 {
+  background: var(--chart-5);
+}

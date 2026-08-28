@@ -1,0 +1,11 @@
+/*
+ * tokens/motion.css — 动效时长令牌（预留，当前被 base/no-motion.css 压制）。
+ * 全站无动效：恢复需整体重新评估，禁止逐组件解禁（docs/Design.md §4 / CSS.md §9）。
+ */
+
+:root {
+  --motion-fast: 120ms; /* 悬停态、图标旋转（预留） */
+  --motion-base: 180ms; /* Sidebar 展开/收起、Dropdown 展开（预留） */
+  --motion-slow: 240ms; /* Sheet/Dialog 进出场（预留） */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* 默认缓动（预留） */
+}
