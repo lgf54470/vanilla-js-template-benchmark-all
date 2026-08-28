@@ -17,6 +17,18 @@ const MIME_TYPES = {
   ".ttf": "font/ttf",
 };
 
+function getHeader(reqOrContext, name) {
+  if (!reqOrContext) return null;
+  const req = reqOrContext.req || reqOrContext;
+  if (req.headers && typeof req.headers.get === "function") {
+    return req.headers.get(name);
+  }
+  if (typeof req.header === "function") {
+    return req.header(name);
+  }
+  return null;
+}
+
 export function createStaticHandler(options = {}) {
   const root = options.root || "apps/web";
   const extraRoots = options.extraRoots || {
@@ -24,7 +36,8 @@ export function createStaticHandler(options = {}) {
   };
 
   return async function staticHandler(c) {
-    const url = new URL(c.req.url);
+    const rawReq = c.req || c;
+    const url = new URL(rawReq.url);
     const pathname = decodeURIComponent(url.pathname);
 
     // Skip API routes
@@ -75,7 +88,7 @@ async function tryServeFile(filePath, c) {
     const contentType = MIME_TYPES[ext] || "application/octet-stream";
     const etag = `W/"${stat.size}-${stat.mtime ? stat.mtime.getTime() : 0}"`;
 
-    const ifNoneMatch = c.req.header("if-none-match");
+    const ifNoneMatch = getHeader(c, "if-none-match");
     if (ifNoneMatch && ifNoneMatch === etag) {
       return new Response(null, {
         status: 304,
