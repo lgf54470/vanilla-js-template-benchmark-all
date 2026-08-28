@@ -255,3 +255,19 @@ export function initAppearance() {
 
   applyAppearance();
 }
+
+// Aliases for general font access
+export function getFont() {
+  return getFontSans();
+}
+
+export function setFont(font) {
+  setFontSans(font);
+}
+
+export function resetAppearance() {
+  if (typeof localStorage !== "undefined") {
+    Object.values(STORAGE_KEYS).forEach((k) => localStorage.removeItem(k));
+  }
+  applyAppearance();
+}

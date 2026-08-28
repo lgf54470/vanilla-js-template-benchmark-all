@@ -11,6 +11,7 @@ const staticHandler = createStaticHandler({
   root: "apps/web",
   extraRoots: {
     "/packages/contracts": "packages/contracts",
+    "/packages/ui": "packages/ui",
   },
 });
 

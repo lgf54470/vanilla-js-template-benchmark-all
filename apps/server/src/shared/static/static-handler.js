@@ -33,6 +33,7 @@ export function createStaticHandler(options = {}) {
   const root = options.root || "apps/web";
   const extraRoots = options.extraRoots || {
     "/packages/contracts": "packages/contracts",
+    "/packages/ui": "packages/ui",
   };
 
   return async function staticHandler(c) {

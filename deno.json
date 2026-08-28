@@ -9,6 +9,8 @@
     "@libsql/client/web": "./packages/lib/libsql-client/web.js",
     "@contracts/": "./packages/contracts/",
     "@contracts": "./packages/contracts/index.js",
+    "@ui/": "./packages/ui/",
+    "@ui": "./packages/ui/index.js",
     "@shared/": "./apps/web/src/shared/",
     "@server-shared/": "./apps/server/src/shared/"
   },

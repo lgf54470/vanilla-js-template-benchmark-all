@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 
-Deno.test("ui: 验证全部 UI 组件、Shell 与模块导入完整性 (模拟浏览器 W3C 规范)", async () => {
+Deno.test("ui: 验证 packages/ui (Base UI) 与全部组件、Shell 导入完整性 (模拟浏览器 W3C 规范)", async () => {
   if (typeof globalThis.window === "undefined") {
     globalThis.window = {
       location: { hash: "", reload: () => {} },
@@ -92,9 +92,56 @@ Deno.test("ui: 验证全部 UI 组件、Shell 与模块导入完整性 (模拟�
     };
   }
 
-  // 1. Import UI components
-  const uiModule = await import("../../../src/shared/ui/index.js");
-  assert.ok(uiModule);
+  // 1. Direct import @ui package
+  const uiPackage = await import("@ui");
+  assert.ok(uiPackage);
+
+  // Check Base UI custom elements
+  const expectedElements = [
+    "ds-button",
+    "ds-badge",
+    "ds-card",
+    "ds-input",
+    "ds-textarea",
+    "ds-select",
+    "ds-checkbox",
+    "ds-switch",
+    "ds-separator",
+    "ds-kbd",
+    "ds-dialog",
+    "ds-alert",
+    "ds-sheet",
+    "ds-popover",
+    "ds-tooltip",
+    "ds-dropdown-menu",
+    "ds-toast",
+    "ds-avatar",
+    "ds-breadcrumb",
+    "ds-empty-state",
+    "ds-skeleton",
+    "ds-tabs",
+    "ds-accordion-item",
+    "ds-collapsible",
+    "ds-table",
+    "ds-scroll-area",
+    "ds-progress",
+    "ds-spinner",
+    "ds-pagination",
+    "ds-segmented-control",
+    "ds-masked-field",
+    "ds-sidebar-provider",
+    "ds-sidebar",
+    "ds-sidebar-trigger",
+    "ds-sidebar-menu-button",
+    "ds-workspace-switcher",
+    "ds-theme-switch",
+    "ds-lang-switch",
+    "ds-nav-user",
+    "ds-appearance-sheet",
+  ];
+  for (const elName of expectedElements) {
+    assert.ok(globalThis.customElements.get(elName), `Element <${elName}> should be registered`);
+  }
 
   // 2. Import Shell and Shell helpers
   const resizeHandleModule = await import("../../../src/app/shell/resize-handle.js");
