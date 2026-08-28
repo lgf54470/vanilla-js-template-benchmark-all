@@ -1,0 +1,4 @@
+/* M0 脚手架占位样式。M1 起本文件只 @import shared/styles/index.css（唯一入口）。 */
+#app {
+  font-family: system-ui, sans-serif;
+}

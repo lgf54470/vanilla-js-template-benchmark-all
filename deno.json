@@ -1,0 +1,45 @@
+{
+  // Deno workspace：两个应用成员；根 imports 映射对全部成员生效。
+  // vendored 依赖映射的来源与理由见 packages/lib/*/VENDOR.md。
+  "workspace": { "members": ["apps/web", "apps/server"] },
+  "imports": {
+    "hono": "./packages/lib/hono/dist/index.js",
+    "hono/": "./packages/lib/hono/dist/",
+    "@libsql/client/web": "./packages/lib/libsql-client/lib-esm/web.js",
+    "@libsql/core/api": "./packages/lib/libsql-core/api.js",
+    "@libsql/core/config": "./packages/lib/libsql-core/config.js",
+    "@libsql/core/uri": "./packages/lib/libsql-core/uri.js",
+    "@libsql/core/util": "./packages/lib/libsql-core/util.js",
+    "@libsql/hrana-client": "./packages/lib/libsql-hrana/lib-esm/index.js",
+    "@libsql/isomorphic-ws": "./packages/lib/libsql-isomorphic-ws/web.mjs",
+    "js-base64": "./packages/lib/js-base64/base64.mjs",
+    "promise-limit": "./packages/lib/promise-limit/index.js",
+    "@contracts/": "./packages/contracts/"
+  },
+  "fmt": {
+    "exclude": [
+      "packages/lib",
+      "docs",
+      "dist",
+      "coverage",
+      ".data"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "packages/lib",
+      "dist",
+      "coverage",
+      ".data"
+    ]
+  },
+  "tasks": {
+    "dev": "deno run -A --env-file --watch=src apps/server/src/platform-adapters/local.entry.js",
+    "start": "deno run -A --env-file apps/server/src/platform-adapters/local.entry.js",
+    "db:migrate": "deno run -A --env-file apps/server/src/scripts/migrate.js",
+    "db:seed": "deno run -A --env-file apps/server/src/scripts/seed.js",
+    "registry:generate": "deno run -A scripts/generate-registry.js",
+    "build:web": "deno run -A scripts/build-web.js",
+    "vendor:update": "deno run -A scripts/vendor-fetch.js"
+  }
+}
