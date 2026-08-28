@@ -50,6 +50,11 @@ const css = `
   height: 1.125rem;
   flex-shrink: 0;
 }
+.toast-msg {
+  flex: 1;
+  font-weight: 500;
+  line-height: 1.4;
+}
 `;
 
 export class DsToast extends HTMLElement {
@@ -63,9 +68,28 @@ export class DsToast extends HTMLElement {
     this.render();
   }
 
-  show({ message, type = "info", duration = 3000 }) {
-    const id = Date.now() + Math.random();
-    this.toasts.push({ id, message, type });
+  show(arg1, arg2 = "info", arg3 = 3000) {
+    let message = "";
+    let type = "info";
+    let duration = 3000;
+
+    if (typeof arg1 === "string") {
+      message = arg1;
+      type = typeof arg2 === "string" ? arg2 : "info";
+      duration = typeof arg3 === "number" ? arg3 : 3000;
+    } else if (arg1 && typeof arg1 === "object") {
+      message = arg1.message || arg1.title || arg1.text || arg1.description ||
+        (arg1.toString && arg1.toString() !== "[object Object]"
+          ? arg1.toString()
+          : JSON.stringify(arg1));
+      type = arg1.type || (typeof arg2 === "string" ? arg2 : "info");
+      duration = arg1.duration !== undefined
+        ? arg1.duration
+        : (typeof arg2 === "number" ? arg2 : 3000);
+    }
+
+    const id = "t_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6);
+    this.toasts.push({ id, message: String(message), type });
     this.render();
 
     if (duration > 0) {
@@ -87,7 +111,7 @@ export class DsToast extends HTMLElement {
           t.type === "success" ? "check-circle" : t.type === "error" ? "alert-circle" : "info",
         )
       }</span>
-            <span style="flex: 1; font-weight: 500;">${t.message}</span>
+            <span class="toast-msg">${t.message}</span>
           </div>
         `).join("")
     }
@@ -116,8 +140,7 @@ function getHost() {
   return globalToastInstance;
 }
 
-export const toast = {
-  success: (msg, dur) => getHost()?.show({ message: msg, type: "success", duration: dur }),
-  error: (msg, dur) => getHost()?.show({ message: msg, type: "error", duration: dur }),
-  info: (msg, dur) => getHost()?.show({ message: msg, type: "info", duration: dur }),
-};
+export const toast = (msg, dur) => getHost()?.show(msg, "info", dur);
+toast.success = (msg, dur) => getHost()?.show(msg, "success", dur);
+toast.error = (msg, dur) => getHost()?.show(msg, "error", dur);
+toast.info = (msg, dur) => getHost()?.show(msg, "info", dur);
