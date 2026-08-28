@@ -1,5 +1,27 @@
 {
   "settings.menu.title": "Settings",
   "settings.menu.profile": "Profile",
-  "settings.menu.account": "Account"
+  "settings.menu.account": "Account",
+  "settings.page.subtitle": "Manage your profile, display and security settings",
+  "settings.profile.title": "Profile",
+  "settings.profile.nickname": "Nickname",
+  "settings.profile.nicknameHint": "The name shown in the sidebar and on your profile",
+  "settings.profile.avatar": "Avatar",
+  "settings.profile.avatarHint": "Avatar upload is not supported yet",
+  "settings.action.save": "Save",
+  "settings.action.saving": "Saving…",
+  "settings.toast.profileSaved": "Profile saved",
+  "settings.account.title": "Account",
+  "settings.account.name": "Name",
+  "settings.account.email": "Email",
+  "settings.account.phone": "Phone",
+  "settings.account.sensitiveHint": "Sensitive fields are masked; shown for local confirmation only",
+  "settings.security.title": "Security",
+  "settings.security.currentPassword": "Current password",
+  "settings.security.newPassword": "New password",
+  "settings.security.newPasswordHint": "At least 8 characters",
+  "settings.action.changePassword": "Change password",
+  "settings.toast.accountSaved": "Account saved",
+  "settings.toast.passwordChanged": "Password changed",
+  "settings.error.loadFailed": "Failed to load settings"
 }

@@ -1,1 +1,7 @@
-{ "channels.menu.title": "Channels" }
+{
+  "channels.menu.title": "Channels",
+  "channels.page.subtitle": "A discussion space per channel",
+  "channels.col.name": "Channel",
+  "channels.col.members": "Members",
+  "channels.col.desc": "Description"
+}

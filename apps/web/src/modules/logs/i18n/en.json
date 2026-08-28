@@ -1,1 +1,8 @@
-{ "logs.menu.title": "Logs" }
+{
+  "logs.menu.title": "Logs",
+  "logs.page.subtitle": "System logs (sample)",
+  "logs.col.time": "Time",
+  "logs.col.level": "Level",
+  "logs.col.module": "Module",
+  "logs.col.message": "Message"
+}

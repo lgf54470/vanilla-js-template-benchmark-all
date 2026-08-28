@@ -1,1 +1,8 @@
-{ "logs.menu.title": "日志" }
+{
+  "logs.menu.title": "日志",
+  "logs.page.subtitle": "系统运行日志（示例）",
+  "logs.col.time": "时间",
+  "logs.col.level": "级别",
+  "logs.col.module": "模块",
+  "logs.col.message": "消息"
+}

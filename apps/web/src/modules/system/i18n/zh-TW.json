@@ -1,1 +1,7 @@
-{ "system.menu.title": "系統" }
+{
+  "system.menu.title": "系統",
+  "system.page.subtitle": "執行時與部署資訊",
+  "system.field.target": "部署目標",
+  "system.field.version": "版本",
+  "system.field.architecture": "架構"
+}

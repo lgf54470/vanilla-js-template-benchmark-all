@@ -1,1 +1,9 @@
-{ "tokens.menu.title": "令牌" }
+{
+  "tokens.menu.title": "令牌",
+  "tokens.page.subtitle": "API 访问令牌（敏感字段掩码显示）",
+  "tokens.col.name": "名称",
+  "tokens.col.value": "值",
+  "tokens.col.createdAt": "创建时间",
+  "tokens.col.status": "状态",
+  "tokens.status.active": "有效"
+}

@@ -1,1 +1,9 @@
-{ "dashboard.menu.title": "Dashboard" }
+{
+  "dashboard.menu.title": "Dashboard",
+  "dashboard.page.subtitle": "An overview of your workspace and quick links",
+  "dashboard.stat.workspaces": "Workspaces",
+  "dashboard.stat.modules": "Modules",
+  "dashboard.stat.target": "Deploy target",
+  "dashboard.stat.notes": "Notes",
+  "dashboard.quick.title": "Get started"
+}

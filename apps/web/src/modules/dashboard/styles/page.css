@@ -1,0 +1,82 @@
+/* modules/dashboard/styles/page.css — 仪表盘样式 */
+
+.page-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.page-title {
+  font-size: var(--text-2xl, 1.4rem);
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: var(--text-sm, 0.85rem);
+  color: var(--color-fg-muted);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-3);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.1rem;
+  block-size: 2.1rem;
+  border-radius: var(--ds-icon-btn-radius);
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
+}
+
+.stat-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: var(--text-sm, 0.82rem);
+  color: var(--color-fg-muted);
+}
+
+.quick-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-steps li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm, 0.85rem);
+  color: var(--color-fg);
+}
+
+.quick-steps .step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+  border-radius: 50%;
+  background: var(--color-muted);
+  color: var(--color-fg-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex: none;
+}

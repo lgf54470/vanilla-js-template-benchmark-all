@@ -83,6 +83,9 @@ export async function bootstrap() {
   on("workspace:changed", () => {
     if (shell && currentRoute) mountRoute(currentRoute);
   });
+  on("user:updated", () => {
+    if (shell) loadUser(); // 设置页保存昵称后刷新 nav-user
+  });
   appearance.on((s) => {
     const sidebar = shell?.querySelector("ds-sidebar");
     if (sidebar) {

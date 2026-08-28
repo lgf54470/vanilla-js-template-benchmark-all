@@ -1,5 +1,27 @@
 {
   "settings.menu.title": "设置",
   "settings.menu.profile": "个人资料",
-  "settings.menu.account": "账户"
+  "settings.menu.account": "账户",
+  "settings.page.subtitle": "管理个人资料、显示与安全设置",
+  "settings.profile.title": "个人资料",
+  "settings.profile.nickname": "昵称",
+  "settings.profile.nicknameHint": "显示在侧栏与资料里的名字",
+  "settings.profile.avatar": "头像",
+  "settings.profile.avatarHint": "头像暂不支持上传",
+  "settings.action.save": "保存",
+  "settings.action.saving": "保存中…",
+  "settings.toast.profileSaved": "个人资料已保存",
+  "settings.account.title": "账户",
+  "settings.account.name": "姓名",
+  "settings.account.email": "邮箱",
+  "settings.account.phone": "手机号",
+  "settings.account.sensitiveHint": "敏感字段掩码显示，仅用于本地确认",
+  "settings.security.title": "安全",
+  "settings.security.currentPassword": "当前密码",
+  "settings.security.newPassword": "新密码",
+  "settings.security.newPasswordHint": "至少 8 位",
+  "settings.action.changePassword": "修改密码",
+  "settings.toast.accountSaved": "账户已保存",
+  "settings.toast.passwordChanged": "密码已修改",
+  "settings.error.loadFailed": "设置加载失败"
 }

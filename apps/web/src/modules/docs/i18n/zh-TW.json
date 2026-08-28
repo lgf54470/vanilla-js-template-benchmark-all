@@ -1,1 +1,12 @@
-{ "docs.menu.title": "文件" }
+{
+  "docs.menu.title": "文件",
+  "docs.page.subtitle": "專案架構與技術文件",
+  "docs.card.architecture": "架構總覽",
+  "docs.card.architecture.desc": "模組系統、依賴邊界與關鍵決策",
+  "docs.card.database": "資料庫",
+  "docs.card.database.desc": "三類資料表、敏感欄位與工作空間隔離",
+  "docs.card.deployment": "部署",
+  "docs.card.deployment.desc": "五平台 runbook 與環境變數矩陣",
+  "docs.card.design": "設計系統",
+  "docs.card.design.desc": "四層令牌與視覺規範"
+}

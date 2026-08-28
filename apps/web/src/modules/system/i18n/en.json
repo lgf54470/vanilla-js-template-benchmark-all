@@ -1,1 +1,7 @@
-{ "system.menu.title": "System" }
+{
+  "system.menu.title": "System",
+  "system.page.subtitle": "Runtime and deployment information",
+  "system.field.target": "Deploy target",
+  "system.field.version": "Version",
+  "system.field.architecture": "Architecture"
+}

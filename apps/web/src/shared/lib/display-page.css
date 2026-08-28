@@ -1,0 +1,136 @@
+/* apps/web/src/shared/lib/display-page.css — 纯展示模块共用页面样式
+ *
+ * 由 channels/tokens/logs/system/docs/auth 这些纯展示模块经
+ * ensurePageStyles(import.meta.url, "../../shared/lib/display-page.css")
+ * 注入（同一 URL 幂等去重）。dashboard 用自有样式。只引用语义/结构令牌。
+
+.page-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.page-title {
+  font-size: var(--text-2xl, 1.4rem);
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: var(--text-sm, 0.85rem);
+  color: var(--color-fg-muted);
+}
+
+/* 通用卡片网格（Layout.md §5 自适列数） */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-w, 16rem),
+    1fr));
+  gap: var(--space-3);
+}
+
+/* 表格式列表（日志/令牌/频道用） */
+.table-card {
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--space-2) * 0.5) var(--space-4);
+  border-radius: var(--ds-card-radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-card-fg);
+  overflow: hidden;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: var(--row-cols, repeat(3, 1fr));
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm, 0.85rem);
+}
+
+.table-row:last-child {
+  border-bottom: 0;
+}
+
+.table-row--head {
+  color: var(--color-fg-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.table-cell {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table-cell strong {
+  color: var(--color-fg);
+  font-weight: 600;
+}
+
+/* 信息卡（docs/system/auth 用） */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.info-field {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--text-sm, 0.85rem);
+}
+
+.info-field:last-child {
+  border-bottom: 0;
+}
+
+.info-field dt {
+  color: var(--color-fg-muted);
+}
+
+.info-field dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+.doc-card {
+  display: block;
+  padding: var(--space-4);
+  border-radius: var(--ds-card-radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-card-fg);
+  transition: none;
+}
+
+.doc-card:hover {
+  background: var(--color-muted);
+}
+
+.doc-card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-fg);
+}
+
+.doc-card__desc {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm, 0.82rem);
+  color: var(--color-fg-muted);
+  line-height: 1.5;
+}

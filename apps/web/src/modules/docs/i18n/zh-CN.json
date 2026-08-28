@@ -1,1 +1,12 @@
-{ "docs.menu.title": "文档" }
+{
+  "docs.menu.title": "文档",
+  "docs.page.subtitle": "项目架构与技术文档",
+  "docs.card.architecture": "架构总览",
+  "docs.card.architecture.desc": "模块系统、依赖边界与关键决策",
+  "docs.card.database": "数据库",
+  "docs.card.database.desc": "三类表约定、敏感字段与工作空间隔离",
+  "docs.card.deployment": "部署",
+  "docs.card.deployment.desc": "五平台 runbook 与环境变量矩阵",
+  "docs.card.design": "设计系统",
+  "docs.card.design.desc": "四层令牌与视觉规范"
+}

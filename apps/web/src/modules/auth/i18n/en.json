@@ -8,5 +8,9 @@
   "auth.session.14d": "14 days",
   "auth.session.30d": "30 days",
   "auth.session.90d": "90 days",
-  "auth.session.sessionOnly": "Keep me signed in until I close the browser"
+  "auth.session.sessionOnly": "Keep me signed in until I close the browser",
+  "auth.page.subtitle": "Session security settings",
+  "auth.card.title": "Access control",
+  "auth.card.desc": "This app is gated by a single password. Session duration and password change live under Settings → Account.",
+  "auth.link.toSettings": "Go to account settings"
 }

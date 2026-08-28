@@ -1,1 +1,9 @@
-{ "tokens.menu.title": "Tokens" }
+{
+  "tokens.menu.title": "Tokens",
+  "tokens.page.subtitle": "API access tokens (sensitive values masked)",
+  "tokens.col.name": "Name",
+  "tokens.col.value": "Value",
+  "tokens.col.createdAt": "Created",
+  "tokens.col.status": "Status",
+  "tokens.status.active": "Active"
+}

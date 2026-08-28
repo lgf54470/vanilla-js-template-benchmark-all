@@ -1,5 +1,27 @@
 {
   "settings.menu.title": "設定",
   "settings.menu.profile": "個人資料",
-  "settings.menu.account": "帳戶"
+  "settings.menu.account": "帳戶",
+  "settings.page.subtitle": "管理個人資料、顯示與安全設定",
+  "settings.profile.title": "個人資料",
+  "settings.profile.nickname": "暱稱",
+  "settings.profile.nicknameHint": "顯示在側欄與資料裡的名字",
+  "settings.profile.avatar": "頭像",
+  "settings.profile.avatarHint": "頭像暫不支援上傳",
+  "settings.action.save": "儲存",
+  "settings.action.saving": "儲存中…",
+  "settings.toast.profileSaved": "個人資料已儲存",
+  "settings.account.title": "帳戶",
+  "settings.account.name": "姓名",
+  "settings.account.email": "信箱",
+  "settings.account.phone": "手機號碼",
+  "settings.account.sensitiveHint": "敏感欄位遮罩顯示，僅供本地確認",
+  "settings.security.title": "安全",
+  "settings.security.currentPassword": "目前密碼",
+  "settings.security.newPassword": "新密碼",
+  "settings.security.newPasswordHint": "至少 8 位",
+  "settings.action.changePassword": "修改密碼",
+  "settings.toast.accountSaved": "帳戶已儲存",
+  "settings.toast.passwordChanged": "密碼已修改",
+  "settings.error.loadFailed": "設定載入失敗"
 }

@@ -8,5 +8,9 @@
   "auth.session.14d": "14 天",
   "auth.session.30d": "30 天",
   "auth.session.90d": "90 天",
-  "auth.session.sessionOnly": "保持登入直到下次瀏覽器開啟"
+  "auth.session.sessionOnly": "保持登入直到下次瀏覽器開啟",
+  "auth.page.subtitle": "會話安全設定",
+  "auth.card.title": "存取控制",
+  "auth.card.desc": "本應用為單密碼門控。會話時長、密碼修改等設定見「設定 → 帳戶」。",
+  "auth.link.toSettings": "前往帳戶設定"
 }

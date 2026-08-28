@@ -1,1 +1,12 @@
-{ "docs.menu.title": "Docs" }
+{
+  "docs.menu.title": "Docs",
+  "docs.page.subtitle": "Project architecture and technical documentation",
+  "docs.card.architecture": "Architecture",
+  "docs.card.architecture.desc": "Module system, dependency boundaries and key decisions",
+  "docs.card.database": "Database",
+  "docs.card.database.desc": "Table conventions, sensitive fields and workspace isolation",
+  "docs.card.deployment": "Deployment",
+  "docs.card.deployment.desc": "Five-platform runbooks and environment matrix",
+  "docs.card.design": "Design system",
+  "docs.card.design.desc": "Four-layer tokens and visual guidelines"
+}

@@ -1,1 +1,7 @@
-{ "channels.menu.title": "频道" }
+{
+  "channels.menu.title": "频道",
+  "channels.page.subtitle": "各频道的讨论空间",
+  "channels.col.name": "频道",
+  "channels.col.members": "成员",
+  "channels.col.desc": "描述"
+}

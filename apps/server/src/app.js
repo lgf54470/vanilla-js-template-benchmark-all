@@ -27,6 +27,9 @@ import { createAuthRoutes } from "./modules/auth/routes.js";
 import { createSettingsRepository } from "./modules/settings/repository.js";
 import { createSettingsService } from "./modules/settings/service.js";
 import { createSettingsRoutes } from "./modules/settings/routes.js";
+import { createNotesRepository } from "./modules/notes/repository.js";
+import { createNotesService } from "./modules/notes/service.js";
+import { createNotesRoutes } from "./modules/notes/routes.js";
 
 const log = createLogger({ module: "app" });
 
@@ -62,6 +65,8 @@ export function createApp({ db, env = {} }) {
   const settingsService = createSettingsService({ repo: settingsRepo });
   const sessionsRepo = createSessionsRepository(db);
   const authService = createAuthService({ sessionsRepo, encryptionKey });
+  const notesRepo = createNotesRepository(db);
+  const notesService = createNotesService({ repo: notesRepo });
 
   const app = new Hono();
 
@@ -103,6 +108,7 @@ export function createApp({ db, env = {} }) {
     "/api/settings",
     createSettingsRoutes({ service: settingsService }),
   );
+  app.route("/api/notes", createNotesRoutes({ service: notesService }));
 
   app.notFound((c) => {
     // 兜底：/api 未匹配路由 → 404 包络；非 /api 由平台入口的静态层处理

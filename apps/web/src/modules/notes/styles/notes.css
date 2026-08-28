@@ -1,0 +1,155 @@
+/* apps/web/src/modules/notes/styles/notes.css — 笔记页样式
+ *
+ * light-DOM 页面样式，经 ensurePageStyles(import.meta.url, ...) 注入。
+ * 只引用语义层 --color-* / --ds-* 与结构令牌（docs/CSS.md §6）。
+ */
+
+.notes-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.notes-title {
+  font-size: var(--text-2xl, 1.4rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.notes-subtitle {
+  font-size: var(--text-sm, 0.85rem);
+  color: var(--color-fg-muted);
+  margin-top: var(--space-1);
+}
+
+.notes-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--ds-btn-radius);
+  font-size: var(--text-sm, 0.82rem);
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  background: var(--color-muted);
+  border: 1px solid var(--color-border);
+}
+
+.tag-chip:hover {
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
+}
+
+.tag-chip[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.tag-chip .count {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.notes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-min-w, 16rem),
+    1fr));
+  gap: var(--space-3);
+}
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--ds-card-radius);
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-card-fg);
+}
+
+.note-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.note-card__title {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-card__pinned {
+  display: inline-flex;
+  color: var(--color-primary);
+  flex: none;
+}
+
+.note-card__content {
+  font-size: var(--text-sm, 0.85rem);
+  color: var(--color-fg-muted);
+  line-height: 1.55;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.note-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.note-card__time {
+  font-size: 0.72rem;
+  color: var(--color-fg-muted);
+}
+
+.note-card__actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.notes-empty {
+  padding: var(--space-8) 0;
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.note-form__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.note-form__row ds-input {
+  flex: 1;
+}
+
+.notes-loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

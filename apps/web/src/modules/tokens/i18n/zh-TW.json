@@ -1,1 +1,9 @@
-{ "tokens.menu.title": "令牌" }
+{
+  "tokens.menu.title": "令牌",
+  "tokens.page.subtitle": "API 存取令牌（敏感欄位遮罩顯示）",
+  "tokens.col.name": "名稱",
+  "tokens.col.value": "值",
+  "tokens.col.createdAt": "建立時間",
+  "tokens.col.status": "狀態",
+  "tokens.status.active": "有效"
+}

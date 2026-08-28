@@ -1,1 +1,9 @@
-{ "dashboard.menu.title": "儀表板" }
+{
+  "dashboard.menu.title": "儀表板",
+  "dashboard.page.subtitle": "工作空間的概覽與快速入口",
+  "dashboard.stat.workspaces": "工作空間",
+  "dashboard.stat.modules": "模組",
+  "dashboard.stat.target": "部署目標",
+  "dashboard.stat.notes": "筆記",
+  "dashboard.quick.title": "快速開始"
+}
