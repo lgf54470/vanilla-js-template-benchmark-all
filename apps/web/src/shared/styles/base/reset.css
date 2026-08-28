@@ -1,0 +1,74 @@
+/* base/reset.css —— 基础重置 + 文档级主题接线
+ *
+ * 只做 UA 样式归一与 body 的主题接线（背景/前景/字体取语义层）。
+ * 本文件在 check-hardcoded-tokens 白名单内（docs/CSS.md §6）。
+ * 注意：[hidden] 由此处兜底 display:none；弹层若自带 display 声明，
+ * 需在自己的 CSS 里同时写 [hidden] 规则（author 规则会覆盖 UA 的 [hidden]）。
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+[hidden] {
+  display: none;
+}

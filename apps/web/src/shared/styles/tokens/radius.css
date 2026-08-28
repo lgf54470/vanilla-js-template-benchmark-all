@@ -1,0 +1,18 @@
+/* tokens/radius.css —— 圆角：单一基准 + calc 倍数档位
+ *
+ * 主题设置面板只写 --radius 即全站生效。档位语义见 docs/Design.md §1：
+ * sm（Badge/Checkbox）→ md（常规控件）→ lg（容器级/按钮）→ xl（Dialog/Sheet）
+ * → 2xl/3xl/4xl（风格集差异化用）→ full（胶囊/圆形）。
+ */
+
+:root {
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-full: 9999px;
+}

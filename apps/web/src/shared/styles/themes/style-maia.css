@@ -1,0 +1,91 @@
+/* themes/style-maia.css —— 风格令牌集：大圆角 + 半填充输入：控件 rounded-4xl、input 30% 填充、弹层 shadow-2xl
+ *
+ * 只写与 style-nova 的差异（delta），未列出的变量沿用 nova 基准。
+ * 值逐项取自官方 registry/styles/style-maia.css 对应 cn-* 的 @apply。
+ *
+ * 本文件是令牌定义处，允许字面量（docs/CSS.md §6 白名单）。
+ */
+
+.style-maia {
+  /* —— Button —— */
+  --ds-btn-radius: var(--radius-4xl);
+  --ds-btn-height: 2.25rem;
+  --ds-btn-padding-x: 0.75rem;
+
+  /* —— Input / Textarea / Select 触发器（同一风格 DNA） —— */
+  --ds-input-bg: color-mix(in oklch, var(--input) 30%, transparent);
+  --ds-input-radius: var(--radius-4xl);
+  --ds-input-height: 2.25rem;
+  --ds-input-padding-x: 0.75rem;
+
+  /* —— Card —— */
+  --ds-card-radius: var(--radius-2xl);
+  --ds-card-spacing: 1.5rem;
+
+  /* —— Dialog / AlertDialog —— */
+  --ds-dialog-radius: var(--radius-4xl);
+  --ds-dialog-ring-alpha: 5%;
+  --ds-dialog-spacing: 1.5rem;
+  --ds-dialog-max-width: 28rem;
+
+  /* —— Popover 容器 —— */
+  --ds-popover-radius: var(--radius-2xl);
+  --ds-popover-ring-alpha: 5%;
+  --ds-popover-shadow: var(--shadow-2xl);
+  --ds-popover-padding: 1rem;
+  --ds-popover-gap: 1rem;
+
+  /* —— Menu 弹层内容（DropdownMenu / ContextMenu / Select 列表） —— */
+  --ds-menu-content-radius: var(--radius-2xl);
+  --ds-menu-content-ring-alpha: 5%;
+  --ds-menu-content-shadow: var(--shadow-2xl);
+  --ds-menu-content-min-width: 12rem;
+
+  /* —— Menu 列表项 —— */
+  --ds-menu-item-radius: var(--radius-xl);
+  --ds-menu-item-padding-x: 0.75rem;
+  --ds-menu-item-padding-y: 0.5rem;
+  --ds-menu-item-gap: 0.625rem;
+
+  /* —— Sidebar 菜单 —— */
+  --ds-sidebar-item-radius: var(--radius-lg);
+  --ds-sidebar-item-padding-x: 0.75rem;
+  --ds-sidebar-label-padding-x: 0.75rem;
+
+  /* —— Tabs —— */
+  --ds-tabs-list-radius: var(--radius-4xl);
+  --ds-tabs-list-height: 2.25rem;
+
+  /* —— Progress / Slider 轨道 —— */
+  --ds-progress-height: 0.75rem;
+  --ds-progress-radius: var(--radius-4xl);
+  --ds-slider-track-height: 0.75rem;
+  --ds-slider-track-radius: var(--radius-4xl);
+
+  /* —— Skeleton / Empty / Item / Alert / Menubar / Command / Select 项 / Kbd / Tooltip —— */
+  --ds-skeleton-radius: var(--radius-xl);
+  --ds-empty-radius: var(--radius-lg);
+  --ds-empty-padding: 3rem;
+  --ds-item-radius: var(--radius-2xl);
+  --ds-alert-padding-x: 1rem;
+  --ds-alert-padding-y: 0.75rem;
+  --ds-alert-gap: 0.625rem;
+  --ds-menubar-radius: var(--radius-4xl);
+  --ds-menubar-height: 2.25rem;
+  --ds-menubar-padding: 0.25rem;
+  --ds-command-radius: var(--radius-4xl);
+  --ds-command-item-radius: var(--radius-lg);
+  --ds-command-item-padding-x: 0.75rem;
+  --ds-command-item-padding-y: 0.5rem;
+  --ds-select-item-radius: var(--radius-xl);
+  --ds-select-item-padding-x: 0.75rem;
+  --ds-select-item-padding-y: 0.5rem;
+  --ds-kbd-radius: var(--radius-4xl);
+}
+
+/* 暗色增量：暗色敏感变量逐风格显式定义（切风格后暗色不失效） */
+.dark.style-maia {
+  --ds-input-bg: color-mix(in oklch, var(--input) 30%, transparent);
+  --ds-checkbox-bg: color-mix(in oklch, var(--input) 30%, transparent);
+  --ds-switch-track-bg: color-mix(in oklch, var(--input) 80%, transparent);
+}

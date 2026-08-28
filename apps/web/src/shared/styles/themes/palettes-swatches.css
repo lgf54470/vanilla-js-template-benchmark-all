@@ -1,0 +1,30 @@
+/* themes/palettes-swatches.css —— 主题设置面板磁贴示意色（原始变量层）
+ *
+ * base 磁贴取该基色 light 的 --primary；chart 磁贴取该主题 light 的 --chart-3。
+ * 仅用于主题设置面板的小色块展示，组件禁止引用本文件变量。
+ *
+ * 本文件是令牌定义处，允许颜色字面量（docs/CSS.md §6 白名单）。
+ */
+
+:root {
+  --swatch-base-zinc: oklch(0.21 0.006 285.885);
+  --swatch-base-red: oklch(0.505 0.213 27.518);
+  --swatch-base-orange: oklch(0.553 0.195 38.402);
+  --swatch-base-green: oklch(0.527 0.154 150.069);
+  --swatch-base-blue: oklch(0.488 0.243 264.376);
+  --swatch-base-violet: oklch(0.491 0.27 292.581);
+  --swatch-base-rose: oklch(0.514 0.222 16.935);
+
+  --swatch-chart-amber: oklch(0.666 0.179 58.318);
+  --swatch-chart-blue: oklch(0.546 0.245 262.881);
+  --swatch-chart-cyan: oklch(0.609 0.126 221.723);
+  --swatch-chart-emerald: oklch(0.596 0.145 163.225);
+  --swatch-chart-fuchsia: oklch(0.591 0.293 322.896);
+  --swatch-chart-green: oklch(0.627 0.194 149.214);
+  --swatch-chart-indigo: oklch(0.511 0.262 276.966);
+  --swatch-chart-orange: oklch(0.646 0.222 41.116);
+  --swatch-chart-pink: oklch(0.592 0.249 0.584);
+  --swatch-chart-red: oklch(0.577 0.245 27.325);
+  --swatch-chart-teal: oklch(0.6 0.118 184.704);
+  --swatch-chart-violet: oklch(0.541 0.281 293.009);
+}

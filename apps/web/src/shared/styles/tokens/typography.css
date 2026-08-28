@@ -1,0 +1,96 @@
+/* tokens/typography.css —— 字号 / 行高 / 字体
+ *
+ * 三可变字体自托管于 public/fonts/（Inter Variable 正文默认、Manrope Variable、
+ * Geist Variable）。@font-face 优先读本地文件（放入 woff2 即自动生效），
+ * 回退 local() 系统安装名；字体文件缺失时整体落到系统栈，不阻塞渲染。
+ * 主题设置写 --font-sans-base / --font-heading-base（pref:*），全站即时生效。
+ */
+
+:root {
+  --text-2xs: 0.625rem; /* 10px 色板示意标签等微字号 */
+  --text-xs: 0.75rem; /* 12px 辅助说明、时间戳、Badge */
+  --text-sm: 0.875rem; /* 14px 正文默认（信息密度优先） */
+  --text-base: 1rem; /* 16px 表单输入、按钮 */
+  --text-lg: 1.125rem; /* 18px 卡片标题、Section 标题 */
+  --text-xl: 1.25rem; /* 20px 页面标题 */
+  --text-2xl: 1.5rem; /* 24px 首页级大数字 */
+  --text-3xl: 1.875rem; /* 30px 极少使用 */
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+
+  /* 图标尺寸三档（Design.md §5） */
+  --icon-sm: 1rem;
+  --icon-md: 1.25rem;
+  --icon-lg: 1.5rem;
+
+  --font-sans:
+    var(--font-sans-base),
+    "Inter Variable",
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  --font-heading:
+    var(--font-heading-base),
+    "Manrope Variable",
+    Manrope,
+    var(--font-sans-base),
+    Inter,
+    system-ui,
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  --font-mono:
+    ui-monospace,
+    "Geist Variable",
+    Geist,
+    "Cascadia Code",
+    Consolas,
+    monospace;
+}
+
+/* 所有 light-DOM 页面级标题跟随主题标题字体（主题设置切字体时全站生效） */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading);
+}
+
+/* 自托管字体：把对应 woff2 放入 public/fonts/ 即自动生效（零 JS） */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src:
+    url("/fonts/inter-variable.woff2") format("woff2-variations"),
+    local("Inter Variable"),
+    local("Inter");
+}
+
+@font-face {
+  font-family: "Manrope Variable";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src:
+    url("/fonts/manrope-variable.woff2") format("woff2-variations"),
+    local("Manrope Variable"),
+    local("Manrope");
+}
+
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src:
+    url("/fonts/geist-variable.woff2") format("woff2-variations"),
+    local("Geist Variable"),
+    local("Geist");
+}

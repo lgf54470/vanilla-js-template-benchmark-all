@@ -1,0 +1,22 @@
+/* base/no-motion.css —— 全站无动效（docs/CSS.md §9）
+ *
+ * 三条通道都要覆盖：
+ * 1. light DOM：本文件经 index.css 全局生效；
+ * 2. shadow DOM：attachStyles()（shared/ui/base.js）把同一规则注入每个
+ *    shadow root（light-DOM 规则穿不透 shadow 边界）；
+ * 3. 弹层等动画等待一律用 waitForTransition()（感知 no-motion 立即完成），
+ *    组件 JS 禁止依赖 transitionend/animationend。
+ *
+ * 唯一允许 !important 的地方（docs/CSS.md §8 例外）。
+ */
+
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+html {
+  scroll-behavior: auto !important;
+}

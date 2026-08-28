@@ -1,0 +1,11 @@
+/* tokens/zindex.css —— 层级令牌（与 docs/Layout.md §6 表一致）
+ * 禁止组件内写裸数字 z-index。
+ */
+
+:root {
+  --z-sidebar-mobile-sheet: 30; /* 移动端 Sidebar 抽屉 */
+  --z-dropdown: 40; /* Dropdown/Menu */
+  --z-sheet: 50; /* 通用 Sheet（非 Sidebar） */
+  --z-dialog: 60; /* Dialog/ConfirmDialog 的遮罩与内容 */
+  --z-toast: 100; /* Toast，永远最高 */
+}

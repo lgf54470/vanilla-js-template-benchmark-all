@@ -1,0 +1,13 @@
+/* base/motion.css —— prefers-reduced-motion 时动效令牌降级（备份路径）
+ *
+ * 当前全站被 base/no-motion.css 压制（docs/CSS.md §9），本文件只是令牌层
+ * 的降级声明：若未来整体恢复动效，减少动效偏好下时长归零仍自动成立。
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+    --motion-slow: 0ms;
+  }
+}

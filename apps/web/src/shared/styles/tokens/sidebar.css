@@ -1,0 +1,16 @@
+/* tokens/sidebar.css —— 侧栏尺寸令牌（只放尺寸；颜色在 palettes/语义层）
+ *
+ * --sidebar-* 三件套是静态常量；--sidebar-current-width 是拖拽调宽的运行时
+ * 实际值（M4 由 Sidebar Provider 写入 <html> 内联样式），--sidebar-resize-duration
+ * 供拖拽跟手时把过渡时长压到 0（全站无动效下恒为 0，恢复动效后拖拽期间临时清零）。
+ */
+
+:root {
+  --sidebar-width: 16rem;
+  --sidebar-width-icon: 3rem;
+  --sidebar-width-mobile: 18rem;
+
+  /* 运行时：拖拽/收起态的实际宽度（默认展开宽） */
+  --sidebar-current-width: var(--sidebar-width);
+  --sidebar-resize-duration: 0ms;
+}

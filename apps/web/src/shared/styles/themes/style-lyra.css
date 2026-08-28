@@ -1,0 +1,85 @@
+/* themes/style-lyra.css —— 风格令牌集：直角极简：全组件 rounded-none、小字号、1px 焦点环、零留白弹层
+ *
+ * 只写与 style-nova 的差异（delta），未列出的变量沿用 nova 基准。
+ * 值逐项取自官方 registry/styles/style-lyra.css 对应 cn-* 的 @apply。
+ *
+ * 本文件是令牌定义处，允许字面量（docs/CSS.md §6 白名单）。
+ */
+
+.style-lyra {
+  /* —— 焦点环 —— */
+  --ds-focus-ring-width: 1px;
+
+  /* —— Button —— */
+  --ds-btn-radius: 0;
+  --ds-btn-font-size: var(--text-xs);
+
+  /* —— Input / Textarea / Select 触发器（同一风格 DNA） —— */
+  --ds-input-radius: 0;
+  --ds-input-font-size: var(--text-xs);
+
+  /* —— Card —— */
+  --ds-card-radius: 0;
+  --ds-card-font-size: var(--text-xs);
+
+  /* —— Dialog / AlertDialog —— */
+  --ds-dialog-radius: 0;
+
+  /* —— Popover 容器 —— */
+  --ds-popover-radius: 0;
+
+  /* —— Menu 弹层内容（DropdownMenu / ContextMenu / Select 列表） —— */
+  --ds-menu-content-radius: 0;
+  --ds-menu-content-padding: 0rem;
+
+  /* —— Menu 列表项 —— */
+  --ds-menu-item-radius: 0;
+  --ds-menu-item-padding-x: 0.5rem;
+  --ds-menu-item-padding-y: 0.5rem;
+  --ds-menu-item-gap: 0.5rem;
+  --ds-menu-item-font-size: var(--text-xs);
+
+  /* —— Sidebar 菜单 —— */
+  --ds-sidebar-item-radius: 0;
+  --ds-sidebar-item-font-size: var(--text-xs);
+  --ds-sidebar-label-radius: 0;
+  --ds-sidebar-label-font-weight: 400;
+
+  /* —— Badge —— */
+  --ds-badge-radius: 0;
+
+  /* —— Toast —— */
+  --ds-toast-radius: 0;
+
+  /* —— Tabs —— */
+  --ds-tabs-list-radius: 0;
+
+  /* —— Progress / Slider 轨道 —— */
+  --ds-progress-radius: 0;
+  --ds-slider-track-radius: 0;
+
+  /* —— Skeleton / Empty / Item / Alert / Menubar / Command / Select 项 / Kbd / Tooltip —— */
+  --ds-skeleton-radius: 0;
+  --ds-empty-radius: 0;
+  --ds-item-radius: 0;
+  --ds-item-font-size: var(--text-xs);
+  --ds-alert-radius: 0;
+  --ds-alert-font-size: var(--text-xs);
+  --ds-menubar-radius: 0;
+  --ds-menubar-padding: 0.25rem;
+  --ds-command-radius: 0;
+  --ds-command-item-radius: 0;
+  --ds-command-item-padding-y: 0.5rem;
+  --ds-select-item-radius: 0;
+  --ds-select-item-padding-x: 0.5rem;
+  --ds-select-item-padding-y: 0.5rem;
+  --ds-kbd-radius: 0;
+  --ds-tooltip-radius: 0;
+}
+
+/* 暗色增量：暗色敏感变量逐风格显式定义（切风格后暗色不失效） */
+.dark.style-lyra {
+  --ds-input-bg: color-mix(in oklch, var(--input) 30%, transparent);
+  --ds-checkbox-bg: color-mix(in oklch, var(--input) 30%, transparent);
+  --ds-switch-track-bg: color-mix(in oklch, var(--input) 80%, transparent);
+}

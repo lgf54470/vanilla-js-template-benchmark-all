@@ -1,4 +1,4 @@
-/* M0 脚手架占位样式。M1 起本文件只 @import shared/styles/index.css（唯一入口）。 */
-#app {
-  font-family: system-ui, sans-serif;
-}
+/* M1 起：唯一入口是 shared/styles/index.css（docs/CSS.md §1）。
+ * 组件/页面禁止绕过本文件直接 @import tokens/themes 下的分片。
+ */
+@import "./shared/styles/index.css";
