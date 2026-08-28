@@ -1,0 +1,8 @@
+/* zindex.css — 层级表（docs/Layout.md §6，禁止组件内写裸数字）。 */
+:root {
+  --z-sidebar-mobile-sheet: 40;
+  --z-dropdown: 50;
+  --z-sheet: 60;
+  --z-dialog: 70;
+  --z-toast: 100;
+}

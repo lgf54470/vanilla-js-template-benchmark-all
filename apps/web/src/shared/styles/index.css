@@ -1,0 +1,26 @@
+/* index.css — 唯一入口（docs/CSS.md §1）：按 tokens → themes → base 顺序 @import。
+ * src/style.css 只引本文件。 */
+@import "./tokens/colors.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radius.css";
+@import "./tokens/shadow.css";
+@import "./tokens/typography.css";
+@import "./tokens/zindex.css";
+@import "./tokens/motion.css";
+@import "./tokens/sidebar.css";
+
+@import "./themes/palettes-base.css";
+@import "./themes/palettes-chart.css";
+@import "./themes/palettes-swatches.css";
+@import "./themes/style-nova.css";
+@import "./themes/style-vega.css";
+@import "./themes/style-maia.css";
+@import "./themes/style-lyra.css";
+@import "./themes/style-mira.css";
+@import "./themes/style-luma.css";
+@import "./themes/style-sera.css";
+@import "./themes/style-rhea.css";
+
+@import "./base/reset.css";
+@import "./base/motion.css";
+@import "./base/no-motion.css";

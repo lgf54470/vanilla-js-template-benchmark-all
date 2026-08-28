@@ -1,2 +1,5 @@
 {
+  "imports": {
+    "/packages/contracts/constants.js": "../../packages/contracts/constants.js"
+  }
 }

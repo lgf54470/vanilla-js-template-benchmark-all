@@ -1,0 +1,27 @@
+/* style-luma.css — 大圆角柔和风 delta：pill 按钮 + 填充输入 + 柔和阴影。 */
+.style-luma {
+  --ds-btn-radius: var(--radius-4xl);
+  --ds-input-radius: var(--radius-3xl);
+  --ds-input-height: 2.25rem;
+  --ds-input-bg: color-mix(in oklch, var(--input) 50%, transparent);
+  --ds-input-border-color: transparent;
+  --ds-input-px: 0.75rem;
+  --ds-card-radius: var(--radius-4xl);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-card-shadow: var(--shadow-md);
+  --ds-card-padding: var(--space-6);
+  --ds-badge-radius: var(--radius-3xl);
+  --ds-dialog-radius: var(--radius-4xl);
+  --ds-dialog-padding: var(--space-6);
+  --ds-dialog-gap: var(--space-6);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-dialog-shadow: var(--shadow-xl);
+  --ds-menu-radius: var(--radius-3xl);
+  --ds-menu-shadow: var(--shadow-lg);
+  --ds-tooltip-radius: var(--radius-xl);
+  --ds-sidebar-item-radius: var(--radius-xl);
+}
+.dark.style-luma {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+}

@@ -1,0 +1,27 @@
+/* style-rhea.css — 圆润通透风 delta：rounded-2xl + 填充输入 + 柔和阴影。 */
+.style-rhea {
+  --ds-btn-radius: var(--radius-2xl);
+  --ds-input-radius: var(--radius-2xl);
+  --ds-input-bg: color-mix(in oklch, var(--input) 50%, transparent);
+  --ds-input-border-color: transparent;
+  --ds-input-px: 0.75rem;
+  --ds-card-radius: min(var(--radius-4xl), 24px);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-card-shadow: var(--shadow-sm);
+  --ds-card-padding: var(--space-5);
+  --ds-badge-radius: var(--radius-2xl);
+  --ds-dialog-radius: min(var(--radius-4xl), 24px);
+  --ds-dialog-padding: var(--space-6);
+  --ds-dialog-gap: var(--space-6);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-dialog-shadow: var(--shadow-xl);
+  --ds-menu-radius: var(--radius-2xl);
+  --ds-menu-shadow: var(--shadow-lg);
+  --ds-tooltip-radius: var(--radius-xl);
+  --ds-toast-radius: var(--radius-2xl);
+  --ds-sidebar-item-radius: var(--radius-xl);
+}
+.dark.style-rhea {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+}

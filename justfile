@@ -16,9 +16,10 @@ fmt:
 fmt-check:
     deno fmt --check
 
-# deno lint + 治理脚本（治理脚本随 M7 接入）
+# deno lint + 治理脚本（check-hardcoded-tokens 自 M1 起接入）
 lint:
     deno lint
+    deno run -A scripts/check-hardcoded-tokens.js
 
 # 全量测试
 test:

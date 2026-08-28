@@ -1,0 +1,19 @@
+/* style-mira.css — 紧凑高密度风 delta：小控件 + 小字号 + 淡填充输入。 */
+.style-mira {
+  --ds-btn-radius: var(--radius-md);
+  --ds-btn-font-size: var(--text-xs);
+  --ds-input-radius: var(--radius-md);
+  --ds-input-height: 1.75rem;
+  --ds-input-font-size: var(--text-xs);
+  --ds-input-bg: color-mix(in oklch, var(--input) 20%, transparent);
+  --ds-input-px: 0.5rem;
+  --ds-card-radius: var(--radius-lg);
+  --ds-card-padding: var(--space-4);
+  --ds-badge-radius: var(--radius-full);
+  --ds-dialog-radius: var(--radius-xl);
+  --ds-dialog-padding: var(--space-4);
+  --ds-menu-radius: var(--radius-lg);
+  --ds-toast-radius: var(--radius-md);
+  --ds-sidebar-item-radius: calc(var(--radius-sm) + 2px);
+  --ds-focus-ring-width: 2px;
+}

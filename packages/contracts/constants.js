@@ -13,6 +13,20 @@
 export const STORAGE_KEYS = {
   /** 外观偏好（风格/基色/图表色/暗色等，具体子键见 shared/lib/appearance.js） */
   theme: "pref:theme",
+  /** 设计风格（style-* 类，8 选 1，默认 nova） */
+  style: "pref:style",
+  /** 基色（base-* 类，7 选 1，默认 zinc） */
+  baseColor: "pref:base-color",
+  /** 图表色（chart-* 类，12 选 1，默认 zinc） */
+  chartColor: "pref:chart-color",
+  /** 圆角基准值（写到 <html> 的 --radius 内联变量） */
+  radius: "pref:radius",
+  /** 正文字体（--font-sans-base 的字体族名） */
+  fontBody: "pref:font-body",
+  /** 标题字体（--font-heading-base 的字体族名） */
+  fontHeading: "pref:font-heading",
+  /** 菜单外观（menu-* 类） */
+  menu: "pref:menu",
   /** 当前语言（zh-CN / zh-TW / en） */
   locale: "pref:locale",
   /** 当前工作空间 id（跨设备同步则写入 settings 表） */

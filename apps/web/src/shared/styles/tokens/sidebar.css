@@ -1,0 +1,6 @@
+/* sidebar.css — 侧栏尺寸常量（docs/CSS.md §1：只放尺寸，颜色在调色板层）。 */
+:root {
+  --sidebar-width: 16rem;
+  --sidebar-width-icon: 3rem;
+  --sidebar-width-mobile: 18rem;
+}

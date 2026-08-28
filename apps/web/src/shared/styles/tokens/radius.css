@@ -1,0 +1,13 @@
+/* radius.css — 圆角：单一基准 + calc 档位（docs/CSS.md §3）。
+ * 主题设置面板只写 --radius 内联变量即全站生效；PREPAINT 首帧前同步。 */
+:root {
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-full: 9999px;
+}

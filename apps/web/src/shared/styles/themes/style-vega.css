@@ -1,0 +1,12 @@
+/* style-vega.css — 经典风格 delta：更小的圆角 + 输入/卡片带微阴影。 */
+.style-vega {
+  --ds-btn-radius: var(--radius-md);
+  --ds-input-radius: var(--radius-md);
+  --ds-input-height: 2.25rem;
+  --ds-input-shadow: var(--shadow-xs);
+  --ds-card-shadow: var(--shadow-xs);
+  --ds-card-padding: var(--space-6);
+  --ds-dialog-padding: var(--space-6);
+  --ds-dialog-gap: var(--space-6);
+  --ds-menu-radius: var(--radius-md);
+}

@@ -1,0 +1,13 @@
+/* motion.css — prefers-reduced-motion 时令牌降级（备份路径）。
+ * 默认被 no-motion.css 全站压制（docs/CSS.md §9）；!important 是本文件与
+ * no-motion 唯一允许的例外（docs/CSS.md §8）。 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,10 @@
+/* no-motion.css — 全站无动效：animation/transition 一律 none（docs/CSS.md §9）。
+ * 本文件只覆盖 light DOM；shadow DOM 由 shared/ui/base.js 的 attachStyles()
+ * 逐 root 注入同一份规则（light DOM 全局规则穿不透 shadow 边界）。 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

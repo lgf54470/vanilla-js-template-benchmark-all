@@ -1,0 +1,63 @@
+/* style-nova.css — 风格基准：--ds-* 组件级样式变量全集（docs/CSS.md §2.3）。
+ * 取值对齐 shadcn base-nova（rounded-lg 按钮 / 描边输入 / ring-1 卡片）；
+ * 其余 7 个风格文件只写与本文件的差异（delta）。
+ * 组件 CSS 以 var(--ds-*, <nova 默认>) 消费。本目录允许颜色字面量（§6 白名单）。 */
+.style-nova {
+  /* ── Button / IconButton ── */
+  --ds-btn-radius: var(--radius-lg);
+  --ds-btn-font-size: var(--text-sm);
+  --ds-btn-font-weight: 500;
+  --ds-btn-text-transform: none;
+  --ds-btn-letter-spacing: normal;
+
+  /* ── Input / Textarea / Select 触发器 ── */
+  --ds-input-radius: var(--radius-lg);
+  --ds-input-height: 2rem;
+  --ds-input-font-size: var(--text-sm);
+  --ds-input-bg: transparent;
+  --ds-input-border-color: var(--input);
+  --ds-input-border-width: 1px;
+  --ds-input-px: 0.625rem;
+  --ds-input-shadow: none;
+
+  /* ── Card ── */
+  --ds-card-radius: var(--radius-xl);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-card-shadow: none;
+  --ds-card-padding: var(--space-4);
+
+  /* ── Badge ── */
+  --ds-badge-radius: var(--radius-4xl);
+  --ds-badge-text-transform: none;
+
+  /* ── Dialog / ConfirmDialog / Sheet 浮层 ── */
+  --ds-dialog-radius: var(--radius-xl);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-dialog-shadow: none;
+  --ds-dialog-padding: var(--space-4);
+  --ds-dialog-gap: var(--space-4);
+
+  /* ── DropdownMenu / Select 下拉内容 ── */
+  --ds-menu-radius: var(--radius-lg);
+  --ds-menu-shadow: var(--shadow-md);
+  --ds-menu-item-radius: var(--radius-sm);
+
+  /* ── Tooltip ── */
+  --ds-tooltip-radius: var(--radius-md);
+
+  /* ── Toast ── */
+  --ds-toast-radius: var(--radius-2xl);
+
+  /* ── Checkbox / Switch ── */
+  --ds-checkbox-radius: var(--radius-sm);
+  --ds-switch-radius: var(--radius-full);
+
+  /* ── SegmentedControl（胶囊 RadioGroup）── */
+  --ds-seg-radius: var(--radius-full);
+
+  /* ── Sidebar 菜单项 ── */
+  --ds-sidebar-item-radius: var(--radius-md);
+
+  /* ── 焦点环宽度 ── */
+  --ds-focus-ring-width: 3px;
+}

@@ -1,0 +1,7 @@
+/* motion.css — 动效时长令牌（预留；当前被 base/no-motion.css 全站压制，见 docs/CSS.md §9）。 */
+:root {
+  --motion-duration-instant: 100ms;
+  --motion-duration-fast: 150ms;
+  --motion-duration-normal: 250ms;
+  --motion-duration-slow: 400ms;
+}

@@ -1,0 +1,71 @@
+/* typography.css — 字号/行高刻度 + 自托管三可变字体（docs/CSS.md §4）。
+ * 字体文件在 public/fonts/*.woff2（不引 CDN）；index.html 对三个 woff2 preload。
+ * 主题设置的「正文字体/标题字体」写 --font-sans-base / --font-heading-base。 */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Manrope Variable";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/ManropeVariable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/GeistVariable.woff2") format("woff2");
+}
+
+:root {
+  /* 字号刻度（与 Tailwind 一致）；正文默认 --text-sm */
+  --text-2xs: 0.625rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* 行高 */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* 主题可切换字体（appearance 引擎 / PREPAINT 写内联变量覆盖） */
+  --font-sans-base:
+    "Inter Variable",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+  --font-heading-base:
+    "Inter Variable",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "PingFang SC",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+/* light DOM 页面标题跟随主题字体（CSS.md §4） */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading-base, inherit);
+}
+
+body {
+  font-family: var(--font-sans-base);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}

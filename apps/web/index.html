@@ -5,7 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>vanilla-js-template</title>
-    <!-- PREPAINT 内联脚本在 M1（设计系统令牌层）落地：首帧前应用持久化外观 -->
+    <!-- 自托管可变字体 preload（docs/CSS.md §4） -->
+    <link
+      rel="preload"
+      href="/fonts/InterVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/ManropeVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/GeistVariable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <!--
+      PREPAINT（docs/CSS.md §1 通道 2）：首帧前把持久化外观偏好写到 <html>，
+      防刷新闪白/闪暗。行为必须与 shared/lib/appearance.js 的 applyAppearance()
+      一致；localStorage 键值 = packages/contracts/constants.js 的 STORAGE_KEYS。
+    -->
+    <script>
+      (function () {
+        var K = {
+          theme: "pref:theme",
+          style: "pref:style",
+          baseColor: "pref:base-color",
+          chartColor: "pref:chart-color",
+          radius: "pref:radius",
+          fontBody: "pref:font-body",
+          fontHeading: "pref:font-heading",
+          menu: "pref:menu",
+        };
+        var STYLES = [
+          "nova",
+          "vega",
+          "maia",
+          "lyra",
+          "mira",
+          "luma",
+          "sera",
+          "rhea",
+        ];
+        var BASES = [
+          "zinc",
+          "red",
+          "orange",
+          "green",
+          "blue",
+          "violet",
+          "rose",
+        ];
+        var CHARTS = BASES.concat(["amber", "cyan", "pink", "teal", "yellow"]);
+        var MENUS = ["subtle", "bold", "inverted"];
+        var FONTS = ["Inter Variable", "Manrope Variable", "Geist Variable"];
+        var RADIUS = {
+          none: "0rem",
+          small: "0.45rem",
+          medium: "0.625rem",
+          large: "0.875rem",
+        };
+        function get(k) {
+          try {
+            return localStorage.getItem(k) || null;
+          } catch (e) {
+            return null;
+          }
+        }
+        function pick(v, list, fallback) {
+          return list.indexOf(v) >= 0 ? v : fallback;
+        }
+        var el = document.documentElement;
+        var theme = pick(get(K.theme), ["light", "dark", "system"], "system");
+        var dark = theme === "dark" ||
+          (theme === "system" && window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        function swap(prefix, list, current) {
+          for (var i = 0; i < list.length; i++) {
+            el.classList.toggle(prefix + list[i], list[i] === current);
+          }
+        }
+        swap("style-", STYLES, pick(get(K.style), STYLES, "nova"));
+        swap("base-", BASES, pick(get(K.baseColor), BASES, "zinc"));
+        swap("chart-", CHARTS, pick(get(K.chartColor), CHARTS, "zinc"));
+        swap("menu-", MENUS, pick(get(K.menu), MENUS, "subtle"));
+        el.classList.toggle("dark", dark);
+        el.setAttribute("data-theme", dark ? "dark" : "light");
+        el.style.colorScheme = dark ? "dark" : "light";
+        el.style.setProperty(
+          "--radius",
+          RADIUS[get(K.radius)] || get(K.radius) || "0.625rem",
+        );
+        function stack(f) {
+          return '"' + f +
+            '", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif';
+        }
+        el.style.setProperty(
+          "--font-sans-base",
+          stack(pick(get(K.fontBody), FONTS, FONTS[0])),
+        );
+        el.style.setProperty(
+          "--font-heading-base",
+          stack(pick(get(K.fontHeading), FONTS, FONTS[0])),
+        );
+      })();
+    </script>
     <link rel="stylesheet" href="/src/style.css" />
     <script type="module" src="/src/main.js"></script>
   </head>

@@ -1,0 +1,23 @@
+/* style-maia.css — 大圆角风格 delta：rounded-2xl/4xl + 填充输入。 */
+.style-maia {
+  --ds-btn-radius: var(--radius-4xl);
+  --ds-input-radius: var(--radius-4xl);
+  --ds-input-height: 2.25rem;
+  --ds-input-bg: color-mix(in oklch, var(--input) 30%, transparent);
+  --ds-input-px: 0.75rem;
+  --ds-card-radius: var(--radius-2xl);
+  --ds-card-padding: var(--space-6);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-dialog-radius: var(--radius-4xl);
+  --ds-dialog-padding: var(--space-6);
+  --ds-dialog-gap: var(--space-6);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-menu-radius: var(--radius-2xl);
+  --ds-menu-shadow: var(--shadow-2xl);
+  --ds-tooltip-radius: var(--radius-2xl);
+  --ds-sidebar-item-radius: var(--radius-lg);
+}
+.dark.style-maia {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-dialog-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+}
