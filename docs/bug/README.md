@@ -23,3 +23,7 @@
 ### 3. 多语言体系与响应式联动
 
 - [2026-08-28: 切换语言后主页面及侧边栏未即时响应重绘](./2026-08-28-i18n-locale-change-non-reactive.md)
+
+### 4. 路由系统与模块加载规范
+
+- [2026-08-28: 前端路由器带 Query 参数的 Hash 路由解析 404](./2026-08-28-router-hash-query-moduleid-mismatch.md)

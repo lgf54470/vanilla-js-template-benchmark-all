@@ -7,6 +7,37 @@ import { toast } from "@ui";
 
 export function getComponentDemo(id) {
   switch (id) {
+    case "switch":
+      return {
+        render: (container) => {
+          container.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 20rem;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); font-weight: 500;">飞行模式</span>
+                <ds-switch id="sw-airplane"></ds-switch>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); font-weight: 500;">无线局域网</span>
+                <ds-switch id="sw-wifi" checked></ds-switch>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: var(--text-sm); font-weight: 500;">蓝牙设置 (禁用)</span>
+                <ds-switch id="sw-bt" disabled></ds-switch>
+              </div>
+            </div>
+          `;
+          container.querySelector("#sw-airplane")?.addEventListener("ds-change", (e) => {
+            toast.info(`飞行模式: ${e.detail.checked ? "已开启" : "已关闭"}`);
+          });
+          container.querySelector("#sw-wifi")?.addEventListener("ds-change", (e) => {
+            toast.info(`无线网络: ${e.detail.checked ? "已开启" : "已关闭"}`);
+          });
+        },
+        code:
+          `<ds-switch id="my-switch" checked></ds-switch>\n\n<script>\n  document.querySelector("#my-switch").addEventListener("ds-change", (e) => {\n    console.log("Checked:", e.detail.checked);\n  });\n</script>`,
+        slots: `data-slot="switch", data-slot="switch-thumb"`,
+      };
+
     case "calendar":
       return {
         render: (container) => {
@@ -90,6 +121,43 @@ export function getComponentDemo(id) {
         slots: `data-slot="dialog", data-slot="dialog-overlay", data-slot="dialog-close"`,
       };
 
+    case "checkbox":
+      return {
+        render: (container) => {
+          container.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+              <ds-checkbox label="接收每日工作汇总简报" checked></ds-checkbox>
+              <ds-checkbox label="允许邮件接收重要安全更新通知"></ds-checkbox>
+              <ds-checkbox label="禁用选项 (不可编辑)" disabled></ds-checkbox>
+            </div>
+          `;
+        },
+        code: `<ds-checkbox label="接收简报" checked></ds-checkbox>`,
+        slots: `data-slot="checkbox", data-slot="checkbox-indicator"`,
+      };
+
+    case "slider":
+      return {
+        render: (container) => {
+          container.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: var(--space-4); max-width: 22rem; width: 100%;">
+              <div style="display: flex; justify-content: space-between; font-size: var(--text-sm);">
+                <span>音量调节</span>
+                <span id="slider-val" style="font-weight: 600;">60%</span>
+              </div>
+              <ds-slider min="0" max="100" value="60" id="demo-slider"></ds-slider>
+            </div>
+          `;
+          const sl = container.querySelector("#demo-slider");
+          sl?.addEventListener("ds-input", (e) => {
+            const valEl = container.querySelector("#slider-val");
+            if (valEl) valEl.textContent = `${e.detail.value}%`;
+          });
+        },
+        code: `<ds-slider min="0" max="100" value="60"></ds-slider>`,
+        slots: `data-slot="slider"`,
+      };
+
     case "toast":
       return {
         render: (container) => {
@@ -118,22 +186,6 @@ export function getComponentDemo(id) {
         slots: `data-slot="toast", data-slot="toast-container"`,
       };
 
-    case "badge":
-      return {
-        render: (container) => {
-          container.innerHTML = `
-            <div style="display: flex; gap: var(--space-2); align-items: center;">
-              <ds-badge variant="default">Default</ds-badge>
-              <ds-badge variant="secondary">Secondary</ds-badge>
-              <ds-badge variant="outline">Outline</ds-badge>
-              <ds-badge variant="destructive">Destructive</ds-badge>
-            </div>
-          `;
-        },
-        code: `<ds-badge variant="default">Badge</ds-badge>`,
-        slots: `data-slot="badge"`,
-      };
-
     case "card":
       return {
         render: (container) => {
@@ -141,7 +193,7 @@ export function getComponentDemo(id) {
             <ds-card style="max-width: 24rem;">
               <div style="font-size: var(--text-lg); font-weight: 600;">项目分析看板</div>
               <div style="font-size: var(--text-sm); color: var(--color-fg-muted);">本周数据指标增长概览。</div>
-              <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-primary);">+24.8%</div>
+              <div style="font-size: var(--text-3xl); font-weight: 700; color: var(--color-primary); margin: var(--space-3) 0;">+24.8%</div>
               <div style="display: flex; justify-content: flex-end;">
                 <ds-button size="sm" variant="outline">查看明细</ds-button>
               </div>
@@ -156,7 +208,7 @@ export function getComponentDemo(id) {
       return {
         render: (container) => {
           container.innerHTML = `
-            <div style="display: flex; flex-direction: column; gap: var(--space-4);">
+            <div style="display: flex; flex-direction: column; gap: var(--space-4); width: 100%; max-width: 28rem;">
               <ds-tabs id="demo-tabs"></ds-tabs>
               <div id="tabs-pane" style="padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background-color: var(--color-card);">
                 当前展示: 个人概览
@@ -169,7 +221,6 @@ export function getComponentDemo(id) {
               { value: "overview", label: "概览" },
               { value: "analytics", label: "分析报告" },
               { value: "reports", label: "导出记录" },
-              { value: "settings", label: "偏好配置" },
             ];
             tabs.addEventListener("ds-change", (e) => {
               const pane = container.querySelector("#tabs-pane");
@@ -177,8 +228,7 @@ export function getComponentDemo(id) {
             });
           }
         },
-        code:
-          `<ds-tabs></ds-tabs>\n\n<script>\n  const tabs = document.querySelector("ds-tabs");\n  tabs.items = [\n    { value: "tab1", label: "标签一" },\n    { value: "tab2", label: "标签二" }\n  ];\n</script>`,
+        code: `<ds-tabs></ds-tabs>`,
         slots: `data-slot="tabs-list", data-slot="tabs-trigger"`,
       };
 

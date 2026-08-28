@@ -32,7 +32,7 @@ class Router {
 
   getCurrentModuleId() {
     const hash = globalThis.window ? globalThis.window.location.hash : "";
-    const clean = hash.replace(/^#\/?/, "").split("/")[0] || "";
+    const clean = hash.replace(/^#\/?/, "").split("?")[0].split("/")[0] || "";
     return clean || "dashboard";
   }
 
