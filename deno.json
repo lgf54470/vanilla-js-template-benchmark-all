@@ -1,0 +1,30 @@
+{
+  "workspace": ["apps/web", "apps/server"],
+  "imports": {
+    "hono": "./packages/lib/hono/mod.js",
+    "hono/": "./packages/lib/hono/",
+    "@libsql/client/web": "./packages/lib/libsql-client/web.js",
+    "@contracts/": "./packages/contracts/",
+    "@shared/": "./apps/web/src/shared/"
+  },
+  "fmt": {
+    "exclude": [
+      "docs",
+      "packages/lib",
+      "dist",
+      ".data",
+      "coverage",
+      "tmp",
+      "ARCHITECTURE.md",
+      "AGENTS.md",
+      "README.md"
+    ]
+  },
+  "lint": {
+    "exclude": ["packages/lib", "dist", ".data", "coverage", "tmp"]
+  },
+  "tasks": {
+    "dev": "deno run -A --env-file=.env apps/server/src/platform-adapters/local.entry.js",
+    "lint:governance": "deno run -A scripts/run-checks.js"
+  }
+}

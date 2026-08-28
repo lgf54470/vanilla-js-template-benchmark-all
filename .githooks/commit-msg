@@ -1,0 +1,67 @@
+#!/usr/bin/env -S deno run --allow-read
+// commit-msg 钩子：校验 Conventional Commits 格式 + 逐文件正文
+// （docs/Commit.md §5；`git config core.hooksPath .githooks` 启用，零依赖）。
+
+const COMMIT_MSG_FILE = Deno.args[0];
+if (!COMMIT_MSG_FILE) {
+  console.error("[commit-msg] 用法：commit-msg <commit-msg-file>");
+  Deno.exit(1);
+}
+
+const content = await Deno.readTextFile(COMMIT_MSG_FILE);
+const lines = content.split("\n");
+const head = lines[0] ?? "";
+const TYPES = [
+  "feat",
+  "fix",
+  "docs",
+  "style",
+  "refactor",
+  "perf",
+  "test",
+  "build",
+  "ci",
+  "chore",
+  "revert",
+];
+
+const problems = [];
+let typeOk = false;
+let scopeOk = false;
+let subjectOk = false;
+
+const headMatch = head.match(/^(\w+)(?:\(([^)]*)\))?: (.*)$/);
+if (!headMatch) {
+  problems.push(`首行不符合 "<type>(<scope>): <subject>" 格式：${head}`);
+} else {
+  const [, type, scope, subject] = headMatch;
+  typeOk = TYPES.includes(type);
+  scopeOk = /^[a-z0-9-]+$/.test(scope ?? "");
+  subjectOk = subject.length > 0 && subject.length <= 50;
+  if (!typeOk) {
+    problems.push(`type "${type}" 不在允许列表：${TYPES.join("|")}`);
+  }
+  if (!scopeOk) {
+    problems.push(`scope "${scope}" 只允许小写字母/数字/连字符`);
+  }
+  if (!subjectOk) {
+    problems.push(`subject 长度须为 1-50 字符（当前 ${subject.length}）`);
+  }
+}
+
+// 正文至少一行 `- 路径: 说明`（docs/Commit.md §5.2）
+const hasFileLine = lines
+  .slice(1)
+  .some((line) => /^- [\w./-]+: .+/.test(line));
+if (!hasFileLine) {
+  problems.push('正文缺少至少一行以 "- <路径>: <改动说明>" 开头的逐文件说明');
+}
+
+if (problems.length > 0) {
+  console.error("[commit-msg] 提交信息未通过校验：");
+  for (const problem of problems) {
+    console.error(`  - ${problem}`);
+  }
+  console.error("规范见 docs/Commit.md");
+  Deno.exit(1);
+}

@@ -1,0 +1,5 @@
+/*
+ * 入口样式表（ARCHITECTURE.md §3：src/style.css 只引 shared/styles/index.css）。
+ * M1 落地令牌层后改为：
+ *   @import "./shared/styles/index.css";
+ */
