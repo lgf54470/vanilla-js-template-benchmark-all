@@ -36,8 +36,9 @@ async function scanDir(dir, results = []) {
 let hasError = false;
 const files = await scanDir(ROOT);
 
-// Regex for hardcoded colors
-const colorRegex = /(#[0-9a-fA-F]{3,8}\b|rgb\([^)]+\)|hsl\([^)]+\)|oklch\([^)]+\))/g;
+// Regex for hardcoded colors (excluding HTML character entities like &#039;)
+const colorRegex =
+  /(?<!&)(#[0-9a-fA-F]{8}\b|#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3,4}\b|rgb\([^)]+\)|hsl\([^)]+\)|oklch\([^)]+\))/g;
 
 for (const file of files) {
   const isWhitelisted = WHITELIST_PATTERNS.some((p) => p.test(file));
@@ -48,18 +49,13 @@ for (const file of files) {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    // Skip comments and imports
     const trimmed = line.trim();
     if (trimmed.startsWith("/*") || trimmed.startsWith("//") || trimmed.startsWith("*")) continue;
 
-    // Check for raw colors
     const colorMatches = line.match(colorRegex);
     if (colorMatches) {
-      // Filter out acceptable occurrences like 0 or inside quotes in tests
-      const invalidColors = colorMatches.filter((_c) =>
-        !line.includes("color-mix(") || !isWhitelisted
-      );
-      if (invalidColors.length > 0 && !line.includes("console.log('%c")) {
+      const invalidColors = colorMatches.filter((_c) => !line.includes("console.log('%c"));
+      if (invalidColors.length > 0) {
         console.error(`[check-hardcoded-tokens] Hardcoded color found in ${file}:${i + 1}`);
         console.error(`  Line: ${line.trim()}`);
         hasError = true;
