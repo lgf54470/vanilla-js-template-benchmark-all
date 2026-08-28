@@ -94,7 +94,7 @@ async function tryServeFile(filePath, c) {
         status: 304,
         headers: {
           etag,
-          "cache-control": ext === ".html" ? "no-cache" : "public, max-age=3600",
+          "cache-control": "no-cache, no-store, must-revalidate",
         },
       });
     }
@@ -105,7 +105,7 @@ async function tryServeFile(filePath, c) {
       headers: {
         "content-type": contentType,
         etag,
-        "cache-control": ext === ".html" ? "no-cache" : "public, max-age=3600",
+        "cache-control": "no-cache, no-store, must-revalidate",
       },
     });
   } catch {

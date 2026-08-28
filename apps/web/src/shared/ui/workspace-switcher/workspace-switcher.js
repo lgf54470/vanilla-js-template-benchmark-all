@@ -131,18 +131,26 @@ export class DsWorkspaceSwitcher extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.workspaces = [];
-    this.activeWorkspace = null;
+    this.workspaces = [
+      { id: "ws_default", name: "i18n:workspace.seed.default", icon: "home" },
+    ];
+    this.activeWorkspace = this.workspaces[0];
     this._handleKeyDown = this._handleKeyDown.bind(this);
+    this._unsubLocale = null;
   }
 
   connectedCallback() {
+    this.render();
     this.loadWorkspaces();
     globalThis.window?.addEventListener("keydown", this._handleKeyDown);
+    this._unsubLocale = eventBus.on("locale:changed", () => {
+      this.render();
+    });
   }
 
   disconnectedCallback() {
     globalThis.window?.removeEventListener("keydown", this._handleKeyDown);
+    if (this._unsubLocale) this._unsubLocale();
   }
 
   _handleKeyDown(e) {
@@ -163,24 +171,23 @@ export class DsWorkspaceSwitcher extends HTMLElement {
         headers: { "x-auth-password": token, "x-workspace-id": currentWsId },
       });
       const data = await res.json();
-      if (data.ok) {
+      if (data.ok && Array.isArray(data.data)) {
         this.workspaces = data.data;
         this.activeWorkspace = this.workspaces.find((w) => w.id === currentWsId) ||
           this.workspaces[0];
         this.render();
       }
     } catch {
-      this.activeWorkspace = { id: "ws_default", name: "默认工作空间", icon: "home" };
-      this.render();
+      // Keep defaults
     }
   }
 
   getDisplayName(ws) {
     if (!ws) return "工作空间";
-    if (ws.name.startsWith("i18n:")) {
+    if (ws.name && ws.name.startsWith("i18n:")) {
       return t(ws.name);
     }
-    return ws.name;
+    return ws.name || "工作空间";
   }
 
   selectWorkspace(ws) {
