@@ -1,6 +1,7 @@
 import { createApp } from "../app.js";
 import { resolveDbAdapter } from "../shared/db/resolve.js";
 import { runMigrations } from "../shared/db/migrate.js";
+import { ensureAuthSeed } from "../shared/workspace/seed.js";
 import { createStaticHandler } from "../shared/static/static-handler.js";
 import { serveWithPortHint } from "../shared/net/serve-with-port-hint.js";
 
@@ -13,10 +14,11 @@ const staticHandler = createStaticHandler({
   },
 });
 
-// Auto-run migrations in local dev
+// Auto-run migrations & seed auth password in local dev
 try {
   const db = await resolveDbAdapter({ target: "local" });
   await runMigrations(db);
+  await ensureAuthSeed(db);
 } catch (err) {
   console.warn("[local] Auto-migration warning:", err.message);
 }

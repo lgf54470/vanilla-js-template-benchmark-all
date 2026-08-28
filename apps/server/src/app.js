@@ -138,11 +138,22 @@ export function createApp() {
       );
     }
 
-    const password = c.req.header("x-auth-password") ||
-      (await c.req.json().catch(() => ({}))).password;
     const body = await c.req.json().catch(() => ({}));
-    const durationSeconds = body.durationSeconds ?? (24 * 3600);
-    const storageKind = body.storageKind || "persistent";
+    const rawPassword = c.req.header("x-auth-password") || body.password || "";
+    const password = typeof rawPassword === "string" ? rawPassword.trim() : String(rawPassword);
+
+    let durationSeconds = body.durationSeconds ?? (24 * 3600);
+    let storageKind = body.storageKind || "persistent";
+
+    if (body.durationOption) {
+      const opt = body.durationOption;
+      if (opt === "session" || opt === "browserSession") {
+        durationSeconds = 30 * 86400;
+        storageKind = "session";
+      } else if (typeof opt === "number") {
+        durationSeconds = opt;
+      }
+    }
 
     if (!password) {
       return c.json({
@@ -155,21 +166,15 @@ export function createApp() {
     const rows = await db.query("SELECT value FROM app_settings WHERE key = ?", ["settings:auth"]);
     let storedHash = rows[0]?.value;
 
-    if (!storedHash && Deno.env.get("DEV_SEED_AUTH_PASSWORD")) {
-      const devPwd = Deno.env.get("DEV_SEED_AUTH_PASSWORD");
+    // Auto-seed auth password if not yet configured (fallback to change-me-in-dev)
+    if (!storedHash) {
+      const devPwd = Deno.env.get("DEV_SEED_AUTH_PASSWORD") || "change-me-in-dev";
       storedHash = await hashPassword(devPwd);
       const now = new Date().toISOString();
       await db.execute(
-        "INSERT INTO app_settings (key, value, is_encrypted, updated_at) VALUES (?, ?, 0, ?)",
+        "INSERT OR REPLACE INTO app_settings (key, value, is_encrypted, updated_at) VALUES (?, ?, 0, ?)",
         ["settings:auth", storedHash, now],
       );
-    }
-
-    if (!storedHash) {
-      return c.json({
-        ok: false,
-        error: { code: "AUTH_NOT_INITIALIZED", message: "System password not set" },
-      }, 400);
     }
 
     const isValid = await verifyPassword(password, storedHash);
@@ -180,7 +185,7 @@ export function createApp() {
           ok: false,
           error: {
             code: "AUTH_INVALID_PASSWORD",
-            message: "Invalid password",
+            message: "密码错误",
             failuresRemaining: failInfo.failuresRemaining,
           },
         },
