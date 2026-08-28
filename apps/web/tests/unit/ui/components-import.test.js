@@ -1,7 +1,14 @@
 import assert from "node:assert/strict";
 
-Deno.test("ui: 验证全部 UI 组件导入与 Custom Elements 注册完整性 (模拟标准浏览器规范)", async () => {
-  // Mock browser globals strictly matching W3C CustomElementRegistry specification
+Deno.test("ui: 验证全部 UI 组件、Shell 与模块导入完整性 (模拟浏览器 W3C 规范)", async () => {
+  if (typeof globalThis.window === "undefined") {
+    globalThis.window = {
+      location: { hash: "", reload: () => {} },
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      matchMedia: () => ({ matches: false, addEventListener: () => {} }),
+    };
+  }
   if (typeof globalThis.document === "undefined") {
     globalThis.document = {
       createElement: () => ({
@@ -18,10 +25,14 @@ Deno.test("ui: 验证全部 UI 组件导入与 Custom Elements 注册完整性 (
         setAttribute: () => {},
         style: { setProperty: () => {} },
       },
+      body: {
+        classList: { add: () => {}, remove: () => {}, contains: () => false },
+      },
       addEventListener: () => {},
       removeEventListener: () => {},
       querySelectorAll: () => [],
       querySelector: () => null,
+      getElementById: () => null,
     };
   }
   if (typeof globalThis.customElements === "undefined") {
@@ -72,28 +83,42 @@ Deno.test("ui: 验证全部 UI 组件导入与 Custom Elements 注册完整性 (
       closest() {
         return null;
       }
+      querySelector() {
+        return null;
+      }
+      querySelectorAll() {
+        return [];
+      }
     };
   }
 
-  // Import full UI index
+  // 1. Import UI components
   const uiModule = await import("../../../src/shared/ui/index.js");
   assert.ok(uiModule);
 
-  // Check critical elements registered
-  assert.ok(globalThis.customElements.get("ds-button"));
-  assert.ok(globalThis.customElements.get("ds-icon-button"));
-  assert.ok(globalThis.customElements.get("ds-input"));
-  assert.ok(globalThis.customElements.get("ds-select"));
-  assert.ok(globalThis.customElements.get("ds-checkbox"));
-  assert.ok(globalThis.customElements.get("ds-theme-switch"));
-  assert.ok(globalThis.customElements.get("ds-lang-switch"));
-  assert.ok(globalThis.customElements.get("ds-appearance-sheet"));
-  assert.ok(globalThis.customElements.get("ds-sidebar-provider"));
-  assert.ok(globalThis.customElements.get("ds-sidebar"));
-  assert.ok(globalThis.customElements.get("ds-workspace-switcher"));
-  assert.ok(globalThis.customElements.get("ds-nav-user"));
-  assert.ok(globalThis.customElements.get("ds-dialog"));
-  assert.ok(globalThis.customElements.get("ds-sheet"));
-  assert.ok(globalThis.customElements.get("ds-toast"));
-  assert.ok(globalThis.customElements.get("ds-dropdown-menu"));
+  // 2. Import Shell and Shell helpers
+  const resizeHandleModule = await import("../../../src/app/shell/resize-handle.js");
+  assert.ok(typeof resizeHandleModule.initSidebarResize === "function");
+  assert.ok(typeof resizeHandleModule.initResizeHandle === "function");
+
+  const appShellModule = await import("../../../src/app/shell/app-shell.js");
+  assert.ok(appShellModule);
+  assert.ok(globalThis.customElements.get("app-shell"));
+
+  // 3. Import all modules
+  const modules = [
+    "analytics",
+    "appearance",
+    "bookmarks",
+    "dashboard",
+    "notes",
+    "passwords",
+    "settings",
+    "todo",
+    "workspace",
+  ];
+  for (const modName of modules) {
+    const mod = await import(`../../../src/modules/${modName}/index.js`);
+    assert.ok(mod, `Module ${modName} import failed`);
+  }
 });

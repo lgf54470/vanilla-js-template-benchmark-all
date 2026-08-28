@@ -2,7 +2,7 @@ import { SIDEBAR_WIDTH_LIMITS } from "@contracts/constants.js";
 import { setSidebarWidth } from "../../shared/lib/appearance.js";
 
 export function initResizeHandle(handleElement) {
-  if (!handleElement || typeof globalThis.window === "undefined") return;
+  if (!handleElement || typeof globalThis.window === "undefined") return () => {};
 
   let isDragging = false;
   let rafId = null;
@@ -14,16 +14,16 @@ export function initResizeHandle(handleElement) {
     const provider = document.querySelector("ds-sidebar-provider");
     if (!provider) return;
 
-    const left = provider.getBoundingClientRect().left;
+    const left = provider.getBoundingClientRect ? provider.getBoundingClientRect().left : 0;
     const rawWidth = Math.round(lastX - left);
 
     // Threshold collapse (< 140px collapses to icon mode)
     if (rawWidth < 140) {
-      provider.setOpen(false);
+      if (typeof provider.setOpen === "function") provider.setOpen(false);
       return;
     } else {
-      if (!provider.store.getState().open) {
-        provider.setOpen(true);
+      if (provider.store && !provider.store.getState().open) {
+        if (typeof provider.setOpen === "function") provider.setOpen(true);
       }
     }
 
@@ -32,14 +32,16 @@ export function initResizeHandle(handleElement) {
       Math.max(SIDEBAR_WIDTH_LIMITS.min, rawWidth),
     );
 
-    document.documentElement.style.setProperty("--sidebar-width", `${dragWidth}px`);
-    document.documentElement.style.setProperty("--sidebar-current-width", `${dragWidth}px`);
+    if (document.documentElement && document.documentElement.style) {
+      document.documentElement.style.setProperty("--sidebar-width", `${dragWidth}px`);
+      document.documentElement.style.setProperty("--sidebar-current-width", `${dragWidth}px`);
+    }
   };
 
   const onPointerDown = (e) => {
     isDragging = true;
     lastX = e.clientX;
-    document.body.classList.add("sidebar-resizing");
+    document.body?.classList?.add("sidebar-resizing");
     try {
       handleElement.setPointerCapture(e.pointerId);
     } catch {
@@ -50,7 +52,7 @@ export function initResizeHandle(handleElement) {
   const onPointerMove = (e) => {
     if (!isDragging) return;
     lastX = e.clientX;
-    if (rafId === null) {
+    if (rafId === null && typeof requestAnimationFrame === "function") {
       rafId = requestAnimationFrame(applyDrag);
     }
   };
@@ -58,9 +60,9 @@ export function initResizeHandle(handleElement) {
   const onPointerUp = (e) => {
     if (!isDragging) return;
     isDragging = false;
-    document.body.classList.remove("sidebar-resizing");
+    document.body?.classList?.remove("sidebar-resizing");
 
-    if (rafId !== null) {
+    if (rafId !== null && typeof cancelAnimationFrame === "function") {
       cancelAnimationFrame(rafId);
       rafId = null;
     }
@@ -78,8 +80,10 @@ export function initResizeHandle(handleElement) {
 
   const onDblClick = () => {
     const defaultWidth = SIDEBAR_WIDTH_LIMITS.default;
-    document.documentElement.style.setProperty("--sidebar-width", `${defaultWidth}px`);
-    document.documentElement.style.setProperty("--sidebar-current-width", `${defaultWidth}px`);
+    if (document.documentElement && document.documentElement.style) {
+      document.documentElement.style.setProperty("--sidebar-width", `${defaultWidth}px`);
+      document.documentElement.style.setProperty("--sidebar-current-width", `${defaultWidth}px`);
+    }
     setSidebarWidth(defaultWidth);
   };
 
@@ -88,4 +92,21 @@ export function initResizeHandle(handleElement) {
   handleElement.addEventListener("pointerup", onPointerUp);
   handleElement.addEventListener("pointercancel", onPointerUp);
   handleElement.addEventListener("dblclick", onDblClick);
+
+  return () => {
+    handleElement.removeEventListener("pointerdown", onPointerDown);
+    handleElement.removeEventListener("pointermove", onPointerMove);
+    handleElement.removeEventListener("pointerup", onPointerUp);
+    handleElement.removeEventListener("pointercancel", onPointerUp);
+    handleElement.removeEventListener("dblclick", onDblClick);
+  };
+}
+
+export function initSidebarResize(container) {
+  if (!container) return () => {};
+  const handle = container.querySelector ? container.querySelector(".app-shell__resize") : null;
+  if (handle) {
+    return initResizeHandle(handle);
+  }
+  return () => {};
 }
