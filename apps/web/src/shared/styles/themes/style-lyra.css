@@ -1,0 +1,8 @@
+/* Lyra: 强调描边与外环 (Delta) */
+:root.style-lyra {
+  --ds-card-ring: color-mix(in oklch, var(--primary) 15%, transparent);
+  --ds-input-border: 1px solid color-mix(in oklch, var(--primary) 30%, var(--color-border));
+}
+.dark.style-lyra {
+  --ds-card-ring: color-mix(in oklch, var(--primary) 20%, transparent);
+}

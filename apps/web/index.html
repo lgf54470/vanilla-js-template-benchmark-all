@@ -5,6 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vanilla-js-template</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- Preload Variable Fonts -->
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Manrope-Variable.woff2" as="font" type="font/woff2"
+      crossorigin>
+    <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- PREPAINT: Synchronously apply theme classes before first render to prevent flash -->
+    <script>
+    (function () {
+      try {
+        var doc = document.documentElement;
+        var theme = localStorage.getItem("pref:theme") || "system";
+        var isDark = theme === "dark" ||
+          (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        if (isDark) {
+          doc.classList.add("dark");
+          doc.setAttribute("data-theme", "dark");
+          doc.style.colorScheme = "dark";
+        } else {
+          doc.classList.remove("dark");
+          doc.setAttribute("data-theme", "light");
+          doc.style.colorScheme = "light";
+        }
+
+        var baseColor = localStorage.getItem("pref:base-color") || "zinc";
+        doc.classList.add("base-" + baseColor);
+
+        var style = localStorage.getItem("pref:style") || "nova";
+        doc.classList.add("style-" + style);
+
+        var chartColor = localStorage.getItem("pref:chart-color") || "chart-1";
+        doc.classList.add(chartColor);
+
+        var variant = localStorage.getItem("pref:sidebar-variant") || "sidebar";
+        doc.setAttribute("data-sidebar-variant", variant);
+
+        var collapsible = localStorage.getItem("pref:sidebar-collapsible") || "icon";
+        doc.setAttribute("data-sidebar-collapsible", collapsible);
+
+        var radius = localStorage.getItem("pref:radius") || "0.625rem";
+        doc.style.setProperty("--radius", radius);
+
+        var fontSans = localStorage.getItem("pref:font-sans");
+        if (fontSans) doc.style.setProperty("--font-sans-base", fontSans);
+
+        var fontHeading = localStorage.getItem("pref:font-heading");
+        if (fontHeading) doc.style.setProperty("--font-heading-base", fontHeading);
+
+        var locale = localStorage.getItem("pref:locale");
+        if (locale) doc.setAttribute("lang", locale);
+      } catch (e) {
+        // Fallback gracefully on storage access denial
+      }
+    })();
+    </script>
+
     <link rel="stylesheet" href="/src/style.css">
   </head>
   <body>

@@ -1,0 +1,5 @@
+/* Mira: 微调卡片底色与层级 (Delta) */
+:root.style-mira {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-btn-radius: var(--radius-lg);
+}

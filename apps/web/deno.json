@@ -1,4 +1,1 @@
-{
-  "name": "@app/web",
-  "exports": "./src/main.js"
-}
+{}

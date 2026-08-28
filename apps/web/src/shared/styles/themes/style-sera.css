@@ -1,0 +1,6 @@
+/* Sera: 极简通透风格 (Delta) */
+:root.style-sera {
+  --ds-btn-radius: var(--radius-sm);
+  --ds-card-radius: var(--radius-sm);
+  --ds-card-ring: transparent;
+}

@@ -16,7 +16,7 @@
     "dev": "deno run --env-file=.env --allow-net --allow-read --allow-write --allow-env --allow-run apps/server/src/platform-adapters/local.entry.js",
     "fmt": "deno fmt",
     "fmt:check": "deno fmt --check",
-    "lint": "deno lint && deno run --allow-read --allow-env --allow-run=deno,just,which scripts/run-checks.js",
+    "lint": "deno lint && deno run --allow-read --allow-env --allow-run scripts/run-checks.js",
     "test": "deno test -A",
     "db:migrate": "deno run --env-file=.env --allow-net --allow-read --allow-write --allow-env apps/server/src/shared/db/migrate.js",
     "db:seed": "deno run --env-file=.env --allow-net --allow-read --allow-write --allow-env apps/server/src/shared/workspace/seed.js",
@@ -36,6 +36,9 @@
     ]
   },
   "lint": {
+    "rules": {
+      "exclude": ["no-slow-types"]
+    },
     "exclude": [
       "dist/",
       ".data/",

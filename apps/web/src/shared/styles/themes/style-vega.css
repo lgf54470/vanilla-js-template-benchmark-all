@@ -1,0 +1,8 @@
+/* Vega: 硬朗紧凑风格 (Delta) */
+:root.style-vega {
+  --ds-btn-radius: var(--radius-sm);
+  --ds-card-radius: var(--radius-md);
+  --ds-input-radius: var(--radius-sm);
+  --ds-menu-item-radius: var(--radius-sm);
+  --ds-sidebar-item-radius: var(--radius-sm);
+}

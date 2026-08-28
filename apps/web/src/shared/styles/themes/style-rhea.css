@@ -1,0 +1,6 @@
+/* Rhea: 优雅悬浮卡片风格 (Delta) */
+:root.style-rhea {
+  --ds-btn-radius: var(--radius-xl);
+  --ds-card-radius: var(--radius-3xl);
+  --ds-dialog-radius: var(--radius-4xl);
+}

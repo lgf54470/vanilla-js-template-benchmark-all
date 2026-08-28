@@ -1,4 +1,52 @@
-/* Entry stylesheet */
-body {
-  margin: 0;
+@import "./shared/styles/index.css";
+
+.main-container {
+  max-inline-size: none;
+  margin-inline: 0;
+}
+
+.page-container {
+  max-inline-size: 64rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.page-container--narrow {
+  max-inline-size: 48rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-fg);
+  line-height: var(--leading-tight);
+}
+
+.page-description {
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+  margin-top: var(--space-1);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min-w, 16rem), 1fr));
+  gap: var(--space-3);
+}
+
+@media (max-width: 767px) {
+  .page-container {
+    gap: var(--space-4);
+  }
 }

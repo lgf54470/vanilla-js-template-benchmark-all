@@ -1,0 +1,12 @@
+/* Luma: 大圆角 + 填充式输入风格 (Delta) */
+:root.style-luma {
+  --ds-btn-radius: calc(var(--radius) * 2.6);
+  --ds-input-radius: calc(var(--radius) * 1.8);
+  --ds-input-bg: color-mix(in oklch, var(--color-muted) 60%, transparent);
+  --ds-input-border: transparent;
+  --ds-menu-item-radius: var(--radius-xl);
+  --ds-sidebar-item-radius: var(--radius-xl);
+}
+.dark.style-luma {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+}

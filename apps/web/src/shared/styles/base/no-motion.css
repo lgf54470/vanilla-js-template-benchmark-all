@@ -1,0 +1,7 @@
+/* 全站无动效 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+}

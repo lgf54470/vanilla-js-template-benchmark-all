@@ -1,0 +1,8 @@
+/* Maia: 圆润柔和风格 (Delta) */
+:root.style-maia {
+  --ds-btn-radius: var(--radius-2xl);
+  --ds-card-radius: var(--radius-2xl);
+  --ds-input-radius: var(--radius-xl);
+  --ds-menu-item-radius: var(--radius-lg);
+  --ds-sidebar-item-radius: var(--radius-lg);
+}
