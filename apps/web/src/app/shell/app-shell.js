@@ -10,6 +10,40 @@ import "../../shared/ui/appearance-sheet/appearance-sheet.js";
 import "../../shared/ui/workspace-switcher/workspace-switcher.js";
 import "../../shared/ui/nav-user/nav-user.js";
 
+const BASE_UI_COMPONENTS = [
+  { id: "calendar", name: "Calendar", icon: "calendar" },
+  { id: "button", name: "Button", icon: "square" },
+  { id: "dialog", name: "Dialog", icon: "square" },
+  { id: "card", name: "Card", icon: "credit-card" },
+  { id: "table", name: "Table", icon: "table" },
+  { id: "tabs", name: "Tabs", icon: "folder" },
+  { id: "input", name: "Input", icon: "edit-3" },
+  { id: "select", name: "Select", icon: "chevron-down" },
+  { id: "checkbox", name: "Checkbox", icon: "check-square" },
+  { id: "switch", name: "Switch", icon: "toggle-left" },
+  { id: "radio-group", name: "Radio Group", icon: "circle" },
+  { id: "slider", name: "Slider", icon: "sliders" },
+  { id: "sheet", name: "Sheet", icon: "sidebar" },
+  { id: "drawer", name: "Drawer", icon: "arrow-up" },
+  { id: "toast", name: "Toast", icon: "bell" },
+  { id: "badge", name: "Badge", icon: "tag" },
+  { id: "avatar", name: "Avatar", icon: "user" },
+  { id: "accordion", name: "Accordion", icon: "chevron-down" },
+  { id: "collapsible", name: "Collapsible", icon: "maximize-2" },
+  { id: "popover", name: "Popover", icon: "layers" },
+  { id: "tooltip", name: "Tooltip", icon: "info" },
+  { id: "dropdown-menu", name: "Dropdown Menu", icon: "more-vertical" },
+  { id: "breadcrumb", name: "Breadcrumb", icon: "navigation" },
+  { id: "pagination", name: "Pagination", icon: "chevrons-right" },
+  { id: "progress", name: "Progress", icon: "trending-up" },
+  { id: "skeleton", name: "Skeleton", icon: "loader" },
+  { id: "empty", name: "Empty", icon: "inbox" },
+  { id: "carousel", name: "Carousel", icon: "play" },
+  { id: "chart", name: "Chart", icon: "bar-chart-2" },
+  { id: "aspect-ratio", name: "Aspect Ratio", icon: "maximize" },
+  { id: "typography", name: "Typography", icon: "type" },
+];
+
 export class AppShell extends HTMLElement {
   constructor() {
     super();
@@ -18,6 +52,7 @@ export class AppShell extends HTMLElement {
     this.unsubscribeLocale = null;
     this.cleanupResize = null;
     this.docsOpen = true;
+    this.componentsOpen = true;
   }
 
   connectedCallback() {
@@ -68,13 +103,25 @@ export class AppShell extends HTMLElement {
       const active = id === moduleId;
       link.classList.toggle("active", active);
       if (active) {
-        this.docsOpen = true;
-        const subList = this.querySelector("#docs-sub-menu");
-        const toggleBtn = this.querySelector("#btn-docs-toggle");
-        if (subList) subList.removeAttribute("hidden");
-        if (toggleBtn) toggleBtn.setAttribute("data-open", "true");
+        if (id === "notes" || id === "passwords") {
+          this.docsOpen = true;
+          const subList = this.querySelector("#docs-sub-menu");
+          const toggleBtn = this.querySelector("#btn-docs-toggle");
+          if (subList) subList.removeAttribute("hidden");
+          if (toggleBtn) toggleBtn.setAttribute("data-open", "true");
+        }
       }
     });
+
+    const hash = globalThis.location?.hash || "";
+    if (hash.startsWith("#/components")) {
+      const match = hash.match(/[?&]c=([a-z0-9-]+)/);
+      const activeCompId = match ? match[1] : "calendar";
+      this.querySelectorAll(".comp-sub-link").forEach((link) => {
+        const cid = link.getAttribute("data-comp-id");
+        link.classList.toggle("active", cid === activeCompId);
+      });
+    }
 
     const breadcrumb = this.querySelector("ds-breadcrumb");
     if (breadcrumb && meta) {
@@ -90,7 +137,9 @@ export class AppShell extends HTMLElement {
     if (!menuContainer) return;
 
     const modules = moduleRegistry.getModules();
-    const topModules = modules.filter((m) => m.id !== "notes" && m.id !== "passwords");
+    const topModules = modules.filter((m) =>
+      m.id !== "notes" && m.id !== "passwords" && m.id !== "components"
+    );
     const subModules = modules.filter((m) => m.id === "notes" || m.id === "passwords");
 
     const topItemsHtml = topModules.map((m) => {
@@ -136,7 +185,34 @@ export class AppShell extends HTMLElement {
       </li>
     `;
 
-    menuContainer.innerHTML = topItemsHtml + docsToggleHtml;
+    const compTitle = t("sidebar.components") || "组件库";
+    const compListHtml = BASE_UI_COMPONENTS.map((c) => `
+      <li data-slot="sidebar-menu-sub-item">
+        <a href="#/components?c=${c.id}" class="comp-sub-link" data-comp-id="${c.id}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#${c.icon}"></use></svg>
+          <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.name}</span>
+        </a>
+      </li>
+    `).join("");
+
+    const compToggleHtml = `
+      <li data-slot="sidebar-menu-item" class="relative" style="list-style: none;">
+        <button type="button" class="menu-toggle-btn" id="btn-comps-toggle" data-open="${
+      this.componentsOpen ? "true" : "false"
+    }" title="${compTitle}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#component"></use></svg>
+          <span class="menu-label" style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${compTitle}</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+        <ul data-slot="sidebar-menu-sub" id="comps-sub-menu" style="max-height: 18rem; overflow-y: auto;" ${
+      !this.componentsOpen ? "hidden" : ""
+    }>
+          ${compListHtml}
+        </ul>
+      </li>
+    `;
+
+    menuContainer.innerHTML = topItemsHtml + docsToggleHtml + compToggleHtml;
 
     menuContainer.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -148,8 +224,11 @@ export class AppShell extends HTMLElement {
     menuContainer.querySelectorAll("[data-slot='sidebar-menu-sub-item'] a").forEach((a) => {
       a.addEventListener("click", (e) => {
         e.preventDefault();
-        const id = a.getAttribute("data-module-id");
-        eventBus.emit("router:navigate", { path: `/${id}` });
+        const href = a.getAttribute("href");
+        if (href.startsWith("#")) {
+          const path = href.replace(/^#/, "");
+          eventBus.emit("router:navigate", { path });
+        }
       });
     });
 
@@ -158,6 +237,19 @@ export class AppShell extends HTMLElement {
       const subList = menuContainer.querySelector("#docs-sub-menu");
       const btn = menuContainer.querySelector("#btn-docs-toggle");
       if (this.docsOpen) {
+        subList?.removeAttribute("hidden");
+        btn?.setAttribute("data-open", "true");
+      } else {
+        subList?.setAttribute("hidden", "");
+        btn?.setAttribute("data-open", "false");
+      }
+    });
+
+    menuContainer.querySelector("#btn-comps-toggle")?.addEventListener("click", () => {
+      this.componentsOpen = !this.componentsOpen;
+      const subList = menuContainer.querySelector("#comps-sub-menu");
+      const btn = menuContainer.querySelector("#btn-comps-toggle");
+      if (this.componentsOpen) {
         subList?.removeAttribute("hidden");
         btn?.setAttribute("data-open", "true");
       } else {

@@ -63,4 +63,11 @@ export const MODULE_METAS = [
     "order": 9,
     "entryPath": "../../modules/settings/index.js",
   },
+  {
+    "id": "components",
+    "title": "组件库",
+    "icon": "component",
+    "order": 10,
+    "entryPath": "../../modules/components/index.js",
+  },
 ];

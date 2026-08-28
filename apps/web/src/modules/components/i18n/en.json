@@ -1,0 +1,11 @@
+{
+  "title": "Shadcn Base UI Component Library",
+  "desc": "Handcrafted native Web Components faithfully porting all 62 Shadcn Base UI official components with live interactive playgrounds.",
+  "docsLink": "View Shadcn Official Docs",
+  "searchPlaceholder": "Search components (e.g. Calendar, Button, Dialog...)",
+  "allCategories": "All Categories",
+  "preview": "Live Preview",
+  "code": "Code Example",
+  "slots": "Slots (data-slot)",
+  "interactive": "Interactive Experience"
+}

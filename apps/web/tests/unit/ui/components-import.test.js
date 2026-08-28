@@ -190,6 +190,7 @@ Deno.test("ui: 验证 packages/ui 全量 62+ 款 Base UI 组件、Shell 导入�
     "analytics",
     "appearance",
     "bookmarks",
+    "components",
     "dashboard",
     "notes",
     "passwords",

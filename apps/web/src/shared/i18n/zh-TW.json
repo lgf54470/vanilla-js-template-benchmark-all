@@ -9,7 +9,7 @@
     "edit": "編輯",
     "create": "新建",
     "search": "搜尋...",
-    "noData": "暫無資料",
+    "noData": "暫無數據",
     "success": "操作成功",
     "error": "操作失敗",
     "retry": "重試",
@@ -23,19 +23,21 @@
     "passwords": "密碼保險箱",
     "analytics": "數據分析",
     "workspace": "工作空間",
-    "appearance": "外觀自訂",
+    "appearance": "外觀定制",
     "settings": "系統設定",
-    "docs": "文件與資料"
+    "docs": "文檔與資料",
+    "components": "組件庫"
   },
   "sidebar": {
     "mainMenu": "主選單",
-    "docs": "文件與資料",
-    "resize": "拖曳調整側欄寬度，雙擊重設"
+    "docs": "文檔與資料",
+    "components": "組件庫",
+    "resize": "拖拽調整側欄寬度，雙擊重設"
   },
   "workspace": {
     "title": "工作空間",
     "seed": {
-      "default": "預設空間",
+      "default": "默認空間",
       "work": "工作",
       "study": "學習",
       "life": "生活",
@@ -45,8 +47,8 @@
   },
   "auth": {
     "login": "登入",
-    "logout": "登出",
-    "password": "存取密碼",
+    "logout": "退出登入",
+    "password": "訪問密碼",
     "loginSuccess": "登入成功",
     "invalidPassword": "密碼錯誤",
     "lockedOut": "嘗試次數過多，請稍後再試"
@@ -57,13 +59,13 @@
     "light": "淺色",
     "dark": "深色",
     "language": "語言",
-    "logout": "登出"
+    "logout": "退出登入"
   },
   "user": {
     "developer": "開發者",
     "settings": "系統設定",
-    "appearance": "外觀自訂",
-    "logout": "登出"
+    "appearance": "外觀定制",
+    "logout": "退出登入"
   },
   "appearance": {
     "theme": "主題",
@@ -78,7 +80,7 @@
   },
   "settings": {
     "title": "主題設定",
-    "description": "自訂外觀、風格與佈局。",
+    "description": "自定義外觀、風格與佈局。",
     "appearance": "外觀",
     "theme": "主題模式",
     "sidebar": "側邊欄樣式",
@@ -88,17 +90,17 @@
     "style": "風格",
     "bodyFont": "正文字體",
     "headingFont": "標題字體",
-    "iconLibrary": "圖示庫",
+    "iconLibrary": "圖標庫",
     "lucide": "Lucide",
     "radius": "圓角",
-    "menuColor": "選單色彩",
+    "menuColor": "選單顏色",
     "menuAppearance": "選單外觀",
     "menuAccent": "選單強調",
     "subtle": "Subtle",
     "close": "關閉",
     "resetAll": "重設全部設定",
     "radiusOptions": {
-      "default": "預設",
+      "default": "默認",
       "none": "無",
       "sm": "小",
       "md": "中",
@@ -111,12 +113,12 @@
       "sidebar": "固定側欄"
     },
     "layoutOptions": {
-      "default": "預設",
-      "icon": "圖示",
-      "offcanvas": "全螢幕抽屜"
+      "default": "默認",
+      "icon": "圖標",
+      "offcanvas": "全屏抽屜"
     },
     "menuColorOptions": {
-      "default": "預設",
+      "default": "默認",
       "inverted": "反色"
     },
     "menuAppearanceOptions": {

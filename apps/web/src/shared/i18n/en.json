@@ -7,11 +7,11 @@
     "confirm": "Confirm",
     "delete": "Delete",
     "edit": "Edit",
-    "create": "Create",
+    "create": "New",
     "search": "Search...",
     "noData": "No data",
     "success": "Success",
-    "error": "Error",
+    "error": "Failed",
     "retry": "Retry",
     "backToHome": "Back to Home"
   },
@@ -22,15 +22,17 @@
     "bookmarks": "Bookmarks",
     "passwords": "Passwords",
     "analytics": "Analytics",
-    "workspace": "Workspaces",
+    "workspace": "Workspace",
     "appearance": "Appearance",
     "settings": "Settings",
-    "docs": "Documentation"
+    "docs": "Documentation",
+    "components": "Components"
   },
   "sidebar": {
     "mainMenu": "Main Menu",
     "docs": "Documentation",
-    "resize": "Drag to resize sidebar, double-click to reset"
+    "components": "Components",
+    "resize": "Drag to resize sidebar, double click to reset"
   },
   "workspace": {
     "title": "Workspace",
@@ -39,16 +41,16 @@
       "work": "Work",
       "study": "Study",
       "life": "Life",
-      "entertainment": "Entertainment",
+      "entertainment": "Fun",
       "travel": "Travel"
     }
   },
   "auth": {
-    "login": "Sign in",
-    "logout": "Sign out",
+    "login": "Login",
+    "logout": "Logout",
     "password": "Password",
-    "loginSuccess": "Signed in successfully",
-    "invalidPassword": "Invalid password",
+    "loginSuccess": "Login Successful",
+    "invalidPassword": "Invalid Password",
     "lockedOut": "Too many attempts, please try again later"
   },
   "header": {
@@ -57,46 +59,46 @@
     "light": "Light",
     "dark": "Dark",
     "language": "Language",
-    "logout": "Sign out"
+    "logout": "Logout"
   },
   "user": {
     "developer": "Developer",
     "settings": "Settings",
     "appearance": "Appearance",
-    "logout": "Sign out"
+    "logout": "Logout"
   },
   "appearance": {
     "theme": "Theme",
-    "baseColor": "Base color",
-    "style": "Style",
-    "chartColor": "Accent color",
-    "radius": "Corner radius",
-    "fontSans": "Body font",
-    "fontHeading": "Heading font",
-    "sidebarVariant": "Sidebar style",
-    "sidebarCollapsible": "Collapsible mode"
+    "baseColor": "Base Color",
+    "style": "Design Style",
+    "chartColor": "Accent Color",
+    "radius": "Radius",
+    "fontSans": "Sans Font",
+    "fontHeading": "Heading Font",
+    "sidebarVariant": "Sidebar Style",
+    "sidebarCollapsible": "Collapse Mode"
   },
   "settings": {
     "title": "Theme Settings",
     "description": "Customize appearance, style and layout.",
     "appearance": "Appearance",
-    "theme": "Theme mode",
-    "sidebar": "Sidebar style",
+    "theme": "Theme Mode",
+    "sidebar": "Sidebar Style",
     "layout": "Layout",
-    "baseColor": "Base color",
-    "chartColor": "Accent color",
+    "baseColor": "Base Color",
+    "chartColor": "Accent Color",
     "style": "Style",
-    "bodyFont": "Body font",
-    "headingFont": "Heading font",
-    "iconLibrary": "Icon library",
+    "bodyFont": "Body Font",
+    "headingFont": "Heading Font",
+    "iconLibrary": "Icon Library",
     "lucide": "Lucide",
-    "radius": "Corner radius",
-    "menuColor": "Menu color",
-    "menuAppearance": "Menu appearance",
-    "menuAccent": "Menu accent",
+    "radius": "Radius",
+    "menuColor": "Menu Color",
+    "menuAppearance": "Menu Appearance",
+    "menuAccent": "Menu Accent",
     "subtle": "Subtle",
     "close": "Close",
-    "resetAll": "Reset all settings",
+    "resetAll": "Reset All Settings",
     "radiusOptions": {
       "default": "Default",
       "none": "None",
@@ -113,7 +115,7 @@
     "layoutOptions": {
       "default": "Default",
       "icon": "Icon",
-      "offcanvas": "Off-canvas"
+      "offcanvas": "Offcanvas"
     },
     "menuColorOptions": {
       "default": "Default",

@@ -1,0 +1,11 @@
+{
+  "title": "Shadcn Base UI 組件庫",
+  "desc": "基於原生 Web Components 手工轉譯的 62 款 Shadcn Base UI 官方核心組件與即時互動展示。",
+  "docsLink": "查看 Shadcn 官方文檔",
+  "searchPlaceholder": "搜尋組件 (如 Calendar, Button, Dialog...)",
+  "allCategories": "全部分類",
+  "preview": "即時預覽",
+  "code": "程式碼範例",
+  "slots": "插槽結構 (data-slot)",
+  "interactive": "互動體驗"
+}
