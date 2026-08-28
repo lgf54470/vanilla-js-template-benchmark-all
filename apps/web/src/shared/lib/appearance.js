@@ -6,7 +6,7 @@ import {
   STORAGE_KEYS,
   STYLES,
 } from "@contracts/constants.js";
-import { eventBus } from "@shared/core/event-bus.js";
+import { eventBus } from "../core/event-bus.js";
 
 const DEFAULT_BASE_COLOR = "zinc";
 const DEFAULT_STYLE = "nova";
