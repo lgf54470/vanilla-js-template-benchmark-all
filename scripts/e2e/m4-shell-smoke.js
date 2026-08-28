@@ -193,6 +193,46 @@ try {
   check("语言切换 → en 菜单", enLabels.includes("Dashboard"), enLabels);
   const langAttr = await page.eval(`document.documentElement.lang`);
   check("html lang=en", langAttr === "en", langAttr);
+  // 切 zh-TW：三语循环的第二站
+  await page.eval(`(() => {
+    const ls = document.querySelector("ds-app-header").shadowRoot
+      .querySelector("ds-lang-switch");
+    ls.shadowRoot.querySelector("button.trigger").click();
+  })()`);
+  await waitFor(
+    `document.querySelector("ds-app-header").shadowRoot.querySelector("ds-lang-switch").shadowRoot.querySelectorAll("ds-menu-item").length === 3`,
+    "语言菜单（zh-TW）",
+  );
+  await page.eval(`(() => {
+    const ls = document.querySelector("ds-app-header").shadowRoot
+      .querySelector("ds-lang-switch");
+    [...ls.shadowRoot.querySelectorAll("ds-menu-item")]
+      .find(i => i.getAttribute("value") === "zh-TW").click();
+  })()`);
+  await waitFor(
+    `[...document.querySelectorAll("ds-sidebar-menu-item")].some(e => e.getAttribute("label") === "儀表板")`,
+    "zh-TW 菜单重建",
+  );
+  const twLabels = await page.eval(
+    `[...document.querySelectorAll("ds-sidebar-menu-item")].map(e => e.getAttribute("label")).join(",")`,
+  );
+  check("语言切换 → zh-TW 菜单", twLabels.includes("儀表板"), twLabels);
+  const wsTw = await page.eval(
+    `[...document.querySelectorAll("ds-workspace-switcher")].flatMap(w =>
+      [...w.shadowRoot.querySelectorAll(".ws-row")]
+        .map(r => r.querySelector("span:nth-child(2)").textContent)
+    ).join(",")`,
+  );
+  check(
+    "zh-TW 工作空间名",
+    wsTw.includes("工作") && wsTw.includes("旅行"),
+    wsTw,
+  );
+  check(
+    "zh-TW 无裸 key",
+    !twLabels.includes("menu.title") && !wsTw.includes("workspace.seed"),
+    twLabels + "|" + wsTw,
+  );
   // 切回 zh-CN
   await page.eval(`(() => {
     const ls = document.querySelector("ds-app-header").shadowRoot
