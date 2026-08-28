@@ -18,10 +18,14 @@ import {
 import { PREVIEW_ICONS } from "../../shared/ui/appearance-sheet/preview-icons.js";
 import { createIcon } from "../../shared/ui/base.js";
 import { toast } from "../../shared/ui/toast/toast.js";
+import { eventBus } from "../../shared/core/event-bus.js";
 
 registerTranslations("zh-CN", "appearance", zhCN);
 registerTranslations("zh-TW", "appearance", zhTW);
 registerTranslations("en", "appearance", en);
+
+let _unsubLocale = null;
+let _unsubAppearance = null;
 
 export default {
   mount(container) {
@@ -422,7 +426,13 @@ export default {
       });
     };
 
+    _unsubLocale = eventBus.on("locale:changed", () => renderContent());
+    _unsubAppearance = eventBus.on("appearance:changed", () => renderContent());
+
     renderContent();
   },
-  unmount() {},
+  unmount() {
+    if (_unsubLocale) _unsubLocale();
+    if (_unsubAppearance) _unsubAppearance();
+  },
 };

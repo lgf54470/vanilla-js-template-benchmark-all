@@ -1,5 +1,6 @@
 import { eventBus } from "./event-bus.js";
 import { moduleRegistry } from "./module-registry.js";
+import { t } from "../lib/i18n.js";
 
 class Router {
   constructor() {
@@ -15,6 +16,9 @@ class Router {
     globalThis.window.addEventListener("hashchange", this._handleHashChange);
     eventBus.on("router:navigate", (e) => {
       this.navigate(e.detail.path);
+    });
+    eventBus.on("locale:changed", () => {
+      this._handleHashChange();
     });
 
     // Handle initial route
@@ -65,8 +69,10 @@ class Router {
     // Scroll <main> strictly to top
     mainContainer.scrollTop = 0;
 
+    const moduleTitle = t(`modules.${moduleId}`) || meta?.title || moduleId;
+
     if (meta) {
-      document.title = `${meta.title || meta.id} - vanilla-js-template`;
+      document.title = `${moduleTitle} - vanilla-js-template`;
       try {
         const instance = await moduleRegistry.loadModule(moduleId);
         this.currentInstance = instance;
@@ -78,18 +84,22 @@ class Router {
           });
         }
       } catch (err) {
-        console.error(`Failed to mount module ${moduleId}:`, err);
+        console.error(`Failed to load module ${moduleId}:`, err);
         mainContainer.innerHTML = `
-          <ds-empty-state icon="alert-circle" title="模块加载失败" description="${err.message}">
-            <ds-button onclick="window.location.reload()">重新加载</ds-button>
+          <ds-empty-state icon="alert-circle" title="${
+          t("common.error")
+        }" description="${err.message}">
+            <ds-button onclick="window.location.reload()">${t("common.retry")}</ds-button>
           </ds-empty-state>
         `;
       }
     } else {
-      document.title = "404 - 未找到模块";
+      document.title = "404 - Not Found";
       mainContainer.innerHTML = `
-        <ds-empty-state icon="help-circle" title="未找到页面" description="请求的模块 '${moduleId}' 不存在或未注册。">
-          <ds-button onclick="window.location.hash = '#/dashboard'">返回首页</ds-button>
+        <ds-empty-state icon="help-circle" title="404" description="Module '${moduleId}' not found.">
+          <ds-button onclick="window.location.hash = '#/dashboard'">${
+        t("common.backToHome")
+      }</ds-button>
         </ds-empty-state>
       `;
     }
@@ -97,7 +107,7 @@ class Router {
     eventBus.emit("router:navigated", {
       path: this.currentPath,
       moduleId,
-      meta,
+      meta: { ...meta, title: moduleTitle },
     });
   }
 }

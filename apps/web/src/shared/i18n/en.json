@@ -15,6 +15,23 @@
     "retry": "Retry",
     "backToHome": "Back to Home"
   },
+  "modules": {
+    "dashboard": "Dashboard",
+    "notes": "Notes",
+    "todo": "Todo",
+    "bookmarks": "Bookmarks",
+    "passwords": "Passwords",
+    "analytics": "Analytics",
+    "workspace": "Workspaces",
+    "appearance": "Appearance",
+    "settings": "Settings",
+    "docs": "Documentation"
+  },
+  "sidebar": {
+    "mainMenu": "Main Menu",
+    "docs": "Documentation",
+    "resize": "Drag to resize sidebar, double-click to reset"
+  },
   "workspace": {
     "title": "Workspace",
     "seed": {
@@ -39,7 +56,14 @@
     "system": "System",
     "light": "Light",
     "dark": "Dark",
-    "language": "Language"
+    "language": "Language",
+    "logout": "Sign out"
+  },
+  "user": {
+    "developer": "Developer",
+    "settings": "Settings",
+    "appearance": "Appearance",
+    "logout": "Sign out"
   },
   "appearance": {
     "theme": "Theme",

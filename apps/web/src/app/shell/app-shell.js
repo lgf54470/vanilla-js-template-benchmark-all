@@ -1,32 +1,40 @@
-import { moduleRegistry } from "../../shared/core/module-registry.js";
 import { eventBus } from "../../shared/core/event-bus.js";
-import { initResizeHandle } from "./resize-handle.js";
-import "../../shared/ui/index.js";
+import { moduleRegistry } from "../../shared/core/module-registry.js";
+import { initSidebarResize } from "./resize-handle.js";
+import { t } from "../../shared/lib/i18n.js";
+import "../../shared/ui/sidebar/sidebar.js";
+import "../../shared/ui/breadcrumb/breadcrumb.js";
+import "../../shared/ui/theme-switch/theme-switch.js";
+import "../../shared/ui/lang-switch/lang-switch.js";
+import "../../shared/ui/appearance-sheet/appearance-sheet.js";
+import "../../shared/ui/workspace-switcher/workspace-switcher.js";
+import "../../shared/ui/nav-user/nav-user.js";
 
 export class AppShell extends HTMLElement {
   constructor() {
     super();
-    this.unsubscribeRouter = null;
-    this.unsubscribeLocale = null;
+    this.unsubscribeNav = null;
     this.unsubscribeWorkspace = null;
+    this.unsubscribeLocale = null;
+    this.cleanupResize = null;
     this.docsOpen = true;
   }
 
   connectedCallback() {
     this.render();
     this.setupListeners();
-    const handle = this.querySelector(".app-shell__resize");
-    if (handle) initResizeHandle(handle);
+    this.cleanupResize = initSidebarResize(this);
   }
 
   disconnectedCallback() {
-    if (this.unsubscribeRouter) this.unsubscribeRouter();
-    if (this.unsubscribeLocale) this.unsubscribeLocale();
+    if (this.unsubscribeNav) this.unsubscribeNav();
     if (this.unsubscribeWorkspace) this.unsubscribeWorkspace();
+    if (this.unsubscribeLocale) this.unsubscribeLocale();
+    if (this.cleanupResize) this.cleanupResize();
   }
 
   setupListeners() {
-    this.unsubscribeRouter = eventBus.on("router:navigated", (e) => {
+    this.unsubscribeNav = eventBus.on("router:navigated", (e) => {
       this.updateActiveNav(e.detail.moduleId, e.detail.meta);
     });
 
@@ -39,23 +47,27 @@ export class AppShell extends HTMLElement {
 
     this.unsubscribeLocale = eventBus.on("locale:changed", () => {
       this.renderSidebarItems();
+      const groupLabel = this.querySelector("#main-menu-label");
+      if (groupLabel) groupLabel.textContent = t("sidebar.mainMenu");
+      const activeBtn = this.querySelector("ds-sidebar-menu-button[data-module-id]");
+      const activeId = activeBtn?.getAttribute("data-module-id");
+      if (activeId) {
+        this.updateActiveNav(activeId, { title: t(`modules.${activeId}`) });
+      }
     });
   }
 
   updateActiveNav(moduleId, meta) {
-    // Single buttons
     this.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       const id = btn.getAttribute("data-module-id");
       btn.isActive = id === moduleId;
     });
 
-    // Sub items
     this.querySelectorAll("[data-slot='sidebar-menu-sub-item'] a").forEach((link) => {
       const id = link.getAttribute("data-module-id");
       const active = id === moduleId;
       link.classList.toggle("active", active);
       if (active) {
-        // If sub item is active, make sure parent is open
         this.docsOpen = true;
         const subList = this.querySelector("#docs-sub-menu");
         const toggleBtn = this.querySelector("#btn-docs-toggle");
@@ -68,7 +80,7 @@ export class AppShell extends HTMLElement {
     if (breadcrumb && meta) {
       breadcrumb.items = [
         { label: "Vanilla Workbench" },
-        { label: meta.title || moduleId },
+        { label: t(`modules.${moduleId}`) || meta.title || moduleId },
       ];
     }
   }
@@ -78,40 +90,44 @@ export class AppShell extends HTMLElement {
     if (!menuContainer) return;
 
     const modules = moduleRegistry.getModules();
-    // Separate single modules and sub-menu modules (notes, passwords)
     const topModules = modules.filter((m) => m.id !== "notes" && m.id !== "passwords");
     const subModules = modules.filter((m) => m.id === "notes" || m.id === "passwords");
 
-    const topItemsHtml = topModules.map((m) => `
-      <ds-sidebar-menu-item>
-        <ds-sidebar-menu-button icon="${m.icon || "folder"}" data-module-id="${m.id}" tooltip="${
-      m.title || m.id
-    }">
-          ${m.title || m.id}
-        </ds-sidebar-menu-button>
-      </ds-sidebar-menu-item>
-    `).join("");
+    const topItemsHtml = topModules.map((m) => {
+      const title = t(`modules.${m.id}`) || m.title || m.id;
+      return `
+        <ds-sidebar-menu-item>
+          <ds-sidebar-menu-button icon="${
+        m.icon || "folder"
+      }" data-module-id="${m.id}" tooltip="${title}">
+            ${title}
+          </ds-sidebar-menu-button>
+        </ds-sidebar-menu-item>
+      `;
+    }).join("");
 
-    const subListHtml = subModules.map((m) => `
-      <li data-slot="sidebar-menu-sub-item">
-        <a href="#/${m.id}" data-module-id="${m.id}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#${
-      m.icon || "file-text"
-    }"></use></svg>
-          <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${
-      m.title || m.id
-    }</span>
-        </a>
-      </li>
-    `).join("");
+    const subListHtml = subModules.map((m) => {
+      const title = t(`modules.${m.id}`) || m.title || m.id;
+      return `
+        <li data-slot="sidebar-menu-sub-item">
+          <a href="#/${m.id}" data-module-id="${m.id}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#${
+        m.icon || "file-text"
+      }"></use></svg>
+            <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${title}</span>
+          </a>
+        </li>
+      `;
+    }).join("");
 
+    const docsTitle = t("sidebar.docs");
     const docsToggleHtml = `
       <li data-slot="sidebar-menu-item" class="relative" style="list-style: none;">
         <button type="button" class="menu-toggle-btn" id="btn-docs-toggle" data-open="${
       this.docsOpen ? "true" : "false"
-    }" title="文档与资料">
+    }" title="${docsTitle}">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#book-open"></use></svg>
-          <span class="menu-label" style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">文档与资料</span>
+          <span class="menu-label" style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${docsTitle}</span>
           <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
         </button>
         <ul data-slot="sidebar-menu-sub" id="docs-sub-menu" ${!this.docsOpen ? "hidden" : ""}>
@@ -122,7 +138,6 @@ export class AppShell extends HTMLElement {
 
     menuContainer.innerHTML = topItemsHtml + docsToggleHtml;
 
-    // Listeners for top modules
     menuContainer.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-module-id");
@@ -130,7 +145,6 @@ export class AppShell extends HTMLElement {
       });
     });
 
-    // Sub modules click
     menuContainer.querySelectorAll("[data-slot='sidebar-menu-sub-item'] a").forEach((a) => {
       a.addEventListener("click", (e) => {
         e.preventDefault();
@@ -139,7 +153,6 @@ export class AppShell extends HTMLElement {
       });
     });
 
-    // Toggle click
     menuContainer.querySelector("#btn-docs-toggle")?.addEventListener("click", () => {
       this.docsOpen = !this.docsOpen;
       const subList = menuContainer.querySelector("#docs-sub-menu");
@@ -164,7 +177,9 @@ export class AppShell extends HTMLElement {
 
           <ds-sidebar-content>
             <ds-sidebar-group>
-              <ds-sidebar-group-label>主菜单</ds-sidebar-group-label>
+              <ds-sidebar-group-label id="main-menu-label">${
+      t("sidebar.mainMenu")
+    }</ds-sidebar-group-label>
               <ds-sidebar-menu id="sidebar-menu"></ds-sidebar-menu>
             </ds-sidebar-group>
           </ds-sidebar-content>
@@ -175,7 +190,9 @@ export class AppShell extends HTMLElement {
           <ds-sidebar-rail></ds-sidebar-rail>
         </ds-sidebar>
 
-        <div class="app-shell__resize" role="separator" aria-orientation="vertical" aria-label="调整侧栏宽度" title="拖拽调整侧栏宽度，双击重置">
+        <div class="app-shell__resize" role="separator" aria-orientation="vertical" aria-label="${
+      t("sidebar.resize")
+    }" title="${t("sidebar.resize")}">
           <span class="handle-pill"></span>
         </div>
 
@@ -190,7 +207,9 @@ export class AppShell extends HTMLElement {
               <ds-lang-switch></ds-lang-switch>
               <ds-theme-switch></ds-theme-switch>
               <ds-appearance-sheet></ds-appearance-sheet>
-              <button type="button" class="header-icon-btn" id="btn-header-logout" title="退出登录" aria-label="退出登录">
+              <button type="button" class="header-icon-btn" id="btn-header-logout" title="${
+      t("header.logout")
+    }" aria-label="${t("header.logout")}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/icons.svg#log-out"></use></svg>
               </button>
             </div>

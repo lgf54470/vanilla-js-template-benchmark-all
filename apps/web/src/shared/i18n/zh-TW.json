@@ -15,6 +15,23 @@
     "retry": "重試",
     "backToHome": "返回首頁"
   },
+  "modules": {
+    "dashboard": "儀表盤",
+    "notes": "筆記",
+    "todo": "待辦事項",
+    "bookmarks": "網址收藏",
+    "passwords": "密碼保險箱",
+    "analytics": "數據分析",
+    "workspace": "工作空間",
+    "appearance": "外觀自訂",
+    "settings": "系統設定",
+    "docs": "文件與資料"
+  },
+  "sidebar": {
+    "mainMenu": "主選單",
+    "docs": "文件與資料",
+    "resize": "拖曳調整側欄寬度，雙擊重設"
+  },
   "workspace": {
     "title": "工作空間",
     "seed": {
@@ -39,7 +56,14 @@
     "system": "跟隨系統",
     "light": "淺色",
     "dark": "深色",
-    "language": "語言"
+    "language": "語言",
+    "logout": "登出"
+  },
+  "user": {
+    "developer": "開發者",
+    "settings": "系統設定",
+    "appearance": "外觀自訂",
+    "logout": "登出"
   },
   "appearance": {
     "theme": "主題",

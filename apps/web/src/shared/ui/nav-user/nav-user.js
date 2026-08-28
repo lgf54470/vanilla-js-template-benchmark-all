@@ -1,5 +1,6 @@
 import { attachStyles, createIcon } from "../base.js";
 import { eventBus } from "../../core/event-bus.js";
+import { t } from "../../lib/i18n.js";
 import "../dropdown-menu/dropdown-menu.js";
 import "../avatar/avatar.js";
 
@@ -111,14 +112,20 @@ export class DsNavUser extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this._unsub = null;
   }
 
   connectedCallback() {
     this.render();
+    this._unsub = eventBus.on("locale:changed", () => this.render());
+  }
+
+  disconnectedCallback() {
+    if (this._unsub) this._unsub();
   }
 
   render() {
-    const user = { name: "开发者", email: "d***@workspace.local" };
+    const user = { name: t("user.developer"), email: "d***@workspace.local" };
 
     this.shadowRoot.innerHTML = `
       <ds-dropdown-menu side="up">
@@ -143,18 +150,18 @@ export class DsNavUser extends HTMLElement {
 
         <div class="menu-item" id="item-settings">
           ${createIcon("settings")}
-          <span>系统设置</span>
+          <span>${t("user.settings")}</span>
         </div>
         <div class="menu-item" id="item-appearance">
           ${createIcon("palette")}
-          <span>外观定制</span>
+          <span>${t("user.appearance")}</span>
         </div>
 
         <div class="separator"></div>
 
         <div class="menu-item menu-item--danger" id="item-logout">
           ${createIcon("log-out")}
-          <span>退出登录</span>
+          <span>${t("user.logout")}</span>
         </div>
       </ds-dropdown-menu>
     `;

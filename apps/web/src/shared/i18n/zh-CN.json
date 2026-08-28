@@ -15,6 +15,23 @@
     "retry": "重试",
     "backToHome": "返回首页"
   },
+  "modules": {
+    "dashboard": "仪表盘",
+    "notes": "笔记",
+    "todo": "待办事项",
+    "bookmarks": "网址收藏",
+    "passwords": "密码保险箱",
+    "analytics": "数据分析",
+    "workspace": "工作空间",
+    "appearance": "外观定制",
+    "settings": "系统设置",
+    "docs": "文档与资料"
+  },
+  "sidebar": {
+    "mainMenu": "主菜单",
+    "docs": "文档与资料",
+    "resize": "拖拽调整侧栏宽度，双击重置"
+  },
   "workspace": {
     "title": "工作空间",
     "seed": {
@@ -39,7 +56,14 @@
     "system": "跟随系统",
     "light": "浅色",
     "dark": "深色",
-    "language": "语言"
+    "language": "语言",
+    "logout": "退出登录"
+  },
+  "user": {
+    "developer": "开发者",
+    "settings": "系统设置",
+    "appearance": "外观定制",
+    "logout": "退出登录"
   },
   "appearance": {
     "theme": "主题",
