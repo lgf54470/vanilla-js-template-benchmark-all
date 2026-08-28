@@ -6,23 +6,73 @@ export function getGeneralDemo(id) {
       return {
         render: (container) => {
           container.innerHTML = `
-            <div style="display: flex; flex-direction: column; gap: var(--space-4); width: 100%;">
-              <div style="font-size: var(--text-xs); color: var(--color-fg-muted); font-weight: 600;">变体 (Variants)</div>
-              <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;">
-                <ds-button variant="default">Default</ds-button>
-                <ds-button variant="secondary">Secondary</ds-button>
-                <ds-button variant="outline">Outline</ds-button>
-                <ds-button variant="ghost">Ghost</ds-button>
-                <ds-button variant="destructive">Destructive</ds-button>
-                <ds-button variant="link">Link</ds-button>
+            <div style="display: flex; flex-direction: column; gap: var(--space-6); width: 100%;">
+              <!-- 变体与尺寸全矩阵 -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="font-size: var(--text-sm); color: var(--color-fg); font-weight: 600;">变体与尺寸矩阵 (Variants & Sizes)</div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button size="xs" variant="default">XS Default</ds-button>
+                  <ds-button size="xs" variant="secondary">Secondary</ds-button>
+                  <ds-button size="xs" variant="outline">Outline</ds-button>
+                  <ds-button size="xs" variant="ghost">Ghost</ds-button>
+                  <ds-button size="xs" variant="destructive">Destructive</ds-button>
+                  <ds-button size="xs" variant="link">Link</ds-button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button size="sm" variant="default">SM Default</ds-button>
+                  <ds-button size="sm" variant="secondary">Secondary</ds-button>
+                  <ds-button size="sm" variant="outline">Outline</ds-button>
+                  <ds-button size="sm" variant="ghost">Ghost</ds-button>
+                  <ds-button size="sm" variant="destructive">Destructive</ds-button>
+                  <ds-button size="sm" variant="link">Link</ds-button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button size="default" variant="default">Default</ds-button>
+                  <ds-button size="default" variant="secondary">Secondary</ds-button>
+                  <ds-button size="default" variant="outline">Outline</ds-button>
+                  <ds-button size="default" variant="ghost">Ghost</ds-button>
+                  <ds-button size="default" variant="destructive">Destructive</ds-button>
+                  <ds-button size="default" variant="link">Link</ds-button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button size="lg" variant="default">LG Default</ds-button>
+                  <ds-button size="lg" variant="secondary">Secondary</ds-button>
+                  <ds-button size="lg" variant="outline">Outline</ds-button>
+                  <ds-button size="lg" variant="ghost">Ghost</ds-button>
+                  <ds-button size="lg" variant="destructive">Destructive</ds-button>
+                  <ds-button size="lg" variant="link">Link</ds-button>
+                </div>
               </div>
-              <div style="font-size: var(--text-xs); color: var(--color-fg-muted); font-weight: 600;">尺寸与图标 (Sizes & Icons)</div>
-              <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center;">
-                <ds-button size="sm" variant="default" icon="plus">Small</ds-button>
-                <ds-button size="default" variant="default" icon="check">Default</ds-button>
-                <ds-button size="lg" variant="default" icon="arrow-right">Large</ds-button>
-                <ds-button size="icon" variant="outline" icon="settings" title="Settings"></ds-button>
-                <ds-button variant="default" disabled icon="lock">Disabled</ds-button>
+
+              <!-- 图标与混排 -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="font-size: var(--text-sm); color: var(--color-fg); font-weight: 600;">图标前后置与纯图标按钮 (Icons & Icon-Only)</div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button size="sm" variant="default" icon="plus" icon-position="start">新建项目</ds-button>
+                  <ds-button size="sm" variant="outline" icon="arrow-right" icon-position="end">继续下一步</ds-button>
+                  <ds-button size="sm" variant="secondary" icon="download" icon-position="start">导出数据</ds-button>
+                  <ds-button size="sm" variant="destructive" icon="trash" icon-position="start">删除记录</ds-button>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button size="icon-xs" variant="outline" icon="settings" title="设置 (XS)"></ds-button>
+                  <ds-button size="icon-sm" variant="outline" icon="settings" title="设置 (SM)"></ds-button>
+                  <ds-button size="icon" variant="outline" icon="settings" title="设置 (Default)"></ds-button>
+                  <ds-button size="icon-lg" variant="outline" icon="settings" title="设置 (LG)"></ds-button>
+                  <ds-button size="icon" variant="default" icon="check" title="确认"></ds-button>
+                  <ds-button size="icon" variant="secondary" icon="bell" title="通知"></ds-button>
+                  <ds-button size="icon" variant="ghost" icon="sparkles" title="AI 助理"></ds-button>
+                  <ds-button size="icon" variant="destructive" icon="trash" title="删除"></ds-button>
+                </div>
+              </div>
+
+              <!-- 禁用状态 -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); color: var(--color-fg); font-weight: 600;">禁用态 (Disabled)</div>
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center;">
+                  <ds-button variant="default" disabled icon="lock">禁用按钮</ds-button>
+                  <ds-button variant="outline" disabled>禁用轮廓</ds-button>
+                  <ds-button size="icon" variant="outline" disabled icon="settings"></ds-button>
+                </div>
               </div>
             </div>
           `;
@@ -35,7 +85,7 @@ export function getGeneralDemo(id) {
           });
         },
         code:
-          `<ds-button variant="default">Default</ds-button>\n<ds-button variant="secondary">Secondary</ds-button>\n<ds-button variant="outline" size="sm" icon="plus">With Icon</ds-button>\n<ds-button variant="destructive">Destructive</ds-button>`,
+          `<ds-button variant="default">Default</ds-button>\n<ds-button size="sm" variant="outline" icon="plus">新建</ds-button>\n<ds-button size="icon" variant="outline" icon="settings"></ds-button>\n<ds-button variant="destructive">Destructive</ds-button>`,
         slots: `data-slot="button"`,
       };
 
@@ -49,7 +99,7 @@ export function getGeneralDemo(id) {
               <ds-badge variant="outline">Outline</ds-badge>
               <ds-badge variant="destructive">Destructive</ds-badge>
               <ds-badge variant="default">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;"><use href="/icons.svg#check"></use></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 4px;"><path d="M20 6 9 17l-5-5"/></svg>
                 Verified
               </ds-badge>
             </div>
@@ -64,22 +114,79 @@ export function getGeneralDemo(id) {
       return {
         render: (container) => {
           container.innerHTML = `
-            <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-              <ds-button-group>
-                <ds-button variant="outline" size="sm" icon="bold"></ds-button>
-                <ds-button variant="outline" size="sm" icon="italic"></ds-button>
-                <ds-button variant="outline" size="sm" icon="underline"></ds-button>
-              </ds-button-group>
-              <ds-button-group>
-                <ds-button variant="default" size="sm">年付 8 折</ds-button>
-                <ds-button variant="secondary" size="sm">月付</ds-button>
-              </ds-button-group>
+            <div style="display: flex; flex-direction: column; gap: var(--space-6); width: 100%;">
+              <!-- 1. 基础按钮组 Basic -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); font-weight: 600; color: var(--color-fg);">基础横向按钮组 (Basic)</div>
+                <ds-button-group>
+                  <ds-button variant="outline">Button</ds-button>
+                  <ds-button variant="outline">Another Button</ds-button>
+                </ds-button-group>
+              </div>
+
+              <!-- 2. 与输入框组合 With Input -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); font-weight: 600; color: var(--color-fg);">与输入框无缝拼接 (With Input)</div>
+                <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                  <ds-button-group style="max-width: 24rem;">
+                    <ds-button variant="outline" icon="search">搜索</ds-button>
+                    <ds-input placeholder="输入关键字..."></ds-input>
+                  </ds-button-group>
+                  <ds-button-group style="max-width: 24rem;">
+                    <ds-input placeholder="输入邮箱地址..."></ds-input>
+                    <ds-button variant="default">订阅</ds-button>
+                  </ds-button-group>
+                </div>
+              </div>
+
+              <!-- 3. 带文本前缀 With Text -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); font-weight: 600; color: var(--color-fg);">带文本前缀 (With Text / Label)</div>
+                <ds-button-group style="max-width: 20rem;">
+                  <ds-button-group-text>GPU Size</ds-button-group-text>
+                  <ds-input placeholder="24 GB VRAM"></ds-input>
+                </ds-button-group>
+              </div>
+
+              <!-- 4. 图标工具栏 With Icons -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); font-weight: 600; color: var(--color-fg);">富文本 / 工具栏 (With Icons)</div>
+                <ds-button-group>
+                  <ds-button variant="outline" size="icon" icon="bold" title="加粗"></ds-button>
+                  <ds-button variant="outline" size="icon" icon="italic" title="斜体"></ds-button>
+                  <ds-button variant="outline" size="icon" icon="underline" title="下划线"></ds-button>
+                </ds-button-group>
+              </div>
+
+              <!-- 5. 分页拼接条 Pagination Bar -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); font-weight: 600; color: var(--color-fg);">分页拼接导航 (Pagination Bar)</div>
+                <ds-button-group>
+                  <ds-button variant="outline" size="sm" icon="chevron-left">Previous</ds-button>
+                  <ds-button variant="outline" size="sm">1</ds-button>
+                  <ds-button variant="outline" size="sm">2</ds-button>
+                  <ds-button variant="outline" size="sm">3</ds-button>
+                  <ds-button variant="outline" size="sm">4</ds-button>
+                  <ds-button variant="outline" size="sm">5</ds-button>
+                  <ds-button variant="outline" size="sm" icon="chevron-right" icon-position="end">Next</ds-button>
+                </ds-button-group>
+              </div>
+
+              <!-- 6. 纵向按钮组 Vertical -->
+              <div style="display: flex; flex-direction: column; gap: var(--space-2);">
+                <div style="font-size: var(--text-sm); font-weight: 600; color: var(--color-fg);">纵向按钮组 (Vertical)</div>
+                <ds-button-group orientation="vertical">
+                  <ds-button variant="outline" size="icon" icon="plus" title="放大"></ds-button>
+                  <ds-button variant="outline" size="icon" icon="minus" title="缩小"></ds-button>
+                </ds-button-group>
+              </div>
             </div>
           `;
         },
         code:
-          `<ds-button-group>\n  <ds-button variant="outline">左</ds-button>\n  <ds-button variant="outline">中</ds-button>\n  <ds-button variant="outline">右</ds-button>\n</ds-button-group>`,
-        slots: `data-slot="button-group", data-slot="button-group-separator"`,
+          `<ds-button-group>\n  <ds-button variant="outline">Button</ds-button>\n  <ds-button variant="outline">Another Button</ds-button>\n</ds-button-group>\n\n<ds-button-group orientation="vertical">\n  <ds-button variant="outline" size="icon" icon="plus"></ds-button>\n  <ds-button variant="outline" size="icon" icon="minus"></ds-button>\n</ds-button-group>`,
+        slots:
+          `data-slot="button-group", data-slot="button-group-text", data-slot="button-group-separator"`,
       };
 
     case "toggle":
@@ -88,11 +195,11 @@ export function getGeneralDemo(id) {
           container.innerHTML = `
             <div style="display: flex; gap: var(--space-3); align-items: center;">
               <ds-toggle id="t-bold" variant="outline">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="/icons.svg#bold"></use></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 12h8a4 4 0 0 0 0-8H6v8Zm0 0h9a4 4 0 0 1 0 8H6v-8Z"/></svg>
                 <span>加粗 (Bold)</span>
               </ds-toggle>
               <ds-toggle id="t-italic" variant="default" pressed>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="/icons.svg#italic"></use></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" x2="10" y1="4" y2="4"/><line x1="14" x2="5" y1="20" y2="20"/><line x1="15" x2="9" y1="4" y2="20"/></svg>
                 <span>斜体 (Italic)</span>
               </ds-toggle>
             </div>
