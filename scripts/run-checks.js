@@ -2,6 +2,7 @@
 
 const checks = [
   "scripts/check-hardcoded-tokens.js",
+  "scripts/check-i18n-keys.js",
 ];
 
 let allPassed = true;

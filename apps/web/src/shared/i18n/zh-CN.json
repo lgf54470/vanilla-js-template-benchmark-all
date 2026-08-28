@@ -1,0 +1,48 @@
+{
+  "common": {
+    "appName": "vanilla-js-template",
+    "loading": "加载中...",
+    "save": "保存",
+    "cancel": "取消",
+    "confirm": "确认",
+    "delete": "删除",
+    "edit": "编辑",
+    "create": "新建",
+    "search": "搜索...",
+    "noData": "暂无数据",
+    "success": "操作成功",
+    "error": "操作失败",
+    "retry": "重试",
+    "backToHome": "返回首页"
+  },
+  "workspace": {
+    "title": "工作空间",
+    "seed": {
+      "default": "默认空间",
+      "work": "工作",
+      "study": "学习",
+      "life": "生活",
+      "entertainment": "娱乐",
+      "travel": "旅行"
+    }
+  },
+  "auth": {
+    "login": "登录",
+    "logout": "退出登录",
+    "password": "访问密码",
+    "loginSuccess": "登录成功",
+    "invalidPassword": "密码错误",
+    "lockedOut": "尝试次数过多，请稍后再试"
+  },
+  "appearance": {
+    "theme": "主题",
+    "baseColor": "基色",
+    "style": "设计风格",
+    "chartColor": "图表配色",
+    "radius": "圆角大小",
+    "fontSans": "正文字体",
+    "fontHeading": "标题字体",
+    "sidebarVariant": "侧栏形态",
+    "sidebarCollapsible": "折叠模式"
+  }
+}

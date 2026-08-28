@@ -1,0 +1,48 @@
+{
+  "common": {
+    "appName": "vanilla-js-template",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "search": "Search...",
+    "noData": "No data",
+    "success": "Success",
+    "error": "Error",
+    "retry": "Retry",
+    "backToHome": "Back to Home"
+  },
+  "workspace": {
+    "title": "Workspaces",
+    "seed": {
+      "default": "Default",
+      "work": "Work",
+      "study": "Study",
+      "life": "Life",
+      "entertainment": "Entertainment",
+      "travel": "Travel"
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "password": "Password",
+    "loginSuccess": "Login successful",
+    "invalidPassword": "Invalid password",
+    "lockedOut": "Too many attempts, please try again later"
+  },
+  "appearance": {
+    "theme": "Theme",
+    "baseColor": "Base Color",
+    "style": "Style",
+    "chartColor": "Chart Colors",
+    "radius": "Radius",
+    "fontSans": "Body Font",
+    "fontHeading": "Heading Font",
+    "sidebarVariant": "Sidebar Variant",
+    "sidebarCollapsible": "Collapsible Mode"
+  }
+}
