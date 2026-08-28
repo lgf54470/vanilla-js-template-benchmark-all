@@ -1,0 +1,10 @@
+/* themes/style-lyra.css — 大字风：控件字号整体放大一档（只写差异） */
+.style-lyra {
+  --ds-btn-font-size: var(--text-base);
+  --ds-btn-height: 2.5rem;
+  --ds-input-font-size: var(--text-base);
+  --ds-input-height: 2.25rem;
+  --ds-menu-item-radius: var(--radius-2xl);
+  --ds-sidebar-group-label-font-size: var(--text-sm);
+  --ds-toast-radius: var(--radius-xl);
+}

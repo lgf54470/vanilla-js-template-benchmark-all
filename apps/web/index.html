@@ -1,11 +1,70 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="base-zinc style-nova chart-zinc menu-default">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>vanilla-js-template</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font"
+      type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Manrope-Variable.woff2" as="font"
+      type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/Geist-Variable.woff2" as="font"
+      type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/src/style.css" />
+    <script>
+    // PREPAINT：首帧前应用持久化外观，防主题闪白/闪暗（ARCHITECTURE.md §6.2，CSS.md §1.2）
+    // 与 shared/lib/appearance.js 的 apply() 保持同一套逻辑（内联复制，无法共享模块）。
+    (function () {
+      try {
+        var store = window.localStorage;
+        var html = document.documentElement;
+        function get(k) {
+          var v = store.getItem(k);
+          return v == null ? null : v;
+        }
+        var theme = get("pref:theme") || "system";
+        var style = get("pref:style") || "nova";
+        var base = get("pref:base") || "zinc";
+        var chart = get("pref:chart") || "zinc";
+        var menu = get("pref:menu") || "default";
+        var radius = Number(get("pref:radius")) || 10;
+        var fontSans = get("pref:font-sans") || "Inter Variable";
+        var fontHeading = get("pref:font-heading") || "Inter Variable";
+        var dark = theme === "dark" ||
+          (theme === "system" && window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        html.classList.add(
+          "style-" + style,
+          "base-" + base,
+          "chart-" + chart,
+          "menu-" + menu,
+        );
+        html.classList.toggle("dark", dark);
+        html.setAttribute("data-theme", dark ? "dark" : "light");
+        html.style.colorScheme = dark ? "dark" : "light";
+        html.style.setProperty("--radius", radius + "px");
+        html.style.setProperty(
+          "--font-sans-base",
+          fontSans + ", system-ui, sans-serif",
+        );
+        html.style.setProperty(
+          "--font-heading-base",
+          fontHeading + ", system-ui, sans-serif",
+        );
+      } catch (e) {
+        // PREPAINT 失败不阻塞渲染（保持默认 zinc/nova/light）
+      }
+    })();
+    </script>
+    <script type="importmap">
+    {
+      "imports": {
+        "@contracts/": "/packages/contracts/",
+        "@shared/": "/src/shared/"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="app"></div>

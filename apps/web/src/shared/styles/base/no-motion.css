@@ -1,0 +1,9 @@
+/* base/no-motion.css — 全站无动效：无条件清零一切 animation/transition（CSS.md §9）
+ * 唯一允许使用 !important 的文件之一；组件 JS 不得依赖 transitionend/animationend。 */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

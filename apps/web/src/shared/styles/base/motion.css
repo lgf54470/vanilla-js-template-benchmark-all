@@ -1,0 +1,9 @@
+/* base/motion.css — 备份降级路径：prefers-reduced-motion 命中时把时长令牌降为 0.01ms
+ * 默认被 base/no-motion.css 覆盖（全站无动效，CSS.md §9 / Design.md §4）。 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0.01ms;
+    --motion-base: 0.01ms;
+    --motion-slow: 0.01ms;
+  }
+}

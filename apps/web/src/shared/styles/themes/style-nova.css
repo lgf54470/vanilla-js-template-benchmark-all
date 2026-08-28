@@ -1,0 +1,76 @@
+/* themes/style-nova.css — 风格基准（--ds-* 组件级样式变量全集）
+ *
+ * 组件 CSS 一律以 var(--ds-<component>-<property>, <nova 默认>) 消费本层；
+ * 其余 7 个风格（vega/maia/lyra/mira/luma/sera/rhea）只写与 nova 的差异（delta）。
+ * 本文件为令牌定义处，允许字面量（check-hardcoded-tokens 白名单 themes/**）。
+ * 圆角档位遵循 Design.md §1：--radius-md 常规控件 / --radius-lg 容器级 / --radius-xl 浮层。
+ */
+.style-nova {
+  /* 通用面板（dropdown/dialog/sheet 等浮层） */
+  --ds-panel-bg: var(--color-popover);
+  --ds-panel-fg: var(--color-popover-fg);
+  --ds-panel-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-panel-shadow: var(--shadow-md);
+  --ds-overlay-shadow: var(--shadow-lg);
+
+  /* Button */
+  --ds-btn-radius: var(--radius-lg);
+  --ds-btn-font-size: var(--text-sm);
+  --ds-btn-font-weight: 500;
+  --ds-btn-height: 2.25rem;
+  --ds-btn-padding-x: var(--space-4);
+  --ds-btn-gap: var(--space-2);
+
+  /* IconButton */
+  --ds-icon-btn-size: 2.25rem;
+  --ds-icon-btn-radius: var(--radius-md);
+
+  /* Input / Textarea / Select */
+  --ds-input-radius: var(--radius-lg);
+  --ds-input-height: 2rem;
+  --ds-input-bg: transparent;
+  --ds-input-border: var(--color-input);
+  --ds-input-font-size: var(--text-sm);
+  --ds-input-padding-x: 0.625rem;
+  --ds-input-focus-ring: var(--color-ring);
+
+  /* Card */
+  --ds-card-radius: var(--radius-xl);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --ds-card-padding: var(--space-4);
+  --ds-card-gap: var(--space-4);
+
+  /* Dialog / Sheet / Dropdown 菜单 */
+  --ds-dialog-radius: var(--radius-xl);
+  --ds-dialog-padding: var(--space-4);
+  --ds-dialog-gap: var(--space-4);
+  --ds-sheet-shadow: var(--shadow-lg);
+  --ds-menu-radius: var(--radius-lg);
+  --ds-menu-padding: var(--space-1);
+  --ds-menu-item-radius: calc(var(--radius) * 1.8);
+  --ds-menu-item-padding-y: var(--space-2);
+  --ds-menu-item-padding-x: var(--space-2);
+
+  /* Sidebar */
+  --ds-sidebar-menu-item-radius: calc(var(--radius) * 1.8);
+  --ds-sidebar-group-label-font-size: var(--text-xs);
+  --ds-sidebar-footer-gap: var(--space-1);
+
+  /* 小组件 */
+  --ds-badge-radius: var(--radius-4xl);
+  --ds-avatar-radius: var(--radius-full);
+  --ds-skeleton-radius: var(--radius-md);
+  --ds-tooltip-radius: var(--radius-md);
+  --ds-tooltip-bg: var(--color-primary);
+  --ds-tooltip-fg: var(--color-primary-fg);
+  --ds-switch-radius: var(--radius-full);
+  --ds-checkbox-radius: var(--radius-sm);
+  --ds-separator-color: var(--color-border);
+
+  /* Toast */
+  --ds-toast-radius: var(--radius-lg);
+  --ds-toast-shadow: var(--shadow-lg);
+  --ds-toast-bg: var(--color-popover);
+  --ds-toast-fg: var(--color-popover-fg);
+  --ds-toast-border: var(--color-border);
+}

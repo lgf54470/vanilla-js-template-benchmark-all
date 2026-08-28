@@ -1,0 +1,7 @@
+/* tokens/sidebar.css — 侧栏尺寸常量（颜色在调色板层，不在这里；CSS.md §2.4） */
+
+:root {
+  --sidebar-width: 16rem; /* 展开态 256px，可拖拽 160–480px（SIDEBAR_WIDTH_LIMITS） */
+  --sidebar-width-icon: 3rem; /* 图标条 */
+  --sidebar-width-mobile: 18rem;
+}

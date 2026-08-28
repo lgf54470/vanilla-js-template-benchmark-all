@@ -1,0 +1,110 @@
+/* themes/palettes-swatches.css — 主题设置选色器的示意色块（令牌定义处）
+ * 基色/图表色磁贴展示各自的代表色；风格磁贴展示圆角形状（--swatch-radius 由
+ * app/shell/theme-settings 消费）。 */
+:root {
+  --swatch-size: 1.75rem;
+  --swatch-radius: var(--radius-md);
+}
+
+/* 基色（代表色 = 该基色的 primary） */
+.swatch-base-zinc {
+  background: oklch(0.21 0.006 285.885);
+}
+.swatch-base-red {
+  background: oklch(0.505 0.213 27.518);
+}
+.swatch-base-orange {
+  background: oklch(0.553 0.195 38.402);
+}
+.swatch-base-green {
+  background: oklch(0.527 0.154 150.069);
+}
+.swatch-base-blue {
+  background: oklch(0.488 0.243 264.376);
+}
+.swatch-base-violet {
+  background: oklch(0.491 0.27 292.581);
+}
+.swatch-base-rose {
+  background: oklch(0.514 0.222 16.935);
+}
+
+/* 图表色（代表色 = 该图表集的 chart-1） */
+.swatch-chart-slate {
+  background: oklch(0.87 0 0);
+}
+.swatch-chart-gray {
+  background: oklch(0.87 0 0);
+}
+.swatch-chart-zinc {
+  background: oklch(0.871 0.006 286.286);
+}
+.swatch-chart-neutral {
+  background: oklch(0.87 0 0);
+}
+.swatch-chart-stone {
+  background: oklch(0.869 0.005 56.366);
+}
+.swatch-chart-red {
+  background: oklch(0.808 0.114 19.571);
+}
+.swatch-chart-orange {
+  background: oklch(0.837 0.128 66.29);
+}
+.swatch-chart-yellow {
+  background: oklch(0.905 0.182 98.111);
+}
+.swatch-chart-green {
+  background: oklch(0.871 0.15 154.449);
+}
+.swatch-chart-blue {
+  background: oklch(0.809 0.105 251.813);
+}
+.swatch-chart-violet {
+  background: oklch(0.811 0.111 293.571);
+}
+.swatch-chart-rose {
+  background: oklch(0.81 0.117 11.638);
+}
+
+/* 风格（磁贴为双色对角渐变，圆角形状由 --swatch-radius 区分） */
+.swatch-style-nova {
+  --swatch-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-vega {
+  --swatch-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-maia {
+  --swatch-radius: var(--radius-xl);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-lyra {
+  --swatch-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-mira {
+  --swatch-radius: var(--radius-lg);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-luma {
+  --swatch-radius: calc(var(--radius) * 2.6);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-sera {
+  --swatch-radius: var(--radius-2xl);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}
+.swatch-style-rhea {
+  --swatch-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-primary) 0 45%,
+    var(--color-border) 45% 100%);
+}

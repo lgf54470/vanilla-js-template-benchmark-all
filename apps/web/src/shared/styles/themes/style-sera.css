@@ -1,0 +1,13 @@
+/* themes/style-sera.css — 柔和卡片风：容器圆角增大、卡片描边更淡（只写差异） */
+.style-sera {
+  --ds-card-radius: var(--radius-2xl);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 4%, transparent);
+  --ds-dialog-radius: var(--radius-2xl);
+  --ds-menu-radius: var(--radius-xl);
+  --ds-input-radius: var(--radius-xl);
+  --ds-btn-radius: var(--radius-xl);
+}
+
+.dark.style-sera {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 8%, transparent);
+}

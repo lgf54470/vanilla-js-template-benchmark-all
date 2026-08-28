@@ -1,0 +1,13 @@
+/* themes/style-mira.css — 高对比描边风：描边加深、ring 强化（只写差异） */
+.style-mira {
+  --ds-panel-ring: color-mix(in oklch, var(--foreground) 18%, transparent);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 12%, transparent);
+  --ds-input-border: color-mix(in oklch, var(--foreground) 55%, transparent);
+  --ds-separator-color: color-mix(in oklch, var(--foreground) 22%, transparent);
+  --ds-input-focus-ring: var(--foreground);
+  --ds-btn-radius: var(--radius-md);
+}
+
+.dark.style-mira {
+  --ds-panel-ring: color-mix(in oklch, var(--foreground) 24%, transparent);
+}

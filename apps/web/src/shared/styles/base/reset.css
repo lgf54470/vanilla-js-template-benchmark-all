@@ -1,0 +1,52 @@
+/* base/reset.css — 最小化重置（light DOM 层；shadow 内由组件各自重置 UA 样式） */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  line-height: var(--leading-normal);
+}
+
+body {
+  min-block-size: 100dvh;
+  font-family: var(--font-sans-base);
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-inline-size: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 焦点基线：统一 --color-ring 2px outline（Design.md §8），禁止 outline:none 而无替代 */
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 1px;
+}

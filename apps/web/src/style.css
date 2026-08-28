@@ -1,9 +1,3 @@
-/* apps/web/src/style.css — 入口样式（M1 起只 @import shared/styles/index.css + 页面容器） */
-:root {
-  color-scheme: light;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-}
+/* apps/web/src/style.css — 入口样式：只 @import shared/styles/index.css + 页面容器
+ * 唯一加载通道（light DOM）：style.css → index.css（CSS.md §1.1）。 */
+@import "./shared/styles/index.css";

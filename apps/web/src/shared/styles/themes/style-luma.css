@@ -1,0 +1,16 @@
+/* themes/style-luma.css — 大圆角 / 填充输入风（docs/CSS.md §2.3 示例风格，只写差异） */
+.style-luma {
+  --ds-btn-radius: calc(var(--radius) * 2.6);
+  --ds-input-bg: color-mix(in oklch, var(--input) 50%, transparent);
+  --ds-input-border: transparent;
+  --ds-card-radius: var(--radius-2xl);
+  --ds-menu-radius: var(--radius-2xl);
+  --ds-menu-item-radius: var(--radius-xl);
+  --ds-dialog-radius: var(--radius-2xl);
+  --ds-toast-radius: var(--radius-2xl);
+}
+
+.dark.style-luma {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-input-bg: color-mix(in oklch, var(--input) 60%, transparent);
+}

@@ -1,0 +1,53 @@
+/* tokens/typography.css — 字号/行高 + 自托管三可变字体（public/fonts/，Design.md §2） */
+
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/Inter-Variable.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Manrope Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 800;
+  src: url("/fonts/Manrope-Variable.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("/fonts/Geist-Variable.woff2") format("woff2-variations");
+}
+
+:root {
+  /* 字号刻度（与 Tailwind 一致）；正文默认 --text-sm（信息密度优先） */
+  --text-2xs: 0.625rem; /* 10px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+
+  /* 正文字体/标题字体：主题设置写内联覆盖（appearance.js） */
+  --font-sans-base: "Inter Variable", system-ui, sans-serif;
+  --font-heading-base: "Inter Variable", system-ui, sans-serif;
+}
+
+/* 所有页面级标题跟随标题字体（主题设置切标题字体时全站生效） */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading-base, inherit);
+  line-height: var(--leading-tight);
+}

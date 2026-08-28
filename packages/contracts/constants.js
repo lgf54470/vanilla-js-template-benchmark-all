@@ -31,6 +31,8 @@ export const STORAGE_KEYS = Object.freeze({
   SIDEBAR_VARIANT: "pref:sidebar-variant",
   /** 侧栏折叠模式 icon | offcanvas | none */
   SIDEBAR_COLLAPSIBLE: "pref:sidebar-collapsible",
+  /** 菜单外观 default | compact | spacious */
+  MENU: "pref:menu",
   /** 持久会话令牌（localStorage，跨浏览器重启存活） */
   AUTH_TOKEN: "pref:auth-token",
   /** 会话级令牌（sessionStorage，浏览器关闭即清除，Auth.md §2） */

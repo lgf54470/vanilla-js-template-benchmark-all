@@ -1,0 +1,14 @@
+/* tokens/radius.css — 圆角：单一基准 + calc 倍数档位（Design.md §1/§4）
+ * 主题设置面板只写 --radius 即全站生效；禁止绕过档位直接写死数值。 */
+
+:root {
+  --radius: 0.625rem;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-full: 9999px;
+}

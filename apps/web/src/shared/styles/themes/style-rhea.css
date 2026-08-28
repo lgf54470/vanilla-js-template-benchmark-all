@@ -1,0 +1,12 @@
+/* themes/style-rhea.css — 硬朗方角风：各档圆角整体收敛一档（只写差异） */
+.style-rhea {
+  --ds-btn-radius: var(--radius-md);
+  --ds-card-radius: var(--radius-lg);
+  --ds-menu-radius: var(--radius-md);
+  --ds-menu-item-radius: var(--radius-md);
+  --ds-sidebar-menu-item-radius: var(--radius-md);
+  --ds-input-radius: var(--radius-md);
+  --ds-dialog-radius: var(--radius-lg);
+  --ds-toast-radius: var(--radius-md);
+  --ds-badge-radius: var(--radius-md);
+}

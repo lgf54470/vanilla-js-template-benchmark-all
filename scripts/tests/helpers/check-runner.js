@@ -55,6 +55,15 @@ export function runCheck(ws, scriptName, args = []) {
   const script = `${import.meta.dirname}/../../${scriptName}`;
   Deno.mkdirSync(`${ws}/scripts`, { recursive: true });
   Deno.copyFileSync(script, `${ws}/scripts/${scriptName}`);
+  // 一并复制脚本间共享 helper（_walk.js 等），保证 fixture 环境自足
+  for (const helper of ["_walk.js"]) {
+    const src = `${import.meta.dirname}/../../${helper}`;
+    try {
+      Deno.copyFileSync(src, `${ws}/scripts/${helper}`);
+    } catch {
+      // 该 helper 不存在时忽略
+    }
+  }
   return runScript(ws, [
     "run",
     "--allow-read",

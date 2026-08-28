@@ -1,0 +1,30 @@
+/* shared/styles/index.css — 设计令牌唯一入口（docs/CSS.md §1 加载顺序）
+ * src/style.css 只引本文件；顺序：结构令牌 → 原始变量/风格集 → base。 */
+
+/* 第 1 层：结构令牌 + 语义映射 */
+@import "./tokens/colors.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radius.css";
+@import "./tokens/shadow.css";
+@import "./tokens/typography.css";
+@import "./tokens/zindex.css";
+@import "./tokens/motion.css";
+@import "./tokens/sidebar.css";
+
+/* 第 2/3 层：原始变量层 + 风格令牌集 */
+@import "./themes/palettes-base.css";
+@import "./themes/palettes-chart.css";
+@import "./themes/palettes-swatches.css";
+@import "./themes/style-nova.css";
+@import "./themes/style-vega.css";
+@import "./themes/style-maia.css";
+@import "./themes/style-lyra.css";
+@import "./themes/style-mira.css";
+@import "./themes/style-luma.css";
+@import "./themes/style-sera.css";
+@import "./themes/style-rhea.css";
+
+/* base */
+@import "./base/reset.css";
+@import "./base/motion.css";
+@import "./base/no-motion.css";

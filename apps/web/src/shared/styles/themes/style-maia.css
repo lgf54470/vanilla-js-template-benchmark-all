@@ -1,0 +1,15 @@
+/* themes/style-maia.css — 柔和风：更淡的描边、更轻的阴影、输入框淡填充（只写差异） */
+.style-maia {
+  --ds-panel-ring: color-mix(in oklch, var(--foreground) 7%, transparent);
+  --ds-panel-shadow: var(--shadow-sm);
+  --ds-overlay-shadow: var(--shadow-md);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 4%, transparent);
+  --ds-input-bg: color-mix(in oklch, var(--input) 40%, transparent);
+  --ds-input-border: transparent;
+  --ds-btn-radius: var(--radius-xl);
+  --ds-dialog-radius: var(--radius-2xl);
+}
+
+.dark.style-maia {
+  --ds-input-bg: color-mix(in oklch, var(--input) 55%, transparent);
+}

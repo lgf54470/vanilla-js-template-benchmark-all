@@ -1,0 +1,21 @@
+/* tokens/spacing.css — 间距刻度（注意跳号：刻意没有 --space-7/9/11，不要"补齐"） */
+
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  /* 图标尺寸三档（Design.md §5） */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+
+  /* 卡片网格最小列宽（Layout.md §5，页面容器按需覆盖） */
+  --card-min-w: 16rem;
+}

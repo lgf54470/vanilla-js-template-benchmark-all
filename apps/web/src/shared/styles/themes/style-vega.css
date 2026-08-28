@@ -1,0 +1,17 @@
+/* themes/style-vega.css — 紧凑工程风：控件更小、圆角更收敛（只写与 nova 的差异） */
+.style-vega {
+  --ds-btn-radius: var(--radius-md);
+  --ds-btn-height: 2rem;
+  --ds-icon-btn-size: 2rem;
+  --ds-input-height: 1.75rem;
+  --ds-input-radius: var(--radius-md);
+  --ds-menu-item-radius: var(--radius-md);
+  --ds-menu-item-padding-y: 0.375rem;
+  --ds-card-padding: var(--space-3);
+  --ds-card-gap: var(--space-3);
+  --ds-sidebar-menu-item-radius: var(--radius-md);
+}
+
+.dark.style-vega {
+  --ds-panel-ring: color-mix(in oklch, var(--foreground) 14%, transparent);
+}
