@@ -86,10 +86,14 @@ export function createStaticHandler({ roots, fallback = "index.html" }) {
     }
 
     const isDir = pathname.endsWith("/") || pathname === "";
-    const relPath = isDir ? `${pathname}index.html` : pathname;
+    let relPath = isDir ? `${pathname}index.html` : pathname;
 
-    // 1) 依次尝试各根
+    // 1) 依次尝试各根：先剥掉命中的 URL 前缀再解析（第二根 /packages/contracts
+    //    的磁盘根里不能出现重复的 packages/contracts 层级）
     for (const root of matching) {
+      if (root.urlPrefix !== "/" && relPath.startsWith(root.urlPrefix)) {
+        relPath = relPath.slice(root.urlPrefix.length);
+      }
       const filePath = resolveSafePath(relPath, root.dir);
       if (!filePath) continue;
       const response = await tryServe(req, filePath);

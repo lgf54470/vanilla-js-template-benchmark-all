@@ -13,16 +13,15 @@ function setup() {
     "<!doctype html><title>app</title>",
   );
   Deno.writeTextFileSync(`${root}/a.js`, "export const a = 1;");
-  Deno.mkdirSync(`${root}/packages/contracts`, { recursive: true });
-  Deno.writeTextFileSync(
-    `${root}/packages/contracts/constants.js`,
-    "export const K = 1;",
-  );
-  return root;
+  // contracts 双根：独立目录（模拟仓库根下的 packages/contracts），与 web 根
+  // 互不包含——前缀剥离错误时该测试必然失败而不是被 "/" 根兜底
+  const contracts = Deno.makeTempDirSync({ prefix: "fb-contracts-" });
+  Deno.writeTextFileSync(`${contracts}/constants.js`, "export const K = 1;");
+  return { root, contracts };
 }
 
 Deno.test("static: 站点根服务 index.html", async () => {
-  const root = setup();
+  const { root } = setup();
   const handler = createStaticHandler({
     roots: [{ urlPrefix: "/", dir: root }],
   });
@@ -33,7 +32,7 @@ Deno.test("static: 站点根服务 index.html", async () => {
 });
 
 Deno.test("static: ETag 命中返回 304", async () => {
-  const root = setup();
+  const { root } = setup();
   const handler = createStaticHandler({
     roots: [{ urlPrefix: "/", dir: root }],
   });
@@ -49,7 +48,7 @@ Deno.test("static: ETag 命中返回 304", async () => {
 });
 
 Deno.test("static: 深链 SPA 回退到 index.html", async () => {
-  const root = setup();
+  const { root } = setup();
   const handler = createStaticHandler({
     roots: [{ urlPrefix: "/", dir: root }],
   });
@@ -59,11 +58,11 @@ Deno.test("static: 深链 SPA 回退到 index.html", async () => {
 });
 
 Deno.test("static: 多根——/packages/contracts 第二根", async () => {
-  const root = setup();
+  const { root, contracts } = setup();
   const handler = createStaticHandler({
     roots: [
       { urlPrefix: "/", dir: root },
-      { urlPrefix: "/packages/contracts", dir: `${root}/packages/contracts` },
+      { urlPrefix: "/packages/contracts", dir: contracts },
     ],
   });
   const res = await handler(
@@ -74,7 +73,7 @@ Deno.test("static: 多根——/packages/contracts 第二根", async () => {
 });
 
 Deno.test("static: 路径穿越被拒（resolveSafePath 单元）", () => {
-  const root = setup();
+  const { root } = setup();
   assert.equal(resolveSafePath("/../secret", root), null);
   assert.equal(resolveSafePath("/..%2f..%2f.env", root), null);
   assert.equal(resolveSafePath("/%00", root), null);
