@@ -1,4 +1,4 @@
-import { attachStyles } from "../base.js";
+import { attachStyles, createIcon } from "../base.js";
 
 const css = `
 :host {
@@ -22,7 +22,7 @@ const css = `
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 .input::placeholder {
   color: var(--color-fg-muted);
@@ -35,16 +35,44 @@ const css = `
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
+.input[aria-invalid="true"], .input-invalid .input {
+  border-color: var(--color-danger) !important;
+}
+.input[aria-invalid="true"]:focus, .input-invalid .input:focus {
+  outline-color: var(--color-danger) !important;
+}
 .input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   background-color: color-mix(in srgb, var(--color-input) 50%, transparent);
 }
+.input-icon-start {
+  position: absolute;
+  left: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-fg-muted);
+  pointer-events: none;
+}
+.input-icon-end {
+  position: absolute;
+  right: 0.625rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-fg-muted);
+  pointer-events: none;
+}
+.has-icon-start .input {
+  padding-left: 2rem;
+}
+.has-icon-end .input {
+  padding-right: 2rem;
+}
 `;
 
 export class DsInput extends HTMLElement {
   static get observedAttributes() {
-    return ["type", "placeholder", "value", "disabled", "name"];
+    return ["type", "placeholder", "value", "disabled", "name", "invalid", "icon", "icon-position"];
   }
 
   constructor() {
@@ -77,10 +105,19 @@ export class DsInput extends HTMLElement {
     const placeholder = this.getAttribute("placeholder") || "";
     const value = this.getAttribute("value") || "";
     const disabled = this.hasAttribute("disabled");
+    const invalid = this.hasAttribute("invalid") || this.getAttribute("aria-invalid") === "true";
     const name = this.getAttribute("name") || "";
+    const icon = this.getAttribute("icon");
+    const iconPos = this.getAttribute("icon-position") || "start";
+
+    const hasStartIcon = icon && iconPos === "start";
+    const hasEndIcon = icon && iconPos === "end";
 
     this.shadowRoot.innerHTML = `
-      <div data-slot="input-wrapper" class="input-wrapper">
+      <div data-slot="input-wrapper" class="input-wrapper ${invalid ? "input-invalid" : ""} ${
+      hasStartIcon ? "has-icon-start" : ""
+    } ${hasEndIcon ? "has-icon-end" : ""}">
+        ${hasStartIcon ? `<span class="input-icon-start">${createIcon(icon)}</span>` : ""}
         <input
           data-slot="input"
           class="input"
@@ -89,7 +126,9 @@ export class DsInput extends HTMLElement {
           value="${value}"
           name="${name}"
           ${disabled ? "disabled" : ""}
+          ${invalid ? 'aria-invalid="true"' : ""}
         />
+        ${hasEndIcon ? `<span class="input-icon-end">${createIcon(icon)}</span>` : ""}
       </div>
     `;
 
