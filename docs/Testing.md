@@ -17,10 +17,7 @@
 ```js
 // apps/server/tests/unit/shared/crypto/field-crypto.test.js
 import { assertEquals } from "node:assert/strict"; // Deno 兼容 node:assert，零依赖
-import {
-  decryptField,
-  encryptField,
-} from "../../../../src/shared/crypto/field-crypto.js";
+import { decryptField, encryptField } from "../../../../src/shared/crypto/field-crypto.js";
 
 Deno.test("encryptField/decryptField 往返一致", async () => {
   const key = "test-key-material";
@@ -191,11 +188,7 @@ Deno.test("check-x 反向：违规样本报错", async () => {
 
 ### 7.3 已踩过的坑（改基建时先看这里）
 
-
-
 ### 7.4 fixture 用例清单
-
-
 
 新治理/构建脚本**必须**带同样式的最小测试（正/负各至少一例），并在此表追加一行；
 `just test` 的 CI 会一并执行（`check-justfile` 相关用例依赖 CI 安装的 `just`）。

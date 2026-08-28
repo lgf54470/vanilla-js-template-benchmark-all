@@ -118,9 +118,7 @@ repository 代码无需修改即可在四个平台运行"的关键。
 ```js
 // repository.js
 async function listPage(db, workspaceId, { cursor, limit = 20 }) {
-  const params = cursor
-    ? [workspaceId, cursor.updatedAt, cursor.id, limit]
-    : [workspaceId, limit];
+  const params = cursor ? [workspaceId, cursor.updatedAt, cursor.id, limit] : [workspaceId, limit];
   const sql = cursor
     ? `SELECT * FROM notes_data WHERE workspace_id = ? AND (updated_at, id) < (?, ?) ORDER BY updated_at DESC, id DESC LIMIT ?`
     : `SELECT * FROM notes_data WHERE workspace_id = ? ORDER BY updated_at DESC, id DESC LIMIT ?`;

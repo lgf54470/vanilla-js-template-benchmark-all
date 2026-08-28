@@ -1,0 +1,46 @@
+{
+  "workspace": [
+    "./apps/web",
+    "./apps/server"
+  ],
+  "imports": {
+    "hono": "./packages/lib/hono/mod.js",
+    "hono/": "./packages/lib/hono/",
+    "@libsql/client/web": "./packages/lib/libsql-client/web.js",
+    "@contracts/": "./packages/contracts/",
+    "@contracts": "./packages/contracts/index.js",
+    "@shared/": "./apps/web/src/shared/",
+    "@server-shared/": "./apps/server/src/shared/"
+  },
+  "tasks": {
+    "dev": "deno run --env-file=.env --allow-net --allow-read --allow-write --allow-env --allow-run apps/server/src/platform-adapters/local.entry.js",
+    "fmt": "deno fmt",
+    "fmt:check": "deno fmt --check",
+    "lint": "deno lint && deno run --allow-read --allow-env --allow-run=deno,just,which scripts/run-checks.js",
+    "test": "deno test -A",
+    "db:migrate": "deno run --env-file=.env --allow-net --allow-read --allow-write --allow-env apps/server/src/shared/db/migrate.js",
+    "db:seed": "deno run --env-file=.env --allow-net --allow-read --allow-write --allow-env apps/server/src/shared/workspace/seed.js",
+    "build:web": "deno run --allow-read --allow-write scripts/build-web.js",
+    "generate:registry": "deno run --allow-read --allow-write scripts/generate-registry.js"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "singleQuote": false,
+    "proseWrap": "preserve",
+    "exclude": [
+      "dist/",
+      ".data/",
+      "packages/lib/hono/dist/"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "dist/",
+      ".data/",
+      "packages/lib/hono/dist/",
+      "packages/lib/libsql-client/"
+    ]
+  }
+}

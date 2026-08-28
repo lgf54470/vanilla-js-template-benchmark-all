@@ -1,0 +1,35 @@
+#!/usr/bin/env -S deno run --allow-read
+
+const commitFile = Deno.args[0];
+if (!commitFile) {
+  Deno.exit(0);
+}
+
+const content = await Deno.readTextFile(commitFile);
+const lines = content.split(/\r?\n/).filter(line => !line.startsWith("#"));
+const text = lines.join("\n").trim();
+
+if (!text) {
+  console.error("[commit-msg hook] Error: Commit message is empty.");
+  Deno.exit(1);
+}
+
+const firstLine = lines[0]?.trim() || "";
+const headerRegex = /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\(([a-z0-9-]+)\): .{1,50}$/;
+
+if (!headerRegex.test(firstLine)) {
+  console.error(`[commit-msg hook] Error: Commit title does not follow format: <type>(<scope>): <subject> (max 50 chars).`);
+  console.error(`Received: "${firstLine}"`);
+  Deno.exit(1);
+}
+
+// Check for at least one per-file change description in body: - <path>: <description>
+const fileLineRegex = /^- [\w./-]+: .+/;
+const hasFileDetail = lines.slice(1).some(line => fileLineRegex.test(line.trim()));
+
+if (!hasFileDetail) {
+  console.error(`[commit-msg hook] Error: Commit body must contain at least one line describing file-level changes in format: "- <path/to/file>: <description>"`);
+  Deno.exit(1);
+}
+
+Deno.exit(0);

@@ -53,9 +53,7 @@ export function createScopedRepository(db, table) {
           const cols = Object.keys(row);
           const placeholders = cols.map(() => "?").join(",");
           return db.execute(
-            `INSERT INTO ${table} (workspace_id, ${
-              cols.join(",")
-            }) VALUES (?, ${placeholders})`,
+            `INSERT INTO ${table} (workspace_id, ${cols.join(",")}) VALUES (?, ${placeholders})`,
             [workspaceId, ...cols.map((c) => row[c])],
           );
         },
@@ -137,8 +135,7 @@ sequenceDiagram
 // modules/notes/index.js
 import { registerCapability } from "@shared/core/module-registry.js";
 registerCapability("notes", {
-  deleteAllForWorkspace: (workspaceId) =>
-    notesService.deleteAllForWorkspace(workspaceId),
+  deleteAllForWorkspace: (workspaceId) => notesService.deleteAllForWorkspace(workspaceId),
 });
 ```
 
