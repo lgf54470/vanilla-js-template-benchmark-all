@@ -115,6 +115,20 @@
           "--font-heading-base",
           stack(pick(get(K.fontHeading), FONTS, FONTS[0])),
         );
+        /* 侧栏外观早期写入（与 appearance.js applySidebarChrome 一致）：
+         * 持久化宽度 + 变体，防首帧侧栏宽度/形态闪变 */
+        var width = parseInt(get("pref:sidebar-width"), 10);
+        if (width >= 160 && width <= 480) {
+          el.style.setProperty("--sidebar-width", width + "px");
+        }
+        var variant = pick(
+          get("pref:sidebar-variant"),
+          ["sidebar", "floating", "inset"],
+          "sidebar",
+        );
+        if (variant !== "sidebar") {
+          el.setAttribute("data-sidebar-variant", variant);
+        }
       })();
     </script>
     <link rel="stylesheet" href="/src/style.css" />

@@ -37,6 +37,8 @@ export const STORAGE_KEYS = {
   sidebarWidth: "pref:sidebar-width",
   /** 侧栏变体（sidebar | floating | inset） */
   sidebarVariant: "pref:sidebar-variant",
+  /** 侧栏折叠模式（offcanvas | icon | none） */
+  sidebarCollapsible: "pref:sidebar-collapsible",
 };
 
 /**

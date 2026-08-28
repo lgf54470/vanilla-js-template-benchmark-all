@@ -240,10 +240,114 @@ export function initAppearance() {
     );
     systemListener = null;
   }
+  applySidebarChrome();
+
   if (prefs.theme === "system" && globalThis.matchMedia) {
     const mq = globalThis.matchMedia("(prefers-color-scheme: dark)");
     systemListener = () => applyAppearance(getStoredAppearance());
     mq.addEventListener("change", systemListener);
   }
   return prefs;
+}
+
+/* ── 侧栏外观：宽度 / 变体 / 折叠模式（docs/Layout.md §1/§1.1、ARCHITECTURE §5.2）──
+ * 三项均为客户端偏好（pref:* 键），与主题偏好同一引擎维护；
+ * 变更后广播 document 级 "sidebar-change"，壳层据此重写网格列与 ds-sidebar 属性。 */
+
+/** 拖拽调宽范围（px，ARCHITECTURE §5.2 SIDEBAR_WIDTH_LIMITS） */
+export const SIDEBAR_WIDTH_LIMITS = { min: 160, max: 480 };
+
+/** 展开态默认宽度（tokens/sidebar.css 的 16rem） */
+export const DEFAULT_SIDEBAR_WIDTH = 256;
+
+/** 侧栏变体（sidebar 贴边 / floating 悬浮 / inset 内嵌） */
+export const SIDEBAR_VARIANTS = ["sidebar", "floating", "inset"];
+
+/** 折叠模式（offcanvas 覆盖隐藏 / icon 图标条 / none 不可折叠） */
+export const SIDEBAR_COLLAPSIBLES = ["offcanvas", "icon", "none"];
+
+function clampWidth(px) {
+  const n = Math.round(Number(px));
+  if (!Number.isFinite(n)) return DEFAULT_SIDEBAR_WIDTH;
+  return Math.min(
+    SIDEBAR_WIDTH_LIMITS.max,
+    Math.max(SIDEBAR_WIDTH_LIMITS.min, n),
+  );
+}
+
+function readStorage(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* 隐私模式等场景下静默跳过持久化 */
+  }
+}
+
+/** 当前侧栏宽度（px，持久化值越界时收敛到限制区间）。 */
+export function getSidebarWidth() {
+  return clampWidth(readStorage(STORAGE_KEYS.sidebarWidth));
+}
+
+/**
+ * 持久化并应用侧栏宽度（拖拽 pointerup 时调用，Layout.md §1.1）。
+ * 写 <html> 内联 --sidebar-width（覆盖 tokens/sidebar.css 的 16rem），
+ * 并广播 "sidebar-change" 让壳层同步 --sidebar-current-width。
+ * @param {number} px
+ */
+export function setSidebarWidth(px) {
+  const width = clampWidth(px);
+  writeStorage(STORAGE_KEYS.sidebarWidth, String(width));
+  document.documentElement.style.setProperty("--sidebar-width", `${width}px`);
+  document.dispatchEvent(
+    new CustomEvent("sidebar-change", { detail: { width } }),
+  );
+  return width;
+}
+
+/** 当前侧栏变体（默认 sidebar）。 */
+export function getSidebarVariant() {
+  const v = readStorage(STORAGE_KEYS.sidebarVariant);
+  return SIDEBAR_VARIANTS.includes(v) ? v : "sidebar";
+}
+
+/** 应用侧栏变体：<html data-sidebar-variant>（壳层 CSS 据此卡片化）。 */
+export function setSidebarVariant(variant) {
+  const v = SIDEBAR_VARIANTS.includes(variant) ? variant : "sidebar";
+  writeStorage(STORAGE_KEYS.sidebarVariant, v);
+  document.documentElement.setAttribute("data-sidebar-variant", v);
+  document.dispatchEvent(
+    new CustomEvent("sidebar-change", { detail: { variant: v } }),
+  );
+  return v;
+}
+
+/** 当前折叠模式（默认 icon）。 */
+export function getSidebarCollapsible() {
+  const v = readStorage(STORAGE_KEYS.sidebarCollapsible);
+  return SIDEBAR_COLLAPSIBLES.includes(v) ? v : "icon";
+}
+
+/** 应用折叠模式（壳层把值反射到 <ds-sidebar collapsible>）。 */
+export function setSidebarCollapsible(mode) {
+  const v = SIDEBAR_COLLAPSIBLES.includes(mode) ? mode : "icon";
+  writeStorage(STORAGE_KEYS.sidebarCollapsible, v);
+  document.dispatchEvent(
+    new CustomEvent("sidebar-change", { detail: { collapsible: v } }),
+  );
+  return v;
+}
+
+/** 把三项侧栏偏好一次性写到 <html>（initAppearance 与 PREPAINT 各自调用一次）。 */
+export function applySidebarChrome() {
+  const el = document.documentElement;
+  el.style.setProperty("--sidebar-width", `${getSidebarWidth()}px`);
+  el.setAttribute("data-sidebar-variant", getSidebarVariant());
 }

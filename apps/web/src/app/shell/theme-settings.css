@@ -1,0 +1,143 @@
+/**
+ * theme-settings.css — 主题设置面板（light DOM，经 ensurePageStyles 注入）。
+ * 面板内按钮一律重置 UA 样式（文档级 reset 不保证覆盖 button 全部默认）；
+ * 色板与磁贴预览依赖 base-xxx 与 chart-xxx 调色板类（全局 palettes-*.css）。
+ */
+
+ds-theme-settings {
+  position: relative;
+  display: inline-flex;
+}
+
+/* ── 面板容器 ── */
+.ts-panel {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: calc(100% + var(--space-2));
+  inline-size: 19rem;
+  max-block-size: min(32rem, 70vh);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  z-index: var(--z-dropdown);
+}
+
+/* ── 分组 ── */
+.ts-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ts-section + .ts-section {
+  border-block-start: 1px solid var(--color-border);
+  padding-block-start: var(--space-3);
+}
+
+.ts-label {
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+}
+
+.ts-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+/* ── 文本选项 ── */
+.ts-opt {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.ts-opt:hover {
+  background: var(--color-muted);
+}
+
+.ts-opt[data-selected="true"] {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── 基色圆点（base-<name> 类提供 --primary） ── */
+.ts-swatch {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-block;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.ts-swatch[data-selected="true"] {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* ── 图表色磁贴（chart-<name> 类提供 --chart-1..5） ── */
+.ts-chart-tile {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  cursor: pointer;
+}
+
+.ts-chart-tile[data-selected="true"] {
+  border-color: var(--color-primary);
+  outline: 1px solid var(--color-primary);
+}
+
+.ts-chart {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.125rem;
+}
+
+.ts-bar {
+  display: inline-block;
+  inline-size: 0.25rem;
+  border-radius: var(--radius-sm);
+}
+
+.ts-bar:nth-child(1) {
+  background: var(--chart-1);
+}
+.ts-bar:nth-child(2) {
+  background: var(--chart-2);
+}
+.ts-bar:nth-child(3) {
+  background: var(--chart-3);
+}
+.ts-bar:nth-child(4) {
+  background: var(--chart-4);
+}
+.ts-bar:nth-child(5) {
+  background: var(--chart-5);
+}
