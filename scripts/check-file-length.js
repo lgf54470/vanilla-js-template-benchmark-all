@@ -4,7 +4,7 @@ const ROOT = new URL("..", import.meta.url);
 const MAX_LINES = 500;
 const EXCLUDED_DIRS = new Set([
   ".git",
-  "packages/lib",
+  "lib", // vendored 依赖（packages/lib）——walk 按目录名匹配
   "dist",
   "coverage",
   ".data",

@@ -12,7 +12,7 @@ import { walk } from "./_walk.js";
 const ROOT = new URL("..", import.meta.url);
 const SKIP_DIRS = new Set([
   ".git",
-  "packages/lib",
+  "lib", // vendored 依赖（packages/lib）——walk 按目录名匹配
   "dist",
   "coverage",
   ".data",
