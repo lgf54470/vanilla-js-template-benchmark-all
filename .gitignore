@@ -35,6 +35,8 @@ size-report.json
 # 测试 / 临时 —— 见 docs/Testing.md §4（.e2e-profile 为 CDP 冒烟测试用的浏览器 profile）
 # ============================================================
 tmp/
+# vendoring 临时下载/解包目录（产物已固化进 packages/lib/，见 docs/Vendoring.md）
+.vendoring-tmp/
 *.log
 .e2e-profile/
 *.bak

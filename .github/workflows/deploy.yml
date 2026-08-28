@@ -1,0 +1,22 @@
+name: Deploy
+
+# 多平台部署（docs/Deployment.md）：手动选择目标，或按分支自动。
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 部署目标
+        type: choice
+        options: [cloudflare, vercel, deno, docker]
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: 2.x
+      # 各目标的具体部署步骤随 M2 平台入口落地后填充。
+      - run: echo "deploy ${{ inputs.target }}: M2 落地"

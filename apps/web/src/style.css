@@ -1,0 +1,5 @@
+/* 入口样式（ARCHITECTURE.md §3）：M1 起仅 @import shared/styles/index.css + 页面容器。 */
+body {
+  font-family: system-ui, sans-serif;
+  margin: 2rem;
+}

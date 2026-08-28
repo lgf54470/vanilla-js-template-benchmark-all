@@ -1,0 +1,36 @@
+{
+  "workspace": [
+    "packages/contracts",
+    "apps/web",
+    "apps/server"
+  ],
+  "imports": {
+    "hono": "./packages/lib/hono/mod.js",
+    "hono/cloudflare-workers": "./packages/lib/hono/cloudflare-workers.js",
+    "hono/deno": "./packages/lib/hono/deno.js",
+    "hono/vercel": "./packages/lib/hono/vercel.js",
+    "hono/": "./packages/lib/hono/",
+    "@libsql/client/web": "./packages/lib/libsql-client/web.js",
+    "@contracts/": "./packages/contracts/"
+  },
+  "tasks": {
+    "dev": "deno run -A apps/server/src/platform-adapters/local.entry.js",
+    "smoke-vendor": "deno run -A scripts/smoke-vendor.js"
+  },
+  "fmt": {
+    "exclude": [
+      "packages/lib/",
+      ".vendoring-tmp/",
+      "docs/",
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "README.md"
+    ]
+  },
+  "lint": {
+    "exclude": [
+      "packages/lib/",
+      ".vendoring-tmp/"
+    ]
+  }
+}

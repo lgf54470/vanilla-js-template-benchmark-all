@@ -1,0 +1,47 @@
+# vanilla-js-template — 任务运行器（全部基于 Deno，AGENTS.md「常用命令」）
+# Windows 下 just 会调用 deno 的 .cmd 后缀由 just 自动处理。
+
+default:
+    @just --list
+
+# 本地开发（Deno + SQLite；M2 接入 --env-file 与数据库）
+dev:
+    deno run -A apps/server/src/platform-adapters/local.entry.js
+
+# 格式化（vendored 源码已通过根 deno.json 排除）
+fmt:
+    deno fmt
+
+# 仅检查格式（CI 第一步）
+fmt-check:
+    deno fmt --check
+
+# deno lint + 治理脚本（治理脚本随 M7 接入）
+lint:
+    deno lint
+
+# 全量测试
+test:
+    deno test -A
+
+# 执行数据库迁移（M2 落地）
+db-migrate:
+    @echo "db-migrate: M2 落地"
+
+# 组装前端静态产物 dist/web（平台发布用，M2 落地）
+build-web:
+    @echo "build-web: M2 落地"
+
+# vendored 依赖冒烟（docs/Vendoring.md）
+smoke-vendor:
+    deno run -A scripts/smoke-vendor.js
+
+# 部署（runbook 见 docs/Deployment.md；各入口 M2 落地）
+deploy-cloudflare:
+    @echo "deploy-cloudflare: M2 落地"
+deploy-vercel:
+    @echo "deploy-vercel: M2 落地"
+deploy-deno:
+    @echo "deploy-deno: M2 落地"
+deploy-docker:
+    @echo "deploy-docker: M2 落地"
