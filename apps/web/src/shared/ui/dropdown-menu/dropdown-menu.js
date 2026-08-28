@@ -4,23 +4,30 @@ import { isComposedClickInside } from "../../lib/dom.js";
 const css = `
 :host {
   position: relative;
-  display: inline-block;
+  display: block;
+  width: 100%;
+}
+.trigger-container {
+  width: 100%;
+  cursor: pointer;
 }
 .menu-panel {
   position: absolute;
-  top: 100%;
+  top: calc(100% + var(--space-1));
   left: 0;
-  z-index: var(--z-dropdown);
-  min-width: 12rem;
-  margin-top: var(--space-1);
+  z-index: var(--z-dropdown, 50);
+  min-width: 14rem;
+  max-width: 20rem;
+  width: 100%;
   background-color: var(--color-popover);
   color: var(--color-popover-fg);
   border-radius: var(--ds-popover-radius, var(--radius-lg));
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   padding: var(--space-1);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 .menu-panel[hidden] {
   display: none !important;
@@ -31,9 +38,7 @@ const css = `
 }
 .menu-panel--up {
   top: auto;
-  bottom: 100%;
-  margin-top: 0;
-  margin-bottom: var(--space-1);
+  bottom: calc(100% + var(--space-1));
 }
 `;
 
