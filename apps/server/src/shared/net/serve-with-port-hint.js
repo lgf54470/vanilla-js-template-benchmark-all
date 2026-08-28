@@ -2,7 +2,7 @@ export function serveWithPortHint(options, fetchHandler) {
   const port = options.port || 8787;
 
   try {
-    Deno.serve(options, fetchHandler);
+    return Deno.serve(options, fetchHandler);
   } catch (err) {
     if (err.name === "AddrInUse" || err.message?.includes("address already in use")) {
       console.error(`\n[ERROR] Port ${port} is already in use.`);
