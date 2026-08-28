@@ -22,7 +22,8 @@
       "docs",
       "dist",
       "coverage",
-      ".data"
+      ".data",
+      ".workbuddy"
     ]
   },
   "lint": {
@@ -30,7 +31,8 @@
       "packages/lib",
       "dist",
       "coverage",
-      ".data"
+      ".data",
+      ".workbuddy"
     ]
   },
   "tasks": {
