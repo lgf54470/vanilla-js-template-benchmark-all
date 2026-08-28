@@ -7,8 +7,6 @@
 //   3. 不允许空字符串翻译。
 // 经 scripts/run-checks.js 自动接入 `just lint`。
 
-import { walk } from "./_walk.js";
-
 const ROOT = new URL("..", import.meta.url);
 const I18N_GLOB_DIRS = [
   "apps/web/src/shared/i18n",

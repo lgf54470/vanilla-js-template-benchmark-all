@@ -38,7 +38,7 @@ async function login(app) {
 }
 
 /** 统一请求辅助：auth + workspace 头始终保留，body 存在时附 JSON 头 */
-async function api(
+function api(
   app,
   path,
   { token, workspaceId = "ws_default", method = "GET", body } = {},
@@ -73,7 +73,7 @@ Deno.test("notes: CRUD 全链路 + tag 过滤", async () => {
 
   // 列表
   res = await api(app, "/api/notes", { token });
-  let list = (await res.json()).data;
+  const list = (await res.json()).data;
   assert.equal(list.length, 1);
 
   // 按 tag 过滤

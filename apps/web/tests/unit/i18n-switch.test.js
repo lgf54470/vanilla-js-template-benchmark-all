@@ -29,7 +29,7 @@ const DICTS = {
 
 function installFetchStub({ failModules = false } = {}) {
   const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url) => {
+  globalThis.fetch = (url) => {
     const href = String(url);
     if (href.includes("/shared/i18n/")) {
       const m = href.match(/i18n\/([\w-]+)\.json/);

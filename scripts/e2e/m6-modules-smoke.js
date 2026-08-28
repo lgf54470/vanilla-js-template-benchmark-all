@@ -33,7 +33,7 @@ async function nav(route) {
 }
 
 /** 导航到模块并等其标题渲染，返回标题文本 */
-async function gotoModule(route, titleKeyExpr) {
+async function gotoModule(route, _titleKeyExpr) {
   await nav(route);
   await waitFor(
     `[...document.querySelectorAll(".page-title,.settings-title,.notes-title")].some(el => el.textContent.trim() !== "")`,

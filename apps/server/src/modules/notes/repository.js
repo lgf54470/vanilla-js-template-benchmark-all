@@ -1,8 +1,9 @@
 // apps/server/src/modules/notes/repository.js — 笔记存取
 //
-// 唯一入口 createScopedRepository(db, "notes_note").forWorkspace(id)：
-// 结构性保证每条 SQL 都带 workspace_id 过滤（Workspace.md §3，裸查询被
-// check-workspace-scope 治理脚本兜底拦截）。
+// 全部业务表访问都经 createScopedRepository(db, "notes_note").forWorkspace(id)：
+// 结构性保证每条 SQL 都带 workspace_id 过滤（Workspace.md §3；裸业务表 SQL 由
+// check-workspace-scope 治理脚本兜底拦截）。tags 聚合在内存做（工作空间内
+// 笔记量级小，避免引入绕过 scoped-repo 的裸查询）。
 
 import { createScopedRepository } from "../../shared/db/scoped-repository.js";
 
@@ -24,14 +25,17 @@ export function createNotesRepository(db) {
           }
           return repo.list("ORDER BY updated_at DESC");
         },
-        listTags() {
-          // 标签聚合（去重 + 按使用次数倒序），仍带 workspace 过滤
-          return db.query(
-            `SELECT tag, COUNT(*) AS count FROM notes_note
-             WHERE workspace_id = ? AND tag <> '' GROUP BY tag
-             ORDER BY count DESC, tag ASC`,
-            [workspaceId],
-          );
+        /** 标签聚合：拉取本工作空间全部笔记后在内存统计（依旧 workspace 隔离） */
+        async listTags() {
+          const rows = await repo.list("ORDER BY updated_at DESC");
+          const count = new Map();
+          for (const row of rows) {
+            if (!row.tag) continue;
+            count.set(row.tag, (count.get(row.tag) ?? 0) + 1);
+          }
+          return [...count.entries()]
+            .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+            .map(([tag, n]) => ({ tag, count: n }));
         },
         findById: repo.findById,
         insert: repo.insert,
