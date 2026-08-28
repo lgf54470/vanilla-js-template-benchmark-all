@@ -23,8 +23,16 @@ button {
 svg {
   display: inline-block;
   vertical-align: middle;
-  fill: currentColor;
   flex-shrink: 0;
+}
+svg.icon {
+  width: 1rem;
+  height: 1rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 [hidden] {
   display: none !important;
@@ -73,7 +81,7 @@ export function attachStyles(shadowRoot, componentCssText = "") {
 }
 
 export function createIcon(name, sizeClass = "") {
-  return `<svg class="icon ${sizeClass}" width="16" height="16" aria-hidden="true"><use href="/icons.svg#${name}"></use></svg>`;
+  return `<svg class="icon ${sizeClass}" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="/icons.svg#${name}"></use></svg>`;
 }
 
 export function escapeHtml(str) {

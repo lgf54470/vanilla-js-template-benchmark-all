@@ -1,6 +1,15 @@
-.app-shell {
+app-shell {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+ds-sidebar-provider.app-shell {
   display: grid;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: var(--sidebar-current-width, 16rem) 1fr;
+  grid-template-rows: 100%;
+  grid-template-areas: 'sidebar inset';
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -9,11 +18,14 @@
 }
 
 .app-shell__resize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--sidebar-current-width, 16rem) - 2px);
   width: 4px;
   cursor: col-resize;
   background-color: transparent;
-  z-index: 10;
-  transition: none;
+  z-index: 50;
   user-select: none;
 }
 
@@ -22,6 +34,7 @@
 }
 
 .app-shell__inset {
+  grid-area: inset;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -30,8 +43,8 @@
 }
 
 .app-shell__header {
-  height: var(--header-height, 3rem);
-  min-height: var(--header-height, 3rem);
+  height: var(--header-height, 3.5rem);
+  min-height: var(--header-height, 3.5rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -56,14 +69,15 @@
 
 .app-shell__main {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: var(--space-4);
+  padding: var(--space-6);
   background-color: var(--color-bg);
 }
 
 @media (max-width: 767px) {
-  .app-shell {
+  ds-sidebar-provider.app-shell {
     display: flex;
     flex-direction: column;
   }

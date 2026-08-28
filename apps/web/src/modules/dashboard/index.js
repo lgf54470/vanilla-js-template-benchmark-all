@@ -13,7 +13,6 @@ export default {
     const token = localStorage.getItem("auth:token") || "";
     const headers = { "x-auth-password": token, "x-workspace-id": workspaceId };
 
-    // Fetch counts in parallel
     let notesCount = 0;
     let todoCount = 0;
     let bookmarksCount = 0;
@@ -46,48 +45,55 @@ export default {
             <h1 class="page-title">${t("dashboard.welcome")}</h1>
             <p class="page-description">${t("dashboard.description")}</p>
           </div>
-          <ds-workspace-badge name="当前空间"></ds-workspace-badge>
         </div>
 
-        <div class="card-grid">
+        <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: var(--space-4);">
           <ds-card>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: var(--text-sm); color: var(--color-fg-muted);">${
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+              <span style="font-size: var(--text-sm); font-weight: 500; color: var(--color-fg-muted);">${
       t("dashboard.notesCount")
     }</span>
-              <ds-badge variant="primary">${notesCount}</ds-badge>
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: var(--color-muted); color: var(--color-primary);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="/icons.svg#file-text"></use></svg>
+              </div>
             </div>
-            <div style="font-size: var(--text-3xl); font-weight: 700; margin-top: var(--space-2);">${notesCount}</div>
+            <div style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-fg);">${notesCount}</div>
           </ds-card>
 
           <ds-card>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: var(--text-sm); color: var(--color-fg-muted);">${
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+              <span style="font-size: var(--text-sm); font-weight: 500; color: var(--color-fg-muted);">${
       t("dashboard.todoCount")
     }</span>
-              <ds-badge variant="success">${todoCount}</ds-badge>
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: var(--color-muted); color: var(--color-success);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="/icons.svg#check-square"></use></svg>
+              </div>
             </div>
-            <div style="font-size: var(--text-3xl); font-weight: 700; margin-top: var(--space-2);">${todoCount}</div>
+            <div style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-fg);">${todoCount}</div>
           </ds-card>
 
           <ds-card>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: var(--text-sm); color: var(--color-fg-muted);">${
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+              <span style="font-size: var(--text-sm); font-weight: 500; color: var(--color-fg-muted);">${
       t("dashboard.bookmarksCount")
     }</span>
-              <ds-badge variant="warning">${bookmarksCount}</ds-badge>
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: var(--color-muted); color: var(--color-warning);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="/icons.svg#bookmark"></use></svg>
+              </div>
             </div>
-            <div style="font-size: var(--text-3xl); font-weight: 700; margin-top: var(--space-2);">${bookmarksCount}</div>
+            <div style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-fg);">${bookmarksCount}</div>
           </ds-card>
 
           <ds-card>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: var(--text-sm); color: var(--color-fg-muted);">${
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2);">
+              <span style="font-size: var(--text-sm); font-weight: 500; color: var(--color-fg-muted);">${
       t("dashboard.passwordsCount")
     }</span>
-              <ds-badge variant="default">${passwordsCount}</ds-badge>
+              <div style="width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); background: var(--color-muted); color: var(--color-primary);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="/icons.svg#key"></use></svg>
+              </div>
             </div>
-            <div style="font-size: var(--text-3xl); font-weight: 700; margin-top: var(--space-2);">${passwordsCount}</div>
+            <div style="font-size: var(--text-2xl); font-weight: 700; color: var(--color-fg);">${passwordsCount}</div>
           </ds-card>
         </div>
 
@@ -105,8 +111,10 @@ export default {
 
         <ds-card>
           <div style="display: flex; align-items: center; gap: var(--space-2);">
-            <span style="display: inline-block; width: 0.5rem; height: 0.5rem; border-radius: var(--radius-full); background-color: var(--color-success);"></span>
-            <span style="font-weight: 600;">${t("dashboard.systemStatus")}:</span>
+            <span style="display: inline-block; width: 0.625rem; height: 0.625rem; border-radius: var(--radius-full); background-color: var(--color-success);"></span>
+            <span style="font-weight: 600; font-size: var(--text-sm);">${
+      t("dashboard.systemStatus")
+    }:</span>
             <span style="color: var(--color-fg-muted); font-size: var(--text-sm);">${
       t("dashboard.runningHealthy")
     }</span>
@@ -123,7 +131,5 @@ export default {
     });
   },
 
-  unmount() {
-    // Cleanup if any
-  },
+  unmount() {},
 };

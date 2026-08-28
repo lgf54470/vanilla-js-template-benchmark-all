@@ -1,7 +1,6 @@
 import {
   BASE_COLORS,
   CHART_COLORS,
-  FONTS,
   SIDEBAR_WIDTH_LIMITS,
   STORAGE_KEYS,
   STYLES,
@@ -13,12 +12,16 @@ const DEFAULT_STYLE = "nova";
 const DEFAULT_CHART_COLOR = "chart-1";
 const DEFAULT_THEME = "system";
 const DEFAULT_RADIUS = "0.625rem";
-const DEFAULT_FONT_SANS = FONTS[0].value;
+const DEFAULT_FONT_SANS = "Inter Variable, sans-serif";
 const DEFAULT_FONT_HEADING = "inherit";
 const DEFAULT_SIDEBAR_VARIANT = "sidebar";
 const DEFAULT_SIDEBAR_COLLAPSIBLE = "icon";
+const DEFAULT_SIDEBAR_WIDTH = 256;
+
+let mediaQueryListener = null;
 
 function getStorage(key, fallback) {
+  if (typeof localStorage === "undefined") return fallback;
   try {
     const val = localStorage.getItem(key);
     return val !== null ? val : fallback;
@@ -28,24 +31,20 @@ function getStorage(key, fallback) {
 }
 
 function setStorage(key, value) {
+  if (typeof localStorage === "undefined") return;
   try {
-    if (value === null || value === undefined) {
-      localStorage.removeItem(key);
-    } else {
-      localStorage.setItem(key, String(value));
-    }
+    localStorage.setItem(key, value);
   } catch {
-    // Ignore localStorage errors
+    // Ignore quota/access errors
   }
 }
-
-let mediaQueryListener = null;
 
 export function getTheme() {
   return getStorage(STORAGE_KEYS.THEME, DEFAULT_THEME);
 }
 
 export function setTheme(theme) {
+  if (!["system", "light", "dark"].includes(theme)) return;
   setStorage(STORAGE_KEYS.THEME, theme);
   applyAppearance();
 }
@@ -56,10 +55,9 @@ export function getBaseColor() {
 }
 
 export function setBaseColor(color) {
-  if (BASE_COLORS.includes(color)) {
-    setStorage(STORAGE_KEYS.BASE_COLOR, color);
-    applyAppearance();
-  }
+  if (!BASE_COLORS.includes(color)) return;
+  setStorage(STORAGE_KEYS.BASE_COLOR, color);
+  applyAppearance();
 }
 
 export function getStyle() {
@@ -68,10 +66,9 @@ export function getStyle() {
 }
 
 export function setStyle(style) {
-  if (STYLES.includes(style)) {
-    setStorage(STORAGE_KEYS.STYLE, style);
-    applyAppearance();
-  }
+  if (!STYLES.includes(style)) return;
+  setStorage(STORAGE_KEYS.STYLE, style);
+  applyAppearance();
 }
 
 export function getChartColor() {
@@ -80,10 +77,9 @@ export function getChartColor() {
 }
 
 export function setChartColor(chart) {
-  if (CHART_COLORS.includes(chart)) {
-    setStorage(STORAGE_KEYS.CHART_COLOR, chart);
-    applyAppearance();
-  }
+  if (!CHART_COLORS.includes(chart)) return;
+  setStorage(STORAGE_KEYS.CHART_COLOR, chart);
+  applyAppearance();
 }
 
 export function getRadius() {
@@ -91,8 +87,7 @@ export function getRadius() {
 }
 
 export function setRadius(radius) {
-  const val = typeof radius === "number" ? `${radius}rem` : radius;
-  setStorage(STORAGE_KEYS.RADIUS, val);
+  setStorage(STORAGE_KEYS.RADIUS, radius);
   applyAppearance();
 }
 
@@ -115,26 +110,34 @@ export function setFontHeading(font) {
 }
 
 export function getSidebarVariant() {
-  return getStorage(STORAGE_KEYS.SIDEBAR_VARIANT, DEFAULT_SIDEBAR_VARIANT);
+  const val = getStorage(STORAGE_KEYS.SIDEBAR_VARIANT, DEFAULT_SIDEBAR_VARIANT);
+  return ["sidebar", "floating", "inset"].includes(val) ? val : DEFAULT_SIDEBAR_VARIANT;
 }
 
 export function setSidebarVariant(variant) {
+  if (!["sidebar", "floating", "inset"].includes(variant)) return;
   setStorage(STORAGE_KEYS.SIDEBAR_VARIANT, variant);
   applyAppearance();
 }
 
 export function getSidebarCollapsible() {
-  return getStorage(STORAGE_KEYS.SIDEBAR_COLLAPSIBLE, DEFAULT_SIDEBAR_COLLAPSIBLE);
+  const val = getStorage(STORAGE_KEYS.SIDEBAR_COLLAPSIBLE, DEFAULT_SIDEBAR_COLLAPSIBLE);
+  return ["icon", "offcanvas", "none"].includes(val) ? val : DEFAULT_SIDEBAR_COLLAPSIBLE;
 }
 
-export function setSidebarCollapsible(mode) {
-  setStorage(STORAGE_KEYS.SIDEBAR_COLLAPSIBLE, mode);
+export function setSidebarCollapsible(collapsible) {
+  if (!["icon", "offcanvas", "none"].includes(collapsible)) return;
+  setStorage(STORAGE_KEYS.SIDEBAR_COLLAPSIBLE, collapsible);
   applyAppearance();
 }
 
 export function getSidebarWidth() {
-  const val = Number(getStorage(STORAGE_KEYS.SIDEBAR_WIDTH, SIDEBAR_WIDTH_LIMITS.default));
-  return isNaN(val) ? SIDEBAR_WIDTH_LIMITS.default : val;
+  const val = Number(getStorage(STORAGE_KEYS.SIDEBAR_WIDTH, DEFAULT_SIDEBAR_WIDTH));
+  if (isNaN(val)) return DEFAULT_SIDEBAR_WIDTH;
+  return Math.max(
+    SIDEBAR_WIDTH_LIMITS.min,
+    Math.min(SIDEBAR_WIDTH_LIMITS.max, val),
+  );
 }
 
 export function setSidebarWidth(width) {
@@ -226,6 +229,13 @@ export function applyAppearance() {
   html.style.setProperty("--radius", state.radius);
   html.style.setProperty("--font-sans-base", state.fontSans);
   html.style.setProperty("--font-heading-base", state.fontHeading);
+
+  // 6. Sidebar Width Variables
+  html.style.setProperty("--sidebar-width", `${state.sidebarWidth}px`);
+  html.style.setProperty(
+    "--sidebar-current-width",
+    state.sidebarOpen ? `${state.sidebarWidth}px` : "var(--sidebar-width-icon, 3rem)",
+  );
 
   eventBus.emit("appearance:changed", state);
 }

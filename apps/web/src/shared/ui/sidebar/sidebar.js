@@ -8,7 +8,9 @@ import "../tooltip/tooltip.js";
 // --- Provider ---
 const providerCss = `
 :host {
-  display: contents;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 `;
 
@@ -97,6 +99,7 @@ const sidebarCss = `
   height: 100%;
   grid-area: sidebar;
   position: relative;
+  width: var(--sidebar-current-width, 16rem);
 }
 .sidebar {
   display: flex;
@@ -105,14 +108,14 @@ const sidebarCss = `
   background-color: var(--color-sidebar);
   color: var(--color-sidebar-fg);
   border-right: 1px solid var(--color-sidebar-border);
-  width: var(--sidebar-width);
+  width: 100%;
   box-sizing: border-box;
   overflow: hidden;
 }
-:host([data-state="collapsed"]) .sidebar {
-  width: var(--sidebar-width-icon);
+:host([data-state="collapsed"]) {
+  width: var(--sidebar-width-icon, 3rem);
 }
-:host([data-collapsible="offcanvas"][data-state="collapsed"]) .sidebar {
+:host([data-collapsible="offcanvas"][data-state="collapsed"]) {
   display: none;
 }
 :host([data-variant="floating"]) .sidebar {
@@ -338,10 +341,10 @@ const menuButtonCss = `
 .menu-btn {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   width: 100%;
-  height: 2rem;
-  padding-inline: var(--space-2);
+  height: 2.25rem;
+  padding-inline: var(--space-3);
   border-radius: var(--ds-sidebar-item-radius, var(--radius-md));
   font-size: var(--text-sm);
   color: var(--color-sidebar-fg);
@@ -358,7 +361,7 @@ const menuButtonCss = `
 }
 :host([data-active="true"]) .menu-btn {
   background-color: var(--color-sidebar-accent);
-  color: var(--color-sidebar-primary);
+  color: var(--color-sidebar-primary, var(--color-primary));
   font-weight: 600;
 }
 .menu-btn:focus-visible {
@@ -366,8 +369,8 @@ const menuButtonCss = `
   outline-offset: 1px;
 }
 .icon {
-  width: 1rem;
-  height: 1rem;
+  width: 1.125rem;
+  height: 1.125rem;
   flex-shrink: 0;
 }
 .label {
@@ -473,7 +476,7 @@ const subMenuItemCss = `
   background-color: var(--color-sidebar-accent);
 }
 :host([data-active="true"]) .sub-item-btn {
-  color: var(--color-sidebar-primary);
+  color: var(--color-sidebar-primary, var(--color-primary));
   font-weight: 600;
   background-color: var(--color-sidebar-accent);
 }
