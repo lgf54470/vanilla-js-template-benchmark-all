@@ -30,7 +30,7 @@
 | `<ds-segmented-control>`              | 胶囊分段控件，`<ds-theme-switch>` 与会话时长选择器复用 |
 | `<ds-dialog>` / `<ds-confirm-dialog>` | 替代 `alert/confirm`                                   |
 | `<ds-sheet>`                          | 抽屉，移动端 Sidebar 与通用侧滑面板复用                |
-| `<ds-toast>`                          | 替代 `alert`，全局单例挂载于 `<body>` 末尾             |
+| `<ds-toast-host>`（`toast.*` API）    | 替代 `alert`，全局单例挂载于 `<body>` 末尾             |
 | `<ds-dropdown-menu>`                  | Dropdown/Menu，`WorkspaceSwitcher`/`NavUser` 均基于它  |
 | `<ds-card>`                           | 卡片容器                                               |
 | `<ds-badge>`                          | 状态徽标                                               |
@@ -188,9 +188,10 @@ teamItems 结构）：
   `--color-danger`），返回 Promise
   供命令式调用：`await confirmDialog({ title, description })`（命名避开全局
   `confirm()`，硬规则 4 的治理脚本可据此严格禁止裸 `confirm(`）。
-- `<ds-toast>`：全局单例（`shared/ui/toast/toast-host.js` 挂载一次），提供
-  `toast.success(msg)` / `toast.error(msg)` / `toast.info(msg)` 命令式
-  API，内部渲染队列，`--z-toast` 层级永远最高。
+- `<ds-toast-host>`：全局单例元素（`shared/ui/toast/toast-host.js` 挂载一次），
+  通过命令式 `toast.success(msg)` / `toast.error(msg)` / `toast.info(msg)`
+  触发（不挂在页面上，由 `toast.js` 惰性创建），内部维护渲染队列，
+  `--z-toast` 层级永远最高。
 
 ## 9. 无障碍要求速查
 
