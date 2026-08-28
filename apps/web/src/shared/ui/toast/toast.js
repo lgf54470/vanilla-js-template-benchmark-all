@@ -5,7 +5,7 @@ const css = `
   position: fixed;
   bottom: var(--space-4);
   right: var(--space-4);
-  z-index: var(--z-toast);
+  z-index: var(--z-toast, 60);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
@@ -38,7 +38,7 @@ const css = `
 .toast-close:hover { color: var(--color-fg); }
 `;
 
-export class DsToastHost extends HTMLElement {
+export class DsToast extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -69,11 +69,11 @@ export class DsToastHost extends HTMLElement {
     const listHtml = this.toasts.map((t) => {
       let iconName = "info";
       if (t.type === "success") iconName = "circle-check";
-      if (t.type === "error") iconName = "alert-circle";
+      else if (t.type === "error") iconName = "alert-circle";
 
       return `
         <div class="toast-item" data-id="${t.id}">
-          <span class="toast-icon toast-icon--${t.type}">${createIcon(iconName)}</span>
+          <span class="toast-icon--${t.type}">${createIcon(iconName)}</span>
           <span class="toast-msg">${t.message}</span>
           <span class="toast-close" data-id="${t.id}">${createIcon("x")}</span>
         </div>
@@ -92,17 +92,19 @@ export class DsToastHost extends HTMLElement {
   }
 }
 
+export class DsToastHost extends DsToast {}
+
+if (!customElements.get("ds-toast")) customElements.define("ds-toast", DsToast);
 if (!customElements.get("ds-toast-host")) customElements.define("ds-toast-host", DsToastHost);
-if (!customElements.get("ds-toast")) customElements.define("ds-toast", DsToastHost);
 
 let globalHost = null;
 
 function getHost() {
   if (typeof document === "undefined") return null;
   if (!globalHost) {
-    globalHost = document.querySelector("ds-toast-host");
+    globalHost = document.querySelector("ds-toast");
     if (!globalHost) {
-      globalHost = document.createElement("ds-toast-host");
+      globalHost = document.createElement("ds-toast");
       document.body.appendChild(globalHost);
     }
   }

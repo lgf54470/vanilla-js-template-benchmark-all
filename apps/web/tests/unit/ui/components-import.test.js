@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 
-Deno.test("ui: 验证全部 UI 组件导入与 Custom Elements 注册完整性", async () => {
-  // Mock browser globals if in Deno CLI test environment
+Deno.test("ui: 验证全部 UI 组件导入与 Custom Elements 注册完整性 (模拟标准浏览器规范)", async () => {
+  // Mock browser globals strictly matching W3C CustomElementRegistry specification
   if (typeof globalThis.document === "undefined") {
     globalThis.document = {
       createElement: () => ({
@@ -25,10 +25,22 @@ Deno.test("ui: 验证全部 UI 组件导入与 Custom Elements 注册完整性",
     };
   }
   if (typeof globalThis.customElements === "undefined") {
-    const registry = new Map();
+    const nameMap = new Map();
+    const constructorSet = new Set();
     globalThis.customElements = {
-      define: (name, constructor) => registry.set(name, constructor),
-      get: (name) => registry.get(name),
+      define: (name, constructor) => {
+        if (nameMap.has(name)) {
+          throw new Error(`CustomElementRegistry: '${name}' has already been defined`);
+        }
+        if (constructorSet.has(constructor)) {
+          throw new Error(
+            "CustomElementRegistry: this constructor has already been used with this registry",
+          );
+        }
+        nameMap.set(name, constructor);
+        constructorSet.add(constructor);
+      },
+      get: (name) => nameMap.get(name),
     };
   }
   if (typeof globalThis.HTMLElement === "undefined") {
