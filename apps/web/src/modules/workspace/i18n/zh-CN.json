@@ -1,0 +1,13 @@
+{
+  "title": "工作空间管理",
+  "description": "管理隔离的数据空间，支持自定义工作空间创建、改名与删除。",
+  "newWorkspace": "新建工作空间",
+  "editWorkspace": "编辑空间",
+  "systemBadge": "系统默认",
+  "wsName": "空间名称",
+  "wsIcon": "空间图标 (home, briefcase, graduation-cap, heart, gamepad-2, plane, folder)",
+  "wsColor": "色彩主题",
+  "switchWorkspace": "切换至此空间",
+  "deleteConfirmTitle": "删除工作空间",
+  "deleteConfirmDesc": "确定要删除此工作空间吗？空间下的所有笔记、待办、收藏和凭据都将被永久清理！"
+}

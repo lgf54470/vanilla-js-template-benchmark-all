@@ -1,0 +1,10 @@
+{
+  "title": "Analytics",
+  "description": "Multi-dimensional data visualization and activity metrics.",
+  "resourceDistribution": "Resource Distribution",
+  "weeklyActivity": "Weekly Activity Trend",
+  "notesRatio": "Notes",
+  "todoRatio": "Tasks",
+  "bookmarksRatio": "Bookmarks",
+  "passwordsRatio": "Credentials"
+}

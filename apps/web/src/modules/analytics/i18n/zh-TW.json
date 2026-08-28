@@ -1,0 +1,10 @@
+{
+  "title": "數據分析",
+  "description": "多維度圖表可視化，展示工作空間內的各項資產分佈與活躍趨勢。",
+  "resourceDistribution": "資源分類分佈",
+  "weeklyActivity": "近七日活躍度",
+  "notesRatio": "筆記佔比",
+  "todoRatio": "待辦佔比",
+  "bookmarksRatio": "收藏佔比",
+  "passwordsRatio": "憑據佔比"
+}

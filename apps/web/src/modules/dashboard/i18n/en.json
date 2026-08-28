@@ -1,0 +1,14 @@
+{
+  "title": "Dashboard",
+  "welcome": "Welcome to Application Workspace",
+  "description": "Overview metrics, quick shortcuts, and system health status.",
+  "notesCount": "Total Notes",
+  "todoCount": "Tasks",
+  "bookmarksCount": "Bookmarks",
+  "passwordsCount": "Passwords",
+  "quickActions": "Quick Actions",
+  "newNote": "New Note",
+  "newTodo": "New Task",
+  "systemStatus": "System Status",
+  "runningHealthy": "All services operating normally"
+}

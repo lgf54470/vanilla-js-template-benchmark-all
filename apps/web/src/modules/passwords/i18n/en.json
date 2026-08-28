@@ -1,0 +1,17 @@
+{
+  "title": "Passwords",
+  "description": "Securely store sensitive credentials with AES-GCM encryption and masked UI display.",
+  "newPassword": "New Password",
+  "editPassword": "Edit Password",
+  "noPasswords": "No credentials stored",
+  "createFirst": "Store your first password credential",
+  "pwdTitle": "Service / App Name",
+  "pwdUsername": "Account / Username / Email",
+  "pwdPassword": "Password",
+  "pwdWebsite": "Website (Optional)",
+  "pwdNotes": "Notes",
+  "copyPassword": "Copy Password",
+  "copied": "Copied to clipboard",
+  "deleteConfirmTitle": "Delete Credential",
+  "deleteConfirmDesc": "Are you sure you want to delete this credential? This action cannot be undone."
+}

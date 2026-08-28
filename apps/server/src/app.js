@@ -16,6 +16,12 @@ import {
   verifyPassword,
 } from "./shared/auth/session.js";
 
+import { createNotesRouter } from "./modules/notes/routes.js";
+import { createTodoRouter } from "./modules/todo/routes.js";
+import { createBookmarksRouter } from "./modules/bookmarks/routes.js";
+import { createPasswordsRouter } from "./modules/passwords/routes.js";
+import { createSettingsRouter } from "./modules/settings/routes.js";
+
 export function createApp() {
   const app = new Hono();
 
@@ -85,7 +91,15 @@ export function createApp() {
     const service = createWorkspaceService(db);
 
     try {
-      const deleted = await service.deleteWorkspace(id);
+      const deleted = await service.deleteWorkspace(id, [
+        async (wsId) => {
+          await db.execute("DELETE FROM notes_items WHERE workspace_id = ?", [wsId]);
+          await db.execute("DELETE FROM todo_items WHERE workspace_id = ?", [wsId]);
+          await db.execute("DELETE FROM bookmarks_items WHERE workspace_id = ?", [wsId]);
+          await db.execute("DELETE FROM passwords_items WHERE workspace_id = ?", [wsId]);
+          await db.execute("DELETE FROM settings_entries WHERE workspace_id = ?", [wsId]);
+        },
+      ]);
       return c.json({ ok: true, data: { deleted } });
     } catch (err) {
       if (err.message === "WORKSPACE_SYSTEM_CANNOT_DELETE") {
@@ -109,7 +123,6 @@ export function createApp() {
 
   // 8. Auth API
   app.post("/api/auth/login", async (c) => {
-    // Check brute-force lockout
     const lockout = checkLockout();
     if (lockout.locked) {
       return c.json(
@@ -139,12 +152,9 @@ export function createApp() {
     }
 
     const db = await resolveDbAdapter({ env: c.env });
-
-    // Retrieve password hash from app_settings
     const rows = await db.query("SELECT value FROM app_settings WHERE key = ?", ["settings:auth"]);
     let storedHash = rows[0]?.value;
 
-    // In local dev, auto-seed auth password if not yet configured
     if (!storedHash && Deno.env.get("DEV_SEED_AUTH_PASSWORD")) {
       const devPwd = Deno.env.get("DEV_SEED_AUTH_PASSWORD");
       storedHash = await hashPassword(devPwd);
@@ -181,13 +191,7 @@ export function createApp() {
     resetLoginFailures();
     const { token } = await issueSessionToken(durationSeconds, storageKind, db);
 
-    return c.json({
-      ok: true,
-      data: {
-        token,
-        storageKind,
-      },
-    });
+    return c.json({ ok: true, data: { token, storageKind } });
   });
 
   app.post("/api/auth/logout", async (c) => {
@@ -203,6 +207,13 @@ export function createApp() {
     const session = c.get("session");
     return c.json({ ok: true, data: { authenticated: true, session } });
   });
+
+  // 9. Mount Module Sub-routers
+  app.route("/api/notes", createNotesRouter());
+  app.route("/api/todo", createTodoRouter());
+  app.route("/api/bookmarks", createBookmarksRouter());
+  app.route("/api/passwords", createPasswordsRouter());
+  app.route("/api/settings", createSettingsRouter());
 
   return app;
 }

@@ -1,0 +1,19 @@
+{
+  "title": "待办事项",
+  "description": "高效管理任务进度与优先级，按工作空间跟踪。",
+  "newTodo": "新增待办",
+  "editTodo": "编辑待办",
+  "noTodos": "暂无待办事项",
+  "createFirst": "创建您的第一条待办任务",
+  "all": "全部",
+  "pending": "待处理",
+  "completed": "已完成",
+  "priority": "优先级",
+  "priorityLow": "低",
+  "priorityMedium": "中",
+  "priorityHigh": "高",
+  "taskTitle": "任务名称",
+  "taskDesc": "详细说明",
+  "deleteConfirmTitle": "删除任务",
+  "deleteConfirmDesc": "确定要删除此任务吗？此操作无法撤销。"
+}

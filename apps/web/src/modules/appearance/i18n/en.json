@@ -1,0 +1,11 @@
+{
+  "title": "Appearance Customization",
+  "description": "Customize theme mode, color palettes, design styles, typography, and sidebar layout.",
+  "themeMode": "Theme Mode",
+  "baseColors": "Base Color Palette",
+  "designStyles": "Design System Style",
+  "chartPalettes": "Chart Color Schemes",
+  "radiusSize": "Corner Radius",
+  "fontSettings": "Typography Settings",
+  "sidebarSettings": "Sidebar Layout Settings"
+}

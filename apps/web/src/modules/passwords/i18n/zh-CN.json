@@ -1,0 +1,17 @@
+{
+  "title": "密码保险箱",
+  "description": "AES-GCM 高度加密存储敏感凭据，前端自动掩码保护。",
+  "newPassword": "新增密码",
+  "editPassword": "编辑密码",
+  "noPasswords": "暂无密码记录",
+  "createFirst": "添加您的第一条密码凭据",
+  "pwdTitle": "服务/系统名称",
+  "pwdUsername": "账号 / 邮箱 / 用户名",
+  "pwdPassword": "密码明文",
+  "pwdWebsite": "关联网址 (可选)",
+  "pwdNotes": "备注信息",
+  "copyPassword": "复制密码",
+  "copied": "已复制到剪贴板",
+  "deleteConfirmTitle": "删除密码记录",
+  "deleteConfirmDesc": "确定要删除此凭据吗？此操作无法撤销。"
+}

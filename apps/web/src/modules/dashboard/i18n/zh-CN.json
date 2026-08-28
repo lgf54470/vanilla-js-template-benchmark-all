@@ -1,0 +1,14 @@
+{
+  "title": "仪表盘",
+  "welcome": "欢迎使用应用工作台",
+  "description": "概览数据、快捷入口与系统运行状态。",
+  "notesCount": "笔记总数",
+  "todoCount": "待办事项",
+  "bookmarksCount": "网址收藏",
+  "passwordsCount": "密码凭据",
+  "quickActions": "快捷操作",
+  "newNote": "新建笔记",
+  "newTodo": "新增待办",
+  "systemStatus": "系统状态",
+  "runningHealthy": "各项服务运行正常"
+}

@@ -1,0 +1,15 @@
+{
+  "title": "網址收藏",
+  "description": "整理常用網站、工具與文件連結，按工作空間歸類。",
+  "newBookmark": "新增收藏",
+  "editBookmark": "編輯收藏",
+  "noBookmarks": "暫無收藏網址",
+  "createFirst": "新增您的第一個網頁收藏",
+  "bmTitle": "網站名稱",
+  "bmUrl": "網址 URL (https://...)",
+  "bmCategory": "分類標籤",
+  "bmDesc": "說明備註",
+  "openLink": "開啟連結",
+  "deleteConfirmTitle": "刪除收藏",
+  "deleteConfirmDesc": "確定要刪除此收藏網址嗎？此操作無法撤銷。"
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Workspace Management",
+  "description": "Organize and isolate data per workspace with custom creation and cascading deletion.",
+  "newWorkspace": "New Workspace",
+  "editWorkspace": "Edit Workspace",
+  "systemBadge": "System",
+  "wsName": "Workspace Name",
+  "wsIcon": "Icon (home, briefcase, graduation-cap, heart, gamepad-2, plane, folder)",
+  "wsColor": "Color Theme",
+  "switchWorkspace": "Switch to this workspace",
+  "deleteConfirmTitle": "Delete Workspace",
+  "deleteConfirmDesc": "Are you sure you want to delete this workspace? All notes, tasks, bookmarks, and credentials inside will be permanently deleted!"
+}

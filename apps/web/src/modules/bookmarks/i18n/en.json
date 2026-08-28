@@ -1,0 +1,15 @@
+{
+  "title": "Bookmarks",
+  "description": "Organize links, docs, and tools isolated by workspace.",
+  "newBookmark": "New Bookmark",
+  "editBookmark": "Edit Bookmark",
+  "noBookmarks": "No bookmarks found",
+  "createFirst": "Add your first bookmark",
+  "bmTitle": "Site Name",
+  "bmUrl": "URL (https://...)",
+  "bmCategory": "Category",
+  "bmDesc": "Description",
+  "openLink": "Open Link",
+  "deleteConfirmTitle": "Delete Bookmark",
+  "deleteConfirmDesc": "Are you sure you want to delete this bookmark? This action cannot be undone."
+}

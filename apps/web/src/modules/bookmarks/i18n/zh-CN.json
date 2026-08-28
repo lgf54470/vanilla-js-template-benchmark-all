@@ -1,0 +1,15 @@
+{
+  "title": "网址收藏",
+  "description": "整理常用网站、工具与文档链接，按工作空间归类。",
+  "newBookmark": "新增收藏",
+  "editBookmark": "编辑收藏",
+  "noBookmarks": "暂无收藏网址",
+  "createFirst": "添加您的第一个网页收藏",
+  "bmTitle": "网站名称",
+  "bmUrl": "网址 URL (https://...)",
+  "bmCategory": "分类标签",
+  "bmDesc": "说明备注",
+  "openLink": "打开链接",
+  "deleteConfirmTitle": "删除收藏",
+  "deleteConfirmDesc": "确定要删除此收藏网址吗？此操作无法撤销。"
+}

@@ -1,0 +1,14 @@
+{
+  "title": "儀表板",
+  "welcome": "歡迎使用應用工作台",
+  "description": "概覽數據、快捷入口與系統運行狀態。",
+  "notesCount": "筆記總數",
+  "todoCount": "待辦事項",
+  "bookmarksCount": "網址收藏",
+  "passwordsCount": "密碼憑據",
+  "quickActions": "快捷操作",
+  "newNote": "新增筆記",
+  "newTodo": "新增待辦",
+  "systemStatus": "系統狀態",
+  "runningHealthy": "各項服務運行正常"
+}

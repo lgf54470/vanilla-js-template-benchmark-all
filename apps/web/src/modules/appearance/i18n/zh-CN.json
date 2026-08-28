@@ -1,0 +1,11 @@
+{
+  "title": "外观定制中心",
+  "description": "自定义主题模式、调色板、设计风格、字体排版及侧栏布局形态。",
+  "themeMode": "主题模式",
+  "baseColors": "基色调色板",
+  "designStyles": "设计风格规范",
+  "chartPalettes": "图表调色板",
+  "radiusSize": "界面圆角大小",
+  "fontSettings": "字体排版设定",
+  "sidebarSettings": "侧栏布局参数"
+}

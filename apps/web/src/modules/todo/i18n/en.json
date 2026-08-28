@@ -1,0 +1,19 @@
+{
+  "title": "Todo",
+  "description": "Manage tasks, status, and priorities organized by workspace.",
+  "newTodo": "New Task",
+  "editTodo": "Edit Task",
+  "noTodos": "No tasks found",
+  "createFirst": "Create your first task",
+  "all": "All",
+  "pending": "Pending",
+  "completed": "Completed",
+  "priority": "Priority",
+  "priorityLow": "Low",
+  "priorityMedium": "Medium",
+  "priorityHigh": "High",
+  "taskTitle": "Task Title",
+  "taskDesc": "Description",
+  "deleteConfirmTitle": "Delete Task",
+  "deleteConfirmDesc": "Are you sure you want to delete this task? This action cannot be undone."
+}

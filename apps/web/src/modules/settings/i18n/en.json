@@ -1,0 +1,13 @@
+{
+  "title": "Settings",
+  "description": "Manage application preferences, authentication password, and system info.",
+  "security": "Security & Access",
+  "changePassword": "Change Password",
+  "newPassword": "New Password",
+  "confirmNewPassword": "Confirm New Password",
+  "savePassword": "Update Password",
+  "systemInfo": "System Information",
+  "appVersion": "Version",
+  "runtime": "Runtime",
+  "storageEngine": "Storage Engine"
+}

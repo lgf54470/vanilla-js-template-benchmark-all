@@ -1,0 +1,16 @@
+{
+  "title": "Notes",
+  "description": "Capture thoughts, drafts, and knowledge bases isolated by workspace.",
+  "newNote": "New Note",
+  "editNote": "Edit Note",
+  "searchPlaceholder": "Search notes by title or content...",
+  "pinned": "Pinned",
+  "noNotes": "No notes found",
+  "createFirst": "Create your first note",
+  "noteTitle": "Note Title",
+  "noteContent": "Note Content",
+  "noteTags": "Tags (comma-separated)",
+  "pinNote": "Pin this note",
+  "deleteConfirmTitle": "Delete Note",
+  "deleteConfirmDesc": "Are you sure you want to delete this note? This action cannot be undone."
+}

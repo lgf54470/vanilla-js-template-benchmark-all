@@ -1,0 +1,11 @@
+{
+  "title": "外觀定製中心",
+  "description": "自定義主題模式、調色板、設計風格、字體排版及側欄佈局形態。",
+  "themeMode": "主題模式",
+  "baseColors": "基色調色板",
+  "designStyles": "設計風格規範",
+  "chartPalettes": "圖表調色板",
+  "radiusSize": "介面圓角大小",
+  "fontSettings": "字體排版設定",
+  "sidebarSettings": "側欄佈局參數"
+}

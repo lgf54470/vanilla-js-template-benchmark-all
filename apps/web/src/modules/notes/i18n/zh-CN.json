@@ -1,0 +1,16 @@
+{
+  "title": "笔记",
+  "description": "记录灵感、草稿与知识库，按工作空间归档。",
+  "newNote": "新建笔记",
+  "editNote": "编辑笔记",
+  "searchPlaceholder": "搜索笔记标题或内容...",
+  "pinned": "置顶",
+  "noNotes": "暂无笔记",
+  "createFirst": "创建您的第一条笔记",
+  "noteTitle": "笔记标题",
+  "noteContent": "笔记内容 (支持 Markdown)",
+  "noteTags": "标签 (逗号分隔)",
+  "pinNote": "置顶此笔记",
+  "deleteConfirmTitle": "删除笔记",
+  "deleteConfirmDesc": "确定要删除这条笔记吗？此操作无法撤销。"
+}

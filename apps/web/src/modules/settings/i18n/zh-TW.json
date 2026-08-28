@@ -1,0 +1,13 @@
+{
+  "title": "系統設定",
+  "description": "管理應用偏好、安全認證密碼與系統運行資訊。",
+  "security": "安全與存取控制",
+  "changePassword": "修改存取密碼",
+  "newPassword": "新存取密碼",
+  "confirmNewPassword": "確認新密碼",
+  "savePassword": "更新密碼",
+  "systemInfo": "系統元數據",
+  "appVersion": "版本號",
+  "runtime": "運行環境",
+  "storageEngine": "儲存引擎"
+}
