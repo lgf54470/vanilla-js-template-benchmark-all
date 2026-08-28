@@ -1,0 +1,79 @@
+.app-shell {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+.app-shell__resize {
+  width: 4px;
+  cursor: col-resize;
+  background-color: transparent;
+  z-index: 10;
+  transition: none;
+  user-select: none;
+}
+
+.app-shell__resize:hover {
+  background-color: var(--color-sidebar-ring);
+}
+
+.app-shell__inset {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.app-shell__header {
+  height: var(--header-height, 3rem);
+  min-height: var(--header-height, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  z-index: 20;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.header-divider {
+  width: 1px;
+  height: 1rem;
+  background-color: var(--color-border);
+}
+
+.app-shell__main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-4);
+  background-color: var(--color-bg);
+}
+
+@media (max-width: 767px) {
+  .app-shell {
+    display: flex;
+    flex-direction: column;
+  }
+  .app-shell__resize {
+    display: none;
+  }
+  .app-shell__header {
+    padding-inline: var(--space-3);
+  }
+  .app-shell__main {
+    padding: var(--space-3);
+  }
+}

@@ -1,4 +1,5 @@
 @import "./shared/styles/index.css";
+@import "./app/shell/app-shell.css";
 
 .main-container {
   max-inline-size: none;
