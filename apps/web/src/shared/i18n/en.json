@@ -16,7 +16,7 @@
     "backToHome": "Back to Home"
   },
   "workspace": {
-    "title": "Workspaces",
+    "title": "Workspace",
     "seed": {
       "default": "Default",
       "work": "Work",
@@ -27,22 +27,66 @@
     }
   },
   "auth": {
-    "login": "Login",
-    "logout": "Logout",
+    "login": "Sign in",
+    "logout": "Sign out",
     "password": "Password",
-    "loginSuccess": "Login successful",
+    "loginSuccess": "Signed in successfully",
     "invalidPassword": "Invalid password",
     "lockedOut": "Too many attempts, please try again later"
   },
+  "header": {
+    "theme": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "language": "Language"
+  },
   "appearance": {
     "theme": "Theme",
-    "baseColor": "Base Color",
+    "baseColor": "Base color",
     "style": "Style",
-    "chartColor": "Chart Colors",
-    "radius": "Radius",
-    "fontSans": "Body Font",
-    "fontHeading": "Heading Font",
-    "sidebarVariant": "Sidebar Variant",
-    "sidebarCollapsible": "Collapsible Mode"
+    "chartColor": "Chart color",
+    "radius": "Corner radius",
+    "fontSans": "Body font",
+    "fontHeading": "Heading font",
+    "sidebarVariant": "Sidebar variant",
+    "sidebarCollapsible": "Collapsible mode"
+  },
+  "settings": {
+    "title": "Theme Settings",
+    "description": "Customize theme colors, styles and layout structures",
+    "appearance": "Appearance",
+    "theme": "Theme Mode",
+    "sidebar": "Sidebar Style",
+    "layout": "Layout Mode",
+    "baseColor": "Base Color",
+    "chartColor": "Chart Color",
+    "style": "Design Style",
+    "bodyFont": "Body Font",
+    "headingFont": "Heading Font",
+    "iconLibrary": "Icon Library",
+    "lucide": "Lucide",
+    "radius": "Corner Radius",
+    "menuColor": "Menu Color",
+    "menuAppearance": "Menu Appearance",
+    "menuAccent": "Menu Accent",
+    "subtle": "Subtle",
+    "close": "Close",
+    "resetAll": "Reset all settings",
+    "variantOptions": {
+      "inset": "Inset",
+      "floating": "Floating",
+      "sidebar": "Sidebar"
+    },
+    "layoutOptions": {
+      "default": "Default",
+      "icon": "Icon Mode",
+      "offcanvas": "Off-canvas"
+    },
+    "themeOptions": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark"
+    }
   }
 }

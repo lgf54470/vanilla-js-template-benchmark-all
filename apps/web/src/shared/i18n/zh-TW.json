@@ -7,7 +7,7 @@
     "confirm": "確認",
     "delete": "刪除",
     "edit": "編輯",
-    "create": "新增",
+    "create": "新建",
     "search": "搜尋...",
     "noData": "暫無資料",
     "success": "操作成功",
@@ -34,15 +34,59 @@
     "invalidPassword": "密碼錯誤",
     "lockedOut": "嘗試次數過多，請稍後再試"
   },
+  "header": {
+    "theme": "主題",
+    "system": "跟隨系統",
+    "light": "淺色",
+    "dark": "深色",
+    "language": "語言"
+  },
   "appearance": {
     "theme": "主題",
     "baseColor": "基色",
     "style": "設計風格",
     "chartColor": "圖表配色",
     "radius": "圓角大小",
-    "fontSans": "內文字體",
+    "fontSans": "正文字體",
     "fontHeading": "標題字體",
-    "sidebarVariant": "側欄型態",
-    "sidebarCollapsible": "摺疊模式"
+    "sidebarVariant": "側欄形態",
+    "sidebarCollapsible": "折疊模式"
+  },
+  "settings": {
+    "title": "主題設定",
+    "description": "客製主題色彩、風格與佈局結構",
+    "appearance": "外觀",
+    "theme": "明暗主題",
+    "sidebar": "側欄形態",
+    "layout": "佈局模式",
+    "baseColor": "基準色彩",
+    "chartColor": "圖表配色",
+    "style": "設計風格",
+    "bodyFont": "正文字體",
+    "headingFont": "標題字體",
+    "iconLibrary": "圖示庫",
+    "lucide": "Lucide",
+    "radius": "圓角大小",
+    "menuColor": "選單色彩",
+    "menuAppearance": "選單外觀",
+    "menuAccent": "選單強調",
+    "subtle": "Subtle",
+    "close": "關閉",
+    "resetAll": "恢復預設外觀設定",
+    "variantOptions": {
+      "inset": "主區內嵌",
+      "floating": "懸浮卡片",
+      "sidebar": "固定側欄"
+    },
+    "layoutOptions": {
+      "default": "標準佈局",
+      "icon": "圖示收攏",
+      "offcanvas": "全螢幕抽屜"
+    },
+    "themeOptions": {
+      "system": "跟隨系統",
+      "light": "淺色",
+      "dark": "深色"
+    }
   }
 }

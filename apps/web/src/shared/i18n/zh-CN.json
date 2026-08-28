@@ -34,6 +34,13 @@
     "invalidPassword": "密码错误",
     "lockedOut": "尝试次数过多，请稍后再试"
   },
+  "header": {
+    "theme": "主题",
+    "system": "跟随系统",
+    "light": "浅色",
+    "dark": "深色",
+    "language": "语言"
+  },
   "appearance": {
     "theme": "主题",
     "baseColor": "基色",
@@ -44,5 +51,42 @@
     "fontHeading": "标题字体",
     "sidebarVariant": "侧栏形态",
     "sidebarCollapsible": "折叠模式"
+  },
+  "settings": {
+    "title": "主题设置",
+    "description": "定制主题色彩、风格与布局结构",
+    "appearance": "外观",
+    "theme": "明暗主题",
+    "sidebar": "侧栏形态",
+    "layout": "布局模式",
+    "baseColor": "基准色彩",
+    "chartColor": "图表配色",
+    "style": "设计风格",
+    "bodyFont": "正文字体",
+    "headingFont": "标题字体",
+    "iconLibrary": "图标库",
+    "lucide": "Lucide",
+    "radius": "圆角大小",
+    "menuColor": "菜单色彩",
+    "menuAppearance": "菜单外观",
+    "menuAccent": "菜单强调",
+    "subtle": "Subtle",
+    "close": "关闭",
+    "resetAll": "恢复默认外观设置",
+    "variantOptions": {
+      "inset": "主区内嵌",
+      "floating": "悬浮卡片",
+      "sidebar": "固定侧栏"
+    },
+    "layoutOptions": {
+      "default": "标准布局",
+      "icon": "图标收拢",
+      "offcanvas": "全屏抽屉"
+    },
+    "themeOptions": {
+      "system": "跟随系统",
+      "light": "浅色",
+      "dark": "深色"
+    }
   }
 }
