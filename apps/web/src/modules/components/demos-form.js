@@ -81,14 +81,41 @@ export function getFormDemo(id) {
       return {
         render: (container) => {
           container.innerHTML = `
-            <div style="display: flex; flex-direction: column; gap: var(--space-3);">
-              <ds-checkbox label="接收每日工作汇总简报" checked></ds-checkbox>
-              <ds-checkbox label="允许邮件接收重要安全更新通知"></ds-checkbox>
-              <ds-checkbox label="禁用选项 (不可编辑)" disabled></ds-checkbox>
+            <div style="display: flex; flex-direction: column; gap: var(--space-5); max-width: 26rem; width: 100%;">
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="font-size: var(--text-xs); color: var(--color-fg-muted); font-weight: 600;">基础状态 (Basic States)</div>
+                <ds-checkbox label="接收每日工作汇总简报" checked id="demo-cb-1"></ds-checkbox>
+                <ds-checkbox label="允许邮件接收重要安全更新通知" id="demo-cb-2"></ds-checkbox>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="font-size: var(--text-xs); color: var(--color-fg-muted); font-weight: 600;">带说明文本 (With Description)</div>
+                <div style="display: flex; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-border); border-radius: var(--radius-lg); background-color: var(--color-card);">
+                  <ds-checkbox checked id="demo-cb-desc"></ds-checkbox>
+                  <div style="display: flex; flex-direction: column; gap: 2px;">
+                    <span style="font-size: var(--text-sm); font-weight: 500; color: var(--color-fg);">双重身份验证 (2FA)</span>
+                    <span style="font-size: var(--text-xs); color: var(--color-fg-muted);">每次从新设备登录时，均需通过认证器输入动态验证码。</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+                <div style="font-size: var(--text-xs); color: var(--color-fg-muted); font-weight: 600;">禁用状态 (Disabled)</div>
+                <ds-checkbox label="已锁定配置项 (选中且禁用)" checked disabled></ds-checkbox>
+                <ds-checkbox label="无权限修改项 (未选且禁用)" disabled></ds-checkbox>
+              </div>
             </div>
           `;
+
+          container.querySelectorAll("ds-checkbox:not([disabled])").forEach((cb) => {
+            cb.addEventListener("ds-change", (e) => {
+              const label = cb.getAttribute("label") || "复选框";
+              toast.info(`${label}: ${e.detail.checked ? "已勾选" : "已取消"}`);
+            });
+          });
         },
-        code: `<ds-checkbox label="我已阅读并同意用户协议" checked></ds-checkbox>`,
+        code:
+          `<div class="flex items-center space-x-2">\n  <ds-checkbox id="terms" checked></ds-checkbox>\n  <ds-label for="terms">我已同意《服务协议》</ds-label>\n</div>`,
         slots: `data-slot="checkbox", data-slot="checkbox-indicator"`,
       };
 
