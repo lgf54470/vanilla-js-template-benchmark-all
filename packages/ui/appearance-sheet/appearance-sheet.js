@@ -13,12 +13,13 @@ import {
   setRadius,
   setStyle,
   setTheme,
-} from "../../../apps/web/src/shared/lib/appearance.js";
-import { t } from "../../../apps/web/src/shared/lib/i18n.js";
+} from "./appearance-state.js";
 import { attachStyles, createIcon } from "../base.js";
 import { css } from "./appearance-sheet.css.js";
 import { PREVIEW_ICONS } from "./preview-icons.js";
 import "../sheet/sheet.js";
+
+const t = (_k) => "";
 
 export class DsAppearanceSheet extends HTMLElement {
   static get observedAttributes() {

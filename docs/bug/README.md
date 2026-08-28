@@ -15,6 +15,7 @@
 - [2026-08-28: 原生 ES 模块导入 @contracts/ 裸路径解析失败](./2026-08-28-contracts-import-path.md)
 - [2026-08-28: resize-handle.js 导出函数命名不一致导致整站白屏](./2026-08-28-resize-handle-export-mismatch.md)
 - [2026-08-28: @contracts/constants.js 遗漏 RADII 导出导致语法错误](./2026-08-28-contracts-radii-export-missing.md)
+- [2026-08-28: packages/ui 跨包相对路径引用 apps/web 导致浏览器动态 ESM 加载 404 白屏](./2026-08-28-packages-ui-relative-import-out-of-tree.md)
 
 ### 2. Web Components 标准与组件生命周期
 
