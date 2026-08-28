@@ -194,7 +194,7 @@ export class DsSidebar extends HTMLElement {
 const headerCss = `
 :host {
   display: block;
-  padding: var(--space-2);
+  padding: 0.5rem;
   border-bottom: 1px solid var(--color-sidebar-border);
 }
 `;
@@ -216,8 +216,8 @@ const contentCss = `
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: var(--space-2);
-  gap: var(--space-2);
+  padding: 0.5rem;
+  gap: 0.5rem;
 }
 `;
 export class DsSidebarContent extends HTMLElement {
@@ -234,7 +234,7 @@ export class DsSidebarContent extends HTMLElement {
 const footerCss = `
 :host {
   display: block;
-  padding: var(--space-2);
+  padding: 0.5rem;
   border-top: 1px solid var(--color-sidebar-border);
 }
 `;
@@ -254,7 +254,7 @@ const groupCss = `
 :host {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 2px;
 }
 `;
 export class DsSidebarGroup extends HTMLElement {
@@ -273,7 +273,7 @@ const groupLabelCss = `
   display: flex;
   align-items: center;
   height: 2rem;
-  padding-inline: var(--space-2);
+  padding-inline: 0.5rem;
   font-size: var(--text-xs);
   font-weight: 500;
   text-transform: uppercase;
@@ -342,11 +342,11 @@ const menuButtonCss = `
 .menu-btn {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 0.5rem;
   width: 100%;
   height: 2rem;
-  padding-inline: var(--space-2);
-  border-radius: var(--ds-sidebar-item-radius, var(--radius-md));
+  padding-inline: 0.5rem;
+  border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-sidebar-fg);
@@ -439,7 +439,7 @@ const subMenuCss = `
 :host {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.25rem;
   margin-left: 0.875rem;
   padding-left: 0.625rem;
   padding-block: 0.125rem;
@@ -469,7 +469,7 @@ const subMenuItemCss = `
   align-items: center;
   width: 100%;
   height: 1.75rem;
-  padding-inline: var(--space-2);
+  padding-inline: 0.5rem;
   border-radius: var(--radius-md);
   font-size: var(--text-sm);
   color: var(--color-sidebar-fg);
@@ -585,17 +585,34 @@ export class DsSidebarTrigger extends HTMLElement {
 
 // --- Collapsible ---
 const collapsibleCss = `
-:host { display: block; }
+:host { display: block; width: 100%; }
 .collapsible-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 2rem;
+  padding-inline: 0.5rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-sidebar-fg);
   cursor: pointer;
+  box-sizing: border-box;
+}
+.collapsible-trigger:hover {
+  background-color: var(--color-sidebar-accent);
+  color: var(--color-sidebar-accent-fg);
 }
 .chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
   color: var(--color-fg-muted);
   transform: rotate(0deg);
+  transition: transform 0.2s ease;
 }
 :host([data-state="open"]) .chevron {
   transform: rotate(90deg);

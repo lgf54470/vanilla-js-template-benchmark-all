@@ -5,51 +5,65 @@ export function initResizeHandle(handleElement) {
   if (!handleElement || typeof globalThis.window === "undefined") return;
 
   let isDragging = false;
-  let startX = 0;
-  let startWidth = 0;
+  let rafId = null;
+  let lastX = 0;
+  let dragWidth = 0;
 
-  const onPointerDown = (e) => {
-    isDragging = true;
-    startX = e.clientX;
-    const currentWidthPx = handleElement.previousElementSibling?.getBoundingClientRect().width ||
-      SIDEBAR_WIDTH_LIMITS.default;
-    startWidth = currentWidthPx;
+  const applyDrag = () => {
+    rafId = null;
+    const provider = document.querySelector("ds-sidebar-provider");
+    if (!provider) return;
 
-    document.body.style.userSelect = "none";
-    document.body.style.cursor = "col-resize";
-    handleElement.setPointerCapture(e.pointerId);
-  };
+    const left = provider.getBoundingClientRect().left;
+    const rawWidth = Math.round(lastX - left);
 
-  const onPointerMove = (e) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - startX;
-    const newWidth = startWidth + deltaX;
-
-    // Threshold collapse check (< 160px collapses to icon mode)
-    if (newWidth < 160) {
-      const provider = document.querySelector("ds-sidebar-provider");
-      if (provider) provider.setOpen(false);
+    // Threshold collapse (< 140px collapses to icon mode)
+    if (rawWidth < 140) {
+      provider.setOpen(false);
       return;
     } else {
-      const provider = document.querySelector("ds-sidebar-provider");
-      if (provider && !provider.store.getState().open) {
+      if (!provider.store.getState().open) {
         provider.setOpen(true);
       }
     }
 
-    const clamped = Math.max(
-      SIDEBAR_WIDTH_LIMITS.min,
-      Math.min(SIDEBAR_WIDTH_LIMITS.max, newWidth),
+    dragWidth = Math.min(
+      SIDEBAR_WIDTH_LIMITS.max,
+      Math.max(SIDEBAR_WIDTH_LIMITS.min, rawWidth),
     );
 
-    document.documentElement.style.setProperty("--sidebar-width", `${clamped}px`);
+    document.documentElement.style.setProperty("--sidebar-width", `${dragWidth}px`);
+    document.documentElement.style.setProperty("--sidebar-current-width", `${dragWidth}px`);
+  };
+
+  const onPointerDown = (e) => {
+    isDragging = true;
+    lastX = e.clientX;
+    document.body.classList.add("sidebar-resizing");
+    try {
+      handleElement.setPointerCapture(e.pointerId);
+    } catch {
+      // Ignore
+    }
+  };
+
+  const onPointerMove = (e) => {
+    if (!isDragging) return;
+    lastX = e.clientX;
+    if (rafId === null) {
+      rafId = requestAnimationFrame(applyDrag);
+    }
   };
 
   const onPointerUp = (e) => {
     if (!isDragging) return;
     isDragging = false;
-    document.body.style.userSelect = "";
-    document.body.style.cursor = "";
+    document.body.classList.remove("sidebar-resizing");
+
+    if (rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
 
     try {
       handleElement.releasePointerCapture(e.pointerId);
@@ -57,22 +71,16 @@ export function initResizeHandle(handleElement) {
       // Ignore
     }
 
-    const computed = globalThis.getComputedStyle(document.documentElement).getPropertyValue(
-      "--sidebar-width",
-    );
-    const widthVal = parseFloat(computed);
-    if (!isNaN(widthVal)) {
-      setSidebarWidth(widthVal);
+    if (dragWidth >= SIDEBAR_WIDTH_LIMITS.min) {
+      setSidebarWidth(dragWidth);
     }
   };
 
-  // Double click resets to default 16rem (256px)
   const onDblClick = () => {
-    document.documentElement.style.setProperty(
-      "--sidebar-width",
-      `${SIDEBAR_WIDTH_LIMITS.default}px`,
-    );
-    setSidebarWidth(SIDEBAR_WIDTH_LIMITS.default);
+    const defaultWidth = SIDEBAR_WIDTH_LIMITS.default;
+    document.documentElement.style.setProperty("--sidebar-width", `${defaultWidth}px`);
+    document.documentElement.style.setProperty("--sidebar-current-width", `${defaultWidth}px`);
+    setSidebarWidth(defaultWidth);
   };
 
   handleElement.addEventListener("pointerdown", onPointerDown);

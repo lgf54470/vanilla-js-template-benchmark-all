@@ -100,7 +100,9 @@ export class AppShell extends HTMLElement {
           <ds-sidebar-rail></ds-sidebar-rail>
         </ds-sidebar>
 
-        <div class="app-shell__resize" title="拖拽调整侧栏宽度，双击重置"></div>
+        <div class="app-shell__resize" role="separator" aria-orientation="vertical" aria-label="调整侧栏宽度" title="拖拽调整侧栏宽度，双击重置">
+          <span class="handle-pill"></span>
+        </div>
 
         <div class="app-shell__inset">
           <header class="app-shell__header">
