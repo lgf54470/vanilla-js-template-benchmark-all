@@ -9,7 +9,7 @@ import zhTW from "./i18n/zh-TW.json" with { type: "json" };
 import en from "./i18n/en.json" with { type: "json" };
 import { COMPONENT_CATALOG, COMPONENT_CATEGORIES } from "./catalog.js";
 import { getComponentDemo } from "./demos.js";
-import { createIcon, toast } from "@ui";
+import { createIcon, toast } from "../../shared/ui/index.js";
 
 registerTranslations("zh-CN", "components", zhCN);
 registerTranslations("zh-TW", "components", zhTW);

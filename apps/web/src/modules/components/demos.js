@@ -3,7 +3,7 @@
  * 交互式实时演示与代码生成器
  */
 
-import { toast } from "@ui";
+import { toast } from "../../shared/ui/index.js";
 
 export function getComponentDemo(id) {
   switch (id) {
@@ -182,7 +182,7 @@ export function getComponentDemo(id) {
           );
         },
         code:
-          `import { toast } from "@ui";\n\ntoast.success("操作成功！");\ntoast.error("发生错误！");\ntoast.info("通知信息");`,
+          `import { toast } from "../../shared/ui/index.js";\n\ntoast.success("操作成功！");\ntoast.error("发生错误！");\ntoast.info("通知信息");`,
         slots: `data-slot="toast", data-slot="toast-container"`,
       };
 
