@@ -7,18 +7,21 @@ const css = `
 }
 .tooltip-box {
   position: absolute;
-  bottom: calc(100% + var(--space-2));
+  bottom: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
-  border-radius: var(--radius-sm);
-  background-color: var(--color-primary);
-  color: var(--color-primary-fg);
-  padding: 0.25rem 0.5rem;
-  font-size: var(--text-2xs);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  color: var(--color-fg);
+  padding: 0.25rem 0.625rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
   white-space: nowrap;
   pointer-events: none;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 .tooltip-box[hidden] {
   display: none !important;
@@ -54,8 +57,8 @@ export class DsTooltip extends HTMLElement {
 
     trigger?.addEventListener("mouseenter", () => box?.removeAttribute("hidden"));
     trigger?.addEventListener("mouseleave", () => box?.setAttribute("hidden", ""));
-    trigger?.addEventListener("focus", () => box?.removeAttribute("hidden"));
-    trigger?.addEventListener("blur", () => box?.setAttribute("hidden", ""));
+    trigger?.addEventListener("focusin", () => box?.removeAttribute("hidden"));
+    trigger?.addEventListener("focusout", () => box?.setAttribute("hidden", ""));
 
     attachStyles(this.shadowRoot, css);
   }

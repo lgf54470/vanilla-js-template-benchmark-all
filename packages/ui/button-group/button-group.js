@@ -5,8 +5,9 @@ const css = `
 .btn-group {
   display: inline-flex;
   align-items: center;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
+  box-sizing: border-box;
 }
 ::slotted(ds-button) {
   border-radius: 0 !important;

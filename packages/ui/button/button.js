@@ -8,9 +8,9 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
+  gap: var(--space-1-5, 0.375rem);
   white-space: nowrap;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   font-size: var(--text-sm);
   font-weight: 500;
   cursor: pointer;
@@ -19,8 +19,10 @@ const css = `
   font-family: inherit;
   outline: none;
   box-sizing: border-box;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 .btn:focus-visible {
+  border-color: var(--ring);
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
@@ -29,35 +31,37 @@ const css = `
   opacity: 0.5;
 }
 
-/* Variants (Base UI standard) */
+/* Variants (Nova Base UI standard) */
 .variant-default {
   background-color: var(--color-primary);
   color: var(--color-primary-fg);
 }
 .variant-default:hover {
-  opacity: 0.9;
+  background-color: color-mix(in srgb, var(--color-primary) 85%, black);
 }
 .variant-destructive {
-  background-color: var(--color-danger);
-  color: var(--color-danger-fg);
+  background-color: color-mix(in srgb, var(--color-danger) 12%, transparent);
+  color: var(--color-danger);
+  border-color: transparent;
 }
 .variant-destructive:hover {
-  opacity: 0.9;
+  background-color: color-mix(in srgb, var(--color-danger) 22%, transparent);
 }
 .variant-outline {
   border-color: var(--color-border);
-  background-color: var(--color-card);
+  background-color: var(--color-bg);
   color: var(--color-fg);
 }
 .variant-outline:hover {
   background-color: var(--color-muted);
+  color: var(--color-fg);
 }
 .variant-secondary {
   background-color: var(--color-secondary);
   color: var(--color-secondary-fg);
 }
 .variant-secondary:hover {
-  opacity: 0.85;
+  background-color: color-mix(in srgb, var(--color-secondary) 85%, var(--color-fg));
 }
 .variant-ghost {
   color: var(--color-fg);
@@ -65,6 +69,7 @@ const css = `
 }
 .variant-ghost:hover {
   background-color: var(--color-muted);
+  color: var(--color-fg);
 }
 .variant-link {
   color: var(--color-primary);
@@ -76,24 +81,25 @@ const css = `
   text-decoration: underline;
 }
 
-/* Sizes */
+/* Sizes (Nova Base UI standard: h-8 default, h-7 sm, h-9 lg) */
 .size-default {
-  height: 2.25rem;
-  padding: 0 var(--space-4);
+  height: 2rem;
+  padding: 0 0.625rem;
+  font-size: var(--text-sm);
 }
 .size-sm {
   height: 1.75rem;
-  padding: 0 var(--space-3);
-  font-size: var(--text-xs);
+  padding: 0 0.625rem;
+  font-size: 0.8rem;
 }
 .size-lg {
-  height: 2.75rem;
-  padding: 0 var(--space-6);
-  font-size: var(--text-base);
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  font-size: var(--text-sm);
 }
 .size-icon {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
 }
 .size-icon-sm {
@@ -102,8 +108,8 @@ const css = `
   padding: 0;
 }
 .size-icon-lg {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0;
 }
 `;

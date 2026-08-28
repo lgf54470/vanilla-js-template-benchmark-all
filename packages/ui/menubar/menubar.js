@@ -5,11 +5,13 @@ const css = `
 .menubar {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
-  border-radius: var(--radius-md);
+  gap: 2px;
+  height: 2rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   background-color: var(--color-card);
-  padding: var(--space-1);
+  padding: 3px;
+  box-sizing: border-box;
 }
 `;
 

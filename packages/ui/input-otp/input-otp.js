@@ -5,23 +5,28 @@ const css = `
 .otp-group {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 0.375rem;
 }
 .otp-slot {
-  width: 2.5rem;
-  height: 2.75rem;
-  border-radius: var(--radius-md);
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-input);
-  background-color: var(--color-card);
+  background-color: transparent;
   text-align: center;
-  font-size: var(--text-lg);
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-fg);
   outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  padding: 0;
+  transition: border-color 0.15s ease;
 }
 .otp-slot:focus {
   border-color: var(--ring);
   outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 `;
 
@@ -61,7 +66,9 @@ export class DsInputOtp extends HTMLElement {
           inputs[idx + 1].focus();
         }
         const fullVal = Array.from(inputs).map((i) => i.value).join("");
-        this.dispatchEvent(new CustomEvent("ds-change", { detail: { value: fullVal } }));
+        this.dispatchEvent(
+          new CustomEvent("ds-change", { detail: { value: fullVal }, bubbles: true }),
+        );
       });
       inp.addEventListener("keydown", (e) => {
         if (e.key === "Backspace" && !inp.value && idx > 0) {

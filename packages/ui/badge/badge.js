@@ -8,13 +8,16 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-1);
+  height: 1.25rem;
   border-radius: var(--radius-full);
-  padding: 0.125rem 0.625rem;
-  font-size: var(--text-2xs);
+  padding: 0.125rem 0.5rem;
+  font-size: var(--text-xs);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1;
   border: 1px solid transparent;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 .variant-default {
   background-color: var(--color-primary);
@@ -25,12 +28,20 @@ const css = `
   color: var(--color-secondary-fg);
 }
 .variant-destructive {
-  background-color: var(--color-danger);
-  color: var(--color-danger-fg);
+  background-color: color-mix(in srgb, var(--color-danger) 15%, transparent);
+  color: var(--color-danger);
 }
 .variant-outline {
   border-color: var(--color-border);
   color: var(--color-fg);
+  background-color: transparent;
+}
+.variant-ghost {
+  color: var(--color-fg-muted);
+  background-color: transparent;
+}
+.variant-link {
+  color: var(--color-primary);
   background-color: transparent;
 }
 `;

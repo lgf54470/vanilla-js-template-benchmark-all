@@ -4,17 +4,18 @@ const css = `
 :host { display: inline-block; position: relative; }
 .hover-panel {
   position: absolute;
-  top: calc(100% + var(--space-2));
+  top: calc(100% + 6px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
   width: 16rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  background-color: var(--color-popover);
-  color: var(--color-popover-fg);
-  padding: var(--space-4);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-card);
+  color: var(--color-fg);
+  padding: 0.625rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 .hover-panel[hidden] { display: none !important; }
 `;
@@ -40,6 +41,8 @@ export class DsHoverCard extends HTMLElement {
 
     trigger?.addEventListener("mouseenter", () => panel?.removeAttribute("hidden"));
     trigger?.addEventListener("mouseleave", () => panel?.setAttribute("hidden", ""));
+    trigger?.addEventListener("focusin", () => panel?.removeAttribute("hidden"));
+    trigger?.addEventListener("focusout", () => panel?.setAttribute("hidden", ""));
 
     attachStyles(this.shadowRoot, css);
   }

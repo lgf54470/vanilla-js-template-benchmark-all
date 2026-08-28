@@ -7,27 +7,35 @@ const css = `
   align-items: center;
   position: relative;
   width: 100%;
-  height: 1.5rem;
+  height: 1.25rem;
   touch-action: none;
 }
 .range-input {
   width: 100%;
-  height: 0.375rem;
+  height: 4px;
   border-radius: var(--radius-full);
   background-color: var(--color-muted);
   appearance: none;
   outline: none;
   cursor: pointer;
+  margin: 0;
 }
 .range-input::-webkit-slider-thumb {
   appearance: none;
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 14px;
+  height: 14px;
   border-radius: var(--radius-full);
-  background-color: var(--color-card);
-  border: 2px solid var(--color-primary);
-  box-shadow: var(--shadow-sm);
+  background-color: var(--color-bg);
+  border: 1px solid var(--ring);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+.range-input::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 35%, transparent);
+}
+.range-input:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 50%, transparent);
 }
 `;
 
@@ -77,15 +85,15 @@ export class DsSlider extends HTMLElement {
     `;
 
     this.shadowRoot.querySelector(".range-input")?.addEventListener("input", (e) => {
-      this.value = e.target.value;
+      this.setAttribute("value", e.target.value);
       this.dispatchEvent(
-        new CustomEvent("ds-input", { detail: { value: Number(e.target.value) } }),
+        new CustomEvent("ds-input", { detail: { value: Number(e.target.value) }, bubbles: true }),
       );
     });
     this.shadowRoot.querySelector(".range-input")?.addEventListener("change", (e) => {
-      this.value = e.target.value;
+      this.setAttribute("value", e.target.value);
       this.dispatchEvent(
-        new CustomEvent("ds-change", { detail: { value: Number(e.target.value) } }),
+        new CustomEvent("ds-change", { detail: { value: Number(e.target.value) }, bubbles: true }),
       );
     });
 

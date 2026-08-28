@@ -12,28 +12,33 @@ const css = `
 }
 .input {
   width: 100%;
-  height: 2.25rem;
-  border-radius: var(--radius-md);
+  height: 2rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-input);
-  background-color: var(--color-card);
-  padding: 0 var(--space-3);
+  background-color: transparent;
+  padding: 0 0.625rem;
   font-size: var(--text-sm);
   color: var(--color-fg);
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
+  transition: border-color 0.15s ease;
 }
 .input::placeholder {
   color: var(--color-fg-muted);
 }
-.input:focus {
+.input:hover:not(:disabled) {
+  border-color: var(--color-fg-muted);
+}
+.input:focus-visible, .input:focus {
   border-color: var(--ring);
   outline: 2px solid var(--ring);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 .input:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--color-input) 50%, transparent);
 }
 `;
 
@@ -90,10 +95,14 @@ export class DsInput extends HTMLElement {
 
     const input = this.shadowRoot.querySelector("input");
     input?.addEventListener("input", (e) => {
-      this.dispatchEvent(new CustomEvent("ds-input", { detail: { value: e.target.value } }));
+      this.dispatchEvent(
+        new CustomEvent("ds-input", { detail: { value: e.target.value }, bubbles: true }),
+      );
     });
     input?.addEventListener("change", (e) => {
-      this.dispatchEvent(new CustomEvent("ds-change", { detail: { value: e.target.value } }));
+      this.dispatchEvent(
+        new CustomEvent("ds-change", { detail: { value: e.target.value }, bubbles: true }),
+      );
     });
 
     attachStyles(this.shadowRoot, css);

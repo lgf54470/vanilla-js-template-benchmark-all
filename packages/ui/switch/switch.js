@@ -4,36 +4,50 @@ const css = `
 :host {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
 }
 .switch-track {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  width: 2rem;
-  height: 1.15rem;
+  width: 32px;
+  height: 18.4px;
+  flex-shrink: 0;
   border-radius: var(--radius-full);
   background-color: var(--color-input);
   cursor: pointer;
   padding: 2px;
   border: 1px solid transparent;
   outline: none;
+  box-sizing: border-box;
+  user-select: none;
+  transition: background-color 0.15s ease;
 }
 .switch-track:focus-visible {
+  border-color: var(--ring);
   outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+.switch-track:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 .switch-track--checked {
   background-color: var(--color-primary);
 }
 .switch-thumb {
-  width: 0.9rem;
-  height: 0.9rem;
+  display: block;
+  width: 13px;
+  height: 13px;
   border-radius: var(--radius-full);
   background-color: var(--color-bg);
-  box-shadow: var(--shadow-xs);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   transform: translateX(0);
+  pointer-events: none;
 }
 .switch-track--checked .switch-thumb {
-  transform: translateX(0.85rem);
+  transform: translateX(13px);
 }
 `;
 
@@ -45,6 +59,8 @@ export class DsSwitch extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this._handleClick = this._handleClick.bind(this);
+    this._handleKeydown = this._handleKeydown.bind(this);
   }
 
   get checked() {
@@ -56,6 +72,15 @@ export class DsSwitch extends HTMLElement {
     else this.removeAttribute("checked");
   }
 
+  get disabled() {
+    return this.hasAttribute("disabled");
+  }
+
+  set disabled(val) {
+    if (val) this.setAttribute("disabled", "");
+    else this.removeAttribute("disabled");
+  }
+
   connectedCallback() {
     this.render();
   }
@@ -64,9 +89,28 @@ export class DsSwitch extends HTMLElement {
     this.render();
   }
 
+  _handleClick() {
+    if (this.disabled) return;
+    this.checked = !this.checked;
+    this.dispatchEvent(
+      new CustomEvent("ds-change", { detail: { checked: this.checked }, bubbles: true }),
+    );
+  }
+
+  _handleKeydown(e) {
+    if (this.disabled) return;
+    if (e.key === " " || e.key === "Enter") {
+      e.preventDefault();
+      this.checked = !this.checked;
+      this.dispatchEvent(
+        new CustomEvent("ds-change", { detail: { checked: this.checked }, bubbles: true }),
+      );
+    }
+  }
+
   render() {
     const checked = this.checked;
-    const disabled = this.hasAttribute("disabled");
+    const disabled = this.disabled;
 
     this.shadowRoot.innerHTML = `
       <button
@@ -75,17 +119,18 @@ export class DsSwitch extends HTMLElement {
         role="switch"
         aria-checked="${checked}"
         class="switch-track ${checked ? "switch-track--checked" : ""}"
+        tabindex="${disabled ? "-1" : "0"}"
         ${disabled ? "disabled" : ""}
       >
-        <span class="switch-thumb"></span>
+        <span data-slot="switch-thumb" class="switch-thumb"></span>
       </button>
     `;
 
-    this.shadowRoot.querySelector(".switch-track")?.addEventListener("click", () => {
-      if (disabled) return;
-      this.checked = !this.checked;
-      this.dispatchEvent(new CustomEvent("ds-change", { detail: { checked: this.checked } }));
-    });
+    this.shadowRoot.querySelector(".switch-track")?.addEventListener("click", this._handleClick);
+    this.shadowRoot.querySelector(".switch-track")?.addEventListener(
+      "keydown",
+      this._handleKeydown,
+    );
 
     attachStyles(this.shadowRoot, css);
   }

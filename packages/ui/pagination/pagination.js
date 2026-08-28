@@ -9,7 +9,7 @@ const css = `
 .pagination-list {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 2px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -22,29 +22,41 @@ const css = `
   height: 2rem;
   padding: 0 var(--space-2);
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  background-color: var(--color-card);
-  color: var(--color-fg);
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--color-fg-muted);
   font-size: var(--text-sm);
+  font-weight: 500;
   cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
-.page-btn:hover {
+.page-btn:hover:not(:disabled):not(.page-btn--active) {
   background-color: var(--color-muted);
+  color: var(--color-fg);
+}
+.page-btn:focus-visible {
+  border-color: var(--ring);
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
 }
 .page-btn--active {
-  background-color: var(--color-primary);
-  color: var(--color-primary-fg);
-  border-color: var(--color-primary);
+  background-color: var(--color-card);
+  color: var(--color-fg);
+  border-color: var(--color-input);
+  font-weight: 600;
 }
 .page-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.35;
   cursor: not-allowed;
 }
 `;
 
 export class DsPagination extends HTMLElement {
   static get observedAttributes() {
-    return ["page", "total-pages"];
+    return ["page", "total-pages", "total", "page-size", "current"];
   }
 
   constructor() {
@@ -53,19 +65,21 @@ export class DsPagination extends HTMLElement {
   }
 
   get page() {
-    return Number(this.getAttribute("page")) || 1;
+    return Number(this.getAttribute("current") || this.getAttribute("page")) || 1;
   }
   set page(val) {
+    this.setAttribute("current", String(val));
     this.setAttribute("page", String(val));
     this.render();
   }
 
   get totalPages() {
-    return Number(this.getAttribute("total-pages")) || 1;
-  }
-  set totalPages(val) {
-    this.setAttribute("total-pages", String(val));
-    this.render();
+    if (this.hasAttribute("total-pages")) {
+      return Number(this.getAttribute("total-pages")) || 1;
+    }
+    const total = Number(this.getAttribute("total")) || 10;
+    const size = Number(this.getAttribute("page-size")) || 10;
+    return Math.max(1, Math.ceil(total / size));
   }
 
   connectedCallback() {
@@ -91,7 +105,7 @@ export class DsPagination extends HTMLElement {
           <li>
             <button data-slot="pagination-prev" class="page-btn" id="btn-prev" ${
       cur <= 1 ? "disabled" : ""
-    }>
+    } aria-label="上一页">
               ${createIcon("chevron-left")}
             </button>
           </li>
@@ -109,7 +123,7 @@ export class DsPagination extends HTMLElement {
           <li>
             <button data-slot="pagination-next" class="page-btn" id="btn-next" ${
       cur >= total ? "disabled" : ""
-    }>
+    } aria-label="下一页">
               ${createIcon("chevron-right")}
             </button>
           </li>
@@ -120,14 +134,18 @@ export class DsPagination extends HTMLElement {
     this.shadowRoot.querySelector("#btn-prev")?.addEventListener("click", () => {
       if (this.page > 1) {
         this.page--;
-        this.dispatchEvent(new CustomEvent("ds-change", { detail: { page: this.page } }));
+        this.dispatchEvent(
+          new CustomEvent("ds-page-change", { detail: { page: this.page }, bubbles: true }),
+        );
       }
     });
 
     this.shadowRoot.querySelector("#btn-next")?.addEventListener("click", () => {
       if (this.page < this.totalPages) {
         this.page++;
-        this.dispatchEvent(new CustomEvent("ds-change", { detail: { page: this.page } }));
+        this.dispatchEvent(
+          new CustomEvent("ds-page-change", { detail: { page: this.page }, bubbles: true }),
+        );
       }
     });
 
@@ -135,7 +153,9 @@ export class DsPagination extends HTMLElement {
       btn.addEventListener("click", () => {
         const p = Number(btn.getAttribute("data-page"));
         this.page = p;
-        this.dispatchEvent(new CustomEvent("ds-change", { detail: { page: p } }));
+        this.dispatchEvent(
+          new CustomEvent("ds-page-change", { detail: { page: p }, bubbles: true }),
+        );
       });
     });
 

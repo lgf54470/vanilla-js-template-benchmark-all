@@ -8,15 +8,18 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
+  height: 1.25rem;
+  min-width: 1.25rem;
+  border-radius: var(--radius-sm, 2px);
   border: 1px solid var(--color-border);
   background-color: var(--color-muted);
-  padding: 0.125rem 0.375rem;
+  padding: 0 0.25rem;
   font-family: inherit;
-  font-size: var(--text-2xs);
+  font-size: var(--text-xs);
   font-weight: 500;
   color: var(--color-fg-muted);
-  box-shadow: var(--shadow-xs);
+  box-sizing: border-box;
+  line-height: 1;
 }
 `;
 

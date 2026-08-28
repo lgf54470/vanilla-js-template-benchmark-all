@@ -9,32 +9,34 @@ const css = `
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-12) var(--space-4);
+  padding: 1.5rem;
   text-align: center;
   border-radius: var(--radius-xl);
   border: 1px dashed var(--color-border);
   background-color: var(--color-card);
   gap: var(--space-3);
+  box-sizing: border-box;
 }
 .icon-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius-full);
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-lg);
   background-color: var(--color-muted);
-  color: var(--color-fg-muted);
+  color: var(--color-fg);
 }
 .title {
-  font-size: var(--text-base);
-  font-weight: 600;
+  font-size: var(--text-sm);
+  font-weight: 500;
   color: var(--color-fg);
 }
 .desc {
   font-size: var(--text-sm);
   color: var(--color-fg-muted);
   max-width: 24rem;
+  line-height: 1.4;
 }
 `;
 
@@ -49,6 +51,10 @@ export class DsEmptyState extends HTMLElement {
   }
 
   connectedCallback() {
+    this.render();
+  }
+
+  attributeChangedCallback() {
     this.render();
   }
 

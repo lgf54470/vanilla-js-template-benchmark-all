@@ -8,19 +8,21 @@ const css = `
 .menu-panel {
   position: absolute;
   z-index: 50;
-  min-width: 10rem;
+  min-width: 9rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  background-color: var(--color-popover);
-  color: var(--color-popover-fg);
-  padding: var(--space-1);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-card);
+  color: var(--color-fg);
+  padding: 4px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  box-sizing: border-box;
 }
 .menu-panel[hidden] {
   display: none !important;
 }
-.side-down { top: calc(100% + var(--space-1)); }
-.side-up { bottom: calc(100% + var(--space-1)); }
+.side-down { top: calc(100% + 4px); }
+.side-up { bottom: calc(100% + 4px); }
 .align-left { left: 0; }
 .align-right { right: 0; }
 `;

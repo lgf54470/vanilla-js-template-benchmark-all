@@ -10,27 +10,29 @@ const css = `
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  backdrop-filter: blur(2px);
 }
 .overlay[hidden] { display: none !important; }
 .drawer-content {
   width: 100%;
-  max-width: 40rem;
+  max-width: 32rem;
   background-color: var(--color-card);
-  color: var(--color-card-fg);
+  color: var(--color-fg);
   border-top-left-radius: var(--radius-xl);
   border-top-right-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-xl);
+  padding: var(--space-4);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   max-height: 80vh;
   overflow-y: auto;
+  box-sizing: border-box;
 }
 .handle {
-  width: 3rem;
-  height: 0.25rem;
+  width: 100px;
+  height: 4px;
   border-radius: var(--radius-full);
-  background-color: var(--color-muted-fg, var(--color-border));
-  margin: 0 auto var(--space-4) auto;
+  background-color: var(--color-muted);
+  margin: 0 auto var(--space-3) auto;
 }
 `;
 

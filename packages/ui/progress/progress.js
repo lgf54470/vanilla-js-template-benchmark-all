@@ -7,7 +7,7 @@ const css = `
 }
 .progress-track {
   position: relative;
-  height: 0.5rem;
+  height: 4px;
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-full);

@@ -13,6 +13,7 @@ const css = `
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
+  backdrop-filter: blur(2px);
 }
 .overlay[hidden] {
   display: none !important;
@@ -20,31 +21,33 @@ const css = `
 .dialog-content {
   position: relative;
   width: 100%;
-  max-width: 32rem;
+  max-width: 26rem;
   border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   background-color: var(--color-card);
-  color: var(--color-card-fg);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-lg);
+  color: var(--color-fg);
+  padding: var(--space-4);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
+  box-sizing: border-box;
 }
 .close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: var(--radius-md);
   color: var(--color-fg-muted);
   cursor: pointer;
   border: none;
   background: transparent;
+  padding: 0;
 }
 .close-btn:hover {
   background-color: var(--color-muted);

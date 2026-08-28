@@ -6,24 +6,29 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
-  border-radius: var(--radius-md);
+  gap: var(--space-1-5, 0.375rem);
+  border-radius: var(--radius-lg);
   font-size: var(--text-sm);
   font-weight: 500;
   cursor: pointer;
   border: 1px solid transparent;
   user-select: none;
-  padding: 0 var(--space-3);
-  height: 2.25rem;
+  padding: 0 0.625rem;
+  height: 2rem;
   background-color: transparent;
   color: var(--color-fg);
   outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .toggle-btn:hover {
   background-color: var(--color-muted);
 }
 .toggle-btn:focus-visible {
+  border-color: var(--ring);
   outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 .toggle-btn--pressed {
   background-color: var(--color-muted);
@@ -31,10 +36,14 @@ const css = `
   font-weight: 600;
 }
 .variant-outline {
-  border-color: var(--color-border);
+  border-color: var(--color-input);
 }
 .variant-outline.toggle-btn--pressed {
   background-color: var(--color-muted);
+}
+.toggle-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 `;
 
@@ -84,7 +93,9 @@ export class DsToggle extends HTMLElement {
     this.shadowRoot.querySelector("button")?.addEventListener("click", () => {
       if (disabled) return;
       this.pressed = !this.pressed;
-      this.dispatchEvent(new CustomEvent("ds-change", { detail: { pressed: this.pressed } }));
+      this.dispatchEvent(
+        new CustomEvent("ds-change", { detail: { pressed: this.pressed }, bubbles: true }),
+      );
     });
 
     attachStyles(this.shadowRoot, css);

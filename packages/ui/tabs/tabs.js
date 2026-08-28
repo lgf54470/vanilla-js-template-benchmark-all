@@ -8,30 +8,46 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 2rem;
   border-radius: var(--radius-lg);
   background-color: var(--color-muted);
-  padding: 0.25rem;
+  padding: 3px;
   color: var(--color-fg-muted);
-  gap: 0.25rem;
+  gap: 2px;
+  box-sizing: border-box;
+  user-select: none;
 }
 .tab-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: calc(2rem - 6px);
   white-space: nowrap;
   border-radius: var(--radius-md);
-  padding: 0.375rem 0.75rem;
+  padding: 0 0.625rem;
   font-size: var(--text-sm);
   font-weight: 500;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--color-fg-muted);
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.tab-trigger:hover:not(.tab-trigger--active) {
+  color: var(--color-fg);
+}
+.tab-trigger:focus-visible {
+  border-color: var(--ring);
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
 }
 .tab-trigger--active {
-  background-color: var(--color-card);
+  background-color: var(--color-bg);
   color: var(--color-fg);
-  box-shadow: var(--shadow-xs);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 `;
 
@@ -90,7 +106,7 @@ export class DsTabs extends HTMLElement {
       btn.addEventListener("click", () => {
         const val = btn.getAttribute("data-value");
         this.value = val;
-        this.dispatchEvent(new CustomEvent("ds-change", { detail: { value: val } }));
+        this.dispatchEvent(new CustomEvent("ds-change", { detail: { value: val }, bubbles: true }));
       });
     });
 

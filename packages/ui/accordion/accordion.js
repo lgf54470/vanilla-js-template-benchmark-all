@@ -12,7 +12,7 @@ const css = `
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: var(--space-4) 0;
+  padding: 0.625rem 0;
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--color-fg);
@@ -20,24 +20,35 @@ const css = `
   border: none;
   background: transparent;
   text-align: left;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
 }
 .trigger:hover {
   text-decoration: underline;
 }
+.trigger:focus-visible {
+  border-radius: var(--radius-md);
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
 .chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 1rem;
   height: 1rem;
   color: var(--color-fg-muted);
-  transition: transform 0.2s ease;
 }
 .trigger[aria-expanded="true"] .chevron {
   transform: rotate(180deg);
 }
 .content {
   overflow: hidden;
-  padding-bottom: var(--space-4);
+  padding-bottom: 0.625rem;
   font-size: var(--text-sm);
   color: var(--color-fg-muted);
+  line-height: 1.5;
 }
 .content[hidden] {
   display: none !important;
@@ -88,7 +99,9 @@ export class DsAccordionItem extends HTMLElement {
 
     this.shadowRoot.querySelector(".trigger")?.addEventListener("click", () => {
       this.open = !this.open;
-      this.dispatchEvent(new CustomEvent("ds-toggle", { detail: { open: this.open } }));
+      this.dispatchEvent(
+        new CustomEvent("ds-toggle", { detail: { open: this.open }, bubbles: true }),
+      );
     });
 
     attachStyles(this.shadowRoot, css);

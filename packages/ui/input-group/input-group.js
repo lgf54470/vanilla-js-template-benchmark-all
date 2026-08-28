@@ -6,18 +6,22 @@ const css = `
   display: flex;
   align-items: center;
   width: 100%;
-  border-radius: var(--radius-md);
+  height: 2rem;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-input);
-  background-color: var(--color-card);
+  background-color: transparent;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .prefix, .suffix {
   display: flex;
   align-items: center;
-  padding: 0 var(--space-3);
+  padding: 0 0.625rem;
   font-size: var(--text-sm);
   color: var(--color-fg-muted);
   background-color: var(--color-muted);
+  height: 100%;
+  user-select: none;
 }
 ::slotted(ds-input) {
   flex: 1;

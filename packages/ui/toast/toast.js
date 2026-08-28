@@ -18,17 +18,38 @@ const css = `
   gap: var(--space-3);
   min-width: 18rem;
   max-width: 24rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   background-color: var(--color-card);
-  color: var(--color-card-fg);
-  padding: var(--space-3) var(--space-4);
-  box-shadow: var(--shadow-lg);
+  color: var(--color-fg);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   font-size: var(--text-sm);
+  box-sizing: border-box;
 }
-.toast-item--success { border-left: 4px solid var(--color-success); }
-.toast-item--error { border-left: 4px solid var(--color-danger); }
-.toast-item--info { border-left: 4px solid var(--color-primary); }
+.toast-item--success {
+  border-color: var(--color-border);
+}
+.toast-item--success .toast-icon {
+  color: var(--color-primary);
+}
+.toast-item--error {
+  border-color: var(--color-danger);
+}
+.toast-item--error .toast-icon {
+  color: var(--color-danger);
+}
+.toast-item--info .toast-icon {
+  color: var(--color-fg-muted);
+}
+.toast-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+}
 `;
 
 export class DsToast extends HTMLElement {
@@ -61,12 +82,12 @@ export class DsToast extends HTMLElement {
         ${
       this.toasts.map((t) => `
           <div data-slot="toast" class="toast-item toast-item--${t.type}">
-            <span>${
+            <span class="toast-icon">${
         createIcon(
-          t.type === "success" ? "circle-check" : t.type === "error" ? "alert-circle" : "info",
+          t.type === "success" ? "check-circle" : t.type === "error" ? "alert-circle" : "info",
         )
       }</span>
-            <span style="flex: 1;">${t.message}</span>
+            <span style="flex: 1; font-weight: 500;">${t.message}</span>
           </div>
         `).join("")
     }

@@ -7,13 +7,14 @@ const css = `
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
   border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
   background-color: var(--color-card);
-  color: var(--color-card-fg);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-sm);
+  color: var(--color-card-fg, var(--color-fg));
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(0, 0, 0, 0.05));
+  box-sizing: border-box;
 }
 `;
 

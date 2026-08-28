@@ -7,28 +7,33 @@ const css = `
 .textarea {
   width: 100%;
   min-height: 5rem;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-input);
-  background-color: var(--color-card);
-  padding: var(--space-2) var(--space-3);
+  background-color: transparent;
+  padding: 0.5rem 0.625rem;
   font-size: var(--text-sm);
   color: var(--color-fg);
   outline: none;
   font-family: inherit;
   box-sizing: border-box;
   resize: vertical;
+  transition: border-color 0.15s ease;
 }
 .textarea::placeholder {
   color: var(--color-fg-muted);
 }
-.textarea:focus {
+.textarea:hover:not(:disabled) {
+  border-color: var(--color-fg-muted);
+}
+.textarea:focus-visible, .textarea:focus {
   border-color: var(--ring);
   outline: 2px solid var(--ring);
-  outline-offset: 1px;
+  outline-offset: 2px;
 }
 .textarea:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  background-color: color-mix(in srgb, var(--color-input) 50%, transparent);
 }
 `;
 
@@ -75,10 +80,14 @@ export class DsTextarea extends HTMLElement {
 
     const textarea = this.shadowRoot.querySelector("textarea");
     textarea?.addEventListener("input", (e) => {
-      this.dispatchEvent(new CustomEvent("ds-input", { detail: { value: e.target.value } }));
+      this.dispatchEvent(
+        new CustomEvent("ds-input", { detail: { value: e.target.value }, bubbles: true }),
+      );
     });
     textarea?.addEventListener("change", (e) => {
-      this.dispatchEvent(new CustomEvent("ds-change", { detail: { value: e.target.value } }));
+      this.dispatchEvent(
+        new CustomEvent("ds-change", { detail: { value: e.target.value }, bubbles: true }),
+      );
     });
 
     attachStyles(this.shadowRoot, css);
