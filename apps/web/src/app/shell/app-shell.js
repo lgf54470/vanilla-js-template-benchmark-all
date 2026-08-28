@@ -9,6 +9,7 @@ export class AppShell extends HTMLElement {
     this.unsubscribeRouter = null;
     this.unsubscribeLocale = null;
     this.unsubscribeWorkspace = null;
+    this.docsOpen = true;
   }
 
   connectedCallback() {
@@ -42,9 +43,25 @@ export class AppShell extends HTMLElement {
   }
 
   updateActiveNav(moduleId, meta) {
+    // Single buttons
     this.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       const id = btn.getAttribute("data-module-id");
       btn.isActive = id === moduleId;
+    });
+
+    // Sub items
+    this.querySelectorAll("[data-slot='sidebar-menu-sub-item'] a").forEach((link) => {
+      const id = link.getAttribute("data-module-id");
+      const active = id === moduleId;
+      link.classList.toggle("active", active);
+      if (active) {
+        // If sub item is active, make sure parent is open
+        this.docsOpen = true;
+        const subList = this.querySelector("#docs-sub-menu");
+        const toggleBtn = this.querySelector("#btn-docs-toggle");
+        if (subList) subList.removeAttribute("hidden");
+        if (toggleBtn) toggleBtn.setAttribute("data-open", "true");
+      }
     });
 
     const breadcrumb = this.querySelector("ds-breadcrumb");
@@ -61,7 +78,11 @@ export class AppShell extends HTMLElement {
     if (!menuContainer) return;
 
     const modules = moduleRegistry.getModules();
-    menuContainer.innerHTML = modules.map((m) => `
+    // Separate single modules and sub-menu modules (notes, passwords)
+    const topModules = modules.filter((m) => m.id !== "notes" && m.id !== "passwords");
+    const subModules = modules.filter((m) => m.id === "notes" || m.id === "passwords");
+
+    const topItemsHtml = topModules.map((m) => `
       <ds-sidebar-menu-item>
         <ds-sidebar-menu-button icon="${m.icon || "folder"}" data-module-id="${m.id}" tooltip="${
       m.title || m.id
@@ -71,11 +92,65 @@ export class AppShell extends HTMLElement {
       </ds-sidebar-menu-item>
     `).join("");
 
+    const subListHtml = subModules.map((m) => `
+      <li data-slot="sidebar-menu-sub-item">
+        <a href="#/${m.id}" data-module-id="${m.id}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#${
+      m.icon || "file-text"
+    }"></use></svg>
+          <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${
+      m.title || m.id
+    }</span>
+        </a>
+      </li>
+    `).join("");
+
+    const docsToggleHtml = `
+      <li data-slot="sidebar-menu-item" class="relative" style="list-style: none;">
+        <button type="button" class="menu-toggle-btn" id="btn-docs-toggle" data-open="${
+      this.docsOpen ? "true" : "false"
+    }" title="文档与资料">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><use href="/icons.svg#book-open"></use></svg>
+          <span class="menu-label" style="flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">文档与资料</span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+        </button>
+        <ul data-slot="sidebar-menu-sub" id="docs-sub-menu" ${!this.docsOpen ? "hidden" : ""}>
+          ${subListHtml}
+        </ul>
+      </li>
+    `;
+
+    menuContainer.innerHTML = topItemsHtml + docsToggleHtml;
+
+    // Listeners for top modules
     menuContainer.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-module-id");
         eventBus.emit("router:navigate", { path: `/${id}` });
       });
+    });
+
+    // Sub modules click
+    menuContainer.querySelectorAll("[data-slot='sidebar-menu-sub-item'] a").forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const id = a.getAttribute("data-module-id");
+        eventBus.emit("router:navigate", { path: `/${id}` });
+      });
+    });
+
+    // Toggle click
+    menuContainer.querySelector("#btn-docs-toggle")?.addEventListener("click", () => {
+      this.docsOpen = !this.docsOpen;
+      const subList = menuContainer.querySelector("#docs-sub-menu");
+      const btn = menuContainer.querySelector("#btn-docs-toggle");
+      if (this.docsOpen) {
+        subList?.removeAttribute("hidden");
+        btn?.setAttribute("data-open", "true");
+      } else {
+        subList?.setAttribute("hidden", "");
+        btn?.setAttribute("data-open", "false");
+      }
     });
   }
 
