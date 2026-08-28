@@ -5,7 +5,6 @@ const css = `
 :host {
   position: relative;
   display: block;
-  width: 100%;
 }
 .trigger-container {
   width: 100%;
@@ -16,9 +15,9 @@ const css = `
   top: calc(100% + var(--space-1));
   left: 0;
   z-index: var(--z-dropdown, 50);
-  min-width: 14rem;
+  min-width: 13rem;
+  width: max-content;
   max-width: 20rem;
-  width: 100%;
   background-color: var(--color-popover);
   color: var(--color-popover-fg);
   border-radius: var(--ds-popover-radius, var(--radius-lg));

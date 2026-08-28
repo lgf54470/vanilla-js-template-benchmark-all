@@ -30,7 +30,6 @@ export class AppShell extends HTMLElement {
     });
 
     this.unsubscribeWorkspace = eventBus.on("workspace:changed", () => {
-      // Reload current route on workspace change
       const hash = globalThis.window?.location.hash;
       if (hash) {
         eventBus.emit("router:navigate", { path: hash.replace(/^#/, "") });
@@ -43,17 +42,15 @@ export class AppShell extends HTMLElement {
   }
 
   updateActiveNav(moduleId, meta) {
-    // Update sidebar buttons active state
     this.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       const id = btn.getAttribute("data-module-id");
       btn.isActive = id === moduleId;
     });
 
-    // Update breadcrumb
     const breadcrumb = this.querySelector("ds-breadcrumb");
     if (breadcrumb && meta) {
       breadcrumb.items = [
-        { label: "vanilla-js-template" },
+        { label: "Vanilla Workbench" },
         { label: meta.title || moduleId },
       ];
     }
@@ -74,7 +71,6 @@ export class AppShell extends HTMLElement {
       </ds-sidebar-menu-item>
     `).join("");
 
-    // Re-attach clicks
     menuContainer.querySelectorAll("ds-sidebar-menu-button").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-module-id");
@@ -93,7 +89,7 @@ export class AppShell extends HTMLElement {
 
           <ds-sidebar-content>
             <ds-sidebar-group>
-              <ds-sidebar-group-label>导航菜单</ds-sidebar-group-label>
+              <ds-sidebar-group-label>主菜单</ds-sidebar-group-label>
               <ds-sidebar-menu id="sidebar-menu"></ds-sidebar-menu>
             </ds-sidebar-group>
           </ds-sidebar-content>
@@ -116,6 +112,10 @@ export class AppShell extends HTMLElement {
             <div class="header-right">
               <ds-lang-switch></ds-lang-switch>
               <ds-theme-switch></ds-theme-switch>
+              <ds-appearance-sheet></ds-appearance-sheet>
+              <button type="button" class="header-icon-btn" id="btn-header-logout" title="退出登录" aria-label="退出登录">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="/icons.svg#log-out"></use></svg>
+              </button>
             </div>
           </header>
 
@@ -123,6 +123,18 @@ export class AppShell extends HTMLElement {
         </div>
       </ds-sidebar-provider>
     `;
+
+    this.querySelector("#btn-header-logout")?.addEventListener("click", async () => {
+      const token = localStorage.getItem("auth:token") || "";
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: { "x-auth-password": token },
+      }).catch(() => {});
+      localStorage.removeItem("auth:token");
+      sessionStorage.removeItem("auth:token");
+      eventBus.emit("auth:unauthorized");
+      globalThis.window?.location.reload();
+    });
 
     this.renderSidebarItems();
   }

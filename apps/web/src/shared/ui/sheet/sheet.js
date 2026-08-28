@@ -6,8 +6,8 @@ const css = `
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: var(--z-sheet);
-  background-color: var(--color-overlay);
+  z-index: var(--z-sheet, 40);
+  background-color: var(--color-overlay, rgba(0, 0, 0, 0.5));
   display: flex;
 }
 .backdrop[hidden] {
@@ -15,8 +15,8 @@ const css = `
 }
 .sheet-panel {
   position: fixed;
-  background-color: var(--color-card);
-  color: var(--color-card-fg);
+  background-color: var(--color-popover, var(--color-card));
+  color: var(--color-popover-fg, var(--color-card-fg));
   box-shadow: var(--shadow-xl);
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@ const css = `
 }
 .sheet--right {
   top: 0; bottom: 0; right: 0;
-  width: 24rem;
+  width: max-content;
   max-width: 100%;
   border-left: 1px solid var(--color-border);
 }
@@ -58,10 +58,13 @@ const css = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-1);
+  width: 1.75rem;
+  height: 1.75rem;
   border-radius: var(--radius-sm);
   color: var(--color-fg-muted);
   cursor: pointer;
+  border: none;
+  background: transparent;
 }
 .close-btn:hover {
   color: var(--color-fg);
@@ -69,6 +72,10 @@ const css = `
 }
 .sheet-body {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.sheet-body--padded {
   padding: var(--space-4);
 }
 `;
@@ -126,16 +133,22 @@ export class DsSheet extends HTMLElement {
     const isOpen = this.open;
     const title = this.getAttribute("title");
 
+    const headerHtml = title
+      ? `
+      <div class="sheet-header">
+        <div class="sheet-title">${title}</div>
+        <button class="close-btn" type="button" aria-label="Close sheet">
+          ${createIcon("x")}
+        </button>
+      </div>
+    `
+      : "";
+
     this.shadowRoot.innerHTML = `
       <div class="backdrop" ${!isOpen ? "hidden" : ""} role="dialog" aria-modal="true">
         <div class="sheet-panel sheet--${this.side}">
-          <div class="sheet-header">
-            <div class="sheet-title">${title || ""}</div>
-            <button class="close-btn" type="button" aria-label="Close sheet">
-              ${createIcon("x")}
-            </button>
-          </div>
-          <div class="sheet-body">
+          ${headerHtml}
+          <div class="sheet-body ${title ? "sheet-body--padded" : ""}">
             <slot></slot>
           </div>
         </div>
@@ -146,7 +159,7 @@ export class DsSheet extends HTMLElement {
     if (closeBtn) closeBtn.addEventListener("click", () => this.close());
 
     const backdrop = this.shadowRoot.querySelector(".backdrop");
-    backdrop.addEventListener("click", (e) => {
+    backdrop?.addEventListener("click", (e) => {
       if (e.target === backdrop) this.close();
     });
 

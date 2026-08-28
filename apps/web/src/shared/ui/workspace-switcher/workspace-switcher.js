@@ -22,8 +22,8 @@ ds-dropdown-menu {
   align-items: center;
   gap: var(--space-2);
   width: 100%;
-  padding: var(--space-1);
-  border-radius: var(--radius-md);
+  padding: var(--space-2);
+  border-radius: var(--radius-lg);
   color: var(--color-sidebar-fg);
   cursor: pointer;
   border: none;
@@ -33,6 +33,7 @@ ds-dropdown-menu {
 }
 .switcher-btn:hover {
   background-color: var(--color-sidebar-accent);
+  color: var(--color-sidebar-accent-fg);
 }
 .icon-tile {
   display: flex;
@@ -40,7 +41,7 @@ ds-dropdown-menu {
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   background-color: var(--color-sidebar-primary, var(--color-primary));
   color: var(--color-sidebar-primary-fg, var(--color-primary-fg));
   flex-shrink: 0;
@@ -50,6 +51,7 @@ ds-dropdown-menu {
   flex-direction: column;
   flex: 1;
   min-width: 0;
+  line-height: 1.25;
 }
 .name {
   font-size: var(--text-sm);
@@ -66,6 +68,7 @@ ds-dropdown-menu {
 .chevrons {
   color: var(--color-fg-muted);
   flex-shrink: 0;
+  margin-left: auto;
 }
 :host-context(ds-sidebar[data-state="collapsed"]) .info,
 :host-context(ds-sidebar[data-state="collapsed"]) .chevrons {
@@ -89,7 +92,7 @@ ds-dropdown-menu {
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   font-size: var(--text-sm);
   color: var(--color-fg);
   cursor: pointer;
@@ -106,8 +109,8 @@ ds-dropdown-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
   background-color: var(--color-muted);
@@ -284,7 +287,9 @@ export class DsWorkspaceSwitcher extends HTMLElement {
           ${shortcut ? `<span class="shortcut">${shortcut}</span>` : ""}
           ${
         active
-          ? `<span style="color: var(--color-primary);">${createIcon("circle-check")}</span>`
+          ? `<span style="color: var(--color-primary); margin-left: auto;">${
+            createIcon("circle-check")
+          }</span>`
           : ""
       }
         </div>

@@ -270,11 +270,12 @@ export class DsSidebarGroup extends HTMLElement {
 
 const groupLabelCss = `
 :host {
-  display: block;
-  padding-block: var(--space-1);
+  display: flex;
+  align-items: center;
+  height: 2rem;
   padding-inline: var(--space-2);
-  font-size: var(--text-2xs);
-  font-weight: 600;
+  font-size: var(--text-xs);
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-fg-muted);
@@ -299,7 +300,7 @@ const menuCss = `
 :host {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 2px;
   list-style: none;
 }
 `;
@@ -341,12 +342,13 @@ const menuButtonCss = `
 .menu-btn {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   width: 100%;
-  height: 2.25rem;
-  padding-inline: var(--space-3);
+  height: 2rem;
+  padding-inline: var(--space-2);
   border-radius: var(--ds-sidebar-item-radius, var(--radius-md));
   font-size: var(--text-sm);
+  font-weight: 500;
   color: var(--color-sidebar-fg);
   cursor: pointer;
   user-select: none;
@@ -369,8 +371,8 @@ const menuButtonCss = `
   outline-offset: 1px;
 }
 .icon {
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .label {
@@ -437,9 +439,11 @@ const subMenuCss = `
 :host {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
-  padding-inline-start: var(--space-6);
-  margin-top: var(--space-1);
+  gap: 2px;
+  margin-left: 0.875rem;
+  padding-left: 0.625rem;
+  padding-block: 0.125rem;
+  border-left: 1px solid var(--color-sidebar-border);
 }
 :host-context(ds-sidebar[data-state="collapsed"]) {
   display: none !important;
@@ -466,13 +470,13 @@ const subMenuItemCss = `
   width: 100%;
   height: 1.75rem;
   padding-inline: var(--space-2);
-  border-radius: var(--radius-sm);
-  font-size: var(--text-xs);
-  color: var(--color-fg-muted);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-sidebar-fg);
   cursor: pointer;
 }
 .sub-item-btn:hover {
-  color: var(--color-sidebar-fg);
+  color: var(--color-sidebar-accent-fg);
   background-color: var(--color-sidebar-accent);
 }
 :host([data-active="true"]) .sub-item-btn {
@@ -546,11 +550,14 @@ const triggerCss = `
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   border-radius: var(--radius-md);
   color: var(--color-fg-muted);
   cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
 }
 .trigger-btn:hover {
   color: var(--color-fg);

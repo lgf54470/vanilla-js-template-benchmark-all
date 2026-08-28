@@ -24,3 +24,4 @@ export * from "./dropdown-menu/dropdown-menu.js";
 export * from "./sidebar/sidebar.js";
 export * from "./workspace-switcher/workspace-switcher.js";
 export * from "./nav-user/nav-user.js";
+export * from "./appearance-sheet/appearance-sheet.js";
