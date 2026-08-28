@@ -1,6 +1,7 @@
 #!/usr/bin/env -S deno run --allow-read --allow-env --allow-run
 
 const checks = [
+  "scripts/check-file-length.js",
   "scripts/check-hardcoded-tokens.js",
   "scripts/check-i18n-keys.js",
 ];

@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { secureHeaders } from "hono/secure-headers";
-import { cors } from "hono/cors";
+import { secureHeaders } from "hono/secure-headers.js";
+import { cors } from "hono/cors.js";
 import { withRequestId } from "./shared/logger/request-context.js";
 import { createAuthMiddleware } from "./shared/auth/auth-middleware.js";
 import { createWorkspaceMiddleware } from "./shared/workspace/context-middleware.js";
