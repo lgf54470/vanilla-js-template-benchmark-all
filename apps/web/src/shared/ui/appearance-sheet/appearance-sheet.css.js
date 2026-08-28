@@ -122,9 +122,14 @@ export const css = `
   color: var(--color-fg);
   font-weight: 500;
 }
-.swatches-grid {
+.swatches-grid-7 {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-2);
+}
+.swatches-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-2);
 }
 .swatch-btn {
@@ -159,6 +164,20 @@ export const css = `
 .swatch-dot--blue { background-color: var(--swatch-blue); }
 .swatch-dot--yellow { background-color: var(--swatch-yellow); }
 .swatch-dot--violet { background-color: var(--swatch-violet); }
+.swatch-dot--amber { background-color: var(--swatch-amber); }
+.swatch-dot--cyan { background-color: var(--swatch-cyan); }
+.swatch-dot--emerald { background-color: var(--swatch-emerald); }
+.swatch-dot--fuchsia { background-color: var(--swatch-fuchsia); }
+.swatch-dot--indigo { background-color: var(--swatch-indigo); }
+.swatch-dot--lime { background-color: var(--swatch-lime); }
+.swatch-dot--pink { background-color: var(--swatch-pink); }
+.swatch-dot--purple { background-color: var(--swatch-purple); }
+.swatch-dot--sky { background-color: var(--swatch-sky); }
+.swatch-dot--teal { background-color: var(--swatch-teal); }
+.swatch-dot--mauve { background-color: var(--swatch-mauve); }
+.swatch-dot--olive { background-color: var(--swatch-olive); }
+.swatch-dot--mist { background-color: var(--swatch-mist); }
+.swatch-dot--taupe { background-color: var(--swatch-taupe); }
 
 .swatch-label {
   font-size: 0.625rem;
@@ -169,17 +188,39 @@ export const css = `
   color: var(--color-fg);
   font-weight: 500;
 }
-.segmented-row {
-  display: flex;
-  flex-wrap: wrap;
+.segmented-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+  background-color: var(--color-muted);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+}
+.segmented-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+  background-color: var(--color-muted);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+}
+.segmented-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.25rem;
+  background-color: var(--color-muted);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+}
+.segmented-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.25rem;
   background-color: var(--color-muted);
   padding: 0.25rem;
   border-radius: var(--radius-md);
 }
 .seg-btn {
-  flex: 1;
-  min-width: 2.5rem;
   height: 1.75rem;
   display: flex;
   align-items: center;
@@ -190,6 +231,10 @@ export const css = `
   cursor: pointer;
   border: none;
   background: transparent;
+}
+.seg-btn:hover {
+  color: var(--color-fg);
+  background-color: var(--color-bg);
 }
 .seg-btn--active {
   background-color: var(--color-bg);

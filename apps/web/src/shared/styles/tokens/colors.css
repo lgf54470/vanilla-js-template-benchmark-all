@@ -63,6 +63,20 @@
   --swatch-blue: oklch(0.623 0.214 259.815);
   --swatch-yellow: oklch(0.795 0.184 86.047);
   --swatch-violet: oklch(0.606 0.25 292.717);
+  --swatch-amber: oklch(0.769 0.188 70.08);
+  --swatch-cyan: oklch(0.789 0.154 211.53);
+  --swatch-emerald: oklch(0.696 0.17 162.48);
+  --swatch-fuchsia: oklch(0.667 0.295 322.15);
+  --swatch-indigo: oklch(0.585 0.233 277.117);
+  --swatch-lime: oklch(0.768 0.233 130.85);
+  --swatch-pink: oklch(0.656 0.241 354.308);
+  --swatch-purple: oklch(0.627 0.265 303.9);
+  --swatch-sky: oklch(0.685 0.169 237.323);
+  --swatch-teal: oklch(0.704 0.14 182.503);
+  --swatch-mauve: oklch(0.553 0.013 285.938);
+  --swatch-olive: oklch(0.553 0.013 110.85);
+  --swatch-mist: oklch(0.553 0.013 211.53);
+  --swatch-taupe: oklch(0.553 0.013 47.604);
 }
 
 .dark:not([class*="base-"]) {

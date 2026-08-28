@@ -216,13 +216,11 @@ export default {
       }</div>
             <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-3);">
               ${
-        [s.baseColor, ...CHART_COLORS.slice(0, 5)].map((ch, idx) => {
+        [s.baseColor, ...CHART_COLORS].map((ch) => {
           const active = s.chartColor === ch;
           return `
                   <button type="button" class="swatch-btn" data-chart-color="${ch}" style="display: flex; flex-direction: column; align-items: center; gap: 0.25rem; border: none; background: transparent; cursor: pointer; padding: 0;">
-                    <span class="swatch-dot swatch-dot--${
-            idx === 0 ? ch : "violet"
-          }" style="position: relative; width: 2rem; height: 2rem; border-radius: var(--radius-full); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
+                    <span class="swatch-dot swatch-dot--${ch}" style="position: relative; width: 2rem; height: 2rem; border-radius: var(--radius-full); border: 1px solid var(--color-border); display: flex; align-items: center; justify-content: center;">
                       ${
             active
               ? `<span style="position: absolute; top: -0.25rem; right: -0.25rem; display: flex; align-items: center; justify-content: center; width: 1rem; height: 1rem; border-radius: var(--radius-full); background: var(--color-primary); color: var(--color-primary-fg);">${
@@ -233,7 +231,7 @@ export default {
                     </span>
                     <span style="font-size: var(--text-xs); color: ${
             active ? "var(--color-fg)" : "var(--color-fg-muted)"
-          };">${idx === 0 ? "base" : ch.replace("chart-", "#")}</span>
+          };">${ch}</span>
                   </button>
                 `;
         }).join("")
@@ -278,7 +276,7 @@ export default {
           s.fontSans === f.value ? "var(--color-fg)" : "var(--color-fg-muted)"
         }; font-weight: ${
           s.fontSans === f.value ? "600" : "400"
-        }; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--text-xs);">${f.name}</button>
+        }; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--text-xs);">${f.label}</button>
                   `).join("")
       }
                 </div>
@@ -296,7 +294,7 @@ export default {
           s.fontHeading === f.value ? "var(--color-fg)" : "var(--color-fg-muted)"
         }; font-weight: ${
           s.fontHeading === f.value ? "600" : "400"
-        }; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--text-xs);">${f.name}</button>
+        }; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--text-xs);">${f.label}</button>
                   `).join("")
       }
                 </div>
@@ -318,7 +316,9 @@ export default {
           s.radius === r.value ? "var(--color-fg)" : "var(--color-fg-muted)"
         }; font-weight: ${
           s.radius === r.value ? "600" : "400"
-        }; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--text-xs);">${r.value}</button>
+        }; border-radius: var(--radius-sm); cursor: pointer; font-size: var(--text-xs);">${
+          t(r.labelKey)
+        }</button>
               `).join("")
       }
             </div>
@@ -411,10 +411,10 @@ export default {
         setTheme("system");
         setBaseColor("zinc");
         setStyle("nova");
-        setChartColor("chart-1");
-        setFontSans("Inter Variable, sans-serif");
-        setFontHeading("inherit");
-        setRadius("0.625rem");
+        setChartColor("zinc");
+        setFontSans("inter");
+        setFontHeading("manrope");
+        setRadius("default");
         setSidebarVariant("sidebar");
         setSidebarCollapsible("icon");
         toast.success(t("settings.resetAll"));

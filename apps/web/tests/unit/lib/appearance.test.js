@@ -22,12 +22,12 @@ Deno.test("appearance: get/set theme", () => {
 });
 
 Deno.test("appearance: get/set base color", () => {
-  setBaseColor("blue");
-  assert.strictEqual(getBaseColor(), "blue");
-  setBaseColor("violet");
-  assert.strictEqual(getBaseColor(), "violet");
+  setBaseColor("stone");
+  assert.strictEqual(getBaseColor(), "stone");
+  setBaseColor("zinc");
+  assert.strictEqual(getBaseColor(), "zinc");
   setBaseColor("invalid-color");
-  assert.strictEqual(getBaseColor(), "violet"); // Should not change on invalid
+  assert.strictEqual(getBaseColor(), "zinc"); // Should not change on invalid
 });
 
 Deno.test("appearance: get/set style", () => {
@@ -38,11 +38,11 @@ Deno.test("appearance: get/set style", () => {
 });
 
 Deno.test("appearance: get/set chart color", () => {
-  setChartColor("chart-3");
-  assert.strictEqual(getChartColor(), "chart-3");
+  setChartColor("amber");
+  assert.strictEqual(getChartColor(), "amber");
 });
 
 Deno.test("appearance: get/set radius", () => {
-  setRadius("0.75rem");
-  assert.strictEqual(getRadius(), "0.75rem");
+  setRadius("lg");
+  assert.strictEqual(getRadius(), "lg");
 });

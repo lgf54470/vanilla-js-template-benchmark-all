@@ -95,6 +95,7 @@ export class DsAppearanceSheet extends HTMLElement {
           </div>
 
           <div class="panel-body">
+            <!-- Theme -->
             <div>
               <div class="section-title">${t("settings.theme")}</div>
               <div class="cards-grid">
@@ -120,6 +121,7 @@ export class DsAppearanceSheet extends HTMLElement {
               </div>
             </div>
 
+            <!-- Sidebar -->
             <div>
               <div class="section-title">${t("settings.sidebar")}</div>
               <div class="cards-grid">
@@ -145,6 +147,7 @@ export class DsAppearanceSheet extends HTMLElement {
               </div>
             </div>
 
+            <!-- Layout -->
             <div>
               <div class="section-title">${t("settings.layout")}</div>
               <div class="cards-grid">
@@ -170,9 +173,10 @@ export class DsAppearanceSheet extends HTMLElement {
               </div>
             </div>
 
+            <!-- Base Colors -->
             <div>
               <div class="section-title">${t("settings.baseColor")}</div>
-              <div class="swatches-grid">
+              <div class="swatches-grid-7">
                 ${
       BASE_COLORS.map((c) => {
         const active = s.baseColor === c;
@@ -192,33 +196,33 @@ export class DsAppearanceSheet extends HTMLElement {
               </div>
             </div>
 
+            <!-- Chart Colors -->
             <div>
               <div class="section-title">${t("settings.chartColor")}</div>
-              <div class="swatches-grid" style="grid-template-columns: repeat(6, 1fr);">
+              <div class="swatches-grid-6">
                 ${
-      [s.baseColor, ...CHART_COLORS.slice(0, 5)].map((ch, idx) => {
+      [s.baseColor, ...CHART_COLORS].map((ch) => {
         const active = s.chartColor === ch;
         return `
                     <button type="button" class="swatch-btn ${
           active ? "swatch-btn--active" : ""
         }" data-chart-color="${ch}">
-                      <span class="swatch-dot swatch-dot--${idx === 0 ? ch : "violet"}">
+                      <span class="swatch-dot swatch-dot--${ch}">
                         ${
           active ? `<span class="check-badge">${createIcon("circle-check")}</span>` : ""
         }
                       </span>
-                      <span class="swatch-label">${
-          idx === 0 ? "base" : ch.replace("chart-", "#")
-        }</span>
+                      <span class="swatch-label">${ch}</span>
                     </button>`;
       }).join("")
     }
               </div>
             </div>
 
+            <!-- Styles -->
             <div>
               <div class="section-title">${t("settings.style")}</div>
-              <div class="segmented-row">
+              <div class="segmented-grid-4">
                 ${
       STYLES.map((st) => `
                   <button type="button" class="seg-btn ${
@@ -228,65 +232,78 @@ export class DsAppearanceSheet extends HTMLElement {
               </div>
             </div>
 
+            <!-- Body Font -->
             <div>
               <div class="section-title">${t("settings.bodyFont")}</div>
-              <div class="segmented-row">
+              <div class="segmented-grid-3">
                 ${
       FONTS.map((f) => `
                   <button type="button" class="seg-btn ${
         s.fontSans === f.value ? "seg-btn--active" : ""
-      }" data-body-font="${f.value}">${f.name}</button>`).join("")
+      }" data-body-font="${f.value}">${f.label}</button>`).join("")
     }
               </div>
             </div>
 
+            <!-- Heading Font -->
             <div>
               <div class="section-title">${t("settings.headingFont")}</div>
-              <div class="segmented-row">
+              <div class="segmented-grid-3">
                 ${
       FONTS.map((f) => `
                   <button type="button" class="seg-btn ${
         s.fontHeading === f.value ? "seg-btn--active" : ""
-      }" data-heading-font="${f.value}">${f.name}</button>`).join("")
+      }" data-heading-font="${f.value}">${f.label}</button>`).join("")
     }
               </div>
             </div>
 
+            <!-- Icon Library -->
             <div class="readonly-row">
               <span class="readonly-label">${t("settings.iconLibrary")}</span>
               <span class="readonly-badge">${t("settings.lucide")}</span>
             </div>
 
+            <!-- Radius -->
             <div>
               <div class="section-title">${t("settings.radius")}</div>
-              <div class="segmented-row">
+              <div class="segmented-grid-6">
                 ${
       RADII.map((r) => `
                   <button type="button" class="seg-btn ${
         s.radius === r.value ? "seg-btn--active" : ""
-      }" data-radius="${r.value}">${r.value}</button>`).join("")
+      }" data-radius="${r.value}">${t(r.labelKey)}</button>`).join("")
     }
               </div>
             </div>
 
+            <!-- Menu Color -->
             <div>
               <div class="section-title">${t("settings.menuColor")}</div>
-              <div class="segmented-row">
+              <div class="segmented-grid-2">
                 <button type="button" class="seg-btn seg-btn--active">${
-      t("settings.variantOptions.sidebar")
+      t("settings.menuColorOptions.default")
     }</button>
-                <button type="button" class="seg-btn">${t("settings.variantOptions.inset")}</button>
+                <button type="button" class="seg-btn">${
+      t("settings.menuColorOptions.inverted")
+    }</button>
               </div>
             </div>
 
+            <!-- Menu Appearance -->
             <div>
               <div class="section-title">${t("settings.menuAppearance")}</div>
-              <div class="segmented-row">
-                <button type="button" class="seg-btn seg-btn--active">Solid</button>
-                <button type="button" class="seg-btn">Translucent</button>
+              <div class="segmented-grid-2">
+                <button type="button" class="seg-btn seg-btn--active">${
+      t("settings.menuAppearanceOptions.solid")
+    }</button>
+                <button type="button" class="seg-btn">${
+      t("settings.menuAppearanceOptions.translucent")
+    }</button>
               </div>
             </div>
 
+            <!-- Menu Accent -->
             <div class="readonly-row">
               <span class="readonly-label">${t("settings.menuAccent")}</span>
               <span class="readonly-badge">${t("settings.subtle")}</span>
@@ -368,10 +385,10 @@ export class DsAppearanceSheet extends HTMLElement {
       setTheme("system");
       setBaseColor("zinc");
       setStyle("nova");
-      setChartColor("chart-1");
-      setFontSans("Inter Variable, sans-serif");
-      setFontHeading("inherit");
-      setRadius("0.625rem");
+      setChartColor("zinc");
+      setFontSans("inter");
+      setFontHeading("manrope");
+      setRadius("default");
       setSidebarVariant("sidebar");
       setSidebarCollapsible("icon");
       setSidebarOpen(true);

@@ -93,43 +93,64 @@ export const STYLES = ["nova", "vega", "maia", "lyra", "mira", "luma", "sera", "
 /**
  * 7 大基色列表
  */
-export const BASE_COLORS = ["zinc", "red", "orange", "green", "blue", "violet", "rose"];
-
-/**
- * 12 组图表色系
- */
-export const CHART_COLORS = [
-  "chart-1",
-  "chart-2",
-  "chart-3",
-  "chart-4",
-  "chart-5",
-  "chart-6",
-  "chart-7",
-  "chart-8",
-  "chart-9",
-  "chart-10",
-  "chart-11",
-  "chart-12",
+export const BASE_COLORS = [
+  "neutral",
+  "stone",
+  "zinc",
+  "mauve",
+  "olive",
+  "mist",
+  "taupe",
 ];
 
 /**
- * 自托管字体选项
+ * 强调色/图表色系
+ */
+export const CHART_COLORS = [
+  "amber",
+  "blue",
+  "cyan",
+  "emerald",
+  "fuchsia",
+  "green",
+  "indigo",
+  "lime",
+  "orange",
+  "pink",
+  "purple",
+  "red",
+  "rose",
+  "sky",
+  "teal",
+  "violet",
+  "yellow",
+];
+
+/**
+ * 自托管/系统字体选项
  */
 export const FONTS = [
-  { id: "inter", name: "Inter", value: "Inter Variable, sans-serif" },
-  { id: "manrope", name: "Manrope", value: "Manrope Variable, sans-serif" },
-  { id: "geist", name: "Geist", value: "Geist Variable, sans-serif" },
+  {
+    value: "inter",
+    label: "Inter",
+    stack: "'Inter Variable', ui-sans-serif, system-ui, sans-serif",
+  },
+  {
+    value: "manrope",
+    label: "Manrope",
+    stack: "'Manrope Variable', ui-sans-serif, system-ui, sans-serif",
+  },
+  { value: "system", label: "System", stack: "ui-sans-serif, system-ui, sans-serif" },
 ];
 
 /**
  * 圆角预设选项
  */
 export const RADII = [
-  { value: "0", label: "0" },
-  { value: "0.3rem", label: "0.3" },
-  { value: "0.5rem", label: "0.5" },
-  { value: "0.625rem", label: "0.625" },
-  { value: "0.75rem", label: "0.75" },
-  { value: "1.0rem", label: "1.0" },
+  { value: "default", labelKey: "settings.radiusOptions.default", px: "0.625rem" },
+  { value: "none", labelKey: "settings.radiusOptions.none", px: "0rem" },
+  { value: "sm", labelKey: "settings.radiusOptions.sm", px: "0.25rem" },
+  { value: "md", labelKey: "settings.radiusOptions.md", px: "0.5rem" },
+  { value: "lg", labelKey: "settings.radiusOptions.lg", px: "0.75rem" },
+  { value: "full", labelKey: "settings.radiusOptions.full", px: "9999px" },
 ];
