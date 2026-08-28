@@ -1,0 +1,68 @@
+/**
+ * ds-sidebar 样式 — 对齐 shadcn nova sidebar：
+ * bg sidebar、右缘 1px 边框、icon 收起态窄条 + 内容裁剪。
+ * 颜色全部走语义层 --color-sidebar-*（palettes 提供，CSS.md §2.4）。
+ */
+
+/* ── 宽度解析链（Layout.md §1.1）：元素级令牌优先于继承 ── */
+:host {
+  --sidebar-self-width: var(--sidebar-width);
+}
+
+:host([data-collapsible="icon"][data-state="collapsed"]) {
+  --sidebar-self-width: var(--sidebar-width-icon);
+}
+
+:host {
+  display: block;
+  grid-area: sidebar;
+}
+
+/* ── 面板 ── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  block-size: 100%;
+  inline-size: var(--sidebar-self-width, var(--sidebar-width));
+  background: var(--color-sidebar);
+  color: var(--color-sidebar-fg);
+  overflow: hidden;
+}
+
+.sidebar[data-side="left"] {
+  border-inline-end: 1px solid var(--color-sidebar-border);
+}
+
+.sidebar[data-side="right"] {
+  border-inline-start: 1px solid var(--color-sidebar-border);
+}
+
+/* 变体：floating 悬浮卡片（贴边留隙 + 圆角 + 阴影） */
+.sidebar[data-variant="floating"] {
+  margin: var(--space-2);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* offcanvas：收起完全隐藏 */
+.sidebar[data-collapsible="offcanvas"][data-state="collapsed"] {
+  visibility: hidden;
+}
+
+/* icon 收起态：内容区溢出裁剪（文本隐藏，仅图标列可见） */
+.sidebar[data-collapsible="icon"][data-state="collapsed"] .sidebar-inner {
+  overflow: hidden;
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-block-size: 0;
+  flex: 1;
+}
+
+/* 移动端：桌面面板不显示（sheet 承载内容） */
+:host([data-mobile="true"]) .sidebar {
+  display: none;
+}

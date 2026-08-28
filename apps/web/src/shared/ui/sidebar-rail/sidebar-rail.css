@@ -1,0 +1,16 @@
+/**
+ * ds-sidebar-rail 样式 — 贴 sidebar 内缘的窄热区（对齐 shadcn SidebarRail）。
+ */
+:host {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: -0.375rem;
+  inline-size: 0.75rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* 移动端无 rail（sidebar 隐藏时它也不应存在；渲染层保证，此处双保险） */
+:host([data-mobile="true"]) {
+  display: none;
+}

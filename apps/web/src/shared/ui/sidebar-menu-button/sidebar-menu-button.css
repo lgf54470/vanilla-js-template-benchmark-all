@@ -1,0 +1,88 @@
+/**
+ * ds-sidebar-menu-button 样式 — 对齐 shadcn nova：
+ * 圆角 md、hover bg sidebar-accent、active 高亮、焦点环 sidebar-ring。
+ */
+
+/* ── UA 重置（button/a 双形态） ── */
+button,
+a {
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+button,
+a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  inline-size: 100%;
+  block-size: 2rem;
+  padding-inline: var(--space-2);
+  border-radius: var(--ds-sidebar-item-radius, var(--radius-md));
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+button[data-size="sm"],
+a[data-size="sm"] {
+  block-size: 1.75rem;
+}
+
+button[data-size="lg"],
+a[data-size="lg"] {
+  block-size: 2.25rem;
+}
+
+button:hover,
+a:hover {
+  background: var(--color-sidebar-accent);
+  color: var(--color-sidebar-accent-fg);
+}
+
+button[data-active="true"],
+a[data-active="true"] {
+  background: var(--color-sidebar-accent);
+  color: var(--color-sidebar-accent-fg);
+  font-weight: 600;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-sidebar-ring);
+}
+
+::slotted(svg) {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+/* chevron：随父 collapsible data-state=open 旋转 90°（瞬时，no-motion） */
+svg[part="chevron"] {
+  margin-inline-start: auto;
+  transition: none;
+}
+
+:host([data-chevron-open="true"]) svg[part="chevron"] {
+  rotate: 90deg;
+}
+
+/* ── icon 收起态：图标居中、文本裁剪 ── */
+:host([data-state="collapsed"][data-collapsible="icon"]) button,
+:host([data-state="collapsed"][data-collapsible="icon"]) a {
+  padding-inline: 0;
+  justify-content: center;
+}

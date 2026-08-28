@@ -1,0 +1,54 @@
+/**
+ * ds-segmented-control 样式 — 胶囊 radiogroup 容器与滑块。
+ * 行模式：容器 --color-muted，滑块（--color-bg + --shadow-xs）translateX 定位；
+ * grid 模式：容器 display:grid（列数由 JS 内联写入），选中项自高亮。
+ */
+
+/* ── UA 重置：shadow 内原生表单控件样式归零（容器自身无原生控件，
+   保持组件间约定统一） ── */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+:host {
+  display: block;
+}
+
+.group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-1);
+  box-sizing: border-box;
+  width: fit-content;
+  padding: var(--space-1);
+  border-radius: var(--ds-seg-radius, var(--radius-full));
+  background: var(--color-muted);
+}
+
+/* 滑块：绝对定位于容器内边距盒，宽度和 translateX 偏移由 JS 按选中项实测写入 */
+.slider {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 0;
+  border-radius: var(--ds-seg-radius, var(--radius-full));
+  background: var(--color-bg);
+  box-shadow: var(--shadow-xs);
+}
+
+.group[data-mode="grid"] {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+}

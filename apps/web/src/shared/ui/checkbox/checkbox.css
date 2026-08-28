@@ -1,0 +1,85 @@
+/**
+ * ds-checkbox 样式 — 自绘方框复选框（对齐 shadcn nova：size-4 方块 /
+ * rounded-sm / 选中底色 primary、打勾 primary-foreground）。
+ */
+
+/* ── UA 重置：shadow 内原生表单控件样式归零 ── */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+:host {
+  display: inline-block;
+}
+
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* input 透明覆盖在 .box 上：保留原生点击/键盘/焦点语义 */
+input {
+  position: absolute;
+  inset-inline-start: 0;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  opacity: 0;
+}
+
+.box {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--ds-checkbox-radius, var(--radius-sm));
+  background: var(--color-bg);
+}
+
+input:checked + .box {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+}
+
+/* 打勾：右+下边框旋转 45°（CSS 自绘，避免引入颜色字面量） */
+input:checked + .box::after {
+  content: "";
+  width: 0.25rem;
+  height: 0.5rem;
+  border-inline-end: 2px solid var(--color-primary-fg);
+  border-block-end: 2px solid var(--color-primary-fg);
+  margin-block-start: -0.125rem;
+  transform: rotate(45deg);
+}
+
+input:focus-visible + .box {
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+input:disabled + .box,
+input:disabled ~ .label {
+  opacity: 0.5;
+}
+
+.label {
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+}

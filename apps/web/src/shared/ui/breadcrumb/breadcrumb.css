@@ -1,0 +1,81 @@
+/**
+ * ds-breadcrumb / ds-breadcrumb-item 样式。
+ * 同一份样式表分别注入两个组件的 shadow root，:host(<tag>) 限定
+ * 各自宿主，互不串扰。
+ */
+
+/* ── UA 重置：shadow 内原生 a（item 的链接） ── */
+a {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+/* ── ds-breadcrumb 容器（注入 ds-breadcrumb 的 shadow）── */
+:host(ds-breadcrumb) {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+:host(ds-breadcrumb) nav {
+  display: inline-flex;
+  min-width: 0;
+}
+
+:host(ds-breadcrumb) ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-sm);
+}
+
+/* ── ds-breadcrumb-item（注入 item 的 shadow）── */
+:host(ds-breadcrumb-item) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+:host(ds-breadcrumb-item) .link {
+  color: var(--color-fg-muted);
+}
+
+:host(ds-breadcrumb-item) .link:hover {
+  color: var(--color-fg);
+  text-decoration: underline;
+}
+
+:host(ds-breadcrumb-item) .link:focus-visible {
+  outline: none;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+:host(ds-breadcrumb-item) .page {
+  color: var(--color-fg);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:host(ds-breadcrumb-item) .separator {
+  display: inline-flex;
+  flex: none;
+  color: var(--color-fg-muted);
+}
+
+/* 当前页或末项不显示分隔符（display 切换，非动画） */
+:host(ds-breadcrumb-item[current]) .separator,
+:host(ds-breadcrumb-item:last-child) .separator {
+  display: none;
+}

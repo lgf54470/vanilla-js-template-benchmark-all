@@ -1,0 +1,35 @@
+/**
+ * ds-card 样式 — nova 基准：ring-1 描边、无阴影。
+ * 阴影在 :host、ring 在 .card（原因见 card.js 头注）；
+ * 无原生表单控件，无需 UA 重置段。
+ */
+
+:host {
+  display: block;
+  border-radius: var(--ds-card-radius, var(--radius-xl));
+  box-shadow: var(--ds-card-shadow, none);
+}
+
+.card {
+  border-radius: inherit;
+  background: var(--color-card);
+  color: var(--color-card-fg);
+  box-shadow: 0 0 0 1px var(--ds-card-ring);
+  padding: var(--ds-card-padding, var(--space-4));
+}
+
+.card[data-padding="none"] {
+  padding: 0;
+}
+
+.card[data-padding="sm"] {
+  padding: var(--space-2);
+}
+
+.card[data-padding="md"] {
+  padding: var(--space-4);
+}
+
+.card[data-padding="lg"] {
+  padding: var(--space-6);
+}

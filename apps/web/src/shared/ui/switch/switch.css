@@ -1,0 +1,79 @@
+/**
+ * ds-switch 样式 — 对齐 shadcn nova 开关（轨道 w-9 h-5 / 圆形滑块 /
+ * 选中轨道 primary、未选中 input 边框色）。
+ */
+
+/* ── UA 重置：shadow 内原生表单控件样式归零 ── */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+:host {
+  display: inline-block;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  user-select: none;
+}
+
+button[role="switch"] {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  box-sizing: border-box;
+  width: var(--ds-switch-width, 2.25rem);
+  height: var(--ds-switch-height, 1.25rem);
+  border-radius: var(--ds-switch-radius, var(--radius-full));
+  background: var(--color-input-border);
+}
+
+button[role="switch"][aria-checked="true"] {
+  background: var(--color-primary);
+}
+
+.thumb {
+  width: var(--ds-switch-thumb, 1rem);
+  height: var(--ds-switch-thumb, 1rem);
+  margin-inline-start: calc(
+    (var(--ds-switch-height, 1.25rem) - var(--ds-switch-thumb, 1rem)) / 2
+  );
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+}
+
+/* 选中位移 = 轨道宽 - 两侧留白（(高-滑块)/2 × 2） */
+button[role="switch"][aria-checked="true"] .thumb {
+  transform: translateX(
+    calc(var(--ds-switch-width, 2.25rem) - var(--ds-switch-height, 1.25rem))
+  );
+}
+
+button[role="switch"]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+button[role="switch"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.label {
+  font-size: var(--text-sm);
+  color: var(--color-fg);
+}

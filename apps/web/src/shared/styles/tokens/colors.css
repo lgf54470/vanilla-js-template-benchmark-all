@@ -66,6 +66,31 @@
   );
   --color-sidebar-border: var(--sidebar-border, oklch(0.92 0.004 286.32));
   --color-sidebar-ring: var(--sidebar-ring, oklch(0.705 0.015 286.067));
+
+  /* 焦点环（原始 --ring 同名，经语义出口暴露；soft = 50% 透明度） */
+  --color-ring: var(--ring, oklch(0.705 0.015 286.067));
+  --color-ring-soft: color-mix(
+    in oklch,
+    var(--ring, oklch(0.705 0.015 286.067)) 50%,
+    transparent
+  );
+
+  /* 悬停/软色（shadcn /80、/10、/20 修饰的语义等价物） */
+  --color-primary-hover: color-mix(
+    in oklch,
+    var(--primary, oklch(0.21 0.006 285.885)) 80%,
+    transparent
+  );
+  --color-danger-soft: color-mix(
+    in oklch,
+    var(--destructive, oklch(0.577 0.245 27.325)) 10%,
+    transparent
+  );
+  --color-danger-soft-hover: color-mix(
+    in oklch,
+    var(--destructive, oklch(0.577 0.245 27.325)) 20%,
+    transparent
+  );
 }
 
 /* 状态色暗色增量（dark 下提亮以保证对比度） */

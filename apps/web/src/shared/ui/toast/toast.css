@@ -1,0 +1,80 @@
+/**
+ * ds-toast 样式 — 单条目：popover 底 + 状态色图标 + 手动关闭。
+ * 宿主容器（z --z-toast、屏幕底部居中纵向堆叠）由 toast-host.js 内联注入。
+ * 无 transition/animation 声明（全站 no-motion，docs/CSS.md §9）。
+ */
+
+/* ── UA 重置：shadow 内原生 button 必须先归零 ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+/* 宿主容器 pointer-events:none，条目自身恢复交互 */
+:host {
+  display: block;
+  pointer-events: auto;
+  max-width: min(100%, 24rem);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-popover);
+  color: var(--color-popover-fg);
+  border-radius: var(--ds-toast-radius, var(--radius-2xl));
+  box-shadow:
+    0 0 0 1px var(--ds-toast-ring, var(--color-border)),
+    var(--ds-toast-shadow, var(--shadow-lg));
+  padding: var(--ds-toast-padding, var(--space-4));
+}
+
+/* 状态色图标：success/error/info */
+.toast[data-type="success"] .icon {
+  color: var(--color-success);
+}
+
+.toast[data-type="error"] .icon {
+  color: var(--color-danger);
+}
+
+.toast[data-type="info"] .icon {
+  color: var(--color-primary);
+}
+
+.msg {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--text-sm);
+}
+
+/* 手动关闭按钮 */
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  border-radius: var(--ds-btn-radius, var(--radius-lg));
+  color: var(--color-fg-muted);
+}
+
+.close:hover {
+  background: var(--color-muted);
+  color: var(--color-fg);
+}
+
+.close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}

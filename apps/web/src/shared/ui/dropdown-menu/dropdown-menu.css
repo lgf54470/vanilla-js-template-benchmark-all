@@ -1,0 +1,79 @@
+/**
+ * ds-dropdown-menu 家族样式 — 对齐 shadcn nova 下拉：
+ * popover 底、ring-1、shadow-md、item 圆角 sm + hover muted。
+ */
+
+/* ── UA 重置（panel 内含原生 button 的 item 组件共用本样式表） ── */
+button {
+  font: inherit;
+  font-size: var(--text-sm);
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+/* ── 面板（宿主 ds-dropdown-menu 内） ── */
+[part="panel"] {
+  position: fixed;
+  min-width: 10rem;
+  max-width: 20rem;
+  padding: var(--space-1);
+  background: var(--color-popover);
+  color: var(--color-popover-fg);
+  border-radius: var(--ds-menu-radius, var(--radius-lg));
+  box-shadow:
+    0 0 0 1px var(--ds-dialog-ring, var(--color-border)),
+    var(--ds-menu-shadow, var(--shadow-md));
+  z-index: var(--z-dropdown);
+  overflow: auto;
+}
+
+/* ── 菜单项（ds-dropdown-item） ── */
+button[role="menuitem"] {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2);
+  border-radius: var(--ds-menu-item-radius, var(--radius-sm));
+  text-align: start;
+  line-height: 1.25;
+}
+
+button[role="menuitem"]:hover:not(:disabled),
+button[role="menuitem"]:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-accent-fg);
+  outline: none;
+}
+
+button[role="menuitem"]:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+::slotted(svg) {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+/* ── 分隔线（ds-dropdown-separator） ── */
+[part="separator"] {
+  height: 1px;
+  margin: var(--space-1);
+  background: var(--color-border);
+}
+
+/* ── 分组标签（ds-dropdown-label） ── */
+[part="label"] {
+  padding: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-fg-muted);
+}

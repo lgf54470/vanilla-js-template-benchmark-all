@@ -1,0 +1,82 @@
+/**
+ * ds-confirm-dialog 样式 — 只负责 footer 按钮区（浮层本体由内部组合的
+ * ds-dialog 渲染）。按钮复用 ds-button 的 variant 语义色与尺寸，但不嵌套
+ * ds-button 组件（避免跨组件 shadow 嵌套）。
+ * 无 transition/animation 声明（全站 no-motion，docs/CSS.md §9）。
+ */
+
+/* ── UA 重置：shadow 内原生 button 必须先归零 ── */
+button {
+  font: inherit;
+  font-size: var(--ds-btn-font-size, var(--text-sm));
+  font-weight: var(--ds-btn-font-weight, 500);
+  letter-spacing: var(--ds-btn-letter-spacing, normal);
+  text-transform: var(--ds-btn-text-transform, none);
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+:host {
+  display: contents;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  padding-inline: var(--ds-btn-px, 0.625rem);
+  border-radius: var(--ds-btn-radius, var(--radius-lg));
+  line-height: 1;
+}
+
+.btn:active {
+  translate: 0 1px;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+.btn[data-variant="outline"] {
+  border-color: var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+.btn[data-variant="outline"]:hover {
+  background: var(--color-muted);
+}
+
+.btn[data-variant="primary"] {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+}
+
+.btn[data-variant="primary"]:hover {
+  background: var(--color-primary-hover);
+}
+
+/* 危险操作：--color-danger 系（对齐 ds-button danger：软底 + danger 文字） */
+.btn[data-variant="danger"] {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.btn[data-variant="danger"]:hover {
+  background: var(--color-danger-soft-hover);
+}

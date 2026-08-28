@@ -1,0 +1,89 @@
+/**
+ * ds-icon-button 样式 — 正方形按钮，尺寸对齐 shadcn nova（default size-8）。
+ * 与 ds-button 共享 variant 语义色。
+ */
+
+/* ── UA 重置 ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--ds-btn-radius, var(--radius-lg));
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+::slotted(svg),
+svg.icon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+button[data-size="sm"] {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+button[data-size="lg"] {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+button[data-variant="primary"] {
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+}
+
+button[data-variant="primary"]:hover {
+  background: var(--color-primary-hover);
+}
+
+button[data-variant="secondary"] {
+  background: var(--color-secondary);
+  color: var(--color-secondary-fg);
+}
+
+button[data-variant="outline"] {
+  border-color: var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+button[data-variant="outline"]:hover,
+button[data-variant="ghost"]:hover,
+button[data-variant="secondary"]:hover {
+  background: var(--color-muted);
+}
+
+button[data-variant="danger"] {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+button[data-variant="danger"]:hover {
+  background: var(--color-danger-soft-hover);
+}

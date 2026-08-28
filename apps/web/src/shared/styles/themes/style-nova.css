@@ -5,6 +5,7 @@
 .style-nova {
   /* ── Button / IconButton ── */
   --ds-btn-radius: var(--radius-lg);
+  --ds-btn-px: 0.625rem;
   --ds-btn-font-size: var(--text-sm);
   --ds-btn-font-weight: 500;
   --ds-btn-text-transform: none;
@@ -60,4 +61,28 @@
 
   /* ── 焦点环宽度 ── */
   --ds-focus-ring-width: 3px;
+
+  /* ── Switch：轨道/滑块尺寸（ds-switch 消费；位移 = 宽 - 高，见 switch.css） ── */
+  --ds-switch-width: 2.25rem;
+  --ds-switch-height: 1.25rem;
+  --ds-switch-thumb: 1rem;
+
+  /* ── SegmentedControl：子项尺寸（ds-segmented-item 消费） ── */
+  --ds-seg-item-height: 1.75rem;
+  --ds-seg-item-px: 0.75rem;
+
+  /* ── Sheet（侧滑抽屉；移动端 Sidebar 复用，对齐 shadcn nova rounded-lg）── */
+  --ds-sheet-radius: var(--radius-lg);
+  --ds-sheet-shadow: var(--shadow-lg);
+  --ds-sheet-padding: var(--space-4);
+
+  /* ── Toast 补充（半径 --ds-toast-radius 见上；ring 对齐 nova 描边风格） ── */
+  --ds-toast-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+  --ds-toast-shadow: var(--shadow-lg);
+  --ds-toast-padding: var(--space-4);
+
+  /* ── Dialog 阴影修正：浮层需要投影层级感（对齐 shadcn nova 的 shadow-lg，
+      覆盖上文的 none；luma/rhea/sera 等 delta 的 --ds-dialog-shadow 覆盖链
+      依旧有效——同名声明后者生效） ── */
+  --ds-dialog-shadow: var(--shadow-lg);
 }

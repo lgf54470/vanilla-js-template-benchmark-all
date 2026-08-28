@@ -1,0 +1,129 @@
+/**
+ * ds-sheet 样式 — 侧滑抽屉：遮罩同 dialog（z --z-sheet），面板贴边。
+ * left/right 宽 min(--sidebar-width-mobile, 80vw)；top/bottom 高
+ * min(60vh, 100%) 贴上下边。定位用逻辑属性（RTL 预留，docs/CSS.md §7）。
+ * 无 transition/animation 声明（全站 no-motion，docs/CSS.md §9）。
+ */
+
+/* ── UA 重置：shadow 内原生 button 必须先归零 ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+:host {
+  display: contents;
+}
+
+/* 遮罩：关闭态显式 display:none + pointer-events:none */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: block;
+  background: var(--color-overlay);
+  z-index: var(--z-sheet);
+}
+
+.overlay[hidden] {
+  display: none;
+  pointer-events: none;
+}
+
+/* 抽屉面板：贴边 + 边框 + 投影 */
+.sheet {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  box-shadow: var(--ds-sheet-shadow, var(--shadow-lg));
+}
+
+.sheet[data-side="left"] {
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: min(var(--sidebar-width-mobile), 80vw);
+  border-inline-end: 1px solid var(--color-border);
+  border-start-end-radius: var(--ds-sheet-radius, var(--radius-lg));
+  border-end-end-radius: var(--ds-sheet-radius, var(--radius-lg));
+}
+
+.sheet[data-side="right"] {
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: min(var(--sidebar-width-mobile), 80vw);
+  border-inline-start: 1px solid var(--color-border);
+  border-start-start-radius: var(--ds-sheet-radius, var(--radius-lg));
+  border-end-start-radius: var(--ds-sheet-radius, var(--radius-lg));
+}
+
+.sheet[data-side="top"] {
+  inset-inline: 0;
+  inset-block-start: 0;
+  height: min(60vh, 100%);
+  border-block-end: 1px solid var(--color-border);
+  border-end-start-radius: var(--ds-sheet-radius, var(--radius-lg));
+  border-end-end-radius: var(--ds-sheet-radius, var(--radius-lg));
+}
+
+.sheet[data-side="bottom"] {
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: min(60vh, 100%);
+  border-block-start: 1px solid var(--color-border);
+  border-start-start-radius: var(--ds-sheet-radius, var(--radius-lg));
+  border-start-end-radius: var(--ds-sheet-radius, var(--radius-lg));
+}
+
+/* 头部：标题 + 关闭按钮 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--ds-sheet-padding, var(--space-4));
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex: none;
+  border-radius: var(--ds-btn-radius, var(--radius-lg));
+  color: var(--color-fg-muted);
+}
+
+.close:hover {
+  background: var(--color-muted);
+  color: var(--color-fg);
+}
+
+.close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+/* 主体内容：抽屉内部消化溢出 */
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--ds-sheet-padding, var(--space-4));
+  font-size: var(--text-sm);
+}

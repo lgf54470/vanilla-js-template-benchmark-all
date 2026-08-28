@@ -1,0 +1,76 @@
+/**
+ * ds-workspace-switcher 样式 — 对齐 shadcn team-switcher（base-nova）：
+ * 6×6 磁贴（border + muted 底）、触发器侧边圆角条、对勾主色。
+ */
+
+/* ── UA 重置 ── */
+button {
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+/* ── 触发器 ── */
+[part="trigger"] {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  inline-size: 100%;
+  block-size: 2rem;
+  padding-inline: var(--space-2);
+  border-radius: var(--ds-sidebar-item-radius, var(--radius-md));
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+[part="trigger"]:hover,
+[part="trigger"]:focus-visible {
+  background: var(--color-sidebar-accent);
+  color: var(--color-sidebar-accent-fg);
+  outline: none;
+}
+
+[part="trigger-name"] {
+  flex: 1;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── 6×6 图标磁贴（border + muted 底，收起态下随 sidebar 裁剪） ── */
+[part="tile"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  flex: none;
+  border: 1px solid var(--color-sidebar-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-sidebar-accent);
+}
+
+/* 列表项名称截断 + 对勾 */
+[part="list"] {
+  display: flex;
+  flex-direction: column;
+}
+
+[part="item-name"] {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[part="check"] {
+  color: var(--color-primary);
+}

@@ -1,0 +1,56 @@
+/**
+ * ds-collapsible 样式 — 触发按钮全宽透明（视觉交给 slot 内容，如
+ * ds-sidebar-menu-button）、内容关闭即 hidden；chevron 用
+ * transform: rotate(90deg) 瞬时旋转（全站无动效）。
+ */
+
+/* ── UA 重置：shadow 内原生 button ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+:host {
+  display: block;
+}
+
+.collapsible {
+  display: block;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  text-align: start;
+  border-radius: var(--radius-sm);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+.chevron {
+  display: inline-flex;
+  flex: none;
+  margin-inline-start: auto;
+  color: var(--color-fg-muted);
+}
+
+/* data-state=open 时 chevron 顺时针转 90deg（瞬时，非动画） */
+.collapsible[data-state="open"] .chevron {
+  transform: rotate(90deg);
+}
+
+.content {
+  display: block;
+}

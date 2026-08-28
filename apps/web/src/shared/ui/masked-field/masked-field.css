@@ -1,0 +1,56 @@
+/**
+ * masked-field 样式 — 掩码文本 + 眼睛切换按钮（小图标按钮形态，
+ * focus ring 复用 --ds-focus-ring-width）；无动效，hover 瞬时切换。
+ */
+
+/* ── UA 重置：shadow 内原生 button ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+:host {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  font-size: var(--text-sm);
+}
+
+[part="value"] {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+  color: var(--color-fg-muted);
+}
+
+button:hover {
+  background: var(--color-muted);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}

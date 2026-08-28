@@ -1,0 +1,55 @@
+/**
+ * ds-page-placeholder 样式 — 页面级占位：在可用空间内居中，
+ * 父容器给定高度时撑满（flex 1）并保底 16rem；error 态圆底
+ * 换 danger 软色、图标 danger。无原生表单控件，无需 UA 重置段。
+ */
+
+:host {
+  display: flex;
+}
+
+.placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 16rem;
+  padding: var(--space-8) var(--space-4);
+}
+
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-full);
+  background: var(--color-muted);
+  color: var(--color-fg-muted);
+  margin-bottom: var(--space-4);
+}
+
+.placeholder[data-state="error"] .icon-circle {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+[part="title"] {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--color-fg);
+}
+
+[part="description"] {
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+}

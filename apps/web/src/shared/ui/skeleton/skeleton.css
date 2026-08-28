@@ -1,0 +1,29 @@
+/**
+ * ds-skeleton 样式 — 底色 muted，圆角按 variant：
+ * text → radius-sm / rect → radius-md / circle → radius-full。
+ * 全部样式落在 :host（无内容无 slot，shadow 仅承载 adoptedStyleSheets）。
+ */
+
+:host {
+  display: inline-block;
+  flex: none;
+  background: var(--color-muted);
+}
+
+:host([data-variant="text"]) {
+  width: 100%;
+  height: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+:host([data-variant="circle"]) {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-full);
+}
+
+:host([data-variant="rect"]) {
+  width: 100%;
+  height: 2rem;
+  border-radius: var(--radius-md);
+}

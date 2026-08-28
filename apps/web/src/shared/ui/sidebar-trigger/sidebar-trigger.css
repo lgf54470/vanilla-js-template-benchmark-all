@@ -1,0 +1,40 @@
+/**
+ * ds-sidebar-trigger 样式 — ghost 图标按钮语义（同 ds-icon-button ghost）。
+ */
+
+/* ── UA 重置 ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border-radius: var(--ds-btn-radius, var(--radius-lg));
+}
+
+button:hover {
+  background: var(--color-muted);
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+svg.icon {
+  width: 1rem;
+  height: 1rem;
+}

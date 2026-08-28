@@ -1,0 +1,115 @@
+/**
+ * ds-dialog 样式 — 对齐 shadcn nova 对话框：rounded-xl 内容卡 + ring 描边 +
+ * --shadow-lg 投影，遮罩 --color-overlay（z --z-dialog）。
+ * 无 transition/animation 声明（全站 no-motion，docs/CSS.md §9）。
+ */
+
+/* ── UA 重置：shadow 内原生 button 必须先归零 ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 1px solid transparent;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  user-select: none;
+}
+
+:host {
+  display: contents;
+}
+
+/* 遮罩：关闭态显式 display:none + pointer-events:none
+   （author 规则压制 UA 的 [hidden]，仅 opacity 归零仍会拦截全屏点击） */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-overlay);
+  z-index: var(--z-dialog);
+  padding: var(--space-4);
+}
+
+.overlay[hidden] {
+  display: none;
+  pointer-events: none;
+}
+
+/* 内容卡 */
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-dialog-gap, var(--space-4));
+  width: min(100%, 32rem);
+  max-height: 100%;
+  background: var(--color-card);
+  color: var(--color-card-fg);
+  border-radius: var(--ds-dialog-radius, var(--radius-xl));
+  box-shadow:
+    0 0 0 1px var(--ds-dialog-ring, var(--color-border)),
+    var(--ds-dialog-shadow, var(--shadow-lg));
+  padding: var(--ds-dialog-padding, var(--space-4));
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.description {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-fg-muted);
+}
+
+/* 右上角关闭按钮 */
+.close {
+  position: absolute;
+  inset-block-start: var(--space-3);
+  inset-inline-end: var(--space-3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--ds-btn-radius, var(--radius-lg));
+  color: var(--color-fg-muted);
+}
+
+.close:hover {
+  background: var(--color-muted);
+  color: var(--color-fg);
+}
+
+.close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--ds-focus-ring-width, 3px) var(--color-ring-soft);
+}
+
+/* 主体内容：浮层内部消化溢出（不外泄到 <main> 滚动区） */
+.content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  font-size: var(--text-sm);
+}
+
+/* 操作区 */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
