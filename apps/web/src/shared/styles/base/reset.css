@@ -1,0 +1,54 @@
+/*
+ * base/reset.css — light DOM 全局重置（令牌定义处，允许字面量）。
+ * 只服务 light DOM；shadow 内的 UA 样式重置由各组件 CSS 自带
+ * （shared/ui 组件先归零原生 button/input/a 再写自家样式）。
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  block-size: 100%;
+  overflow: hidden; /* 唯一允许滚动的是 main（docs/Layout.md §1） */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-inline-size: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--color-primary) 25%, transparent);
+}

@@ -1,0 +1,41 @@
+/*
+ * themes/style-nova.css — 风格令牌集：全集基准（docs/CSS.md §2.3，令牌定义处）。
+ * 其余 7 个风格（vega/maia/lyra/mira/luma/sera/rhea）只写与本文件的 delta；
+ * 组件 CSS 一律以 var(--ds-<x>, <nova 默认>) 消费，未挂 style-* 类时回退
+ * nova 默认值（默认值写在组件 CSS 的 var() 第二参里，与本文件保持一致）。
+ * 暗色增量用 .dark.style-<name>。
+ */
+
+.style-nova {
+  /* Button */
+  --ds-btn-radius: calc(var(--radius) * 2.6);
+  --ds-btn-height: 2.25rem;
+
+  /* Input / Textarea / Select */
+  --ds-input-radius: calc(var(--radius) * 0.8);
+  --ds-input-bg: transparent;
+  --ds-input-border: var(--color-border);
+
+  /* Card */
+  --ds-card-radius: calc(var(--radius) * 1.4);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 5%, transparent);
+
+  /* Menu / Dropdown */
+  --ds-menu-item-radius: calc(var(--radius) * 1.8);
+  --ds-menu-item-height: 2rem;
+  --ds-dropdown-radius: calc(var(--radius) * 1.4);
+  --ds-dropdown-shadow: var(--shadow-md);
+
+  /* Dialog / Sheet */
+  --ds-dialog-radius: calc(var(--radius) * 1.4);
+  --ds-dialog-shadow: var(--shadow-lg);
+  --ds-sheet-radius: 0;
+
+  /* 小控件 */
+  --ds-badge-radius: var(--radius-full);
+  --ds-tooltip-radius: calc(var(--radius) * 0.8);
+  --ds-switch-radius: var(--radius-full);
+  --ds-segmented-radius: var(--radius-full);
+  --ds-avatar-radius: var(--radius-full);
+  --ds-checkbox-radius: calc(var(--radius) * 0.4);
+}

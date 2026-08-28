@@ -1,0 +1,27 @@
+/*
+ * themes/palettes-swatches.css — 主题设置选色器的示意色块（令牌定义处）。
+ * 只被 ds-theme-settings 的磁贴消费；不进入任何组件的常规色彩链路。
+ */
+
+:root {
+  --swatch-base-zinc: oklch(0.21 0.006 285.885);
+  --swatch-base-red: oklch(0.505 0.213 27.518);
+  --swatch-base-orange: oklch(0.553 0.195 38.402);
+  --swatch-base-green: oklch(0.527 0.154 150.069);
+  --swatch-base-blue: oklch(0.488 0.243 264.376);
+  --swatch-base-violet: oklch(0.491 0.27 292.581);
+  --swatch-base-rose: oklch(0.514 0.222 16.935);
+
+  --swatch-chart-zinc: oklch(0.442 0.017 285.786);
+  --swatch-chart-red: oklch(0.577 0.245 27.325);
+  --swatch-chart-orange: oklch(0.646 0.222 41.116);
+  --swatch-chart-amber: oklch(0.666 0.179 58.318);
+  --swatch-chart-yellow: oklch(0.681 0.162 75.834);
+  --swatch-chart-lime: oklch(0.648 0.2 131.684);
+  --swatch-chart-green: oklch(0.627 0.194 149.214);
+  --swatch-chart-emerald: oklch(0.596 0.145 163.225);
+  --swatch-chart-teal: oklch(0.6 0.118 184.704);
+  --swatch-chart-blue: oklch(0.546 0.245 262.881);
+  --swatch-chart-violet: oklch(0.541 0.281 293.009);
+  --swatch-chart-rose: oklch(0.586 0.253 17.585);
+}

@@ -1,0 +1,11 @@
+/*
+ * tokens/sidebar.css — 侧栏尺寸三件套（令牌定义处，允许字面量；
+ * docs/Components.md §3.6）。颜色不在这里：--sidebar-* 原始变量由
+ * themes/palettes-base.css 提供，组件消费语义层 --color-sidebar-*。
+ */
+
+:root {
+  --sidebar-width: 16rem;
+  --sidebar-width-icon: 3rem;
+  --sidebar-width-mobile: 18rem;
+}

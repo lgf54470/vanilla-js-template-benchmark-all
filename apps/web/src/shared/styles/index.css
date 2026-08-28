@@ -1,0 +1,30 @@
+/*
+ * index.css — 样式唯一入口（docs/CSS.md §1）。加载顺序：结构令牌与语义映射层
+ * → 原始变量层 + 风格令牌集 → base 三件。src/style.css 只 @import 本文件；
+ * shadow DOM 的 no-motion 由 shared/ui/base.js 的 attachStyles() 注入。
+ */
+
+@import "./tokens/colors.css";
+@import "./tokens/spacing.css";
+@import "./tokens/radius.css";
+@import "./tokens/shadow.css";
+@import "./tokens/typography.css";
+@import "./tokens/zindex.css";
+@import "./tokens/motion.css";
+@import "./tokens/sidebar.css";
+
+@import "./themes/palettes-base.css";
+@import "./themes/palettes-chart.css";
+@import "./themes/palettes-swatches.css";
+@import "./themes/style-nova.css";
+@import "./themes/style-vega.css";
+@import "./themes/style-maia.css";
+@import "./themes/style-lyra.css";
+@import "./themes/style-mira.css";
+@import "./themes/style-luma.css";
+@import "./themes/style-sera.css";
+@import "./themes/style-rhea.css";
+
+@import "./base/reset.css";
+@import "./base/motion.css";
+@import "./base/no-motion.css";

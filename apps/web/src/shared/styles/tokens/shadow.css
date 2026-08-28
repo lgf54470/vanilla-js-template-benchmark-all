@@ -1,0 +1,14 @@
+/*
+ * tokens/shadow.css — 阴影六档（令牌定义处，允许字面量）。
+ * 阴影只允许出现在浮层（Dropdown/Dialog/Sheet/Toast，docs/Design.md §3）；
+ * 静态卡片一律 1px --color-border 分隔，无阴影。
+ */
+
+:root {
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-sm: 0 1px 3px rgb(0 0 0 / 10%), 0 1px 2px rgb(0 0 0 / 6%);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 10%);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 16%);
+  --shadow-xl: 0 20px 40px rgb(0 0 0 / 18%);
+  --shadow-2xl: 0 25px 50px rgb(0 0 0 / 25%);
+}

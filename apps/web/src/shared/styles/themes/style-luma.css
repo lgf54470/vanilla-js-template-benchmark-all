@@ -1,0 +1,14 @@
+/*
+ * themes/style-luma.css — 大圆角/填充输入风（delta，取值对齐 docs/CSS.md §2.3 示例）。
+ */
+
+.style-luma {
+  --ds-btn-radius: calc(var(--radius) * 2.6);
+  --ds-input-bg: color-mix(in oklch, var(--input) 50%, transparent);
+  --ds-input-border: transparent;
+  --ds-input-radius: calc(var(--radius) * 1.4);
+}
+
+.dark.style-luma {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 10%, transparent);
+}

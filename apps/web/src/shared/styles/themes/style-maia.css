@@ -1,0 +1,13 @@
+/*
+ * themes/style-maia.css — 高对比描边风（delta）。
+ */
+
+.style-maia {
+  --ds-input-border: var(--color-fg);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 14%, transparent);
+  --ds-dropdown-shadow: none;
+}
+
+.dark.style-maia {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 20%, transparent);
+}

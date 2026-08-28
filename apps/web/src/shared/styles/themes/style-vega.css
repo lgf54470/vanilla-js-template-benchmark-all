@@ -1,0 +1,14 @@
+/*
+ * themes/style-vega.css — 锐利直角风（delta，只写与 style-nova 的差异）。
+ */
+
+.style-vega {
+  --ds-btn-radius: calc(var(--radius) * 0.3);
+  --ds-input-radius: calc(var(--radius) * 0.3);
+  --ds-card-radius: calc(var(--radius) * 0.3);
+  --ds-menu-item-radius: calc(var(--radius) * 0.4);
+  --ds-dropdown-radius: calc(var(--radius) * 0.3);
+  --ds-dialog-radius: calc(var(--radius) * 0.4);
+  --ds-tooltip-radius: calc(var(--radius) * 0.3);
+  --ds-checkbox-radius: calc(var(--radius) * 0.2);
+}

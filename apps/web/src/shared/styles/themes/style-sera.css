@@ -1,0 +1,12 @@
+/*
+ * themes/style-sera.css — 柔面填充风（delta）：输入与卡片带浅色底。
+ */
+
+.style-sera {
+  --ds-input-bg: color-mix(in oklch, var(--muted) 40%, transparent);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 8%, transparent);
+}
+
+.dark.style-sera {
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 12%, transparent);
+}

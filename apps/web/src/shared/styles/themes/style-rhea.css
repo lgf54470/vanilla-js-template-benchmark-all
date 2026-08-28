@@ -1,0 +1,11 @@
+/*
+ * themes/style-rhea.css — 方圆折中风（delta）：控件半径整体收小一档。
+ */
+
+.style-rhea {
+  --ds-btn-radius: calc(var(--radius) * 1.2);
+  --ds-card-radius: calc(var(--radius) * 0.6);
+  --ds-menu-item-radius: calc(var(--radius) * 0.8);
+  --ds-dropdown-radius: calc(var(--radius) * 0.8);
+  --ds-dialog-radius: calc(var(--radius) * 0.8);
+}

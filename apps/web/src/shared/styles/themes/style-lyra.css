@@ -1,0 +1,9 @@
+/*
+ * themes/style-lyra.css — 轻浮层/柔和阴影风（delta）：浮层阴影整体上浮一档。
+ */
+
+.style-lyra {
+  --ds-dropdown-shadow: var(--shadow-lg);
+  --ds-dialog-shadow: var(--shadow-xl);
+  --ds-card-ring: color-mix(in oklch, var(--foreground) 3%, transparent);
+}

@@ -1,0 +1,71 @@
+/*
+ * tokens/typography.css — 字号/行高/字体三件套（令牌定义处，允许字面量）。
+ * 自托管三可变字体（public/fonts/，docs/CSS.md §4），不引 CDN；
+ * 页面级标题 h1-h4 跟随 --font-heading-base（主题设置切换标题字体时全站生效）。
+ */
+
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/inter-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Manrope Variable";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/manrope-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/geist-var.woff2") format("woff2");
+}
+
+:root {
+  /* 字号（与 Tailwind 刻度一致；正文默认 --text-sm） */
+  --text-2xs: 0.625rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* 行高 */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+
+  /* 字体族：主题设置写 --font-*-base（值 = 下方 --font-<name> 之一） */
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-manrope: "Manrope Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-geist: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-base: var(--font-sans);
+  --font-heading-base: var(--font-sans);
+
+  /* 图标三档尺寸（docs/Design.md §5） */
+  --icon-sm: 1rem;
+  --icon-md: 1.25rem;
+  --icon-lg: 1.5rem;
+}
+
+body {
+  font-family: var(--font-sans-base);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-heading-base);
+  line-height: var(--leading-tight);
+}

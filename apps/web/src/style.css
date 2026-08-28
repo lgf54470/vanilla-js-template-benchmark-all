@@ -1,5 +1,19 @@
 /*
- * 入口样式表（ARCHITECTURE.md §3：src/style.css 只引 shared/styles/index.css）。
- * M1 落地令牌层后改为：
- *   @import "./shared/styles/index.css";
+ * 入口样式表（ARCHITECTURE.md §3）：只 @import shared/styles/index.css +
+ * 页面容器与壳层公用规则。令牌与主题见 docs/CSS.md；限宽职责归页面自己的
+ * 容器（docs/Layout.md §4）。
  */
+
+@import "./shared/styles/index.css";
+
+.page-container {
+  max-inline-size: 64rem; /* narrow 变体 48rem */
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.page-container--narrow {
+  max-inline-size: 48rem;
+}

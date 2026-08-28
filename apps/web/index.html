@@ -4,12 +4,89 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>vanilla-js-template</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="/fonts/inter-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/manrope-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script>
+    // PREPAINT（docs/CSS.md §1 注入通道 2）：首帧前把持久化外观写到 <html>，
+    // 防刷新闪白/闪暗。与 shared/lib/appearance.js 维护同一套类与键名
+    // （STORAGE_KEYS，pref:*）——改动任一侧必须同步另一侧。
+    // 注意：prepaint 不做合法值校验（values 由外观引擎写入时已校验），
+    // 异常值最多导致回退到 tokens 的 oklch 兜底。
+    (function () {
+      try {
+        var d = document.documentElement;
+        var get = function (k) {
+          try {
+            return localStorage.getItem(k);
+          } catch (e) {
+            return null;
+          }
+        };
+        var swap = function (prefix, value) {
+          var re = new RegExp("(?:^|\\\\s)" + prefix + "[^\\\\s]*", "g");
+          d.className = d.className.replace(re, "");
+          if (value) d.className += " " + prefix + value;
+        };
+        swap("style-", get("pref:style") || "nova");
+        swap("base-", get("pref:base") || "zinc");
+        swap("chart-", get("pref:chart") || "zinc");
+        swap("menu-", get("pref:menu-appearance") || "");
+        var theme = get("pref:theme") || "system";
+        var dark = theme === "dark" ||
+          (theme === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        d.classList.toggle("dark", dark);
+        d.dataset.theme = dark ? "dark" : "light";
+        d.style.colorScheme = dark ? "dark" : "light";
+        var radius = get("pref:radius");
+        if (radius) d.style.setProperty("--radius", radius);
+        var fs = get("pref:font-sans") || "inter";
+        var fh = get("pref:font-heading") || "inter";
+        d.style.setProperty(
+          "--font-sans-base",
+          "var(" + (fs === "inter" ? "--font-sans" : "--font-" + fs) + ")",
+        );
+        d.style.setProperty(
+          "--font-heading-base",
+          "var(" + (fh === "inter" ? "--font-sans" : "--font-" + fh) + ")",
+        );
+        d.dataset.sidebarVariant = get("pref:sidebar-variant") || "sidebar";
+        d.dataset.sidebarCollapsible = get("pref:sidebar-collapsible") || "icon";
+      } catch (e) {
+        /* 外观应用失败不阻塞首帧 */
+      }
+    })();
+    </script>
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
     <main>
-      <h1>vanilla-js-template</h1>
-      <p>M0 脚手架占位页（M1 起替换为设计系统令牌层与完整应用壳）。</p>
+      <div class="page-container">
+        <h1>vanilla-js-template</h1>
+        <p>
+          M1：设计系统令牌层已就位（四层体系 / 外观引擎 / PREPAINT / 自托管字体）。
+        </p>
+      </div>
     </main>
     <script type="module" src="./src/main.js"></script>
   </body>

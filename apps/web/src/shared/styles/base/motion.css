@@ -1,0 +1,16 @@
+/*
+ * base/motion.css — prefers-reduced-motion 降级路径（备份，默认被
+ * no-motion.css 覆盖；docs/CSS.md §9）。本文件与 no-motion.css 是全项目
+ * 唯二允许 !important 的地方（需要压制组件内的过渡声明）。
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

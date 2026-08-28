@@ -1,0 +1,8 @@
+/*
+ * themes/style-mira.css — 紧凑密度风（delta）：控件与菜单项整体收窄。
+ */
+
+.style-mira {
+  --ds-btn-height: 2rem;
+  --ds-menu-item-height: 1.75rem;
+}
