@@ -121,3 +121,15 @@ export const FONTS = [
   { id: "manrope", name: "Manrope", value: "Manrope Variable, sans-serif" },
   { id: "geist", name: "Geist", value: "Geist Variable, sans-serif" },
 ];
+
+/**
+ * 圆角预设选项
+ */
+export const RADII = [
+  { value: "0", label: "0" },
+  { value: "0.3rem", label: "0.3" },
+  { value: "0.5rem", label: "0.5" },
+  { value: "0.625rem", label: "0.625" },
+  { value: "0.75rem", label: "0.75" },
+  { value: "1.0rem", label: "1.0" },
+];

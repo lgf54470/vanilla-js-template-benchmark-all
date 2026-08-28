@@ -93,6 +93,7 @@ export class DsToastHost extends HTMLElement {
 }
 
 if (!customElements.get("ds-toast-host")) customElements.define("ds-toast-host", DsToastHost);
+if (!customElements.get("ds-toast")) customElements.define("ds-toast", DsToastHost);
 
 let globalHost = null;
 
