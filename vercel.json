@@ -1,0 +1,5 @@
+{
+  "outputDirectory": "dist/web",
+  "buildCommand": "",
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+}

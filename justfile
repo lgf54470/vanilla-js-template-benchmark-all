@@ -20,18 +20,19 @@ fmt-check:
 lint:
     deno lint
     deno run -A scripts/check-hardcoded-tokens.js
+    deno check apps/server/src/platform-adapters/
 
 # 全量测试
 test:
     deno test -A
 
-# 执行数据库迁移（M2 落地）
+# 执行数据库迁移（本地 SQLite；D1/Turso 由部署流程处理）
 db-migrate:
-    @echo "db-migrate: M2 落地"
+    deno run -A scripts/db-migrate.js
 
-# 组装前端静态产物 dist/web（平台发布用，M2 落地）
+# 组装前端静态产物 dist/web（平台发布用）
 build-web:
-    @echo "build-web: M2 落地"
+    deno run -A scripts/build-web.js
 
 # vendored 依赖冒烟（docs/Vendoring.md）
 smoke-vendor:
