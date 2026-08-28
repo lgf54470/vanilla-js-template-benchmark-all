@@ -1,0 +1,28 @@
+{
+  "workspace": ["./apps/web", "./apps/server", "./packages/contracts"],
+  "imports": {
+    "hono": "./packages/lib/hono/dist/index.js",
+    "hono/": "./packages/lib/hono/dist/",
+    "@libsql/client/web": "./packages/lib/libsql-client/web.js",
+    "@contracts/": "./packages/contracts/",
+    "@shared/": "./apps/web/src/shared/"
+  },
+  "tasks": {
+    "generate:registry": "deno run -A scripts/generate-registry.js",
+    "db-migrate": "deno run --env-file=.env -A scripts/db-migrate.js",
+    "db-seed": "deno run --env-file=.env -A scripts/db-seed.js",
+    "build-web": "deno run -A scripts/build-web.js"
+  },
+  "fmt": {
+    "exclude": [
+      "packages/lib/",
+      "docs/",
+      "AGENTS.md",
+      "ARCHITECTURE.md",
+      "README.md"
+    ]
+  },
+  "lint": {
+    "exclude": ["packages/lib/"]
+  }
+}

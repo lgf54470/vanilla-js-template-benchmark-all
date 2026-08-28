@@ -1,0 +1,39 @@
+#!/usr/bin/env -S deno run --allow-read
+// .githooks/commit-msg — 提交信息校验（零依赖 Deno 脚本，docs/Commit.md §5）
+// 1) 首行匹配 <type>(<scope>): <subject>；2) 正文至少一行「- 路径: 说明」。
+const file = Deno.args[0];
+if (!file) {
+  console.error("commit-msg: 缺少参数（commit message 文件路径）");
+  Deno.exit(1);
+}
+const msg = await Deno.readTextFile(file);
+const lines = msg.split("\n");
+const subject = lines[0] ?? "";
+
+const typeRe =
+  /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\(([a-z0-9-]+)\): .{1,50}$/;
+if (!typeRe.test(subject)) {
+  const typeOk =
+    /^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)\(/.test(
+      subject,
+    );
+  const scopeOk = /\(([a-z0-9-]+)\): /.test(subject);
+  console.error(
+    `commit-msg: 首行不符合规范\n` +
+      `  期望: <type>(<scope>): <subject>（type∈feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert，subject ≤ 50 字符，不加句号）\n` +
+      `  实际: ${subject}\n` +
+      `  type 合法性: ${typeOk ? "是" : "否（检查 type 拼写）"}\n` +
+      `  scope 合法性: ${scopeOk ? "是" : "否（scope 应为小写字母/数字/连字符）"}\n` +
+      `  长度: ${subject.length} 字符${subject.length > 50 ? "（超过 50，需精简）" : ""}`,
+  );
+  Deno.exit(1);
+}
+
+const bodyRe = /^- [\w./-]+: .+/;
+if (!lines.slice(1).some((l) => bodyRe.test(l))) {
+  console.error(
+    "commit-msg: 正文缺少逐文件改动说明\n" +
+      "  至少需要一行以「- 路径: 改动说明」开头的正文（docs/Commit.md §1）",
+  );
+  Deno.exit(1);
+}

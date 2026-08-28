@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 部署目标
+        required: true
+        type: choice
+        options:
+          - cloudflare
+          - vercel
+          - deno
+          - docker
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - uses: extractions/setup-just@v2
+      - name: 部署到指定目标
+        run: just deploy-${{ github.event.inputs.target }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          APP_ENCRYPTION_KEY: ${{ secrets.APP_ENCRYPTION_KEY }}
+          TURSO_URL: ${{ secrets.TURSO_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
