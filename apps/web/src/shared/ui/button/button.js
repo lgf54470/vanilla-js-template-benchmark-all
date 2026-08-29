@@ -38,12 +38,24 @@ class DsButton extends HTMLElement {
     const icon = this.getAttribute("icon");
     const size = this.getAttribute("size");
     const disabled = this.hasAttribute("disabled");
+    // type="submit"：shadow 内 button 与宿主所在 light-DOM <form> 无关联，
+    // 浏览器不会自动提交流表单（历史 bug），因此 type=submit 改为点击时手动
+    // requestSubmit() 最近宿主 form；内部 button 一律按 "button" 处理避免歧义。
+    const type = this.getAttribute("type") ?? "button";
     this.shadowRoot.innerHTML = "";
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.setAttribute("variant", variant);
     if (size) btn.setAttribute("size", size);
     btn.disabled = disabled;
     if (disabled) btn.setAttribute("aria-disabled", "true");
+    btn.addEventListener("click", () => {
+      if (disabled) return;
+      if (type === "submit") {
+        const form = this.closest?.("form");
+        if (form?.requestSubmit) form.requestSubmit();
+      }
+    });
     if (icon) {
       const svg = iconEl(icon);
       svg.style.width = "1rem";

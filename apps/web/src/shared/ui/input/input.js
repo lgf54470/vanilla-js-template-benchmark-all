@@ -43,6 +43,16 @@ class DsInput extends HTMLElement {
     this._input.addEventListener("change", () => {
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
     });
+    // 单行输入框 Enter 提交宿主所在 light-DOM 表单（shadow 内原生 input 与
+    // 表单无关联，浏览器不会自动提交——就历史 bug ds-input/button 同源）
+    this._input.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      const form = this.closest?.("form");
+      if (form?.requestSubmit) {
+        e.preventDefault();
+        form.requestSubmit();
+      }
+    });
   }
   attributeChangedCallback(name) {
     if (!this._input) return;

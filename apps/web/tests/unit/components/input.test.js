@@ -78,3 +78,33 @@ Deno.test("ds-textarea: 实时键入反射回宿主 value 属性", async () => {
   host._area.dispatchEvent({ type: "input" });
   assertEqual(host.getAttribute("value"), "第一行\n第二行");
 });
+
+Deno.test("ds-input: Enter 触发宿主 light-DOM 表单提交（requestSubmit）", async () => {
+  await load();
+  const { host } = makeInput();
+  const record = { called: 0 };
+  host.closest = () => ({ requestSubmit: () => record.called++ });
+  host.connectedCallback();
+  let prevented = false;
+  host._input.dispatchEvent({
+    type: "keydown",
+    key: "Enter",
+    preventDefault: () => (prevented = true),
+  });
+  assertEqual(record.called, 1);
+  assertEqual(prevented, true);
+});
+
+Deno.test("ds-input: 非 Enter 键不触发提交", async () => {
+  await load();
+  const { host } = makeInput();
+  const record = { called: 0 };
+  host.closest = () => ({ requestSubmit: () => record.called++ });
+  host.connectedCallback();
+  host._input.dispatchEvent({
+    type: "keydown",
+    key: "a",
+    preventDefault: () => {},
+  });
+  assertEqual(record.called, 0);
+});
