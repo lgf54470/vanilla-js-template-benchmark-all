@@ -119,8 +119,10 @@ google-chrome --headless=new --remote-debugging-port=9222 --user-data-dir=/tmp/e
 deno test -A apps/web/tests/e2e/
 ```
 
-（e2e 对 `E2E_APP_URL` 环境变量敏感，默认 `http://127.0.0.1:8788`；测试内
-登录密码用 `.env` 的 `DEV_SEED_AUTH_PASSWORD`，即 `change-me-in-dev`。）
+（e2e 对 `E2E_APP_URL` 环境变量敏感，默认 `http://127.0.0.1:8788`；登录密码为开发种子默认
+`admin`——`apps/server/src/shared/db/bootstrap.js` 的 `DEFAULT_DEV_PASSWORD`，仅当
+`settings:auth` 缺失时写入。它**不读取** `.env` 的 DEV 变量，`.env` 里若还残留
+`DEV_SEED_AUTH_PASSWORD=change-me-in-dev` 是已废弃的死配置，可删，别用它登录。）
 
 ## 5. 覆盖率与门禁
 
