@@ -185,6 +185,10 @@ async function connectPage(wsUrl) {
       consoleErrors() {
         return [...consoleErrors];
       },
+      /** 发送任意 CDP 命令（如 Input.insertText 做真实键入） */
+      send(method, params = {}) {
+        return send(method, params);
+      },
       /** 截图到本地 PNG 文件（Page.captureScreenshot） */
       async screenshot(filePath) {
         const res = await send("Page.captureScreenshot", {

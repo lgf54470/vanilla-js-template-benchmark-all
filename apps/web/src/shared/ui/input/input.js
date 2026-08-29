@@ -36,14 +36,23 @@ class DsInput extends HTMLElement {
   connectedCallback() {
     this._render();
     this._input.addEventListener("input", () => {
+      // 实时输入反射回宿主 value 属性（登录/表单多用 getAttribute("value") 读取）
+      this.setAttribute("value", this._input.value);
       this.dispatchEvent(new CustomEvent("input", { bubbles: true }));
     });
     this._input.addEventListener("change", () => {
       this.dispatchEvent(new CustomEvent("change", { bubbles: true }));
     });
   }
-  attributeChangedCallback() {
-    if (this._input) this._render();
+  attributeChangedCallback(name) {
+    if (!this._input) return;
+    if (name === "value") {
+      // 仅值变化：直接同步内部 input，避免整棵 re-render 丢失焦点/光标
+      const v = this.getAttribute("value") ?? "";
+      if (this._input.value !== v) this._input.value = v;
+      return;
+    }
+    this._render();
   }
   _render() {
     const type = this.getAttribute("type") ?? "text";
@@ -88,13 +97,20 @@ class DsTextarea extends HTMLElement {
   }
   connectedCallback() {
     this._render();
-    this._area.addEventListener(
-      "input",
-      () => this.dispatchEvent(new CustomEvent("input", { bubbles: true })),
-    );
+    this._area.addEventListener("input", () => {
+      // 与 ds-input 一致：实时输入反射回宿主 value 属性
+      this.setAttribute("value", this._area.value);
+      this.dispatchEvent(new CustomEvent("input", { bubbles: true }));
+    });
   }
-  attributeChangedCallback() {
-    if (this._area) this._render();
+  attributeChangedCallback(name) {
+    if (!this._area) return;
+    if (name === "value") {
+      const v = this.getAttribute("value") ?? "";
+      if (this._area.value !== v) this._area.value = v;
+      return;
+    }
+    this._render();
   }
   _render() {
     const placeholder = this.getAttribute("placeholder") ?? "";

@@ -69,6 +69,9 @@ class ShadowRoot {
   fire(type, ev) {
     for (const fn of [...(this._listeners[type] ?? [])]) fn(ev);
   }
+  append(...nodes) {
+    (this._children ??= []).push(...nodes);
+  }
 }
 
 function makeTablist() {
