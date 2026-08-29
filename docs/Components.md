@@ -28,6 +28,7 @@
 | `<ds-select>`                         | 下拉选择                                               |
 | `<ds-checkbox>` / `<ds-switch>`       | 布尔输入                                               |
 | `<ds-segmented-control>`              | 胶囊分段控件，`<ds-theme-switch>` 与会话时长选择器复用 |
+| `<ds-tabs>` + `<ds-tab>`              | 标签页（顶栏 tab / 方向键导航 / `ds-tabs-change`）     |
 | `<ds-dialog>` / `<ds-confirm-dialog>` | 替代 `alert/confirm`                                   |
 | `<ds-sheet>`                          | 抽屉，移动端 Sidebar 与通用侧滑面板复用                |
 | `<ds-toast-host>`（`toast.*` API）    | 替代 `alert`，全局单例挂载于 `<body>` 末尾             |
@@ -48,7 +49,9 @@
 | `<ds-workspace-switcher>`             | 见 §4                                                  |
 | `<ds-nav-user>`                       | 见 §5                                                  |
 
-> **尚未实现**：`<ds-tabs>` / `<ds-table>` / `<ds-pagination>`。需要时按 §1 的
+> **已实现**：`<ds-tabs>`（`shared/ui/tabs/tabs.js`，行为见 `docs/Components.md §8`）。
+>
+> **尚未实现**：`<ds-table>` / `<ds-pagination>`。需要时按 §1 的
 > authoring 约定新增（Pagination 对接 `Database.md §4.1` keyset 约定），不要在
 > 现有组件上叠加变通实现。
 
@@ -192,6 +195,24 @@ teamItems 结构）：
   通过命令式 `toast.success(msg)` / `toast.error(msg)` / `toast.info(msg)`
   触发（不挂在页面上，由 `toast.js` 惰性创建），内部维护渲染队列，
   `--z-toast` 层级永远最高。
+
+## 8. 标签页 `<ds-tabs>`
+
+```html
+<ds-tabs value="overview">
+  <ds-tab value="overview" label="概览">内容 A</ds-tab>
+  <ds-tab value="detail" label="明细">内容 B</ds-tab>
+</ds-tabs>
+```
+
+- `value`：当前激活 tab 的 id；未设置时默认激活第一个 `<ds-tab>`。
+- `<ds-tab value label>`：面板容器，内容即默认槽渲染；`label` 缺失时回退到
+  `textContent`。
+- **无动效**：激活态用 `box-shadow: inset 0 -2px` 下划线（瞬时），不带
+  transition/animation（全站 no-motion，attachStyles 注入）。
+- 行为：点击 tab 或 `←/→`、Home/End 方向键切换（roving tabindex）；切换时派发
+  `bubbles+composed` 的 `CustomEvent('ds-tabs-change')`，`detail: { value }`。
+- 角色语义：`tablist` / `tab`（`aria-selected`）/ `tabpanel`（`aria-labelledby`）。
 
 ## 9. 无障碍要求速查
 

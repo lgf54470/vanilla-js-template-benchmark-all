@@ -15,6 +15,7 @@ import "./toast/toast.js";
 import "./breadcrumb/breadcrumb.js";
 import "./masked-field/masked-field.js";
 import "./theme-switch/theme-switch.js";
+import "./tabs/tabs.js";
 import "./sidebar/sidebar-provider.js";
 import "./sidebar/sidebar.js";
 import "./sidebar/sidebar-menu.js";

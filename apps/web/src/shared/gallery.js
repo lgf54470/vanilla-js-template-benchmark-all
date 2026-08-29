@@ -70,6 +70,20 @@ export function renderGallery(container) {
       </ds-segmented-control>
     </div></section>
 
+    <section class="sec"><h2>标签页</h2><div class="col" style="max-width:28rem">
+      <ds-tabs value="overview">
+        <ds-tab value="overview" label="概览">
+          <div style="font-size:.85rem;color:var(--color-fg)">概览面板内容。</div>
+        </ds-tab>
+        <ds-tab value="detail" label="明细">
+          <div style="font-size:.85rem;color:var(--color-fg-muted)">明细面板内容。</div>
+        </ds-tab>
+        <ds-tab value="logs" label="日志">
+          <div style="font-size:.85rem;color:var(--color-fg-muted)">日志面板内容。</div>
+        </ds-tab>
+      </ds-tabs>
+    </div></section>
+
     <section class="sec"><h2>展示</h2><div class="row">
       <ds-badge>默认</ds-badge>
       <ds-badge variant="success">成功</ds-badge>
